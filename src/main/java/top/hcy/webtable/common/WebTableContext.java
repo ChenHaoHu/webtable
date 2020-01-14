@@ -22,11 +22,12 @@ public class WebTableContext {
 
     private HandlerTypeCode handlerTypeCode;
     private HttpServletRequest reuqest;
-    private  HttpServletResponse response;
-    private  Object respsonseEntity = null;
+    private HttpServletResponse response;
+    private Object respsonseEntity = null;
     private String tableName;
     private String[] fieldsName;
     private RespCode respCode = RespCode.SUCCESS;
+    private boolean error;
 
     public WebTableContext(HttpServletRequest reuqest, HttpServletResponse response) {
         this.reuqest = reuqest;
