@@ -9,15 +9,15 @@ package top.hcy.webtable.common;
  * @Date: 2020/1/14 19:42
  * @Version: 1.0
  */
-public enum WebTableHandlerTypeCode {
+public enum HandlerTypeCode {
 
-    GET_TABLE(0,"获取表详情"),
-    GET_Filed(1,"获取表详情");
+    GTABLE(0,"获取表详情"),
+    GFiled(1,"获取表详情");
 
     private int type;
     private String msg;
 
-    WebTableHandlerTypeCode(int code, String msg) {
+    HandlerTypeCode(int code, String msg) {
         this.msg = msg;
     }
 

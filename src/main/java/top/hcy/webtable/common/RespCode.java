@@ -1,9 +1,10 @@
 package top.hcy.webtable.common;
 
 public enum RespCode {
-    ERROR(1,"请求失败"),
-    SUCCESS(0, "请求成功"),
-    WARN(-1, "请求错误");
+    SUCCESS(1000, "请求成功"),
+    ERROR(1001,"请求失败"),
+    WARN(1002, "请求错误"),
+    URI_ERROR(1003, "URI转发错误");
 
 
     private int code;
