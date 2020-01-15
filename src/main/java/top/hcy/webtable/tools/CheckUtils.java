@@ -23,7 +23,7 @@ public class CheckUtils {
     public static void checkRequestMethod(WebTableContext ctx, HttpServletRequest request) {
         String method = "POST";
         String requestMethod = request.getMethod();
-        if(requestMethod!=null && method.equals(requestMethod.toString().toUpperCase())){
+        if(requestMethod!=null && method.equals(requestMethod.toUpperCase())){
         }else{
             ctx.setWRespCode(WRespCode.REQUEST_METHOD_ERROR);
             ctx.setError(true);
