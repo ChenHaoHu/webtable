@@ -4,7 +4,7 @@ package top.hcy.webtable.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.hcy.webtable.WebTabelHandler;
-import top.hcy.webtable.common.ResponseEntity;
+import top.hcy.webtable.common.response.WResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +20,8 @@ public class WebTableController {
 
 
     @RequestMapping("/webtable")
-    public ResponseEntity getSome(HttpServletRequest reuqest, HttpServletResponse response){
-        ResponseEntity handler = webTabelHandler.handler(reuqest, response);
+    public WResponseEntity getSome(HttpServletRequest reuqest, HttpServletResponse response){
+        WResponseEntity handler = webTabelHandler.handler(reuqest, response);
         return handler;
     }
 }

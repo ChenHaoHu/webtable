@@ -1,4 +1,4 @@
-package top.hcy.webtable.common;
+package top.hcy.webtable.common.enums;
 
 /**
  * @ProjectName: webtable
@@ -9,7 +9,7 @@ package top.hcy.webtable.common;
  * @Date: 2020/1/14 19:42
  * @Version: 1.0
  */
-public enum HandlerTypeCode {
+public enum WHandlerTypeCode {
 
     GTABLE(0,"获取表详情"),
     GFiled(1,"获取表详情");
@@ -17,7 +17,7 @@ public enum HandlerTypeCode {
     private int type;
     private String msg;
 
-    HandlerTypeCode(int code, String msg) {
+    WHandlerTypeCode(int code, String msg) {
         this.msg = msg;
     }
 

@@ -1,6 +1,6 @@
-package top.hcy.webtable.common;
+package top.hcy.webtable.common.enums;
 
-public enum RespCode {
+public enum WRespCode {
     SUCCESS(1000, "请求成功"),
     ERROR(1001,"请求失败"),
     WARN(1002, "请求错误"),
@@ -12,7 +12,7 @@ public enum RespCode {
     private int code;
     private String msg;
 
-    RespCode(int code, String msg) {
+    WRespCode(int code, String msg) {
         this.code = code;
         this.msg = msg;
     }

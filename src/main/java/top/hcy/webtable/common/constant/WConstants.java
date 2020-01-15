@@ -1,4 +1,4 @@
-package top.hcy.webtable.common;
+package top.hcy.webtable.common.constant;
 
 import java.util.HashMap;
 
@@ -11,7 +11,7 @@ import java.util.HashMap;
  * @Date: 2020/1/14 21:00
  * @Version: 1.0
  */
-public class Constant {
+public class WConstants {
 
 
 }

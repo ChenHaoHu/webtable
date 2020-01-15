@@ -1,8 +1,9 @@
 package top.hcy.webtable.common;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
+import top.hcy.webtable.common.enums.WRespCode;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,14 +21,15 @@ import javax.servlet.http.HttpServletResponse;
 @ToString
 public class WebTableContext {
 
-    private HandlerTypeCode handlerTypeCode;
+    private top.hcy.webtable.common.enums.WHandlerTypeCode WHandlerTypeCode;
     private HttpServletRequest reuqest;
     private HttpServletResponse response;
     private Object respsonseEntity = null;
     private String tableName;
     private String[] fieldsName;
-    private RespCode respCode = RespCode.SUCCESS;
+    private WRespCode wRespCode = WRespCode.SUCCESS;
     private boolean error;
+    private JSONObject params;
 
     public WebTableContext(HttpServletRequest reuqest, HttpServletResponse response) {
         this.reuqest = reuqest;
