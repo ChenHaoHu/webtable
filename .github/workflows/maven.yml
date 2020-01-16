@@ -35,7 +35,7 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd /githubci
-          kill -9 `ps -aux | grep webtable | awk {'print $2'}  | head -n 1 | tail -n 1`
+          kill -9 `lsof -i :9299 | awk {'print $2'}  | head -n 2 | tail -n 1`
           nohup java -jar /githubci/target/webtable-1.0.0.jar > Log.log 2>&1 &
           echo "deploy ok"
           
