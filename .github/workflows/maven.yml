@@ -24,7 +24,7 @@ jobs:
         password: ${{ secrets.PASSWD }}
         port: ${{ secrets.PORT }}
         source: "target/webtable-1.0.0.jar"
-        target: "/githubci/webtable-1.0.0.jar"
+        target: "/githubci"
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
       with:
