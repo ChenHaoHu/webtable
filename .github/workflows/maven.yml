@@ -16,5 +16,24 @@ jobs:
     - name: Build with Maven
       run: |
         mvn -B package --file pom.xml
-        ls -l
-
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        source: "target/webtable-1.0.0.jar"
+        target: "/githubci/webtable-1.0.0.jar"
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd /githubci
+          nohup java -jar webtable-1.0.0.jar > Log.log 2>&1 &
+          echo "deploy ok"
+          
