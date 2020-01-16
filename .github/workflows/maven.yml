@@ -35,6 +35,6 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd /githubci
-          nohup java -jar webtable-1.0.0.jar > Log.log 2>&1 &
+          nohup java -jar /githubci/target/webtable-1.0.0.jar > Log.log 2>&1 &
           echo "deploy ok"
           
