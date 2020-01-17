@@ -1,5 +1,7 @@
 package top.hcy.webtable.common.constant;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import java.util.HashMap;
 
 /**
@@ -13,5 +15,8 @@ import java.util.HashMap;
  */
 public class WConstants {
 
+    public static final String JWT_SECRET = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExMSIsImV";
+
+    public static final long JWT_EXPIRATION = 60 * 60 * 1000;
 
 }
