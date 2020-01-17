@@ -24,24 +24,25 @@ import static org.junit.jupiter.api.Assertions.*;
 class JwtTokenUtilTest {
 
 
+
     @Test
     void generateToken() {
-        String s = JwtTokenUtil.generateToken("hcy");
+        String s = JwtTokenUtil.generateToken("156165156165");
         System.out.println(s);
     }
 
     @Test
     void validateToken() {
-        Boolean c = JwtTokenUtil.validateToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoY3kiLCJleHAiOjE1NzkyNzEyMjMsImlhdCI6MTU3OTI2NzYyM30.lRTjM_BeRwmcduAktFeMZD_cXmi5yU2PPDJJa0sYO5NdUMUbuJfukiLqvT9X3YkXJchIiBV8ZBOGNmFef4lkvA", "hcy");
-        System.out.println(c);
+     //   Boolean c = JwtTokenUtil.validateToken("eyJhbGciyyuOiJIUzUxMiJ9.eyJzdWIiOiJoY3kiLCJleHAiOjE1NzkyODA5MzMsImlhdCI6MTU3OTI4MDg3M30.acVRlOouzRhbvp4YjuNV5kTLnYEEsPpheRHoE0N0lvxwAVQOvOZNd2vHVOZLIXzcOvN6LSX8kIWvq2OUY1Nf1A", "hcy");
+      //  System.out.println(c);
     }
 
     @Test
     void getDataFromToken() {
-        Date d = JwtTokenUtil.getExpirationDateFromToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoY3kiLCJleHAiOjE1NzkyNzEyMjMsImlhdCI6MTU3OTI2NzYyM30.lRTjM_BeRwmcduAktFeMZD_cXmi5yU2PPDJJa0sYO5NdUMUbuJfukiLqvT9X3YkXJchIiBV8ZBOGNmFef4lkvA");
+      //  Date d = JwtTokenUtil.getExpirationDateFromToken("eyJhbGciOi1111JIUzUxMiJ9.eyJzdWIiOiJoY3kiLCJleHAiOjE1NzkyODA5MzMsImlhdCI6MTU3OTI4MDg3M30.acVRlOouzRhbvp4YjuNV5kTLnYEEsPpheRHoE0N0lvxwAVQOvOZNd2vHVOZLIXzcOvN6LSX8kIWvq2OUY1Nf1A");
 
-        SimpleDateFormat formatter  = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
-        String  dString = formatter.format(d);
-        System.out.println(dString);
+     //   SimpleDateFormat formatter  = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
+       // String  dString = formatter.format(d);
+       // System.out.println(dString);
     }
 }

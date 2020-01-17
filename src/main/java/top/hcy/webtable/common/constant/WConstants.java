@@ -17,6 +17,6 @@ public class WConstants {
 
     public static final String JWT_SECRET = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExMSIsImV";
 
-    public static final long JWT_EXPIRATION = 60 * 60 * 1000;
+    public static final long JWT_EXPIRATION = 60 * 1000;
 
 }
