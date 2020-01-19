@@ -3,10 +3,12 @@ package top.hcy.webtable.tools;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import top.hcy.webtable.common.constant.WTokenType;
 
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,25 +26,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class JwtTokenUtilTest {
 
 
-
-    @Test
+    @Test//验证token功能正常
     void generateToken() {
-        String s = JwtTokenUtil.generateToken("156165156165");
-        System.out.println(s);
+
+        Random random = new Random();
+        int i = random.nextInt(10000);
+        String txt = String.valueOf(i);
+        String s = JwtTokenUtil.generateToken(txt, WTokenType.DEFAULT_TOKE);
+        String data = JwtTokenUtil.getDataFromToken(s);
+        Assert.assertEquals(txt,data);
+        Boolean aBoolean = JwtTokenUtil.validateToken(s, txt);
+        Assert.assertEquals(aBoolean,true);
+        Boolean tokenExpired = JwtTokenUtil.isTokenExpired(s);
+        Assert.assertEquals(tokenExpired,false);
     }
 
-    @Test
-    void validateToken() {
-     //   Boolean c = JwtTokenUtil.validateToken("eyJhbGciyyuOiJIUzUxMiJ9.eyJzdWIiOiJoY3kiLCJleHAiOjE1NzkyODA5MzMsImlhdCI6MTU3OTI4MDg3M30.acVRlOouzRhbvp4YjuNV5kTLnYEEsPpheRHoE0N0lvxwAVQOvOZNd2vHVOZLIXzcOvN6LSX8kIWvq2OUY1Nf1A", "hcy");
-      //  System.out.println(c);
-    }
 
-    @Test
-    void getDataFromToken() {
-      //  Date d = JwtTokenUtil.getExpirationDateFromToken("eyJhbGciOi1111JIUzUxMiJ9.eyJzdWIiOiJoY3kiLCJleHAiOjE1NzkyODA5MzMsImlhdCI6MTU3OTI4MDg3M30.acVRlOouzRhbvp4YjuNV5kTLnYEEsPpheRHoE0N0lvxwAVQOvOZNd2vHVOZLIXzcOvN6LSX8kIWvq2OUY1Nf1A");
 
-     //   SimpleDateFormat formatter  = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
-       // String  dString = formatter.format(d);
-       // System.out.println(dString);
-    }
+
 }

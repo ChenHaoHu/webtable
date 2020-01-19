@@ -1,0 +1,311 @@
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T125617.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcyhcy
+
+{
+  "u": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T125612.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token:
+
+{
+  "u": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T125600.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+
+{
+  "u": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T125138.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token:
+
+{
+  "u": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T125130.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token:
+
+{
+  "u": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T125123.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: 12222222222
+
+{
+  "u": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T125109.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: 12222222222
+
+{
+  "u": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T124841.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+
+{
+  "u": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T124835.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: 123344
+
+{
+  "u": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T124824.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: 123344
+
+{
+  "u": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T120935.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: 123344
+
+{
+  "r": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T120929.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: 123344
+
+{
+  "type": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T120915.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: 123344
+
+{
+  "type": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T120740.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: 123344
+
+{
+  "type": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T120730.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: 123344
+
+{
+  "type": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T120704.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: 123344
+
+{
+  "type": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-19T115610.200.json
+
+###
+
+GET http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: 123344
+
+{
+  "type": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-19T115558.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: 123344
+
+{
+  "type": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-19T115551.200.json
+
+###
+
+POST http://localhost:9299/webtable1
+Content-Type: application/jsonn
+token: 123344
+
+{
+  "type": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-19T115542.404.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: 123344
+
+{
+  "type": "111",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+###
+

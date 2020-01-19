@@ -6,10 +6,10 @@
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
 POST http://{{host}}:{{port}}/webtable
 Content-Type: application/jsonn
-token:123344
+token:hcytoken
 
 {
-  "type": "111",
+  "u": "111",
   "table": "",
   "fields": [1,2,3,4],
   "data": "content"

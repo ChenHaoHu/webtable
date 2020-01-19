@@ -12,13 +12,14 @@ package top.hcy.webtable.common.enums;
 public enum WHandlerTypeCode {
 
     GTABLE(0,"获取表详情"),
-    GFiled(1,"获取表详情");
-
+    GFiled(1,"获取表详情"),
+    HPreRequest(2,"检查request请求");
     private int type;
     private String msg;
 
-    WHandlerTypeCode(int code, String msg) {
-        this.msg = msg;
+    WHandlerTypeCode(int type, String msg) {
+
+        this.type= type;this.msg = msg;
     }
 
     public int getCode() {

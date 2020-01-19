@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 public class WebTableContext {
 
     private top.hcy.webtable.common.enums.WHandlerTypeCode WHandlerTypeCode;
-    private HttpServletRequest reuqest;
+    private HttpServletRequest request;
     private HttpServletResponse response;
     private Object respsonseEntity = null;
     private String tableName;
@@ -30,9 +30,14 @@ public class WebTableContext {
     private WRespCode wRespCode = WRespCode.SUCCESS;
     private boolean error;
     private JSONObject params;
+    private String username;
+    private String token;
+    private String tokenKey;
+    private String realUri;
+    private String newToken;
 
     public WebTableContext(HttpServletRequest reuqest, HttpServletResponse response) {
-        this.reuqest = reuqest;
+        this.request = reuqest;
         this.response = response;
     }
 

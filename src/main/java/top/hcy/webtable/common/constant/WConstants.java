@@ -17,6 +17,17 @@ public class WConstants {
 
     public static final String JWT_SECRET = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExMSIsImV";
 
-    public static final long JWT_EXPIRATION = 60 * 1000;
+
+    public static final String URI_NAME = "u";
+
+    public static final long TOKEN_REFRESH_TIME = 20 * 1000;
+
+    public static  final String[] NO_TOKEN_URI = new String[]{
+            "/login","login",
+    };
+
+    public static  final String[] TOKEN_POWER = new String[]{
+            "hcytoken"
+    };
 
 }
