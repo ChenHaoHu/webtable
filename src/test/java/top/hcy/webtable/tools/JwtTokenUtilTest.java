@@ -2,12 +2,7 @@ package top.hcy.webtable.tools;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import top.hcy.webtable.common.constant.WTokenType;
-
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;

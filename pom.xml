@@ -58,6 +58,18 @@
 <!--                </exclusion>-->
 <!--            </exclusions>-->
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.iq80.leveldb/leveldb -->
+        <dependency>
+            <groupId>org.iq80.leveldb</groupId>
+            <artifactId>leveldb</artifactId>
+            <version>0.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.iq80.leveldb</groupId>
+            <artifactId>leveldb-api</artifactId>
+            <version>0.7</version>
+        </dependency>
     </dependencies>
 
     <build>

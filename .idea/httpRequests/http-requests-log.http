@@ -1,5 +1,35 @@
 POST http://localhost:9299/webtable
 Content-Type: application/jsonn
+token: hcytoken1
+
+{
+  "u": "login",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T010025.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "login",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-20T010021.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
 token: hcytoken
 
 {

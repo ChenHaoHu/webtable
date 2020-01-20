@@ -17,7 +17,6 @@ public class WConstants {
 
     public static final String JWT_SECRET = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExMSIsImV";
 
-
     public static final String URI_NAME = "u";
 
     public static final long TOKEN_REFRESH_TIME = 20 * 1000;

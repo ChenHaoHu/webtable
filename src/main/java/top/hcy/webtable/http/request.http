@@ -9,7 +9,7 @@ Content-Type: application/jsonn
 token:hcytoken
 
 {
-  "u": "111",
+  "u": "login",
   "table": "",
   "fields": [1,2,3,4],
   "data": "content"
