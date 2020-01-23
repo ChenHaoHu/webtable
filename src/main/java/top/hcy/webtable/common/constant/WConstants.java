@@ -29,7 +29,7 @@ public class WConstants {
             "hcytoken"
     };
 
-    public static  final String[][] defaultAccounts  = {
+    public static  final String[][] DefaultAccounts  = {
             {"secadmin","admin"},
             {"admin","admin"}
     };
