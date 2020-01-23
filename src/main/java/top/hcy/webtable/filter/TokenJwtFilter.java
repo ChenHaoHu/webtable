@@ -5,9 +5,8 @@ import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.common.constant.WTokenType;
 import top.hcy.webtable.common.enums.WRespCode;
-import top.hcy.webtable.tools.JwtTokenUtil;
+import top.hcy.webtable.tools.JwtTokenUtils;
 
-import javax.swing.*;
 import java.util.Date;
 
 /**
@@ -54,17 +53,18 @@ public class TokenJwtFilter implements WHandlerFilter {
             }
         }
 
+
         //检查token
         ctx.setToken(token);
-        if ( !JwtTokenUtil.isTokenExpired(token)){
-            String data = JwtTokenUtil.getDataFromToken(token);
+        if ( !JwtTokenUtils.isTokenExpired(token)){
+            String data = JwtTokenUtils.getDataFromToken(token);
             ctx.setTokenKey(data);
             //检查是否需要刷新token
             //todo: 该用户是否需要刷新token 这里暂时默认刷新默认时长的token
-            Date expirationDate = JwtTokenUtil.getExpirationDateFromToken(token);
+            Date expirationDate = JwtTokenUtils.getExpirationDateFromToken(token);
             Date now = new Date();
             if(expirationDate.getTime() - now.getTime() > 0 && expirationDate.getTime() - now.getTime()  < WConstants.TOKEN_REFRESH_TIME){
-                String s = JwtTokenUtil.generateToken(data, WTokenType.DEFAULT_TOKE);
+                String s = JwtTokenUtils.generateToken(data, WTokenType.DEFAULT_TOKE);
                 ctx.setNewToken(s);
             }else{
                 ctx.setNewToken(token);

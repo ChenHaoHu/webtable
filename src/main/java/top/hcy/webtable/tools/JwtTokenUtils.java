@@ -21,7 +21,7 @@ import java.util.Map;
 
 @Component
 @Slf4j
-public class JwtTokenUtil implements Serializable {
+public class JwtTokenUtils implements Serializable {
     private static final long serialVersionUID = -3301605591108950415L;
 
     private static String secret = WConstants.JWT_SECRET ;

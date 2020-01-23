@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import top.hcy.webtable.common.constant.WTokenType;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * @ProjectName: webtable
  * @Package: top.hcy.webtable.tools
@@ -18,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 //@SpringBootTest
 
-class JwtTokenUtilTest {
+class JwtTokenUtilsTest {
 
 
     @Test//验证token功能正常
@@ -27,12 +25,12 @@ class JwtTokenUtilTest {
         Random random = new Random();
         int i = random.nextInt(10000);
         String txt = String.valueOf(i);
-        String s = JwtTokenUtil.generateToken(txt, WTokenType.DEFAULT_TOKE);
-        String data = JwtTokenUtil.getDataFromToken(s);
+        String s = JwtTokenUtils.generateToken(txt, WTokenType.DEFAULT_TOKE);
+        String data = JwtTokenUtils.getDataFromToken(s);
         Assert.assertEquals(txt,data);
-        Boolean aBoolean = JwtTokenUtil.validateToken(s, txt);
+        Boolean aBoolean = JwtTokenUtils.validateToken(s, txt);
         Assert.assertEquals(aBoolean,true);
-        Boolean tokenExpired = JwtTokenUtil.isTokenExpired(s);
+        Boolean tokenExpired = JwtTokenUtils.isTokenExpired(s);
         Assert.assertEquals(tokenExpired,false);
     }
 
