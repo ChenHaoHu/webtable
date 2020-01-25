@@ -19,7 +19,7 @@ import java.util.Date;
  * @Version: 1.0
  */
 @Data
-public class TokenJwtFilter implements WHandlerFilter {
+public class TokenJwtFilter implements WHandleFilter {
 
     @Override
     public void doFilter(WebTableContext ctx) {

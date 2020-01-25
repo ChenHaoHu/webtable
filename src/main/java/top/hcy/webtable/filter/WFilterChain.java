@@ -9,7 +9,11 @@ package top.hcy.webtable.filter;
  * @Date: 2020/1/15 11:01
  * @Version: 1.0
  */
-public interface WFilterChain {
+public interface WFilterChain extends WHandleFilter {
 
+    public abstract boolean addFitersOnFirst(AbstractFilterChain f);
+    public abstract boolean deleteFiter(WHandleFilter f);
+    public abstract boolean addFiterOnLast(WHandleFilter f);
+    public abstract boolean addFiterOnFirst(WHandleFilter f);
 
 }

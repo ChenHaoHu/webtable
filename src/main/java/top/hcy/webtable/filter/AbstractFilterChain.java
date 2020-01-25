@@ -1,7 +1,9 @@
 package top.hcy.webtable.filter;
 
 import lombok.Data;
-import top.hcy.webtable.common.enums.WHandlerTypeCode;
+import top.hcy.webtable.common.enums.WHandlerType;
+
+import java.util.ArrayList;
 
 /**
  * @ProjectName: webtable
@@ -13,13 +15,16 @@ import top.hcy.webtable.common.enums.WHandlerTypeCode;
  * @Version: 1.0
  */
 @Data
-public class AbstractFilterChain implements WFilterChain {
-    private WHandlerTypeCode code;
+public abstract class AbstractFilterChain implements WFilterChain {
+
+    public ArrayList<WHandleFilter> filters = new ArrayList<>();
+
+    private WHandlerType code;
 
     public AbstractFilterChain() {
     }
 
-    public AbstractFilterChain(WHandlerTypeCode code) {
+    public AbstractFilterChain(WHandlerType code) {
         this.code = code;
     }
 

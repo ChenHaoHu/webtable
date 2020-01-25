@@ -2,6 +2,7 @@ package top.hcy.webtable.number;
 
 
 import org.junit.jupiter.api.Test;
+import top.hcy.webtable.common.constant.WConstants;
 
 import java.util.UUID;
 

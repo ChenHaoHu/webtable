@@ -1,5 +1,95 @@
 POST http://localhost:9299/webtable
 Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "login",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-25T110952.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "logi1n",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-25T110949.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "login",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-25T110945.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken1
+
+{
+  "u": "logi1n",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-25T110938.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "logi1n",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-25T110934.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "login",
+  "table": "",
+  "fields": [1,2,3,4],
+  "data": "content"
+}
+
+<> 2020-01-25T110929.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
 token: hcytoken1
 
 {

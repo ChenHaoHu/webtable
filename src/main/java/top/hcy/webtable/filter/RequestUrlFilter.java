@@ -1,10 +1,11 @@
 package top.hcy.webtable.filter;
 
 import com.alibaba.fastjson.JSONObject;
-import org.apache.tomcat.util.bcel.classfile.Constant;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.common.enums.WRespCode;
+import top.hcy.webtable.router.Router;
+import top.hcy.webtable.service.WService;
 import top.hcy.webtable.tools.ParamUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Date: 2020-01-19 23:35
  * @Version: 1.0
  **/
-public class RequestUrlFilter implements WHandlerFilter {
+public class RequestUrlFilter implements WHandleFilter {
     @Override
     public void doFilter(WebTableContext ctx) {
         //处理url解析成分
@@ -42,12 +43,20 @@ public class RequestUrlFilter implements WHandlerFilter {
                 ctx.setWRespCode(WRespCode.REQUEST_URI_EMPTY);
                 ctx.setError(true);
             }
-            ctx.setRealUri(u);
+
+            WService chain = Router.getService(u);
+
+            if (chain != null){
+                ctx.setRealUri(u);
+                ctx.setWService(chain);
+            }else{
+                ctx.setWRespCode(WRespCode.REQUEST_CHAIN_LOST);
+                ctx.setError(true);
+            }
+
         }else{
             ctx.setWRespCode(WRespCode.REQUEST_URI_LOST);
             ctx.setError(true);
         }
-
-
     }
 }

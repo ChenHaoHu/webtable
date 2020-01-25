@@ -3,7 +3,9 @@ package top.hcy.webtable.common;
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 import lombok.ToString;
+import top.hcy.webtable.common.enums.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
+import top.hcy.webtable.service.WService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 @ToString
 public class WebTableContext {
 
-    private top.hcy.webtable.common.enums.WHandlerTypeCode WHandlerTypeCode;
     private HttpServletRequest request;
     private HttpServletResponse response;
     private Object respsonseEntity = null;
@@ -35,6 +36,7 @@ public class WebTableContext {
     private String tokenKey;
     private String realUri;
     private String newToken;
+    private WService wService;
 
     public WebTableContext(HttpServletRequest reuqest, HttpServletResponse response) {
         this.request = reuqest;

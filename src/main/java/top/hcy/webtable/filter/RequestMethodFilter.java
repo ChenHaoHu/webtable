@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Date: 2020-01-19 23:33
  * @Version: 1.0
  **/
-public class RequestMethodFilter implements WHandlerFilter {
+public class RequestMethodFilter implements WHandleFilter {
     @Override
     public void doFilter(WebTableContext ctx) {
         String method = "POST";

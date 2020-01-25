@@ -10,6 +10,7 @@ public enum WRespCode {
     REQUEST_URI_EMPTY(1006, "请求体实际请求uri为空"),
     REQUEST_TOKEN_ERROR(1007, "TOKEN 无效"),
     REQUEST_TOKEN_LOST(1008, "TOKEN 缺失"),
+    REQUEST_CHAIN_LOST(1009, "请求为空"),
     REQUEST_PARAM_WARN(1100, "请求参数不合法");
 
 
