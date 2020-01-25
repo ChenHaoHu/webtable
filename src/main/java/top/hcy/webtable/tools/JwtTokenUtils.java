@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cglib.core.internal.Function;
 import org.springframework.stereotype.Component;
 import top.hcy.webtable.common.constant.WConstants;
+import top.hcy.webtable.common.constant.WTokenType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.entity.UserDetails;
 
@@ -29,6 +30,11 @@ public class JwtTokenUtils implements Serializable {
 
 
     private static Clock clock = DefaultClock.INSTANCE;
+
+    public static String generateToken(String str) {
+        Map<String, Object> claims = new HashMap<>();
+        return doGenerateToken(claims, str, WTokenType.DEFAULT_TOKE);
+    }
 
     public static String generateToken(String str, long expiration) {
         Map<String, Object> claims = new HashMap<>();

@@ -66,14 +66,12 @@ public class TokenJwtFilter implements WHandleFilter {
             if(expirationDate.getTime() - now.getTime() > 0 && expirationDate.getTime() - now.getTime()  < WConstants.TOKEN_REFRESH_TIME){
                 String s = JwtTokenUtils.generateToken(data, WTokenType.DEFAULT_TOKE);
                 ctx.setNewToken(s);
-            }else{
-                ctx.setNewToken(token);
+                ctx.setRefreshToken(true);
             }
         }else{
             //失效token
             ctx.setWRespCode(WRespCode.REQUEST_TOKEN_ERROR);
             ctx.setError(true);
-            return;
         }
     }
 }

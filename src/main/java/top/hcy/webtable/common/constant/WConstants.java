@@ -19,6 +19,9 @@ public class WConstants {
 
     public static final String URI_NAME = "u";
 
+
+    public static final String PREFIX_ACCOUNTS = "account.";
+
     public static final long TOKEN_REFRESH_TIME = 20 * 1000;
 
     public static  final String[] NO_TOKEN_URI = new String[]{

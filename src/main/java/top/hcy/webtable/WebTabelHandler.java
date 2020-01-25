@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import lombok.extern.slf4j.Slf4j;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.common.enums.WHandlerType;
+import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.common.response.WResponseEntity;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.db.kv.KVType;
@@ -48,9 +49,6 @@ public class WebTabelHandler {
         Router.addRouter(WHandlerType.LoginRequest,new LoginService());
     }
 
-
-
-
     //处理入口
     public WResponseEntity handler(HttpServletRequest request, HttpServletResponse response){
         WebTableContext ctx = new WebTableContext(request,response);
@@ -60,9 +58,25 @@ public class WebTabelHandler {
           return defulteWResponseEntity(ctx);
         }
 
-        ctx.getWService().doService(ctx);
+        try {
+            ctx.getWService().doService(ctx);
+        } catch (Exception e) {
+            log.error("service error"+e.getClass().getName() +"  ctx:"+ ctx.toString());
+            ctx.setWRespCode(WRespCode.REQUEST_SERVICE_ERROR);
 
-        return new WResponseEntity(ctx.getWRespCode(),ctx.getRespsonseEntity());
+        }
+
+
+        HashMap res = new HashMap();
+        if (ctx.isRefreshToken()){
+            res.put("token",ctx.getNewToken());
+        }else{
+            res.put("token","");
+        }
+
+        res.put("data",ctx.getRespsonseEntity());
+
+        return new WResponseEntity(ctx.getWRespCode(),res);
     }
 
 
@@ -70,15 +84,9 @@ public class WebTabelHandler {
         ArrayList<HashMap> list = new ArrayList<>();
         HashMap<String,String> data = null;
         String[][] defaultAccounts = WConstants.DefaultAccounts;
-
         for (int i = 0; i < defaultAccounts.length; i++) {
-            data = new HashMap<>();
-            data.put("username",defaultAccounts[i][0]);
-            data.put("passwd",defaultAccounts[i][1]);
-            list.add(data);
+            kvDBUtils.setValue(WConstants.PREFIX_ACCOUNTS +defaultAccounts[i][0],defaultAccounts[i][1], KVType.T_STRING);
         }
-        kvDBUtils.setValue("account",list, KVType.T_LIST);
-        JSONArray account = (JSONArray)kvDBUtils.getValue("account", KVType.T_LIST);
     }
 
     public WResponseEntity defulteWResponseEntity(WebTableContext ctx){

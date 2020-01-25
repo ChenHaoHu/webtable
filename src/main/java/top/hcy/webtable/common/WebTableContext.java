@@ -9,6 +9,7 @@ import top.hcy.webtable.service.WService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 
 /**
  * @ProjectName: webtable
@@ -36,6 +37,7 @@ public class WebTableContext {
     private String tokenKey;
     private String realUri;
     private String newToken;
+    private boolean refreshToken = false;
     private WService wService;
 
     public WebTableContext(HttpServletRequest reuqest, HttpServletResponse response) {
@@ -44,5 +46,26 @@ public class WebTableContext {
     }
 
     private WebTableContext() {
+    }
+
+    @Override
+    public String toString() {
+        return "WebTableContext{" +
+                "request=" + request +
+                ", response=" + response +
+                ", respsonseEntity=" + respsonseEntity +
+                ", tableName='" + tableName + '\'' +
+                ", fieldsName=" + Arrays.toString(fieldsName) +
+                ", wRespCode=" + wRespCode +
+                ", error=" + error +
+                ", params=" + params +
+                ", username='" + username + '\'' +
+                ", token='" + token + '\'' +
+                ", tokenKey='" + tokenKey + '\'' +
+                ", realUri='" + realUri + '\'' +
+                ", newToken='" + newToken + '\'' +
+                ", refreshToken=" + refreshToken +
+                ", wService=" + wService +
+                '}';
     }
 }
