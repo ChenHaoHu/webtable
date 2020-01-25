@@ -98,8 +98,8 @@ public class WebTabelHandler {
         RequestUrlFilter requestUrlFilter = new RequestUrlFilter();
         TokenJwtFilter tokenJwtFilter = new TokenJwtFilter();
         hPreRequest = new WFiterChainImpl(WHandlerType.HPreRequest);
-        hPreRequest.addFiterOnFirst(requestMethodFilter);
-        hPreRequest.addFiterOnFirst(requestUrlFilter);
-        hPreRequest.addFiterOnFirst(tokenJwtFilter);
+        hPreRequest.addFiterOnLast(requestMethodFilter);
+        hPreRequest.addFiterOnLast(requestUrlFilter);
+        hPreRequest.addFiterOnLast(tokenJwtFilter);
     }
 }

@@ -11,9 +11,9 @@ package top.hcy.webtable.filter;
  */
 public interface WFilterChain extends WHandleFilter {
 
-    public abstract boolean addFitersOnFirst(AbstractFilterChain f);
-    public abstract boolean deleteFiter(WHandleFilter f);
-    public abstract boolean addFiterOnLast(WHandleFilter f);
-    public abstract boolean addFiterOnFirst(WHandleFilter f);
+    boolean addFitersOnFirst(AbstractFilterChain f);
+    boolean deleteFiter(WHandleFilter f);
+    boolean addFiterOnLast(WHandleFilter f);
+    boolean addFiterOnFirst(WHandleFilter f);
 
 }
