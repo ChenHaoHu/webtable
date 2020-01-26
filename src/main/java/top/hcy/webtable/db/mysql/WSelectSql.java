@@ -3,12 +3,11 @@ package top.hcy.webtable.db.mysql;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * @ProjectName: webtable
  * @Package: top.hcy.webtable.db.mysql
- * @ClassName: WSql
+ * @ClassName: WSelectSql
  * @Author: hcy
  * @Description:
  * @Date: 20-1-26 22:11
@@ -49,6 +48,13 @@ public class WSelectSql {
         isLimit = true;
         this.limit_x = limit;
         this.limit_y = offset;
+        return this;
+    }
+
+    public WSelectSql page(int pageNum, int pageSize){
+        isLimit = true;
+        this.limit_x = pageSize;
+        this.limit_y = pageNum*pageSize;
         return this;
     }
 

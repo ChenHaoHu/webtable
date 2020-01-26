@@ -17,9 +17,9 @@ class WSelectSqlTest {
         d = selectSql
                 .table("task")
                 .fields("task_id","author", "task_name")
-                .where("task_id < ?")
-                .limit(2,3)
-                .executeQuery("15");
+                .where("author = ?")
+                .limit(2,0)
+                .executeQuery("胡晨阳");
         String s = JSON.toJSONString(d);
         System.out.println(s);
     }

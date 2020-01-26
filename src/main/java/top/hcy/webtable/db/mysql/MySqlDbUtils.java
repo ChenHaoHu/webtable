@@ -76,8 +76,28 @@ public class MySqlDbUtils implements DBUtils {
         return list;
     }
 
-    public static int insert(String sql) {
-        return 0;
+    public static int insert(String sql,ArrayList<ArrayList<String>> values) {
+        int execute = 0;
+        try{
+           Connection connection = getConnection();
+           PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+           int size = values.size();
+            for (int i = 0; i < size; i++) {
+                ArrayList<String> value = values.get(i);
+                int valueSize = value.size();
+                for (int j = 0; j < valueSize; j++) {
+                    preparedStatement.setString(i*valueSize+j+1,value.get(j));
+                }
+            }
+
+
+           execute = preparedStatement.executeUpdate();
+       }catch (Exception e){
+           e.printStackTrace();
+           //log
+       }
+        return execute;
     }
 
     public static void update(String sql) {
