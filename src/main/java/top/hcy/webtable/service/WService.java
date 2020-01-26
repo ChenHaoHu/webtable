@@ -14,5 +14,7 @@ import top.hcy.webtable.filter.WHandleFilter;
  * @Version: 1.0
  */
 public interface WService {
-    void  doService(WebTableContext ctx) throws Exception;
+
+    void verifyParams(WebTableContext ctx);
+    void doService(WebTableContext ctx);
 }

@@ -11,6 +11,7 @@ import top.hcy.webtable.db.kv.KVType;
 import top.hcy.webtable.filter.*;
 import top.hcy.webtable.router.Router;
 import top.hcy.webtable.service.LoginService;
+import top.hcy.webtable.service.WService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -57,16 +58,20 @@ public class WebTabelHandler {
         if (ctx.isError()){
           return defulteWResponseEntity(ctx);
         }
-
+        //获取对应service
+        WService wService = ctx.getWService();
+        //校验参数
+        wService.verifyParams(ctx);
+        if (ctx.isError()){
+            return defulteWResponseEntity(ctx);
+        }
+        //执行service
         try {
-            ctx.getWService().doService(ctx);
+            wService.doService(ctx);
         } catch (Exception e) {
             log.error("service error"+e.getClass().getName() +"  ctx:"+ ctx.toString());
             ctx.setWRespCode(WRespCode.REQUEST_SERVICE_ERROR);
-
         }
-
-
         HashMap res = new HashMap();
         if (ctx.isRefreshToken()){
             res.put("token",ctx.getNewToken());

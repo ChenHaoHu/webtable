@@ -3,6 +3,155 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
+  "u": "login",
+  "username": "",
+  "passwd":"admin"
+}
+
+<> 2020-01-26T034001.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "login",
+
+  "passwd":"admin"
+}
+
+<> 2020-01-26T033957.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "login",
+  "username": "admi1n",
+  "passwd":"admin"
+}
+
+<> 2020-01-26T033952.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "login",
+  "username": "admin",
+  "passwd":"admin1"
+}
+
+<> 2020-01-26T033946.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "login",
+  "username": "admin",
+  "passwd":"admin"
+}
+
+<> 2020-01-26T033943.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "login",
+  "username": "admin",
+  "passwd":"admin"
+}
+
+<> 2020-01-26T033939.200.json
+
+###
+
+POST https://www.hcyang.top/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+<> 2020-01-26T015603.500.json
+
+###
+
+POST https://www.hcyang.top/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+
+
+}
+
+<> 2020-01-26T015557.200.json
+
+###
+
+POST https://www.hcyang.top/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "log1in",
+
+}
+
+<> 2020-01-26T015552.200.json
+
+###
+
+POST https://www.hcyang.top/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "log1in",
+  "passwd":"aaa"
+}
+
+<> 2020-01-26T015543.200.json
+
+###
+
+POST https://www.hcyang.top/webtable
+
+<> 2020-01-26T015515.500.json
+
+###
+
+POST https://www.hcyang.top/webtable/
+
+<> 2020-01-26T015507.500.json
+
+###
+
+POST https://www.hcyang.top/webtable
+
+<> 2020-01-26T015445.500.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
   "u": "log1in",
   "passwd":"aaa"
 }
@@ -507,200 +656,6 @@ token: hcytoken
 }
 
 <> 2020-01-25T110945.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken1
-
-{
-  "u": "logi1n",
-  "table": "",
-  "fields": [1,2,3,4],
-  "data": "content"
-}
-
-<> 2020-01-25T110938.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "logi1n",
-  "table": "",
-  "fields": [1,2,3,4],
-  "data": "content"
-}
-
-<> 2020-01-25T110934.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "login",
-  "table": "",
-  "fields": [1,2,3,4],
-  "data": "content"
-}
-
-<> 2020-01-25T110929.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken1
-
-{
-  "u": "login",
-  "table": "",
-  "fields": [1,2,3,4],
-  "data": "content"
-}
-
-<> 2020-01-20T010025.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "login",
-  "table": "",
-  "fields": [1,2,3,4],
-  "data": "content"
-}
-
-<> 2020-01-20T010021.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "111",
-  "table": "",
-  "fields": [1,2,3,4],
-  "data": "content"
-}
-
-<> 2020-01-20T125617.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcyhcy
-
-{
-  "u": "111",
-  "table": "",
-  "fields": [1,2,3,4],
-  "data": "content"
-}
-
-<> 2020-01-20T125612.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token:
-
-{
-  "u": "111",
-  "table": "",
-  "fields": [1,2,3,4],
-  "data": "content"
-}
-
-<> 2020-01-20T125600.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-
-{
-  "u": "111",
-  "table": "",
-  "fields": [1,2,3,4],
-  "data": "content"
-}
-
-<> 2020-01-20T125138.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token:
-
-{
-  "u": "111",
-  "table": "",
-  "fields": [1,2,3,4],
-  "data": "content"
-}
-
-<> 2020-01-20T125130.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token:
-
-{
-  "u": "111",
-  "table": "",
-  "fields": [1,2,3,4],
-  "data": "content"
-}
-
-<> 2020-01-20T125123.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: 12222222222
-
-{
-  "u": "111",
-  "table": "",
-  "fields": [1,2,3,4],
-  "data": "content"
-}
-
-<> 2020-01-20T125109.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: 12222222222
-
-{
-  "u": "111",
-  "table": "",
-  "fields": [1,2,3,4],
-  "data": "content"
-}
-
-<> 2020-01-20T124841.200.json
 
 ###
 

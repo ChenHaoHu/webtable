@@ -15,10 +15,9 @@ import java.util.HashMap;
  */
 public class WConstants {
 
-    public static final String JWT_SECRET = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExMSIsImV";
+    public static final String JWT_SECRET = "eyJhbGciOiJIUzUxMiJ9";
 
     public static final String URI_NAME = "u";
-
 
     public static final String PREFIX_ACCOUNTS = "account.";
 
@@ -36,7 +35,6 @@ public class WConstants {
             {"secadmin","admin"},
             {"admin","admin"}
     };
-
 
 
 }

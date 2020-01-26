@@ -13,7 +13,4 @@ public class WTokenType {
     public  static  final  long  SHORT_TOKE = 30 * 1000;
     public  static  final  long  LONG_TOKE = 120 * 1000;
 
-    public static long customToken(long l){
-        return l;
-    }
 }

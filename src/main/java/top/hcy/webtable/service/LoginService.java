@@ -20,23 +20,33 @@ import top.hcy.webtable.tools.JwtTokenUtils;
  **/
 public class LoginService implements WService {
     @Override
-    public void doService(WebTableContext ctx) throws Exception{
+    public void verifyParams(WebTableContext ctx) {
         JSONObject params = ctx.getParams();
         String username = (String)params.get("username");
         String passwd = (String)params.get("passwd");
         if (username!=null && passwd!=null && !username.isEmpty()&&!passwd.isEmpty()){
-            String password = (String)WGlobal.kvDBUtils.getValue(WConstants.PREFIX_ACCOUNTS + username, KVType.T_STRING);
-            if (passwd.equals(password)){
-                ctx.setWRespCode(WRespCode.LOGIN_SUCCESS);
-                String s = JwtTokenUtils.generateToken(username);
-                ctx.setNewToken(s);
-                ctx.setRefreshToken(true);
-            }else{
-                ctx.setWRespCode(WRespCode.LOGIN_FAILE);
-            }
-
+            return;
         }else{
             ctx.setWRespCode(WRespCode.REQUEST_PARAM_ERROR);
+            ctx.setError(true);
+            return;
         }
+    }
+
+    @Override
+    public void doService(WebTableContext ctx) {
+        JSONObject params = ctx.getParams();
+        String username = (String)params.get("username");
+        String passwd = (String)params.get("passwd");
+        String password = (String)WGlobal.kvDBUtils.getValue(WConstants.PREFIX_ACCOUNTS + username, KVType.T_STRING);
+        if (passwd.equals(password)){
+            ctx.setWRespCode(WRespCode.LOGIN_SUCCESS);
+            String s = JwtTokenUtils.generateToken(username);
+            ctx.setNewToken(s);
+            ctx.setRefreshToken(true);
+        }else{
+            ctx.setWRespCode(WRespCode.LOGIN_FAILE);
+        }
+
     }
 }

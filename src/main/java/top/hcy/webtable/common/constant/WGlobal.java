@@ -12,8 +12,6 @@ import top.hcy.webtable.db.kv.LevelDBUtils;
  **/
 public class WGlobal {
 
-
     public  final static KvDbUtils kvDBUtils = new LevelDBUtils();
-
 
 }
