@@ -10,9 +10,9 @@ class WDeleteSqlTest {
     @Test
     void executeDelete() {
         WDeleteSql deleteSql = new WDeleteSql();
-        int i = deleteSql.table("ttt")
-                .where("id<?")
-                .executeDelete("100");
+       deleteSql.table("ttt")
+                .where("id<?");
+//                .executeDelete("100");
         String sql = deleteSql.getSql();
         Assert.assertEquals(sql,"DELETE FROM  ttt WHERE id<?");
     }

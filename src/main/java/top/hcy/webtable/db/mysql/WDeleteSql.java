@@ -54,7 +54,7 @@ public class WDeleteSql {
         sql.append("DELETE FROM  "+table);
 
         if (!condition.isEmpty()){
-            sql.append(" WHERE "+condition+" ");
+            sql.append(" WHERE "+condition);
         }
         return sql.toString();
     }
