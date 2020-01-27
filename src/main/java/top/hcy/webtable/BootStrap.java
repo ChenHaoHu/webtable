@@ -2,6 +2,14 @@ package top.hcy.webtable;
 
 import com.alibaba.fastjson.JSONArray;
 import lombok.extern.slf4j.Slf4j;
+import org.reflections.Reflections;
+import org.reflections.scanners.FieldAnnotationsScanner;
+import org.reflections.scanners.MethodAnnotationsScanner;
+import org.reflections.scanners.MethodParameterScanner;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.util.ConfigurationBuilder;
+import top.hcy.webtable.annotation.WebTable;
+import top.hcy.webtable.common.WTable;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.common.enums.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
@@ -15,8 +23,11 @@ import top.hcy.webtable.service.WService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
@@ -24,19 +35,19 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 /**
  * @ProjectName: webtable
  * @Package: top.hcy.webtable
- * @ClassName: WebTabelHandler
+ * @ClassName: BootStrap
  * @Author: hcy
  * @Description: web table 处理入口
  * @Date: 2020/1/14 19:52
  * @Version: 1.0
  */
 @Slf4j
-public class WebTabelHandler {
+public class BootStrap {
 
     //普通请求前置处理
     WFiterChainImpl hPreRequest = null;
 
-    public WebTabelHandler() {
+    public BootStrap() {
         init();
     }
 
@@ -44,6 +55,26 @@ public class WebTabelHandler {
         initFilters();
         initDefaultAccount();
         initRouters();
+        initTableData();
+    }
+
+    private void initTableData() {
+
+        // 扫包
+        Reflections reflections = new Reflections(new ConfigurationBuilder()
+                .forPackages(WConstants.PACKAGE_SCAN) // 指定路径URL
+//                .addScanners(new SubTypesScanner()) // 添加子类扫描工具
+                .addScanners(new FieldAnnotationsScanner()) // 添加 属性注解扫描工具
+                .addScanners(new MethodAnnotationsScanner() ) // 添加 方法注解扫描工具
+                .addScanners(new MethodParameterScanner() ) // 添加方法参数扫描工具
+        );
+        Set<Class<?>> c = reflections.getTypesAnnotatedWith(WebTable.class);
+        Iterator<Class<?>> iterator = c.iterator();
+        while (iterator.hasNext()){
+
+        }
+
+
     }
 
     private void initRouters() {

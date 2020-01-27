@@ -5,15 +5,11 @@ import io.jsonwebtoken.Clock;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.DefaultClock;
-import jdk.nashorn.internal.runtime.logging.Logger;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cglib.core.internal.Function;
 import org.springframework.stereotype.Component;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.common.constant.WTokenType;
-import top.hcy.webtable.common.enums.WRespCode;
-import top.hcy.webtable.entity.UserDetails;
 
 import java.io.Serializable;
 import java.util.Date;

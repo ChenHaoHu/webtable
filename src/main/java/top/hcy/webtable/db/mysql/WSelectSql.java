@@ -82,9 +82,28 @@ public class WSelectSql {
         if (isLimit){
             sql.append(" LIMIT "+limit_x + "  OFFSET "+limit_y);
         }
-        System.out.println(sql);
         ArrayList<HashMap<String, Object>> data = MySqlDbUtils.find(sql.toString(), values);
         return data;
     }
 
+    public String getSql() {
+        StringBuffer sql = new StringBuffer();
+        sql.append("SELECT ");
+        int size = fields.size();
+        for (int i = 0; i < size; i++) {
+            sql.append(fields.get(i));
+            if (i !=size-1){
+                sql.append(",");
+            }
+        }
+
+        sql.append(" FROM "+table);
+        if (!condition.isEmpty()){
+            sql.append(" WHERE "+condition+" ");
+        }
+        if (isLimit){
+            sql.append(" LIMIT "+limit_x + "  OFFSET "+limit_y);
+        }
+        return sql.toString();
+    }
 }

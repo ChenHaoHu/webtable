@@ -45,7 +45,7 @@ public class WInsertSql {
         return this;
     }
 
-    public int execute(){
+    public int executeInsert(){
 
         StringBuffer sql = new StringBuffer();
         sql.append("INSERT INTO "+table +" (");
@@ -57,9 +57,7 @@ public class WInsertSql {
             }
         }
         sql.append(")VALUES");
-
         size = values.size();
-
         for (int i = 0; i < size; i++) {
             sql.append("(");
             ArrayList<String> value = values.get(i);
@@ -75,11 +73,38 @@ public class WInsertSql {
                 sql.append(",");
             }
         }
-
-        System.out.println(sql);
         int insert = MySqlDbUtils.insert(sql.toString(),values);
-
         return insert;
+    }
+
+    public String getSql() {
+        StringBuffer sql = new StringBuffer();
+        sql.append("INSERT INTO "+table +" (");
+        int size = fields.size();
+        for (int i = 0; i < size; i++) {
+            sql.append(fields.get(i));
+            if (i !=size-1){
+                sql.append(",");
+            }
+        }
+        sql.append(")VALUES");
+        size = values.size();
+        for (int i = 0; i < size; i++) {
+            sql.append("(");
+            ArrayList<String> value = values.get(i);
+            int valueSize = value.size();
+            for (int j = 0; j < valueSize; j++) {
+                sql.append("?");
+                if (j !=valueSize-1){
+                    sql.append(",");
+                }
+            }
+            sql.append(")");
+            if (i !=size-1){
+                sql.append(",");
+            }
+        }
+        return sql.toString();
     }
 
 }
