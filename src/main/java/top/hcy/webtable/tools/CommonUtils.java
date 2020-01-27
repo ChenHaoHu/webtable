@@ -1,5 +1,8 @@
 package top.hcy.webtable.tools;
 
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -27,5 +30,25 @@ public class CommonUtils {
         data.put("username",getShortStr());
         data.put("passwd",getShortStr());
         return data;
+    }
+
+
+    public static ArrayList<HashMap<String,Object>> convertResultSetToList(ResultSet rs){
+        ArrayList<HashMap<String,Object>> list = new ArrayList<>();
+        HashMap<String,Object> rowData = null;
+        try {
+            ResultSetMetaData md = rs.getMetaData();
+            int columnCount = md.getColumnCount();   //获得列数
+            while (rs.next()) {
+                rowData = new HashMap<String,Object>();
+                for (int i = 1; i <= columnCount; i++) {
+                    rowData.put(md.getColumnName(i), rs.getObject(i));
+                }
+                list.add(rowData);
+            }
+        }catch (Exception e){
+            list  = null;
+        }
+        return list;
     }
 }

@@ -1,15 +1,12 @@
 package top.hcy.webtable;
 
-import com.alibaba.fastjson.JSONArray;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.MethodParameterScanner;
-import org.reflections.scanners.SubTypesScanner;
 import org.reflections.util.ConfigurationBuilder;
-import top.hcy.webtable.annotation.WebTable;
-import top.hcy.webtable.common.WTable;
+import top.hcy.webtable.annotation.table.WTable;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.common.enums.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
@@ -23,7 +20,6 @@ import top.hcy.webtable.service.WService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -68,10 +64,10 @@ public class BootStrap {
                 .addScanners(new MethodAnnotationsScanner() ) // 添加 方法注解扫描工具
                 .addScanners(new MethodParameterScanner() ) // 添加方法参数扫描工具
         );
-        Set<Class<?>> c = reflections.getTypesAnnotatedWith(WebTable.class);
+        Set<Class<?>> c = reflections.getTypesAnnotatedWith(WTable.class);
         Iterator<Class<?>> iterator = c.iterator();
         while (iterator.hasNext()){
-
+            Class<?> next = iterator.next();
         }
 
 

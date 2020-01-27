@@ -1,4 +1,4 @@
-package top.hcy.webtable.annotation;
+package top.hcy.webtable.annotation.field;
 
 import java.lang.annotation.*;
 
@@ -6,6 +6,5 @@ import java.lang.annotation.*;
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-public @interface WebInsertField {
-
+public @interface WUpdateField {
 }

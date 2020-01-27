@@ -1,7 +1,7 @@
 package top.hcy.webtable.entity;
 
 import lombok.Data;
-import top.hcy.webtable.annotation.WebTable;
+import top.hcy.webtable.annotation.table.WTable;
 
 /**
  * @ProjectName: webtable
@@ -13,7 +13,7 @@ import top.hcy.webtable.annotation.WebTable;
  * @Version: 1.0
  **/
 @Data
-@WebTable(aliasName = "数据集一",tableName = "data1")
+@WTable(aliasName = "数据集一",tableName = "data1")
 public class Data1 {
    private long id;
    private String name;

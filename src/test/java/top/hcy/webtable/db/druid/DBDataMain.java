@@ -2,10 +2,13 @@ package top.hcy.webtable.db.druid;
 
 import java.io.InputStream;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 import javax.sql.DataSource;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
+import top.hcy.webtable.tools.CommonUtils;
 
 public class DBDataMain {
 
@@ -64,8 +67,9 @@ public class DBDataMain {
     public static void main(String[] args) throws Exception {
         Connection connection = getConnection();
         DatabaseMetaData d = connection.getMetaData();
-        System.out.println(d.getDatabaseProductName());
-        System.out.println(d.getRowIdLifetime());
+        ResultSet ttt = d.getPrimaryKeys(connection.getCatalog(), null, "tt");
+        ArrayList<HashMap<String, Object>> h = CommonUtils.convertResultSetToList(ttt);
+        System.out.println(h);
         return;
     }
 }
