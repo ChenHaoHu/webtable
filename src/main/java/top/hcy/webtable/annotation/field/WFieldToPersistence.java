@@ -2,8 +2,9 @@ package top.hcy.webtable.annotation.field;
 
 import java.lang.annotation.*;
 
-@Target({ElementType.FIELD})
+@Target({ElementType.METHOD})
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-public @interface WUpdateField {
+public @interface WFieldToPersistence {
+    String value() default  "";
 }

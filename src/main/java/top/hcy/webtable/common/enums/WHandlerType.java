@@ -11,9 +11,9 @@ package top.hcy.webtable.common.enums;
  */
 public enum WHandlerType {
 
-    GTABLE("","获取表详情"),
     GFiled("","获取表详情"),
     HPreRequest("","检查request请求"),
+    GTABLE("table","获取表数据信息"),
     LoginRequest("login","登录请求");
 
     private String uri;

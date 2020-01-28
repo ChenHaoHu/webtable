@@ -3,9 +3,8 @@ package top.hcy.webtable.annotation.field;
 import java.lang.annotation.*;
 
 @Target({ElementType.FIELD})
-@Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-public @interface WInsertField {
+public @interface WInsertField   {
 
 }

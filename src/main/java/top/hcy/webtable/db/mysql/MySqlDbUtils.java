@@ -4,6 +4,8 @@ import com.alibaba.druid.pool.DruidDataSourceFactory;
 import jdk.nashorn.internal.runtime.logging.Logger;
 import lombok.extern.slf4j.Slf4j;
 import top.hcy.webtable.db.DBUtils;
+import top.hcy.webtable.entity.Data1;
+import top.hcy.webtable.tools.CommonUtils;
 
 import javax.sql.DataSource;
 import java.io.InputStream;
@@ -61,15 +63,8 @@ public class MySqlDbUtils implements DBUtils {
                 preparedStatement.setString(i+1,values[i]);
             }
             ResultSet rs = preparedStatement.executeQuery();
-            ResultSetMetaData md = rs.getMetaData(); //获得结果集结构信息,元数据
-            int columnCount = md.getColumnCount();   //获得列数
-            while (rs.next()) {
-                HashMap<String,Object> rowData = new HashMap<String,Object>();
-                for (int i = 1; i <= columnCount; i++) {
-                    rowData.put(md.getColumnName(i), rs.getObject(i));
-                }
-                list.add(rowData);
-            }
+
+            list = CommonUtils.convertResultSetToList(rs);
             connection.close();
         }catch (Exception e){
             // e.printStackTrace();
@@ -170,5 +165,33 @@ public class MySqlDbUtils implements DBUtils {
             }
         }
         return execute;
+    }
+
+    public static ArrayList<String> getPrimayKey(String table) {
+        ArrayList<String> list = new ArrayList<>();
+        Connection connection = null;
+        try{
+            connection = getConnection();
+            DatabaseMetaData d = connection.getMetaData();
+            ResultSet rs = d.getPrimaryKeys(connection.getCatalog(), null, table);
+            ArrayList<HashMap<String, Object>> h = CommonUtils.convertResultSetToList(rs);
+            int size = h.size();
+            for (int i = 0; i < size; i++) {
+                list.add(h.get(i).get("COLUMN_NAME").toString());
+            }
+
+        }catch (Exception e){
+            //e.printStackTrace();
+            log.error(table+ "  "+ e.getMessage());
+        }finally {
+            if(connection!=null){
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return list;
     }
 }

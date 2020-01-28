@@ -23,6 +23,9 @@ public class WConstants {
     public static final String URI_NAME = "u";
 
     public static final String PREFIX_ACCOUNTS = "account.";
+    public static final String PREFIX_TABLE = "table.";
+
+    public static final String PREFIX_FIELD = "field.";
 
     public static final long TOKEN_REFRESH_TIME = 20 * 1000;
 

@@ -1,7 +1,12 @@
 package top.hcy.webtable.entity;
 
 import lombok.Data;
-import top.hcy.webtable.annotation.table.WTable;
+import top.hcy.webtable.annotation.field.*;
+import top.hcy.webtable.annotation.method.WDeleteTrigger;
+import top.hcy.webtable.annotation.method.WInsertTrigger;
+import top.hcy.webtable.annotation.method.WUpdateTrigger;
+import top.hcy.webtable.annotation.table.*;
+import top.hcy.webtable.common.enums.WebFieldType;
 
 /**
  * @ProjectName: webtable
@@ -13,14 +18,63 @@ import top.hcy.webtable.annotation.table.WTable;
  * @Version: 1.0
  **/
 @Data
-@WTable(aliasName = "数据集一",tableName = "data1")
+@WTable(aliasName = "用户信息",tableName = "data1")
+@WEnadbleDelete
+@WEnadbleInsert
+@WEnadbleUpdate
 public class Data1 {
+   @WField(aliasName = "编号")
    private long id;
+   @WInsertField
+   @WField(aliasName = "姓名")
    private String name;
+   @WInsertField
+   @WUpdateField
+   @WField(aliasName = "年龄")
    private int age;
+   @WInsertField
+   @WUpdateField
+   @WField(aliasName = "密码",fieldType = WebFieldType.Number)
    private String passwd;
+   @WField(aliasName = "数据一")
    private String data1;
+   @WField(aliasName = "数据二")
    private String data2;
    private String data3;
    private String data4;
+
+
+
+   @WFieldToShow("name")
+   public void wFieldToShowName(){
+      System.out.println("------------- 展示时，调整name值 ------------- ");
+      this.name = "hello"+this.name;
+   }
+
+   @WFieldToShow("age")
+   public void wFieldToShowAge(){
+      System.out.println("------------- 展示时，调整age值 ------------- ");
+      this.age = this.age + 1000;
+   }
+
+   @WFieldToPersistence("age")
+   public void wFieldToPersistenceAge(){
+      System.out.println("------------- 存储时，调整age值 ------------- ");
+      this.age = -1;
+   }
+
+   @WInsertTrigger
+   public void insertData1Trigger(){
+      System.out.println("------------- 插入触发器 --------------");
+   }
+
+   @WUpdateTrigger
+   public void updateData1Trigger(){
+      System.out.println("------------- 更新触发器 --------------");
+   }
+
+   @WDeleteTrigger
+   public void deleteData1Trigger(){
+      System.out.println("------------- 更新触发器 --------------");
+   }
 }

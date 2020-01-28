@@ -1,25 +1,39 @@
 package top.hcy.webtable;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import org.omg.CORBA.OBJ_ADAPTER;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.MethodParameterScanner;
 import org.reflections.util.ConfigurationBuilder;
+import top.hcy.webtable.annotation.field.*;
+import top.hcy.webtable.annotation.method.WDeleteTrigger;
+import top.hcy.webtable.annotation.method.WInsertTrigger;
+import top.hcy.webtable.annotation.method.WSelectTrigger;
+import top.hcy.webtable.annotation.table.WEnadbleDelete;
+import top.hcy.webtable.annotation.table.WEnadbleInsert;
+import top.hcy.webtable.annotation.table.WEnadbleUpdate;
 import top.hcy.webtable.annotation.table.WTable;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.common.enums.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
+import top.hcy.webtable.common.enums.WebFieldType;
 import top.hcy.webtable.common.response.WResponseEntity;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.db.kv.KVType;
 import top.hcy.webtable.filter.*;
 import top.hcy.webtable.router.Router;
+import top.hcy.webtable.service.GetTableService;
 import top.hcy.webtable.service.LoginService;
 import top.hcy.webtable.service.WService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -41,40 +55,186 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 public class BootStrap {
 
     //普通请求前置处理
-    WFiterChainImpl hPreRequest = null;
+    private WFiterChainImpl hPreRequest = null;
+
+    private Reflections reflections = null;
 
     public BootStrap() {
         init();
     }
 
     private void init() {
+        initReflections();
         initFilters();
         initDefaultAccount();
         initRouters();
-        initTableData();
+        initKvData();
     }
 
-    private void initTableData() {
-
-        // 扫包
-        Reflections reflections = new Reflections(new ConfigurationBuilder()
+    private void initReflections() {
+        reflections = new Reflections(new ConfigurationBuilder()
                 .forPackages(WConstants.PACKAGE_SCAN) // 指定路径URL
 //                .addScanners(new SubTypesScanner()) // 添加子类扫描工具
                 .addScanners(new FieldAnnotationsScanner()) // 添加 属性注解扫描工具
                 .addScanners(new MethodAnnotationsScanner() ) // 添加 方法注解扫描工具
                 .addScanners(new MethodParameterScanner() ) // 添加方法参数扫描工具
         );
-        Set<Class<?>> c = reflections.getTypesAnnotatedWith(WTable.class);
-        Iterator<Class<?>> iterator = c.iterator();
+    }
+
+    private void initKvData() {
+        saveTableData();
+        saveFieldData();
+        saveTriggerMethods();
+        UpdateToShowMethods();
+        UpdateToPersistenceMethods();
+
+        JSONObject value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+"Data1"+"."+"name", KVType.T_MAP);
+        System.out.println(value);
+        value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+"Data1"+"."+"age", KVType.T_MAP);
+        System.out.println(value);
+    }
+
+    private void UpdateToShowMethods() {
+        Set<Method> wFieldToShowMethods = reflections.getMethodsAnnotatedWith(WFieldToShow.class);
+        Iterator<Method> iterator = wFieldToShowMethods.iterator();
         while (iterator.hasNext()){
-            Class<?> next = iterator.next();
+            Method method = iterator.next();
+            WFieldToShow annotation = method.getAnnotation(WFieldToShow.class);
+            String fieldName = annotation.value();
+            String className = method.getDeclaringClass().getSimpleName();
+            JSONObject field = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+className+"."+fieldName, KVType.T_MAP);
+            field.put("toShowMethod",method.getName());
+            kvDBUtils.setValue(WConstants.PREFIX_FIELD+className+"."+fieldName,field, KVType.T_MAP);
         }
+    }
 
+    private void UpdateToPersistenceMethods() {
+        Set<Method> wFieldToShowMethods = reflections.getMethodsAnnotatedWith(WFieldToPersistence.class);
+        Iterator<Method> iterator = wFieldToShowMethods.iterator();
+        while (iterator.hasNext()){
+            Method method = iterator.next();
+            WFieldToPersistence annotation = method.getAnnotation(WFieldToPersistence.class);
+            String fieldName = annotation.value();
+            String className = method.getDeclaringClass().getSimpleName();
+            JSONObject field = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+className+"."+fieldName, KVType.T_MAP);
+            field.put("toPersistenceMethod",method.getName());
+            kvDBUtils.setValue(WConstants.PREFIX_FIELD+className+"."+fieldName,field, KVType.T_MAP);
+        }
+    }
 
+    private void saveTriggerMethods() {
+        updateTriggerMethods(WInsertTrigger.class,"insertTrigger");
+        updateTriggerMethods(WUpdateField.class,"updateTrigger");
+        updateTriggerMethods(WDeleteTrigger.class,"deleteTrigger");
+        updateTriggerMethods(WSelectTrigger.class,"selectTrigger");
+        //测试打印
+        JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + "Data1", KVType.T_MAP);
+        System.out.println(value);
+    }
+
+    private void updateTriggerMethods(Class triggerClass,String key) {
+        Set<Method> wInsertTriggerMethods = reflections.getMethodsAnnotatedWith(triggerClass);
+        Iterator<Method> iterator = wInsertTriggerMethods.iterator();
+        while (iterator.hasNext()){
+            Method method = iterator.next();
+            String className = method.getDeclaringClass().getSimpleName();
+            JSONObject table = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + className, KVType.T_MAP);
+            table.put(key,method.getName());
+            kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, KVType.T_MAP);
+        }
+    }
+
+    private void saveFieldData() {
+        Set<Field> fields = reflections.getFieldsAnnotatedWith(WField.class);
+        Iterator<Field> iterator = fields.iterator();
+        while (iterator.hasNext()){
+            Field field = iterator.next();
+            WField wField = field.getAnnotation(WField.class);
+            String className = field.getDeclaringClass().getSimpleName();
+            String intactClass = field.getDeclaringClass().getName();
+            String fieldName = field.getName();
+            String  aliasFieldName = "".equals(wField.aliasName())?fieldName:wField.aliasName();
+            String  columnName = "".equals(wField.columnName())?fieldName:wField.columnName();
+            String webFieldType = wField.fieldType().getStr();
+            //表权限表
+            ArrayList<String> fieldType = new ArrayList<>();
+            if(field.getAnnotation(WInsertField.class)!=null ||
+                    wField.insert() ){
+                fieldType.add("insert");
+            }
+            if(field.getAnnotation(WUpdateField.class)!=null ||
+                    wField.update() ){
+                fieldType.add("update");
+            }
+            HashMap<String, Object> fieldData = new HashMap<>();
+            fieldData.put("field",fieldName);
+            fieldData.put("type",field.getType());
+            fieldData.put("webFieldType",webFieldType);
+            fieldData.put("class",className);
+            fieldData.put("intactClass",intactClass);
+            fieldData.put("alias",aliasFieldName);
+            fieldData.put("column",columnName);
+            fieldData.put("fieldType",fieldType);
+            fieldData.put("toShowMethod",null);
+            fieldData.put("toPersistenceMethod",null);
+            kvDBUtils.setValue(WConstants.PREFIX_FIELD+className+"."+fieldName,fieldData, KVType.T_MAP);
+            JSONObject value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+className+"."+fieldName, KVType.T_MAP);
+            System.out.println(value);
+        }
+    }
+
+    private void saveTableData() {
+        Set<Class<?>> wTableClasses = reflections.getTypesAnnotatedWith(WTable.class);
+        Iterator<Class<?>> iterator = wTableClasses.iterator();
+        while (iterator.hasNext()){
+            Class<?> wTableClass = iterator.next();
+            WTable wTable = wTableClass.getAnnotation(WTable.class);
+            String wTableClassName = wTableClass.getSimpleName();
+            String aliasTableName = "".equals(wTable.aliasName())?wTableClassName:wTable.aliasName();
+            String tableName = "".equals(wTable.tableName())?wTableClassName:wTable.tableName();
+            //表权限表
+            ArrayList<String> permission = new ArrayList<>();
+            if(wTableClass.getAnnotation(WEnadbleDelete.class)!=null ||
+                    wTable.delete() ){
+                permission.add("delete");
+            }
+            if(wTableClass.getAnnotation(WEnadbleInsert.class)!=null ||
+                    wTable.insert() ){
+                permission.add("add");
+            }
+            if(wTableClass.getAnnotation(WEnadbleUpdate.class)!=null ||
+                    wTable.update() ){
+                permission.add("update");
+            }
+            ArrayList<String> f = new ArrayList<>();
+            Field[] fields = wTableClass.getDeclaredFields();
+            int length = fields.length;
+            for (int i = 0; i < length; i++) {
+                if ( fields[i].getAnnotation(WField.class)!=null){
+                    f.add(fields[i].getName());
+                }
+            }
+
+            HashMap<String, Object> tableData = new HashMap<>();
+            tableData.put("table",tableName);
+            tableData.put("alias",aliasTableName);
+            tableData.put("class",wTableClassName);
+            tableData.put("intactClass",wTableClass.getName());
+            tableData.put("fields",f);
+            tableData.put("permission",permission);
+            tableData.put("insertTrigger",null);
+            tableData.put("updateTrigger",null);
+            tableData.put("selectTrigger",null);
+            tableData.put("deleteTrigger",null);
+            kvDBUtils.setValue(WConstants.PREFIX_TABLE+wTableClassName,tableData, KVType.T_MAP);
+            JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + wTableClassName, KVType.T_MAP);
+            System.out.println(value);
+        }
     }
 
     private void initRouters() {
         Router.addRouter(WHandlerType.LoginRequest,new LoginService());
+        Router.addRouter(WHandlerType.GTABLE,new GetTableService());
     }
 
     //处理入口
@@ -83,7 +243,7 @@ public class BootStrap {
         //检查url 和 请求方法
         hPreRequest.doFilter(ctx);
         if (ctx.isError()){
-          return defulteWResponseEntity(ctx);
+            return defulteWResponseEntity(ctx);
         }
         //获取对应service
         WService wService = ctx.getWService();
