@@ -6,11 +6,15 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.iq80.leveldb.DB;
 import org.iq80.leveldb.DBFactory;
+import org.iq80.leveldb.DBIterator;
 import org.iq80.leveldb.Options;
 import org.iq80.leveldb.impl.Iq80DBFactory;
 
 import java.io.File;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @ClassName: LevelDBUtils
@@ -20,7 +24,7 @@ import java.nio.charset.Charset;
  * @Version: 1.0
  **/
 @Slf4j
-public class LevelDBUtils implements KvDbUtils {
+public class LevelDBUtils implements WKvDbUtils {
 
     private static final String PATH = "leveldb";
     private static final Charset CHARSET = Charset.forName("utf-8");
@@ -44,7 +48,7 @@ public class LevelDBUtils implements KvDbUtils {
 
 
     @Override
-    public Object getValue(String key,int t) {
+    public Object getValue(String key,WKVType t) {
         if(db == null){
             log.error(" LevelDBUtils start error db is null");
             return null;
@@ -54,9 +58,9 @@ public class LevelDBUtils implements KvDbUtils {
             return null;
         }
 
-        if (t == KVType.T_STRING){
+        if (t == WKVType.T_STRING){
             return new String(bytes);
-        }else  if(t == KVType.T_LIST){
+        }else  if(t == WKVType.T_LIST){
             try{
                 JSONArray array = JSONArray.parseArray(new String(bytes));
                 return array;
@@ -64,7 +68,7 @@ public class LevelDBUtils implements KvDbUtils {
                 log.error("bytes" + new String(bytes)+" to JSONArray error");
                 return null;
             }
-        }else if  (t == KVType.T_MAP){
+        }else if  (t == WKVType.T_MAP){
             try{
                 JSONObject object = JSONObject.parseObject(new String(bytes));
                 return object;
@@ -79,14 +83,14 @@ public class LevelDBUtils implements KvDbUtils {
     }
 
     @Override
-    public boolean setValue(String key, Object ob,int t ){
+    public boolean setValue(String key, Object ob,WKVType t ){
         if(db == null){
             log.error(" LevelDBUtils start error db is null");
             return false;
         }
         String s = null;
 
-        if(t != KVType.T_STRING){
+        if(t != WKVType.T_STRING){
             s = JSON.toJSONString(ob);
         }else{
             s = ob.toString();
@@ -107,8 +111,25 @@ public class LevelDBUtils implements KvDbUtils {
     }
 
     @Override
-    public boolean updateKey(String key, Object ob,int t) {
+    public boolean updateKey(String key, Object ob,WKVType t) {
         boolean b = setValue(key, ob, t);
         return b;
     }
+
+    @Override
+    public boolean copyKey(String target, String key) {
+        byte[] bytes = db.get(key.getBytes(CHARSET));
+        db.put(target.getBytes(CHARSET),bytes);
+        return true;
+    }
+    public ArrayList<String> getAllKeys(){
+        ArrayList<String> keys = new ArrayList<>();
+        DBIterator iterator = db.iterator();
+        while (iterator.hasNext() ){
+            Map.Entry<byte[], byte[]> next = iterator.next();
+            keys.add(new String(next.getKey()));
+        }
+        return keys;
+    }
+
 }

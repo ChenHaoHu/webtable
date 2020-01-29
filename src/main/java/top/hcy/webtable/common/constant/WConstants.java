@@ -15,32 +15,13 @@ import java.util.HashMap;
  */
 public class WConstants {
 
-    public static final String PACKAGE_SCAN = "top.hcy.webtable.entity";
-
-
-    public static final String JWT_SECRET = "eyJhbGciOiJIUzUxMiJ9";
 
     public static final String URI_NAME = "u";
-
     public static final String PREFIX_ACCOUNTS = "account.";
     public static final String PREFIX_TABLE = "table.";
-
     public static final String PREFIX_FIELD = "field.";
-
-    public static final long TOKEN_REFRESH_TIME = 20 * 1000;
-
     public static  final String[] NO_TOKEN_URI = new String[]{
             "/login","login",
     };
-
-    public static  final String[] TOKEN_POWER = new String[]{
-            "hcytoken"
-    };
-
-    public static  final String[][] DefaultAccounts  = {
-            {"secadmin","admin"},
-            {"admin","admin"}
-    };
-
 
 }

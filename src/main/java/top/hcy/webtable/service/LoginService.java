@@ -4,9 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.common.constant.WGlobal;
-import top.hcy.webtable.common.constant.WTokenType;
 import top.hcy.webtable.common.enums.WRespCode;
-import top.hcy.webtable.db.kv.KVType;
+import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.tools.JwtTokenUtils;
 
 /**
@@ -38,7 +37,7 @@ public class LoginService implements WService {
         JSONObject params = ctx.getParams();
         String username = (String)params.get("username");
         String passwd = (String)params.get("passwd");
-        String password = (String)WGlobal.kvDBUtils.getValue(WConstants.PREFIX_ACCOUNTS + username, KVType.T_STRING);
+        String password = (String)WGlobal.kvDBUtils.getValue(WConstants.PREFIX_ACCOUNTS + username, WKVType.T_STRING);
         if (passwd.equals(password)){
             ctx.setWRespCode(WRespCode.LOGIN_SUCCESS);
             String s = JwtTokenUtils.generateToken(username);

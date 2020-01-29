@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cglib.core.internal.Function;
 import org.springframework.stereotype.Component;
 import top.hcy.webtable.common.constant.WConstants;
+import top.hcy.webtable.common.constant.WGlobal;
 import top.hcy.webtable.common.constant.WTokenType;
 
 import java.io.Serializable;
@@ -21,7 +22,7 @@ import java.util.Map;
 public class JwtTokenUtils implements Serializable {
     private static final long serialVersionUID = -3301605591108950415L;
 
-    private static String secret = WConstants.JWT_SECRET ;
+    private static String secret = WGlobal.JWT_SECRET ;
 
 
 

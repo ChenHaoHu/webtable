@@ -3,6 +3,7 @@ package top.hcy.webtable.filter;
 import lombok.Data;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
+import top.hcy.webtable.common.constant.WGlobal;
 import top.hcy.webtable.common.constant.WTokenType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.tools.JwtTokenUtils;
@@ -45,9 +46,9 @@ public class TokenJwtFilter implements WHandleFilter {
 
 
         //检查万能token
-         len = WConstants.TOKEN_POWER.length;
+         len = WGlobal.TOKEN_POWER.length;
         for (int i = 0; i < len; i++) {
-            if(WConstants.TOKEN_POWER[i].equals(token)){
+            if(WGlobal.TOKEN_POWER[i].equals(token)){
                 ctx.setTokenKey("admin");
                 return;
             }
@@ -63,7 +64,7 @@ public class TokenJwtFilter implements WHandleFilter {
             //todo: 该用户是否需要刷新token 这里暂时默认刷新默认时长的token
             Date expirationDate = JwtTokenUtils.getExpirationDateFromToken(token);
             Date now = new Date();
-            if(expirationDate.getTime() - now.getTime() > 0 && expirationDate.getTime() - now.getTime()  < WConstants.TOKEN_REFRESH_TIME){
+            if(expirationDate.getTime() - now.getTime() > 0 && expirationDate.getTime() - now.getTime()  < WGlobal.TOKEN_REFRESH_TIME){
                 String s = JwtTokenUtils.generateToken(data, WTokenType.DEFAULT_TOKE);
                 ctx.setNewToken(s);
                 ctx.setRefreshToken(true);

@@ -1,9 +1,7 @@
 package top.hcy.webtable;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import org.omg.CORBA.OBJ_ADAPTER;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.MethodAnnotationsScanner;
@@ -18,12 +16,13 @@ import top.hcy.webtable.annotation.table.WEnadbleInsert;
 import top.hcy.webtable.annotation.table.WEnadbleUpdate;
 import top.hcy.webtable.annotation.table.WTable;
 import top.hcy.webtable.common.constant.WConstants;
+import top.hcy.webtable.common.constant.WGlobal;
 import top.hcy.webtable.common.enums.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
-import top.hcy.webtable.common.enums.WebFieldType;
 import top.hcy.webtable.common.response.WResponseEntity;
 import top.hcy.webtable.common.WebTableContext;
-import top.hcy.webtable.db.kv.KVType;
+import top.hcy.webtable.db.kv.WKVType;
+import top.hcy.webtable.db.kv.WKvDbUtils;
 import top.hcy.webtable.filter.*;
 import top.hcy.webtable.router.Router;
 import top.hcy.webtable.service.GetTableService;
@@ -69,11 +68,44 @@ public class BootStrap {
         initDefaultAccount();
         initRouters();
         initKvData();
+        saveInitializationKeys();
+        initDefaultAccountPermission();
+    }
+
+
+    private void initDefaultAccountPermission() {
+        ArrayList<String> baseKeys = WGlobal.baseKeys;
+        String[][] defaultAccounts = WGlobal.DefaultAccounts;
+        int length = defaultAccounts.length;
+        int size =baseKeys.size();
+        for (int i = 0; i < size; i++) {
+            String key = baseKeys.get(i);
+            for (int j = 0; j < length; j++) {
+                kvDBUtils.copyKey(defaultAccounts[j][0]+"."+key,key);
+            }
+        }
+        ArrayList<String> allKeys = kvDBUtils.getAllKeys();
+        System.out.println(allKeys);
+
+    }
+
+
+    private void saveInitializationKeys() {
+        //储存读取到的 table 和 field 数据
+        ArrayList<String> allKeys = kvDBUtils.getAllKeys();
+        ArrayList<String> baseKeys = WGlobal.baseKeys;
+        int size = allKeys.size();
+        for (int i = 0; i < size; i++) {
+            String s = allKeys.get(i);
+            if (s.startsWith(WConstants.PREFIX_TABLE) || s.startsWith(WConstants.PREFIX_FIELD)){
+                baseKeys.add(s);
+            }
+        }
     }
 
     private void initReflections() {
         reflections = new Reflections(new ConfigurationBuilder()
-                .forPackages(WConstants.PACKAGE_SCAN) // 指定路径URL
+                .forPackages(WGlobal.PACKAGE_SCAN) // 指定路径URL
 //                .addScanners(new SubTypesScanner()) // 添加子类扫描工具
                 .addScanners(new FieldAnnotationsScanner()) // 添加 属性注解扫描工具
                 .addScanners(new MethodAnnotationsScanner() ) // 添加 方法注解扫描工具
@@ -88,9 +120,9 @@ public class BootStrap {
         UpdateToShowMethods();
         UpdateToPersistenceMethods();
 
-        JSONObject value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+"Data1"+"."+"name", KVType.T_MAP);
+        JSONObject value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+"Data1"+"."+"name", WKVType.T_MAP);
         System.out.println(value);
-        value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+"Data1"+"."+"age", KVType.T_MAP);
+        value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+"Data1"+"."+"age", WKVType.T_MAP);
         System.out.println(value);
     }
 
@@ -102,9 +134,9 @@ public class BootStrap {
             WFieldToShow annotation = method.getAnnotation(WFieldToShow.class);
             String fieldName = annotation.value();
             String className = method.getDeclaringClass().getSimpleName();
-            JSONObject field = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+className+"."+fieldName, KVType.T_MAP);
+            JSONObject field = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+className+"."+fieldName, WKVType.T_MAP);
             field.put("toShowMethod",method.getName());
-            kvDBUtils.setValue(WConstants.PREFIX_FIELD+className+"."+fieldName,field, KVType.T_MAP);
+            kvDBUtils.setValue(WConstants.PREFIX_FIELD+className+"."+fieldName,field, WKVType.T_MAP);
         }
     }
 
@@ -116,9 +148,9 @@ public class BootStrap {
             WFieldToPersistence annotation = method.getAnnotation(WFieldToPersistence.class);
             String fieldName = annotation.value();
             String className = method.getDeclaringClass().getSimpleName();
-            JSONObject field = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+className+"."+fieldName, KVType.T_MAP);
+            JSONObject field = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+className+"."+fieldName, WKVType.T_MAP);
             field.put("toPersistenceMethod",method.getName());
-            kvDBUtils.setValue(WConstants.PREFIX_FIELD+className+"."+fieldName,field, KVType.T_MAP);
+            kvDBUtils.setValue(WConstants.PREFIX_FIELD+className+"."+fieldName,field, WKVType.T_MAP);
         }
     }
 
@@ -128,7 +160,7 @@ public class BootStrap {
         updateTriggerMethods(WDeleteTrigger.class,"deleteTrigger");
         updateTriggerMethods(WSelectTrigger.class,"selectTrigger");
         //测试打印
-        JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + "Data1", KVType.T_MAP);
+        JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + "Data1", WKVType.T_MAP);
         System.out.println(value);
     }
 
@@ -138,9 +170,9 @@ public class BootStrap {
         while (iterator.hasNext()){
             Method method = iterator.next();
             String className = method.getDeclaringClass().getSimpleName();
-            JSONObject table = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + className, KVType.T_MAP);
+            JSONObject table = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + className, WKVType.T_MAP);
             table.put(key,method.getName());
-            kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, KVType.T_MAP);
+            kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, WKVType.T_MAP);
         }
     }
 
@@ -177,8 +209,8 @@ public class BootStrap {
             fieldData.put("fieldType",fieldType);
             fieldData.put("toShowMethod",null);
             fieldData.put("toPersistenceMethod",null);
-            kvDBUtils.setValue(WConstants.PREFIX_FIELD+className+"."+fieldName,fieldData, KVType.T_MAP);
-            JSONObject value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+className+"."+fieldName, KVType.T_MAP);
+            kvDBUtils.setValue(WConstants.PREFIX_FIELD+className+"."+fieldName,fieldData, WKVType.T_MAP);
+            JSONObject value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+className+"."+fieldName, WKVType.T_MAP);
             System.out.println(value);
         }
     }
@@ -226,8 +258,8 @@ public class BootStrap {
             tableData.put("updateTrigger",null);
             tableData.put("selectTrigger",null);
             tableData.put("deleteTrigger",null);
-            kvDBUtils.setValue(WConstants.PREFIX_TABLE+wTableClassName,tableData, KVType.T_MAP);
-            JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + wTableClassName, KVType.T_MAP);
+            kvDBUtils.setValue(WConstants.PREFIX_TABLE+wTableClassName,tableData, WKVType.T_MAP);
+            JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + wTableClassName, WKVType.T_MAP);
             System.out.println(value);
         }
     }
@@ -275,9 +307,9 @@ public class BootStrap {
     private void initDefaultAccount() {
         ArrayList<HashMap> list = new ArrayList<>();
         HashMap<String,String> data = null;
-        String[][] defaultAccounts = WConstants.DefaultAccounts;
+        String[][] defaultAccounts = WGlobal.DefaultAccounts;
         for (int i = 0; i < defaultAccounts.length; i++) {
-            kvDBUtils.setValue(WConstants.PREFIX_ACCOUNTS +defaultAccounts[i][0],defaultAccounts[i][1], KVType.T_STRING);
+            kvDBUtils.setValue(WConstants.PREFIX_ACCOUNTS +defaultAccounts[i][0],defaultAccounts[i][1], WKVType.T_STRING);
         }
     }
 

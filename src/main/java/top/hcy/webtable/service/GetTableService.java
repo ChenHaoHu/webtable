@@ -10,6 +10,7 @@ import top.hcy.webtable.annotation.field.WFieldToShow;
 import top.hcy.webtable.annotation.table.WTable;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
+import top.hcy.webtable.common.constant.WGlobal;
 import top.hcy.webtable.db.mysql.WSelectSql;
 
 import java.lang.reflect.Field;
@@ -38,7 +39,7 @@ public class GetTableService implements WService {
     public void doService(WebTableContext ctx) {
         // 扫包
         Reflections reflections = new Reflections(new ConfigurationBuilder()
-                .forPackages(WConstants.PACKAGE_SCAN) // 指定路径URL
+                .forPackages(WGlobal.PACKAGE_SCAN) // 指定路径URL
 //                .addScanners(new SubTypesScanner()) // 添加子类扫描工具
                 .addScanners(new FieldAnnotationsScanner()) // 添加 属性注解扫描工具
                 .addScanners(new MethodAnnotationsScanner() ) // 添加 方法注解扫描工具

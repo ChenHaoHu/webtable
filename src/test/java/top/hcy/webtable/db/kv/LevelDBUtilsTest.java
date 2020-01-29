@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Assert;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -22,6 +22,7 @@ class LevelDBUtilsTest
     ArrayList<String> value3 = new ArrayList<>();
     String value2 = "testvalue";
     String key = "test";
+    String key2 = "test2";
 
 
 
@@ -40,36 +41,57 @@ class LevelDBUtilsTest
 
     @Test
     void getValue() {
-        boolean test = kvDBUtils.setValue(key, value1,KVType.T_MAP);
-        JSONObject value = (JSONObject)kvDBUtils.getValue(key,KVType.T_MAP);
+        boolean test = kvDBUtils.setValue(key, value1, WKVType.T_MAP);
+        JSONObject value = (JSONObject)kvDBUtils.getValue(key, WKVType.T_MAP);
         Assert.assertEquals(value1,value);
     }
 
     @Test
     void setValue() {
-        boolean t = kvDBUtils.setValue(key, value2,KVType.T_STRING);
+        boolean t = kvDBUtils.setValue(key, value2, WKVType.T_STRING);
         Assert.assertTrue(t);
-        String value = (String)kvDBUtils.getValue(key,KVType.T_STRING);
+        String value = (String)kvDBUtils.getValue(key, WKVType.T_STRING);
         Assert.assertEquals(value2,value);
     }
 
 
     @Test
     void updateKey() {
-        boolean b = kvDBUtils.updateKey(key, value3,KVType.T_LIST);
+        boolean b = kvDBUtils.updateKey(key, value3, WKVType.T_LIST);
         Assert.assertTrue(b);
-        JSONArray value = (JSONArray)kvDBUtils.getValue(key,KVType.T_LIST);
+        JSONArray value = (JSONArray)kvDBUtils.getValue(key, WKVType.T_LIST);
         //    System.out.println(value);
         Assert.assertEquals(value, JSON.parseArray(JSON.toJSONString(value3)));
     }
 
 
     @Test
+    void copyKey() {
+        boolean t = kvDBUtils.copyKey(key2, key);
+        Assert.assertTrue(t);
+        //  JSONObject ttt = (JSONObject)kvDBUtils.getValue("ttt", WKVType.T_MAP);
+    }
+
+    @Test
     void deleKey() {
         boolean b = kvDBUtils.deleKey(key);
         Assert.assertTrue(b);
-        Object value = kvDBUtils.getValue(key,KVType.T_STRING);
+        Object value = kvDBUtils.getValue(key, WKVType.T_STRING);
         Assert.assertEquals(value,null);
-
     }
+
+
+    @Test
+    void getAllKeys() {
+        ArrayList<String> allKeys = kvDBUtils.getAllKeys();
+    }
+
+
+    @AfterAll
+    void deleteData(){
+        System.out.println(" ----- deleteData ----- ");
+        kvDBUtils.deleKey(key);
+        kvDBUtils.deleKey(key2);
+    }
+
 }

@@ -1,7 +1,9 @@
 package top.hcy.webtable.common.constant;
 
-import top.hcy.webtable.db.kv.KvDbUtils;
+import top.hcy.webtable.db.kv.WKvDbUtils;
 import top.hcy.webtable.db.kv.LevelDBUtils;
+
+import java.util.ArrayList;
 
 /**
  * @ClassName: WGlobal
@@ -12,6 +14,22 @@ import top.hcy.webtable.db.kv.LevelDBUtils;
  **/
 public class WGlobal {
 
-    public  final static KvDbUtils kvDBUtils = new LevelDBUtils();
+    public static WKvDbUtils kvDBUtils = new LevelDBUtils();
+
+    public static ArrayList<String> baseKeys =  new ArrayList<>();
+
+    public static  final String[][] DefaultAccounts  = {
+            {"secadmin","admin"},
+            {"admin","admin"}
+    };
+
+    public static  final String[] TOKEN_POWER = new String[]{
+            "hcytoken"
+    };
+
+    public static final long TOKEN_REFRESH_TIME = 20 * 1000;
+
+    public static final String PACKAGE_SCAN = "top.hcy.webtable.entity";
+    public static final String JWT_SECRET = "eyJhbGciOiJIUzUxMiJ9";
 
 }
