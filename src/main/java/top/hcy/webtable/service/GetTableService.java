@@ -49,7 +49,7 @@ public class GetTableService implements WService {
             JSONArray permission = (JSONArray) tableOb.get("permission");
             String tableName = (String)tableOb.get("table");
             String className = (String)tableOb.get("intactClass");
-            String insertTrigger = (String)tableOb.get("selectTrigger");
+            String selectTrigger = (String)tableOb.get("selectTrigger");
             String alias = (String)tableOb.get("alias");
 
             WSelectSql sql = new WSelectSql();

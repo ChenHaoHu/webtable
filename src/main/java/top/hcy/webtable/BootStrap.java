@@ -136,8 +136,10 @@ public class BootStrap {
             String fieldName = annotation.value();
             String className = method.getDeclaringClass().getSimpleName();
             JSONObject field = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+className+"."+fieldName, WKVType.T_MAP);
-            field.put("toShowMethod",method.getName());
-            kvDBUtils.setValue(WConstants.PREFIX_FIELD+className+"."+fieldName,field, WKVType.T_MAP);
+            if(field!=null){
+                field.put("toShowMethod",method.getName());
+                kvDBUtils.setValue(WConstants.PREFIX_FIELD+className+"."+fieldName,field, WKVType.T_MAP);
+            }
         }
     }
 
@@ -150,8 +152,10 @@ public class BootStrap {
             String fieldName = annotation.value();
             String className = method.getDeclaringClass().getSimpleName();
             JSONObject field = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+className+"."+fieldName, WKVType.T_MAP);
-            field.put("toPersistenceMethod",method.getName());
-            kvDBUtils.setValue(WConstants.PREFIX_FIELD+className+"."+fieldName,field, WKVType.T_MAP);
+            if(field!=null) {
+                field.put("toPersistenceMethod", method.getName());
+                kvDBUtils.setValue(WConstants.PREFIX_FIELD + className + "." + fieldName, field, WKVType.T_MAP);
+            }
         }
     }
 
