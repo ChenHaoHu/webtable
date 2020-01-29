@@ -14,6 +14,8 @@ import java.util.ArrayList;
  **/
 public class WGlobal {
 
+    public static  ArrayList<String> tables = new ArrayList<>();
+
     public static WKvDbUtils kvDBUtils = new LevelDBUtils();
 
     public static ArrayList<String> baseKeys =  new ArrayList<>();

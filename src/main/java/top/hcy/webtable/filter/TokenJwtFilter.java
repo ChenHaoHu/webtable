@@ -27,7 +27,6 @@ public class TokenJwtFilter implements WHandleFilter {
         //token 存在 heard里的token字段下
         String token = ctx.getRequest().getHeader("token");
 
-
         if (token == null ){
             ctx.setWRespCode(WRespCode.REQUEST_TOKEN_LOST);
             ctx.setError(true);

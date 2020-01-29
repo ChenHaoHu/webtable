@@ -30,8 +30,8 @@ public class Data1 {
    private String name;
    @WInsertField
    @WUpdateField
-   @WField(aliasName = "年龄")
-   private int age;
+   @WField(aliasName = "年龄",columnName = "age")
+   private int age2;
    @WInsertField
    @WUpdateField
    @WField(aliasName = "密码",fieldType = WebFieldType.Number)
@@ -54,13 +54,13 @@ public class Data1 {
    @WFieldToShow("age")
    public void wFieldToShowAge(){
       System.out.println("------------- 展示时，调整age值 ------------- ");
-      this.age = this.age + 1000;
+      this.age2 = this.age2 + 1000;
    }
 
    @WFieldToPersistence("age")
    public void wFieldToPersistenceAge(){
       System.out.println("------------- 存储时，调整age值 ------------- ");
-      this.age = -1;
+      this.age2 = -1;
    }
 
    @WInsertTrigger

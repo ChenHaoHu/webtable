@@ -1,5 +1,6 @@
 package top.hcy.webtable;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.Reflections;
@@ -185,8 +186,8 @@ public class BootStrap {
             String className = field.getDeclaringClass().getSimpleName();
             String intactClass = field.getDeclaringClass().getName();
             String fieldName = field.getName();
-            String  aliasFieldName = "".equals(wField.aliasName())?fieldName:wField.aliasName();
-            String  columnName = "".equals(wField.columnName())?fieldName:wField.columnName();
+            String aliasFieldName = "".equals(wField.aliasName())?fieldName:wField.aliasName();
+            String columnName = "".equals(wField.columnName())?fieldName:wField.columnName();
             String webFieldType = wField.fieldType().getStr();
             //表权限表
             ArrayList<String> fieldType = new ArrayList<>();
@@ -259,8 +260,8 @@ public class BootStrap {
             tableData.put("selectTrigger",null);
             tableData.put("deleteTrigger",null);
             kvDBUtils.setValue(WConstants.PREFIX_TABLE+wTableClassName,tableData, WKVType.T_MAP);
-            JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + wTableClassName, WKVType.T_MAP);
-            System.out.println(value);
+          //  JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + wTableClassName, WKVType.T_MAP);
+            WGlobal.tables.add(wTableClassName);
         }
     }
 
@@ -277,6 +278,10 @@ public class BootStrap {
         if (ctx.isError()){
             return defulteWResponseEntity(ctx);
         }
+
+        //处理 token key
+        ctx.setUsername(ctx.getTokenKey());
+
         //获取对应service
         WService wService = ctx.getWService();
         //校验参数
@@ -288,6 +293,7 @@ public class BootStrap {
         try {
             wService.doService(ctx);
         } catch (Exception e) {
+            e.printStackTrace();
             log.error("service error"+e.getClass().getName() +"  ctx:"+ ctx.toString());
             ctx.setWRespCode(WRespCode.REQUEST_SERVICE_ERROR);
         }
