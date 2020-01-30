@@ -5,6 +5,9 @@ token:hcytoken
 
 {
   "u": "table",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2
 }
 
 ###

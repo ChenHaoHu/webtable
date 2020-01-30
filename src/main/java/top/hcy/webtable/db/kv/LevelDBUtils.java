@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import org.iq80.leveldb.DB;
-import org.iq80.leveldb.DBFactory;
-import org.iq80.leveldb.DBIterator;
-import org.iq80.leveldb.Options;
+import org.iq80.leveldb.*;
 import org.iq80.leveldb.impl.Iq80DBFactory;
 
 import java.io.File;
@@ -30,14 +27,14 @@ public class LevelDBUtils implements WKvDbUtils {
     private static final Charset CHARSET = Charset.forName("utf-8");
     private static final File FILE = new File(PATH);
     DB db = null;
+    DBFactory factory = null;
 
     public LevelDBUtils(){
         //初始化对象
-        DBFactory factory = new Iq80DBFactory();
+         factory = new Iq80DBFactory();
         // 默认如果没有则创建
         Options options = new Options();
         File file = new File(PATH);
-
         try {
             db = factory.open(file, options);
         }catch (Exception e){
@@ -130,6 +127,10 @@ public class LevelDBUtils implements WKvDbUtils {
             keys.add(new String(next.getKey()));
         }
         return keys;
+    }
+
+    public void test(){
+
     }
 
 }

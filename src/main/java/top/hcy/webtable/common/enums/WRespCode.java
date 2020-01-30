@@ -15,6 +15,7 @@ public enum WRespCode {
     REQUEST_SERVICE_ERROR(1010, "请求处理失败"),
     LOGIN_SUCCESS(1011, "登录成功"),
     LOGIN_FAILE(1012, "登录失败，账号或密码错误"),
+    TABLE_NULL(1013, "没有可操作的数据表"),
     REQUEST_PARAM_WARN(1100, "请求参数不合法");
 
 

@@ -86,7 +86,7 @@ public class BootStrap {
             }
         }
         ArrayList<String> allKeys = kvDBUtils.getAllKeys();
-        System.out.println(allKeys);
+       // System.out.println(allKeys);
 
     }
 
@@ -122,9 +122,7 @@ public class BootStrap {
         UpdateToPersistenceMethods();
 
         JSONObject value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+"Data1"+"."+"name", WKVType.T_MAP);
-        System.out.println(value);
         value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+"Data1"+"."+"age", WKVType.T_MAP);
-        System.out.println(value);
     }
 
     private void UpdateToShowMethods() {
@@ -165,8 +163,8 @@ public class BootStrap {
         updateTriggerMethods(WDeleteTrigger.class,"deleteTrigger");
         updateTriggerMethods(WSelectTrigger.class,"selectTrigger");
         //测试打印
-        JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + "Data1", WKVType.T_MAP);
-        System.out.println(value);
+//        JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + "Data1", WKVType.T_MAP);
+//        System.out.println(value);
     }
 
     private void updateTriggerMethods(Class triggerClass,String key) {
@@ -194,14 +192,14 @@ public class BootStrap {
             String columnName = "".equals(wField.columnName())?fieldName:wField.columnName();
             String webFieldType = wField.fieldType().getStr();
             //表权限表
-            ArrayList<String> fieldType = new ArrayList<>();
+            ArrayList<String> fieldPermission = new ArrayList<>();
             if(field.getAnnotation(WInsertField.class)!=null ||
                     wField.insert() ){
-                fieldType.add("insert");
+                fieldPermission.add("insert");
             }
             if(field.getAnnotation(WUpdateField.class)!=null ||
                     wField.update() ){
-                fieldType.add("update");
+                fieldPermission.add("update");
             }
             HashMap<String, Object> fieldData = new HashMap<>();
             fieldData.put("field",fieldName);
@@ -211,12 +209,12 @@ public class BootStrap {
             fieldData.put("intactClass",intactClass);
             fieldData.put("alias",aliasFieldName);
             fieldData.put("column",columnName);
-            fieldData.put("fieldType",fieldType);
+            fieldData.put("fieldPermission",fieldPermission);
             fieldData.put("toShowMethod",null);
             fieldData.put("toPersistenceMethod",null);
             kvDBUtils.setValue(WConstants.PREFIX_FIELD+className+"."+fieldName,fieldData, WKVType.T_MAP);
             JSONObject value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+className+"."+fieldName, WKVType.T_MAP);
-            System.out.println(value);
+         //   System.out.println(value);
         }
     }
 

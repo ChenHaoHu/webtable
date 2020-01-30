@@ -1,5 +1,7 @@
 package top.hcy.webtable.db.mysql;
 
+import top.hcy.webtable.common.constant.WConstants;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -44,6 +46,17 @@ public class WSelectSql {
         return this;
     }
 
+    public WSelectSql fieldsPk(String pk){
+        this.fields(pk+" as "+ WConstants.PREFIX_PK+pk);
+        return this;
+    }
+
+    public WSelectSql count(){
+        fields.clear();
+        fields.add("count(1) as count");
+        return this;
+    }
+
     public WSelectSql limit(int limit, int offset){
         isLimit = true;
         this.limit_x = limit;
@@ -82,6 +95,7 @@ public class WSelectSql {
         if (isLimit){
             sql.append(" LIMIT "+limit_x + "  OFFSET "+limit_y);
         }
+        System.out.println(sql);
         ArrayList<HashMap<String, Object>> data = MySqlDbUtils.find(sql.toString(), values);
         return data;
     }

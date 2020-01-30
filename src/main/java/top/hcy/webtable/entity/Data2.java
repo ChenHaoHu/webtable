@@ -4,8 +4,12 @@ import lombok.Data;
 import top.hcy.webtable.annotation.field.*;
 import top.hcy.webtable.annotation.method.WDeleteTrigger;
 import top.hcy.webtable.annotation.method.WInsertTrigger;
+import top.hcy.webtable.annotation.method.WSelectTrigger;
 import top.hcy.webtable.annotation.method.WUpdateTrigger;
-import top.hcy.webtable.annotation.table.*;
+import top.hcy.webtable.annotation.table.WEnadbleDelete;
+import top.hcy.webtable.annotation.table.WEnadbleInsert;
+import top.hcy.webtable.annotation.table.WEnadbleUpdate;
+import top.hcy.webtable.annotation.table.WTable;
 import top.hcy.webtable.common.enums.WebFieldType;
 
 /**
@@ -18,24 +22,24 @@ import top.hcy.webtable.common.enums.WebFieldType;
  * @Version: 1.0
  **/
 @Data
-@WTable(aliasName = "用户信息",tableName = "data1")
+@WTable(aliasName = "用户信息",tableName = "data2")
 @WEnadbleDelete
 @WEnadbleInsert
 @WEnadbleUpdate
-public class Data1 {
-   @WField(aliasName = "编号")
+public class Data2 {
+  @WField(aliasName = "编号")
    private long id;
    @WInsertField
-   @WField(aliasName = "姓名")
-   private String name;
+   @WField(aliasName = "任务")
+   private String job;
    @WInsertField
    @WUpdateField
-   @WField(aliasName = "年龄",columnName = "age")
-   private int age2;
+   @WField(aliasName = "数值",columnName = "num")
+   private int num;
    @WInsertField
    @WUpdateField
    @WField(aliasName = "密码",fieldType = WebFieldType.Number)
-   private String passwd;
+   private String tip;
    @WField(aliasName = "数据一")
    private String data1;
    @WField(aliasName = "数据二")
@@ -44,23 +48,9 @@ public class Data1 {
    private String data4;
 
 
-
-   @WFieldToShow("name")
-   public void wFieldToShowName(){
-      System.out.println("------------- 展示时，调整name值 ------------- ");
-      this.name = "hello"+this.name;
-   }
-
-   @WFieldToShow("age2")
-   public void wFieldToShowAge(){
-      System.out.println("------------- 展示时，调整age值 ------------- ");
-      this.age2 = this.age2 + 1000;
-   }
-
-   @WFieldToPersistence("age")
-   public void wFieldToPersistenceAge(){
-      System.out.println("------------- 存储时，调整age值 ------------- ");
-      this.age2 = -1;
+   @WSelectTrigger
+   public void selectData1Trigger(){
+      System.out.println("------------- 查找触发器 --------------");
    }
 
    @WInsertTrigger

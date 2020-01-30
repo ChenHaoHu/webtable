@@ -42,7 +42,8 @@ public class CommonUtils {
             while (rs.next()) {
                 rowData = new HashMap<String,Object>();
                 for (int i = 1; i <= columnCount; i++) {
-                    rowData.put(md.getColumnName(i), rs.getObject(i));
+
+                    rowData.put(md.getColumnLabel(i), rs.getObject(i));
                 }
                 list.add(rowData);
             }

@@ -23,12 +23,12 @@ public class WTableData {
         this.table = table;
     }
 
-    WTableData  table(String table){
+    public WTableData  table(String table){
         this.table = table;
         return this;
     }
 
-   ArrayList<String> getPrimayKey(){
+    public ArrayList<String> getPrimayKey(){
        ArrayList<String> primayKeys = MySqlDbUtils.getPrimayKey(table);
        return primayKeys;
    }
