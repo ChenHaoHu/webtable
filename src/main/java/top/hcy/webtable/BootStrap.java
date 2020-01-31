@@ -23,12 +23,9 @@ import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.common.response.WResponseEntity;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.db.kv.WKVType;
-import top.hcy.webtable.db.kv.WKvDbUtils;
 import top.hcy.webtable.filter.*;
 import top.hcy.webtable.router.Router;
-import top.hcy.webtable.service.GetTableService;
-import top.hcy.webtable.service.LoginService;
-import top.hcy.webtable.service.WService;
+import top.hcy.webtable.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -85,9 +82,11 @@ public class BootStrap {
                 kvDBUtils.copyKey(defaultAccounts[j][0]+"."+key,key);
             }
         }
-        ArrayList<String> allKeys = kvDBUtils.getAllKeys();
-       // System.out.println(allKeys);
 
+        for (int i = 0; i < length; i++) {
+            //储存表目录
+            kvDBUtils.copyKey(defaultAccounts[i][0]+"."+"tables","tables");
+        }
     }
 
 
@@ -121,8 +120,8 @@ public class BootStrap {
         UpdateToShowMethods();
         UpdateToPersistenceMethods();
 
-        JSONObject value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+"Data1"+"."+"name", WKVType.T_MAP);
-        value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+"Data1"+"."+"age", WKVType.T_MAP);
+//        JSONObject value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+"Data1"+"."+"name", WKVType.T_MAP);
+//        value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+"Data1"+"."+"age", WKVType.T_MAP);
     }
 
     private void UpdateToShowMethods() {
@@ -219,6 +218,9 @@ public class BootStrap {
     }
 
     private void saveTableData() {
+
+        kvDBUtils.deleKey("tables");
+
         Set<Class<?>> wTableClasses = reflections.getTypesAnnotatedWith(WTable.class);
         Iterator<Class<?>> iterator = wTableClasses.iterator();
         while (iterator.hasNext()){
@@ -227,6 +229,17 @@ public class BootStrap {
             String wTableClassName = wTableClass.getSimpleName();
             String aliasTableName = "".equals(wTable.aliasName())?wTableClassName:wTable.aliasName();
             String tableName = "".equals(wTable.tableName())?wTableClassName:wTable.tableName();
+
+
+            //储存表目录
+            JSONArray tables = (JSONArray)kvDBUtils.getValue("tables", WKVType.T_LIST);
+            if (tables == null){
+                tables = new JSONArray();
+            }
+            tables.add(wTableClassName);
+            kvDBUtils.setValue("tables",tables, WKVType.T_LIST);
+
+
             //表权限表
             ArrayList<String> permission = new ArrayList<>();
             if(wTableClass.getAnnotation(WEnadbleDelete.class)!=null ||
@@ -269,7 +282,9 @@ public class BootStrap {
 
     private void initRouters() {
         Router.addRouter(WHandlerType.LoginRequest,new LoginService());
-        Router.addRouter(WHandlerType.GTABLE,new GetTableService());
+        Router.addRouter(WHandlerType.GTABLE,new GetTableDataService());
+        Router.addRouter(WHandlerType.UTABLE,new UpdateTableDataService());
+        Router.addRouter(WHandlerType.GKVDATA,new GetKvDataService());
     }
 
     //处理入口

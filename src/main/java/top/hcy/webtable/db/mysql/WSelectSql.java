@@ -27,7 +27,7 @@ public class WSelectSql {
 
     private boolean isLimit = false;
 
-    private String condition  = "";
+    private StringBuffer condition  = new StringBuffer();
 
     public WSelectSql() {
     }
@@ -71,8 +71,34 @@ public class WSelectSql {
         return this;
     }
 
+    public WSelectSql where(){
+        if (condition.length() == 0){
+            this.condition.append(" 1=1 ");
+        }
+        return this;
+    }
+
+
     public WSelectSql where(String condition){
-        this.condition = condition;
+
+        if (condition.length() == 0){
+            this.condition.append(condition);
+        }
+        return this;
+    }
+
+    public WSelectSql and(String andStr){
+
+        if (condition.length() != 0){
+            this.condition.append("and "+andStr+"=? ");
+        }
+        return this;
+    }
+
+    public WSelectSql or(String orStr){
+        if (condition.length() != 0){
+            this.condition.append("or "+orStr+"=? ");
+        }
         return this;
     }
 
@@ -89,7 +115,7 @@ public class WSelectSql {
         }
 
         sql.append(" FROM "+table);
-        if (!condition.isEmpty()){
+        if (condition.length() != 0){
             sql.append(" WHERE "+condition+" ");
         }
         if (isLimit){
@@ -112,7 +138,7 @@ public class WSelectSql {
         }
 
         sql.append(" FROM "+table);
-        if (!condition.isEmpty()){
+        if (condition.length() != 0){
             sql.append(" WHERE "+condition+" ");
         }
         if (isLimit){

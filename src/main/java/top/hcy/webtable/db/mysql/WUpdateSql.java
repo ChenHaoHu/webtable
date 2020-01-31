@@ -20,7 +20,7 @@ public class WUpdateSql {
 
     private ArrayList<String> values = new ArrayList<>();
 
-    private String condition  = "";
+    private StringBuffer condition  = new StringBuffer();
 
     public WUpdateSql() {
     }
@@ -52,8 +52,33 @@ public class WUpdateSql {
 //        return this;
 //    }
 
+    public WUpdateSql where(){
+        if (condition.length() == 0){
+            this.condition.append(" 1=1 ");
+        }
+        return this;
+    }
+
     public WUpdateSql where(String condition){
-        this.condition = condition;
+
+        if (condition.length() == 0){
+            this.condition.append(condition);
+        }
+        return this;
+    }
+
+    public WUpdateSql and(String andStr){
+
+        if (condition.length() != 0){
+            this.condition.append("and "+andStr+"=? ");
+        }
+        return this;
+    }
+
+    public WUpdateSql or(String orStr){
+        if (condition.length() != 0){
+            this.condition.append("or "+orStr+"=? ");
+        }
         return this;
     }
 
@@ -68,9 +93,10 @@ public class WUpdateSql {
                 sql.append(",");
             }
         }
-        if (!condition.isEmpty()){
+        if (condition.length()!=0){
             sql.append(" WHERE "+condition+" ");
         }
+        System.out.println(sql);
         int insert = MySqlDbUtils.update(sql.toString(),values,conditionValues);
 
         return insert;
@@ -87,7 +113,7 @@ public class WUpdateSql {
                 sql.append(",");
             }
         }
-        if (!condition.isEmpty()){
+        if (condition.length()!=0){
             sql.append(" WHERE "+condition+" ");
         }
         return sql.toString();

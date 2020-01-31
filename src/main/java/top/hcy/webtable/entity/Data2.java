@@ -27,44 +27,51 @@ import top.hcy.webtable.common.enums.WebFieldType;
 @WEnadbleInsert
 @WEnadbleUpdate
 public class Data2 {
-  @WField(aliasName = "编号")
-   private long id;
-   @WInsertField
-   @WField(aliasName = "任务")
-   private String job;
-   @WInsertField
-   @WUpdateField
-   @WField(aliasName = "数值",columnName = "num")
-   private int num;
-   @WInsertField
-   @WUpdateField
-   @WField(aliasName = "密码",fieldType = WebFieldType.Number)
-   private String tip;
-   @WField(aliasName = "数据一")
-   private String data1;
-   @WField(aliasName = "数据二")
-   private String data2;
-   private String data3;
-   private String data4;
+ @WField(aliasName = "编号")
+ @WUpdateField
+ private long id;
+ @WInsertField
+ @WField(aliasName = "任务")
+ private String job;
+ @WInsertField
+ @WUpdateField
+ @WField(aliasName = "数值",columnName = "num")
+ private int numNumber;
+ @WInsertField
+ @WUpdateField
+ @WField(aliasName = "密码",fieldType = WebFieldType.Number)
+ private String tip;
+ @WField(aliasName = "数据一")
+ private String data1;
+ @WField(aliasName = "数据二")
+ private String data2;
+ private String data3;
+ private String data4;
 
 
-   @WSelectTrigger
-   public void selectData1Trigger(){
-      System.out.println("------------- 查找触发器 --------------");
-   }
+ @WFieldToPersistence("tip")
+ public String sss(Object a){
+  System.out.println("----- tip - update ------");
+  return "tiptiptip";
+ }
 
-   @WInsertTrigger
-   public void insertData1Trigger(){
-      System.out.println("------------- 插入触发器 --------------");
-   }
+ @WSelectTrigger
+ public void selectData1Trigger(){
+  System.out.println("------------- 查找触发器 --------------");
+ }
 
-   @WUpdateTrigger
-   public void updateData1Trigger(){
-      System.out.println("------------- 更新触发器 --------------");
-   }
+ @WInsertTrigger
+ public void insertData1Trigger(){
+  System.out.println("------------- 插入触发器 --------------");
+ }
 
-   @WDeleteTrigger
-   public void deleteData1Trigger(){
-      System.out.println("------------- 更新触发器 --------------");
-   }
+ @WUpdateTrigger
+ public void updateData1Trigger(){
+  System.out.println("------------- 更新触发器 --------------");
+ }
+
+ @WDeleteTrigger
+ public void deleteData1Trigger(){
+  System.out.println("------------- 更新触发器 --------------");
+ }
 }

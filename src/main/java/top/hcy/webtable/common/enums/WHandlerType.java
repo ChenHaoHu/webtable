@@ -13,7 +13,9 @@ public enum WHandlerType {
 
     GFiled("","获取表详情"),
     HPreRequest("","检查request请求"),
-    GTABLE("table","获取表数据信息"),
+    GTABLE("gtable","获取表数据信息"),
+    UTABLE("utable","更新表数据信息"),
+    GKVDATA("gkvdata","获取kv数据库信息"),
     LoginRequest("login","登录请求");
 
     private String uri;

@@ -34,6 +34,11 @@ public class RequestUrlFilter implements WHandleFilter {
 
         //获取请求的form
         ParamUtils.getParamsFromRequest(ctx,request);
+
+        if (ctx.isError()){
+            return;
+        }
+
         JSONObject params = ctx.getParams();
 
         boolean b = params.containsKey(WConstants.URI_NAME);

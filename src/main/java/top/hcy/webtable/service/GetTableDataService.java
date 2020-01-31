@@ -6,7 +6,6 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
-import top.hcy.webtable.common.constant.WGlobal;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.db.mysql.WSelectSql;
@@ -22,14 +21,14 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 /**
  * @ProjectName: webtable
  * @Package: top.hcy.webtable.service
- * @ClassName: GetTableService
+ * @ClassName: GetTableDataService
  * @Author: hcy
  * @Description:
  * @Date: 20-1-28 22:16
  * @Version: 1.0
  **/
 @Slf4j
-public class GetTableService implements WService {
+public class GetTableDataService implements WService {
     @Override
     public void verifyParams(WebTableContext ctx) {
         JSONObject params = ctx.getParams();
@@ -78,14 +77,13 @@ public class GetTableService implements WService {
         res.put("total",Integer.valueOf(total.toString()));
 
         WSelectSql sql = new WSelectSql();
-        String[] s = new String[1];
         sql.table(tableName);
         HashMap<String,String[]> fieldMap = new HashMap<>();
         HashMap< String,HashMap<String,Object>> fieldsMap = new HashMap<>();
         res.put("fields",fieldsMap);
 
         for (int j = 0; j < fields.size(); j++) {
-            JSONObject value = getFields(table, username, fields.getString(j));
+            JSONObject value = getFieldData(table, username, fields.getString(j));
             if (value == null){
                 continue;
             }
@@ -140,11 +138,23 @@ public class GetTableService implements WService {
                     String filedName = fields.getString(j);
                     if (fieldMap.get(filedName)[1]!=null && !"".equals(fieldMap.get(filedName)[1])){
                         //无参数或者 带一个object参数
-                        Method method = c.getDeclaredMethod(fieldMap.get(filedName)[1]);
+                        Method method = null;
+                        try{
+                            method = c.getDeclaredMethod(fieldMap.get(filedName)[1]);
+                        }catch (Exception e){
+
+                        }
+
                         Object out = null;
                         if(method == null){
-                            method = c.getDeclaredMethod(fieldMap.get(filedName)[1],Object.class);
-                            out =  method.invoke(map.get(fieldMap.get(filedName)[0]));
+
+                            try{
+                                method = c.getDeclaredMethod(fieldMap.get(filedName)[1],Object.class);
+                                out =  method.invoke(map.get(fieldMap.get(filedName)[0]));
+                            }catch (Exception e){
+
+                            }
+
                         }else{
                             out = method.invoke(o);
                         }
@@ -175,7 +185,7 @@ public class GetTableService implements WService {
         return res;
     }
 
-    private JSONObject getFields(String table, String username, String field) {
+    private JSONObject getFieldData(String table, String username, String field) {
         return (JSONObject) kvDBUtils.getValue(username + "." + WConstants.PREFIX_FIELD+table+"."+ field, WKVType.T_MAP);
     }
 

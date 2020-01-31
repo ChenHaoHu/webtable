@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import top.hcy.webtable.common.WebTableContext;
+import top.hcy.webtable.common.enums.WRespCode;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -35,11 +36,14 @@ public class ParamUtils {
             while ((b = inputStream.read(bytes))!=-1){
                 str.append(new String(bytes), 0, b);
             }
+            System.out.println(str.toString());
+            System.out.println("------------");
             JSONObject jsonObject = JSON.parseObject(str.toString());
             ctx.setParams(jsonObject);
-        } catch (IOException e) {
+        } catch (Exception e) {
        //     e.printStackTrace();
             ctx.setError(true);
+            ctx.setWRespCode(WRespCode.REQUEST_PARAM_ERROR);
             if(log.isErrorEnabled()){
                 log.error("request params parse error");
             }

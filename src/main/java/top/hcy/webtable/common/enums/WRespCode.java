@@ -16,6 +16,11 @@ public enum WRespCode {
     LOGIN_SUCCESS(1011, "登录成功"),
     LOGIN_FAILE(1012, "登录失败，账号或密码错误"),
     TABLE_NULL(1013, "没有可操作的数据表"),
+    PERMISSION_DENIED(1014, "没有操作权限"),
+    FIELD_UNFAMILIAR(1015, "表字段不明确"),
+    PK_UNFAMILIAR(1015, "主键表字段不明确"),
+    UPDATE_NODATA(1016, "没有数据更新"),
+    UPDATE_SUCCESS(1017, "更新成功"),
     REQUEST_PARAM_WARN(1100, "请求参数不合法");
 
 
