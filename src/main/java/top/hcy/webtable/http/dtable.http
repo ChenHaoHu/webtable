@@ -1,0 +1,21 @@
+//login
+POST http://{{host}}:{{port}}/webtable
+Content-Type: application/jsonn
+token:hcytoken
+
+{
+  "u": "dtable",
+  "table":"Data2",
+  "fields":{
+   "id":"45277289"
+  }
+}
+
+###
+
+###
+
+
+
+
+###

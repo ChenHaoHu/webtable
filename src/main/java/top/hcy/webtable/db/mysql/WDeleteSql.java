@@ -17,7 +17,7 @@ public class WDeleteSql {
 
     private String table = "";
 
-    private String condition  = "";
+    private StringBuffer condition  = new StringBuffer();
 
     public WDeleteSql() {
     }
@@ -31,19 +31,48 @@ public class WDeleteSql {
         return this;
     }
 
-    public WDeleteSql where(String condition){
-        this.condition = condition;
+    public WDeleteSql where(){
+        if (this.condition.length() == 0){
+            this.condition.append(" 1=1 ");
+        }
         return this;
     }
+
+
+    public WDeleteSql where(String condition){
+
+        if (this.condition.length() == 0){
+            this.condition.append(condition);
+        }
+        return this;
+    }
+
+    public WDeleteSql and(String andStr){
+
+        if (condition.length() != 0){
+            this.condition.append("and "+andStr+"=? ");
+        }
+        return this;
+    }
+
+    public WDeleteSql or(String orStr){
+        if (condition.length() != 0){
+            this.condition.append("or "+orStr+"=? ");
+        }
+        return this;
+    }
+
 
     public int executeDelete(String... values){
 
         StringBuffer sql = new StringBuffer();
         sql.append("DELETE FROM  "+table);
 
-        if (!condition.isEmpty()){
+        if (condition.length()!=0){
             sql.append(" WHERE "+condition+" ");
         }
+
+        System.out.println(sql);
 
         int i = MySqlDbUtils.delete(sql.toString(), values);
         return i;
@@ -53,7 +82,7 @@ public class WDeleteSql {
         StringBuffer sql = new StringBuffer();
         sql.append("DELETE FROM  "+table);
 
-        if (!condition.isEmpty()){
+        if (condition.length()!=0){
             sql.append(" WHERE "+condition);
         }
         return sql.toString();

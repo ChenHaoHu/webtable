@@ -12,6 +12,7 @@ import top.hcy.webtable.annotation.field.*;
 import top.hcy.webtable.annotation.method.WDeleteTrigger;
 import top.hcy.webtable.annotation.method.WInsertTrigger;
 import top.hcy.webtable.annotation.method.WSelectTrigger;
+import top.hcy.webtable.annotation.method.WUpdateTrigger;
 import top.hcy.webtable.annotation.table.WEnadbleDelete;
 import top.hcy.webtable.annotation.table.WEnadbleInsert;
 import top.hcy.webtable.annotation.table.WEnadbleUpdate;
@@ -25,6 +26,7 @@ import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.filter.*;
 import top.hcy.webtable.router.Router;
+import top.hcy.webtable.router.RoutersManagement;
 import top.hcy.webtable.service.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -158,7 +160,7 @@ public class BootStrap {
 
     private void saveTriggerMethods() {
         updateTriggerMethods(WInsertTrigger.class,"insertTrigger");
-        updateTriggerMethods(WUpdateField.class,"updateTrigger");
+        updateTriggerMethods(WUpdateTrigger.class,"updateTrigger");
         updateTriggerMethods(WDeleteTrigger.class,"deleteTrigger");
         updateTriggerMethods(WSelectTrigger.class,"selectTrigger");
         //测试打印
@@ -248,7 +250,7 @@ public class BootStrap {
             }
             if(wTableClass.getAnnotation(WEnadbleInsert.class)!=null ||
                     wTable.insert() ){
-                permission.add("add");
+                permission.add("insert");
             }
             if(wTableClass.getAnnotation(WEnadbleUpdate.class)!=null ||
                     wTable.update() ){
@@ -281,10 +283,7 @@ public class BootStrap {
     }
 
     private void initRouters() {
-        Router.addRouter(WHandlerType.LoginRequest,new LoginService());
-        Router.addRouter(WHandlerType.GTABLE,new GetTableDataService());
-        Router.addRouter(WHandlerType.UTABLE,new UpdateTableDataService());
-        Router.addRouter(WHandlerType.GKVDATA,new GetKvDataService());
+        new RoutersManagement().invoke();
     }
 
     //处理入口
@@ -349,4 +348,6 @@ public class BootStrap {
         hPreRequest.addFiterOnLast(requestUrlFilter);
         hPreRequest.addFiterOnLast(tokenJwtFilter);
     }
+
+
 }

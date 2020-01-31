@@ -10,6 +10,7 @@ import top.hcy.webtable.annotation.table.WEnadbleDelete;
 import top.hcy.webtable.annotation.table.WEnadbleInsert;
 import top.hcy.webtable.annotation.table.WEnadbleUpdate;
 import top.hcy.webtable.annotation.table.WTable;
+import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.enums.WebFieldType;
 
 /**
@@ -29,6 +30,7 @@ import top.hcy.webtable.common.enums.WebFieldType;
 public class Data2 {
  @WField(aliasName = "编号")
  @WUpdateField
+ @WInsertField
  private long id;
  @WInsertField
  @WField(aliasName = "任务")
@@ -56,22 +58,23 @@ public class Data2 {
  }
 
  @WSelectTrigger
- public void selectData1Trigger(){
+ public void selectData1Trigger(WebTableContext ctx){
   System.out.println("------------- 查找触发器 --------------");
  }
 
  @WInsertTrigger
- public void insertData1Trigger(){
+ public void insertData1Trigger(WebTableContext ctx){
   System.out.println("------------- 插入触发器 --------------");
  }
 
- @WUpdateTrigger
- public void updateData1Trigger(){
-  System.out.println("------------- 更新触发器 --------------");
+ @WDeleteTrigger
+ public void deleteData1Trigger(WebTableContext ctx){
+  System.out.println("------------- 删除触发器 --------------");
  }
 
- @WDeleteTrigger
- public void deleteData1Trigger(){
+
+ @WUpdateTrigger
+ public void updateData1Trigger(WebTableContext ctx){
   System.out.println("------------- 更新触发器 --------------");
  }
 }

@@ -21,6 +21,11 @@ public enum WRespCode {
     PK_UNFAMILIAR(1015, "主键表字段不明确"),
     UPDATE_NODATA(1016, "没有数据更新"),
     UPDATE_SUCCESS(1017, "更新成功"),
+    UPDATE_FAIL(1018, "更新失败"),
+    INSERT_SUCCESS(1019, "插入成功"),
+    INSERT_FAIL(1020, "插入失败"),
+    DELETE_SUCCESS(1021, "删除成功"),
+    DELETE_FAIL(1022, "删除失败"),
     REQUEST_PARAM_WARN(1100, "请求参数不合法");
 
 

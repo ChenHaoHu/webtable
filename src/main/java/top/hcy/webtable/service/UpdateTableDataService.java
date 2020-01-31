@@ -57,8 +57,13 @@ public class UpdateTableDataService implements WService{
         JSONObject params = ctx.getParams();
         String table = params.getString("table");
         JSONObject updateFields = params.getJSONObject("fields");
+
         JSONObject pks = params.getJSONObject("pk");
         JSONObject tableData = (JSONObject) kvDBUtils.getValue(username+"."+WConstants.PREFIX_TABLE+table,WKVType.T_MAP);
+        if (tableData == null){
+            ctx.setWRespCode(WRespCode.TABLE_NULL);
+            return;
+        }
         String tableName = tableData.getString("table");
         WTableData wTableData = new WTableData();
         ArrayList<String> primayKey = wTableData.table(tableName).getPrimayKey();
@@ -104,7 +109,11 @@ public class UpdateTableDataService implements WService{
                 }
                 fieldMap.put(column,cFields[i].getName());
                 cFields[i].setAccessible(true);
-                cFields[i].set(o,data.get(column));
+                try {
+                    cFields[i].set(o,data.get(column));
+                }catch (Exception e){
+
+                }
             }
             //更新对象
            for(String key:updateFields.keySet()){
@@ -146,7 +155,7 @@ public class UpdateTableDataService implements WService{
           //进行更新操作
 
             WUpdateSql updateSql  = new WUpdateSql();
-           updateSql.table(tableName).where();
+            updateSql.table(tableName).where();
 
             for (int i = 0; i < pkSize; i++) {
                 updateSql.and(primayKey.get(i));
@@ -159,7 +168,26 @@ public class UpdateTableDataService implements WService{
 
             if (i == 1){
                 ctx.setWRespCode(WRespCode.UPDATE_SUCCESS);
+                //更新触发器
+                String updateTrigger = tableData.getString("updateTrigger");
+                System.out.println(updateTrigger);
+                if (updateTrigger!=null&& updateTrigger.length()>0){
+                    Method trigger = null;
+                    try{
+                     trigger =  c.getDeclaredMethod(updateTrigger,WebTableContext.class);
+                    }catch (Exception e){
+
+                    }
+                  if (trigger!=null){
+                      trigger.invoke(o,ctx);
+                  }
+                }
+
+            }else{
+                ctx.setWRespCode(WRespCode.UPDATE_FAIL);
             }
+
+
 
         } catch (Exception e) {
             e.printStackTrace();

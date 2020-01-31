@@ -4,6 +4,7 @@ import lombok.Data;
 import top.hcy.webtable.annotation.field.*;
 import top.hcy.webtable.annotation.method.WDeleteTrigger;
 import top.hcy.webtable.annotation.method.WInsertTrigger;
+import top.hcy.webtable.annotation.method.WSelectTrigger;
 import top.hcy.webtable.annotation.method.WUpdateTrigger;
 import top.hcy.webtable.annotation.table.*;
 import top.hcy.webtable.common.enums.WebFieldType;
@@ -75,6 +76,6 @@ public class Data1 {
 
    @WDeleteTrigger
    public void deleteData1Trigger(){
-      System.out.println("------------- 更新触发器 --------------");
+      System.out.println("------------- 删除触发器 --------------");
    }
 }

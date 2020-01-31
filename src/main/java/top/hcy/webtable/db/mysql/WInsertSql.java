@@ -73,6 +73,9 @@ public class WInsertSql {
                 sql.append(",");
             }
         }
+        System.out.println(sql);
+        System.out.println(values);
+
         int insert = MySqlDbUtils.insert(sql.toString(),values);
         return insert;
     }

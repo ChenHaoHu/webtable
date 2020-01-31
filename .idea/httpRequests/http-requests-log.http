@@ -12,429 +12,12 @@ token: hcytoken
      },
     "pk":{
 
-       "id":21212121
+       "id":45277303
 
     }
 }
 
-<> 2020-01-31T052752.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111",
-       "id":21212121
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T052622.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111",
-       "id":21212121
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T052418.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111",
-       "id":"122112112"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T052408.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T052206.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T051201.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T051014.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T050819.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T050750.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T050435.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T044336.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T044302.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T044102.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T043953.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T041940.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
-
-       "id":452176316
-
-    }
-}
-
-<> 2020-01-31T041936.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T041918.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T041839.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T041402.200.json
+<> 2020-01-31T102436.200.json
 
 ###
 
@@ -449,7 +32,70 @@ token: hcytoken
   "pagesize":2
 }
 
-<> 2020-01-31T041330.200.json
+<> 2020-01-31T100549.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2
+}
+
+<> 2020-01-31T100353.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "dtable",
+  "table":"Data2",
+  "fields":{
+   "id":"45277289"
+  }
+}
+
+<> 2020-01-31T100345.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "dtable",
+  "table":"Data2",
+  "fields":{
+   "id":"45277289"
+  }
+}
+
+<> 2020-01-31T095704.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "dtable",
+  "table":"Data2",
+  "fields":{
+   "id":"45277288"
+  }
+}
+
+<> 2020-01-31T095655.200.json
 
 ###
 
@@ -463,16 +109,407 @@ token: hcytoken
   "fields":
      {
        "num":100,
-       "tip":"1111"
+       "tip":"aaaaaaaaaaaaaaaaaaa",
      },
     "pk":{
 
-       "id":45276316
+       "id":21212121
 
     }
 }
 
-<> 2020-01-31T041214.200.json
+<> 2020-01-31T095644.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2
+}
+
+<> 2020-01-31T095628.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2
+}
+
+<> 2020-01-31T095246.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2
+}
+
+<> 2020-01-31T095048.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2
+}
+
+<> 2020-01-31T094926.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2
+}
+
+<> 2020-01-31T094607.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2
+}
+
+<> 2020-01-31T094348.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2
+}
+
+<> 2020-01-31T093918.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2
+}
+
+<> 2020-01-31T093825.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2
+}
+
+<> 2020-01-31T093558.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2
+}
+
+<> 2020-01-31T093435.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2
+}
+
+<> 2020-01-31T093426.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2
+}
+
+<> 2020-01-31T093356.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "dtable",
+  "table":"Data2",
+  "fields":{
+   "id":"45277288"
+  }
+}
+
+<> 2020-01-31T093216.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "dtable",
+  "table":"Data2",
+  "fields":{
+   "id":"45277288"
+  }
+}
+
+<> 2020-01-31T092649.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "dtable",
+  "table":"Data2",
+  "fields":{
+   "id":"45277288"
+  }
+}
+
+<> 2020-01-31T092536.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "dtable",
+  "table":"Data2",
+  "fields":{
+   "id":"45277288"
+  }
+}
+
+<> 2020-01-31T092321.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "dtable",
+  "table":"Data2",
+  "fields":{
+   "id":"45277288"
+  }
+}
+
+<> 2020-01-31T092146.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "dtable",
+  "table":"Data2",
+  "fields":{
+   "id":"45277288"
+  }
+}
+
+<> 2020-01-31T092139.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "dtable",
+  "table":"Data2",
+  "fields":{
+   "id":"1111"
+  }
+}
+
+<> 2020-01-31T092123.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "dtable",
+  "table":"Data2",
+  "fields":{
+   "id":"1111"
+  }
+}
+
+<> 2020-01-31T085859.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "dtable",
+  "table":"Data2",
+  "fields":{
+   "aid":"1111"
+  }
+}
+
+<> 2020-01-31T085854.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "dtable",
+  "table":"Data2",
+  "fields":{
+   "id":"1111",
+  }
+}
+
+<> 2020-01-31T085845.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "dtable",
+  "table":"Data2",
+  "fields":{
+   "job":"1111",
+   "tip":"21121212"
+  }
+}
+
+<> 2020-01-31T085836.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "dtable",
+  "table":"Data2",
+  "fields":{
+   "job":"1111",
+   "tip":"21121212"
+  }
+}
+
+<> 2020-01-31T085414.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "atable",
+  "table":"Data2",
+  "fields":{
+   "job":"1111",
+   "tip":"21121212"
+  }
+}
+
+<> 2020-01-31T085409.200.json
 
 ###
 
@@ -486,16 +523,16 @@ token: hcytoken
   "fields":
      {
        "num":100,
-       "tip":"1111"
+       "tip":"aaaaaaaaaaaaaaaaaaa",
      },
     "pk":{
 
-       "id":45276316
+       "id":21212121
 
     }
 }
 
-<> 2020-01-31T040539.200.json
+<> 2020-01-31T081004.200.json
 
 ###
 
@@ -504,67 +541,16 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
-  "u": "utable",
+  "u": "atable",
   "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
+  "fields":{
 
-       "id":45276316
-
-    }
+   "job":"1111",
+   "tip":"21121212"
+  }
 }
 
-<> 2020-01-31T040432.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"1111"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T032648.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "age2":100,
-       "passwd":"1111"
-     },
-    "pk":{
-
-       "id":45276316
-
-    }
-}
-
-<> 2020-01-31T032601.200.json
+<> 2020-01-31T080959.200.json
 
 ###
 
@@ -576,7 +562,7 @@ token: hcytoken
   "u": "gkvdata",
 }
 
-<> 2020-01-31T032532.200.json
+<> 2020-01-31T080621.200.json
 
 ###
 
@@ -589,17 +575,17 @@ token: hcytoken
   "table":"Data2",
   "fields":
      {
-       "age2":100,
-       "passwd":"1111"
+       "num":100,
+       "tip":"aaaaaaaaaaaaaaaaaaa",
      },
     "pk":{
 
-       "id":45276316
+       "id":21212121
 
     }
 }
 
-<> 2020-01-31T032155.200.json
+<> 2020-01-31T075803.200.json
 
 ###
 
@@ -608,36 +594,21 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
-  "u": "gtable",
+  "u": "utable",
   "table":"Data2",
-  "pagenum":0,
-  "pagesize":2
-}
-
-<> 2020-01-31T032049.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data1",
   "fields":
      {
-       "age2":100,
-       "passwd":"1111"
+       "num":100,
+       "tip":"aaaaaaaaaaaaaaaaaaa",
      },
     "pk":{
 
-       "id":1222
+       "id":21212121
 
     }
 }
 
-<> 2020-01-31T031732.200.json
+<> 2020-01-31T075624.200.json
 
 ###
 
@@ -646,21 +617,16 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100,
-       "passwd":"1111"
-     },
-    "pk":{
+  "u": "atable",
+  "table":"Data2",
+  "fields":{
 
-       "id":1222
-
-    }
+   "job":"1111",
+   "tip":"21121212"
+  }
 }
 
-<> 2020-01-31T031659.200.json
+<> 2020-01-31T075537.200.json
 
 ###
 
@@ -669,21 +635,16 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100,
-       "passwd":"1111"
-     },
-    "pk":{
+  "u": "atable",
+  "table":"Data2",
+  "fields":{
 
-       "id":1222
-
-    }
+   "job":"1111",
+   "tip":"21121212"
+  }
 }
 
-<> 2020-01-31T030911.200.json
+<> 2020-01-31T075532.200.json
 
 ###
 
@@ -692,21 +653,16 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100,
-       "passwd":"1111"
-     },
-    "pk":{
-
-       "id":1222
-
-    }
+  "u": "atable",
+  "table":"Data2",
+  "fields":{
+   "id":4444144,
+   "job":"1111",
+   "tip":"21121212"
+  }
 }
 
-<> 2020-01-31T030417.200.json
+<> 2020-01-31T075523.200.json
 
 ###
 
@@ -715,21 +671,16 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100,
-       "passwd":"1111"
-     },
-    "pk":{
-
-       "id1":1222
-
-    }
+  "u": "atable",
+  "table":"Data2",
+  "fields":{
+   "id":444444,
+   "job":"1111",
+   "tip":"21121212"
+  }
 }
 
-<> 2020-01-31T030414.200.json
+<> 2020-01-31T075517.200.json
 
 ###
 
@@ -738,21 +689,16 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100,
-       "passwd":"1111"
-     },
-    "pk":{
-
-       "id":1222
-
-    }
+  "u": "atable",
+  "table":"Data2",
+  "fields":{
+   "id":444444,
+   "job":"1111",
+   "tip":"21121212"
+  }
 }
 
-<> 2020-01-31T030406.200.json
+<> 2020-01-31T075306.200.json
 
 ###
 
@@ -761,21 +707,16 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100,
-       "passwd":"1111"
-     },
-    "pk":{
-
-       "id":1222
-
-    }
+  "u": "atable",
+  "table":"Data2",
+  "fields":{
+   "id":444444,
+   "job":"1111",
+   "tip":"21121212"
+  }
 }
 
-<> 2020-01-31T025657.200.json
+<> 2020-01-31T075143.200.json
 
 ###
 
@@ -784,21 +725,16 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100,
-       "passwd":"1111"
-     },
-    "pk":{
-
-       "id1":1222
-
-    }
+  "u": "atable",
+  "table":"Data2",
+  "fields":{
+  "id":444444,
+   "job":"1111",
+   "tip":"21121212"
+  }
 }
 
-<> 2020-01-31T025644.200.json
+<> 2020-01-31T075057.200.json
 
 ###
 
@@ -807,21 +743,16 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100,
-       "passwd":"1111"
-     },
-    "pk":{
-
-       "id1":1222
-
-    }
+  "u": "atable",
+  "table":"Data2",
+  "fields":{
+  "id":444444
+   "job":"1111",
+   "tip":"21121212"
+  }
 }
 
-<> 2020-01-31T025254.200.json
+<> 2020-01-31T075048.200.json
 
 ###
 
@@ -830,21 +761,15 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100,
-       "passwd":"1111"
-     },
-    "pk":{
-
-       "id1":1222
-
-    }
+  "u": "atable",
+  "table":"Data2",
+  "fields":{
+   "job":"1111",
+   "tip":"21121212"
+  }
 }
 
-<> 2020-01-31T025122.200.json
+<> 2020-01-31T075010.200.json
 
 ###
 
@@ -853,21 +778,15 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100,
-       "passwd":"1111"
-     },
-    "pk":{
-
-       "id":1222
-
-    }
+  "u": "atable",
+  "table":"Data2",
+  "fields":{
+   "job":"1111",
+   "tip":"21121212"
+  }
 }
 
-<> 2020-01-31T025116.200.json
+<> 2020-01-31T074921.200.json
 
 ###
 
@@ -876,16 +795,15 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100,
-       "passwd":"1111"
-     }
+  "u": "atable",
+  "table":"Data2",
+  "fields":{
+   "job":"1111",
+   "tip":"21121212"
+  }
 }
 
-<> 2020-01-31T023611.200.json
+<> 2020-01-31T073834.200.json
 
 ###
 
@@ -894,16 +812,15 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100
-       "passwd":"1111"
-     }
+  "u": "atable",
+  "table":"Data2",
+  "fields":{
+   "job":"1111",
+   "tip":"21121212"
+  }
 }
 
-<> 2020-01-31T023603.200.json
+<> 2020-01-31T073756.200.json
 
 ###
 
@@ -912,160 +829,15 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
-  "u": "utable",
-  "fields":
-     {
-       "age2":100
-       "passwd":"1111"
-     }
-
+  "u": "atable",
+  "table":"Data2",
+  "fields":{
+   "job":"1111",
+   "tip":"21121212"
+  }
 }
 
-<> 2020-01-31T020419.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-
-
-}
-
-<> 2020-01-31T020414.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100
-       "passwd":"1111"
-     }
-
-}
-
-<> 2020-01-31T020402.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100
-       "passwd":"1111"
-     }
-
-}
-
-<> 2020-01-31T020233.500.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100,
-       "passwd":"1111"
-     }
-
-}
-
-<> 2020-01-31T020229.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100,
-       "passwd":"1111"
-     }
-
-}
-
-<> 2020-01-31T020056.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100
-       "passwd":"1111"
-     }
-
-}
-
-<> 2020-01-31T020049.500.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age2":100
-     }
-
-}
-
-<> 2020-01-31T020035.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data1",
-  "fields":
-     {
-       "age":100
-     }
-
-}
-
-<> 2020-01-31T020032.200.json
+<> 2020-01-31T073314.200.json
 
 ###
 
