@@ -98,6 +98,7 @@ public class GetTableDataService implements WService {
             map.put("alias",value.getString("alias"));
             map.put("webFieldType",value.getString("webFieldType"));
             map.put("fieldPermission",value.get("fieldPermission"));
+            map.put("selects",value.get("selects"));
             fieldsMap.put(columnName,map);
         }
 
@@ -114,7 +115,38 @@ public class GetTableDataService implements WService {
 
         res.put("pk",primayKey);
 
-        data = sql.executeQuery();
+        String[] queryValue = null;
+
+        sql.where();
+        //处理 查找条件
+        boolean find = permission.contains("find");
+        if (find == true){
+
+            JSONObject params = ctx.getParams();
+            JSONObject findData = params.getJSONObject("find");
+            JSONObject likeData = params.getJSONObject("like");
+            int size1 = findData == null?0:findData.size();
+            int size2 = likeData == null?0:likeData.size();
+            int i = 0;
+            queryValue = new String[size1+size2];
+            if (size1 > 0){
+                for (String key : findData.keySet()){
+                    sql.and(key);
+                    queryValue[i++] = findData.getString(key);
+                }
+            }
+            if (size2 > 0){
+                for (String key : likeData.keySet()){
+
+
+                    sql.like(key);
+                    queryValue[i++] = "%"+likeData.getString(key)+"%";
+                }
+            }
+        }
+
+
+        data = sql.executeQuery(queryValue);
 
         int length = fields.size();
         Class<?> c = null;

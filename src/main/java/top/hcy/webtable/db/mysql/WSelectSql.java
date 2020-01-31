@@ -102,6 +102,13 @@ public class WSelectSql {
         return this;
     }
 
+    public WSelectSql like(String likeStr){
+        if (condition.length() != 0){
+            this.condition.append("and "+likeStr+"  like ?");
+        }
+        return this;
+    }
+
     public ArrayList<HashMap<String,Object>> executeQuery(String... values){
 
         StringBuffer sql = new StringBuffer();

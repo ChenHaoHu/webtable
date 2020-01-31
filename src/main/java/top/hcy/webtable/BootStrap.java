@@ -188,10 +188,14 @@ public class BootStrap {
             WField wField = field.getAnnotation(WField.class);
             String className = field.getDeclaringClass().getSimpleName();
             String intactClass = field.getDeclaringClass().getName();
+
             String fieldName = field.getName();
             String aliasFieldName = "".equals(wField.aliasName())?fieldName:wField.aliasName();
             String columnName = "".equals(wField.columnName())?fieldName:wField.columnName();
             String webFieldType = wField.fieldType().getStr();
+
+
+
             //表权限表
             ArrayList<String> fieldPermission = new ArrayList<>();
             if(field.getAnnotation(WInsertField.class)!=null ||
@@ -201,6 +205,10 @@ public class BootStrap {
             if(field.getAnnotation(WUpdateField.class)!=null ||
                     wField.update() ){
                 fieldPermission.add("update");
+            }
+            if(field.getAnnotation(WFindField.class)!=null ||
+                    wField.find() ){
+                fieldPermission.add("find");
             }
             HashMap<String, Object> fieldData = new HashMap<>();
             fieldData.put("field",fieldName);
@@ -213,6 +221,16 @@ public class BootStrap {
             fieldData.put("fieldPermission",fieldPermission);
             fieldData.put("toShowMethod",null);
             fieldData.put("toPersistenceMethod",null);
+
+
+            //添加多选
+            WSelectField wSelectField = field.getAnnotation(WSelectField.class);
+           if(wSelectField !=null){
+               String[] selects = wSelectField.select();
+               fieldData.put("selects",selects);
+           }
+
+
             kvDBUtils.setValue(WConstants.PREFIX_FIELD+className+"."+fieldName,fieldData, WKVType.T_MAP);
             JSONObject value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+className+"."+fieldName, WKVType.T_MAP);
          //   System.out.println(value);
@@ -255,6 +273,10 @@ public class BootStrap {
             if(wTableClass.getAnnotation(WEnadbleUpdate.class)!=null ||
                     wTable.update() ){
                 permission.add("update");
+            }
+            if(wTableClass.getAnnotation(WEnadbleUpdate.class)!=null ||
+                    wTable.find() ){
+                permission.add("find");
             }
             ArrayList<String> f = new ArrayList<>();
             Field[] fields = wTableClass.getDeclaredFields();

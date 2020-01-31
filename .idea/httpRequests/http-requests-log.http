@@ -3,6 +3,378 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2,
+  "like":{
+     "id":"452760"
+  }
+}
+
+<> 2020-02-01T124804.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2,
+  "like":{
+     "id":"452760"
+  }
+}
+
+<> 2020-02-01T124602.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2,
+  "like":{
+     "id":"452760"
+  }
+}
+
+<> 2020-02-01T123315.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2,
+  "like":{
+     "id":"452760"
+  }
+}
+
+<> 2020-02-01T123214.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2,
+  "like":{
+     "id":"452760"
+  }
+}
+
+<> 2020-02-01T123030.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2,
+  "find":{
+     "id":"45276073"
+  }
+}
+
+<> 2020-02-01T123016.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2,
+  "find":{
+     "id":"45276073"
+  }
+}
+
+<> 2020-02-01T122825.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2,
+  "find":{
+     "dasd":"dsada"
+  }
+}
+
+<> 2020-02-01T122704.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2,
+  "find":{
+     "dasd":"dsada"
+  }
+}
+
+<> 2020-02-01T122555.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2,
+  "find":{
+     "dasd":"dsada"
+  },
+  "like":{
+     "dasd"："Dada"
+  }
+}
+
+<> 2020-02-01T122541.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2
+}
+
+<> 2020-02-01T122533.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2
+}
+
+<> 2020-02-01T122346.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2,
+  "find":{
+     "dasd":"dsada"
+  },
+  "like":{
+     "dasd"："Dada"
+  }
+}
+
+<> 2020-02-01T122328.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2,
+  "find":{
+     "dasd":"dsada"
+  },
+  "like":{
+     "dasd"："Dada
+  }
+}
+
+<> 2020-02-01T122311.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2,
+  "find":{
+     "dasd":"dsada"
+  },
+  "like":{
+
+  }
+}
+
+<> 2020-01-31T112642.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data1",
+  "pagenum":0,
+  "pagesize":2,
+  "find":{
+     "dasd":"dsada"
+  },
+  "like":{
+
+  }
+}
+
+<> 2020-01-31T112633.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2,
+  "find":{
+     "dasd":"dsada"
+  },
+  "like":{
+
+  }
+}
+
+<> 2020-01-31T112550.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2,
+  "find":{
+     "dasd":"dsada"
+  }
+}
+
+<> 2020-01-31T110609.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2,
+  "find":{
+     "dasd":"dsada"
+  }
+}
+
+<> 2020-01-31T110403.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Data2",
+  "pagenum":0,
+  "pagesize":2,
+  "find":{
+     "dasd":"dsada"
+  }
+}
+
+<> 2020-01-31T110311.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
   "u": "utable",
   "table":"Data2",
   "fields":
@@ -476,368 +848,6 @@ token: hcytoken
 }
 
 <> 2020-01-31T085836.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "dtable",
-  "table":"Data2",
-  "fields":{
-   "job":"1111",
-   "tip":"21121212"
-  }
-}
-
-<> 2020-01-31T085414.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "atable",
-  "table":"Data2",
-  "fields":{
-   "job":"1111",
-   "tip":"21121212"
-  }
-}
-
-<> 2020-01-31T085409.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"aaaaaaaaaaaaaaaaaaa",
-     },
-    "pk":{
-
-       "id":21212121
-
-    }
-}
-
-<> 2020-01-31T081004.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "atable",
-  "table":"Data2",
-  "fields":{
-
-   "job":"1111",
-   "tip":"21121212"
-  }
-}
-
-<> 2020-01-31T080959.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gkvdata",
-}
-
-<> 2020-01-31T080621.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"aaaaaaaaaaaaaaaaaaa",
-     },
-    "pk":{
-
-       "id":21212121
-
-    }
-}
-
-<> 2020-01-31T075803.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "utable",
-  "table":"Data2",
-  "fields":
-     {
-       "num":100,
-       "tip":"aaaaaaaaaaaaaaaaaaa",
-     },
-    "pk":{
-
-       "id":21212121
-
-    }
-}
-
-<> 2020-01-31T075624.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "atable",
-  "table":"Data2",
-  "fields":{
-
-   "job":"1111",
-   "tip":"21121212"
-  }
-}
-
-<> 2020-01-31T075537.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "atable",
-  "table":"Data2",
-  "fields":{
-
-   "job":"1111",
-   "tip":"21121212"
-  }
-}
-
-<> 2020-01-31T075532.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "atable",
-  "table":"Data2",
-  "fields":{
-   "id":4444144,
-   "job":"1111",
-   "tip":"21121212"
-  }
-}
-
-<> 2020-01-31T075523.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "atable",
-  "table":"Data2",
-  "fields":{
-   "id":444444,
-   "job":"1111",
-   "tip":"21121212"
-  }
-}
-
-<> 2020-01-31T075517.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "atable",
-  "table":"Data2",
-  "fields":{
-   "id":444444,
-   "job":"1111",
-   "tip":"21121212"
-  }
-}
-
-<> 2020-01-31T075306.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "atable",
-  "table":"Data2",
-  "fields":{
-   "id":444444,
-   "job":"1111",
-   "tip":"21121212"
-  }
-}
-
-<> 2020-01-31T075143.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "atable",
-  "table":"Data2",
-  "fields":{
-  "id":444444,
-   "job":"1111",
-   "tip":"21121212"
-  }
-}
-
-<> 2020-01-31T075057.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "atable",
-  "table":"Data2",
-  "fields":{
-  "id":444444
-   "job":"1111",
-   "tip":"21121212"
-  }
-}
-
-<> 2020-01-31T075048.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "atable",
-  "table":"Data2",
-  "fields":{
-   "job":"1111",
-   "tip":"21121212"
-  }
-}
-
-<> 2020-01-31T075010.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "atable",
-  "table":"Data2",
-  "fields":{
-   "job":"1111",
-   "tip":"21121212"
-  }
-}
-
-<> 2020-01-31T074921.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "atable",
-  "table":"Data2",
-  "fields":{
-   "job":"1111",
-   "tip":"21121212"
-  }
-}
-
-<> 2020-01-31T073834.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "atable",
-  "table":"Data2",
-  "fields":{
-   "job":"1111",
-   "tip":"21121212"
-  }
-}
-
-<> 2020-01-31T073756.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "atable",
-  "table":"Data2",
-  "fields":{
-   "job":"1111",
-   "tip":"21121212"
-  }
-}
-
-<> 2020-01-31T073314.200.json
 
 ###
 

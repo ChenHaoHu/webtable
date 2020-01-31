@@ -46,7 +46,9 @@ public class Data2 {
  @WField(aliasName = "数据一")
  private String data1;
  @WField(aliasName = "数据二")
+ @WFindField
  private String data2;
+ @WSelectField(select = {"wqwq","dsadsa"} )
  private String data3;
  private String data4;
 

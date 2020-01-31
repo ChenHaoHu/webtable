@@ -5,6 +5,5 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD})
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-
-public @interface WUpdateField  {
+public @interface WFindField {
 }

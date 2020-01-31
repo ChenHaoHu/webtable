@@ -5,9 +5,12 @@ token:hcytoken
 
 {
   "u": "gtable",
-  "table":"Data2",
+  "table":"Data1",
   "pagenum":0,
-  "pagesize":2
+  "pagesize":2,
+  "like":{
+     "id":"452760"
+  }
 }
 
 ###
