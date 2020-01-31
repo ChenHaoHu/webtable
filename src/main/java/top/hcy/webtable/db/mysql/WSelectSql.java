@@ -72,7 +72,7 @@ public class WSelectSql {
     }
 
     public WSelectSql where(){
-        if (condition.length() == 0){
+        if (this.condition.length() == 0){
             this.condition.append(" 1=1 ");
         }
         return this;
@@ -81,7 +81,7 @@ public class WSelectSql {
 
     public WSelectSql where(String condition){
 
-        if (condition.length() == 0){
+        if (this.condition.length() == 0){
             this.condition.append(condition);
         }
         return this;

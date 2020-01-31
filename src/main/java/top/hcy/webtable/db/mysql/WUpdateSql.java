@@ -61,7 +61,7 @@ public class WUpdateSql {
 
     public WUpdateSql where(String condition){
 
-        if (condition.length() == 0){
+        if (this.condition.length() == 0){
             this.condition.append(condition);
         }
         return this;
@@ -93,6 +93,7 @@ public class WUpdateSql {
                 sql.append(",");
             }
         }
+
         if (condition.length()!=0){
             sql.append(" WHERE "+condition+" ");
         }
@@ -113,7 +114,7 @@ public class WUpdateSql {
                 sql.append(",");
             }
         }
-        if (condition.length()!=0){
+        if (condition.length()!= 0){
             sql.append(" WHERE "+condition+" ");
         }
         return sql.toString();
