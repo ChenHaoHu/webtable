@@ -18,6 +18,7 @@ public enum WHandlerType {
     DTABLE("dtable","删除表中数据信息"),
     ATABLE("atable","添加表中数据信息"),
     GKVDATA("gkvdata","获取kv数据库信息"),
+    USERINFO("userinfo","获取用户信息"),
     LoginRequest("login","登录请求");
 
     private String uri;

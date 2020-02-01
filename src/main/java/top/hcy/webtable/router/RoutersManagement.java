@@ -11,5 +11,6 @@ public class RoutersManagement {
             Router.addRouter(WHandlerType.GKVDATA,new GetKvDataService());
             Router.addRouter(WHandlerType.ATABLE,new AddTableDataService());
             Router.addRouter(WHandlerType.DTABLE,new DeteleTableDataService());
+            Router.addRouter(WHandlerType.USERINFO,new UserInfoService());
         }
     }
