@@ -15,6 +15,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
@@ -78,7 +79,9 @@ public class GetTableDataService implements WService {
         WSelectSql sql = new WSelectSql();
         sql.table(tableName);
         HashMap<String,String[]> fieldMap = new HashMap<>();
-        HashMap< String,HashMap<String,Object>> fieldsMap = new HashMap<>();
+        //HashMap< String,HashMap<String,Object>> fieldsMap = new HashMap<>();
+        //不让乱序
+        LinkedHashMap fieldsMap = new LinkedHashMap();
         res.put("fields",fieldsMap);
 
         for (int j = 0; j < fields.size(); j++) {

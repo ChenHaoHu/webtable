@@ -23,7 +23,7 @@ import top.hcy.webtable.common.enums.WebFieldType;
  * @Version: 1.0
  **/
 @Data
-@WTable(aliasName = "用户信息",tableName = "data2")
+@WTable(aliasName = "工作信息",tableName = "data2")
 @WEnadbleDelete
 @WEnadbleInsert
 @WEnadbleUpdate

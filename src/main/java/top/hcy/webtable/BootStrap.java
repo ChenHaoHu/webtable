@@ -250,7 +250,6 @@ public class BootStrap {
             String aliasTableName = "".equals(wTable.aliasName())?wTableClassName:wTable.aliasName();
             String tableName = "".equals(wTable.tableName())?wTableClassName:wTable.tableName();
 
-
             //储存表目录
             JSONArray tables = (JSONArray)kvDBUtils.getValue("tables", WKVType.T_LIST);
             if (tables == null){

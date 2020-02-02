@@ -4,7 +4,6 @@ import lombok.Data;
 import top.hcy.webtable.annotation.field.*;
 import top.hcy.webtable.annotation.method.WDeleteTrigger;
 import top.hcy.webtable.annotation.method.WInsertTrigger;
-import top.hcy.webtable.annotation.method.WSelectTrigger;
 import top.hcy.webtable.annotation.method.WUpdateTrigger;
 import top.hcy.webtable.annotation.table.*;
 import top.hcy.webtable.common.enums.WebFieldType;
@@ -37,7 +36,7 @@ public class Data1 {
    @WUpdateField
    @WField(aliasName = "密码",fieldType = WebFieldType.Number)
    private String passwd;
-   @WField(aliasName = "数据一")
+   @WField(aliasName = "照片显示",fieldType = WebFieldType.IMAGEURL)
    private String data1;
    @WField(aliasName = "数据二")
    private String data2;

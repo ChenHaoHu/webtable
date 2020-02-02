@@ -40,6 +40,11 @@ public class RequestUrlFilter implements WHandleFilter {
         }
 
         JSONObject params = ctx.getParams();
+        if (params == null){
+            ctx.setWRespCode(WRespCode.REQUEST_URI_LOST);
+            ctx.setError(true);
+            return;
+        }
 
         boolean b = params.containsKey(WConstants.URI_NAME);
         if(b){
