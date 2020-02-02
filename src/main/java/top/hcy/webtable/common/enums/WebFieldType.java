@@ -14,6 +14,7 @@ public enum WebFieldType {
     STRING("String"),
     IMAGEURL("ImageURL"),
     Number("Number"),
+    aa("Number"),
     IMAGEBASE64("ImageBASE64");
 
 
