@@ -105,7 +105,7 @@ public class GetTableDataService implements WService {
             fieldsMap.put(columnName,map);
         }
 
-        sql.limit(pagesize, pagenum*pagesize);
+        sql.limit(pagesize, (pagenum-1)*pagesize);
 
         //添加主键 保证唯一性
         WTableData wTableData = new WTableData();

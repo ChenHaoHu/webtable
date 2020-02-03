@@ -43,7 +43,7 @@ public class Data2 {
  @WUpdateField
  @WField(aliasName = "密码",fieldType = WebFieldType.Number)
  private String tip;
- @WField(aliasName = "数据一")
+ @WField(aliasName = "BASE64照片",fieldType = WebFieldType.IMAGEBASE64)
  private String data1;
  @WField(aliasName = "数据二")
  @WFindField
