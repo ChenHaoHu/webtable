@@ -99,6 +99,7 @@ public class GetTableDataService implements WService {
 
             HashMap<String,Object> map = new HashMap<>();
             map.put("alias",value.getString("alias"));
+            map.put("field",value.getString("field"));
             map.put("webFieldType",value.getString("webFieldType"));
             map.put("fieldPermission",value.get("fieldPermission"));
             map.put("selects",value.get("selects"));

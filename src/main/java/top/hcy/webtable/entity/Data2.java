@@ -44,6 +44,7 @@ public class Data2 {
  @WField(aliasName = "密码",fieldType = WebFieldType.NUMBER)
  private String tip;
  @WField(aliasName = "BASE64照片",fieldType = WebFieldType.IMAGEBASE64)
+ @WInsertField
  private String data1;
  @WField(aliasName = "数据二")
  @WFindField

@@ -15,6 +15,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
@@ -78,10 +79,19 @@ public class AddTableDataService implements WService{
                     column = fieldData.getString("column");
                 }
                 fieldMap.put(column,cFields[i].getName());
-                Object varColumn = insertFields.get(column);
+                String varColumn = insertFields.getString(column);
                 if (varColumn!=null){
                     cFields[i].setAccessible(true);
-                    cFields[i].set(o,varColumn);
+
+                    String type = cFields[i].getType().getName();
+                    if ("int".equals(type)){
+                        cFields[i].set(o,Integer.valueOf(varColumn.toString()));
+                    }else if ("long".equals(type)){
+                        cFields[i].set(o,Long.valueOf(varColumn.toString()));
+                    }else{
+                        cFields[i].set(o,varColumn);
+                    }
+
                 }
             }
 
@@ -175,20 +185,50 @@ public class AddTableDataService implements WService{
             return;
         }
 
+
         //验证字段正确 和 权限
-        for (String field : insertFields.keySet()){
-            JSONObject fieldData = (JSONObject) kvDBUtils.getValue(username + "." + WConstants.PREFIX_FIELD + table + "." + field, WKVType.T_MAP);
-            if (fieldData == null){
-                ctx.setWRespCode(WRespCode.FIELD_UNFAMILIAR);
-                ctx.setError(true);
-                return;
+        String intactClass =  tableData.getString("intactClass");
+
+        try {
+            Class<?> c = Class.forName(intactClass);
+            Set<String> keySet = insertFields.keySet();
+            Field[] fields = c.getFields();
+            for (int i = 0; i < fields.length; i++) {
+                Field field = fields[i];
+                JSONObject fieldData = (JSONObject) kvDBUtils.getValue(username + "." + WConstants.PREFIX_FIELD + table + "." + field, WKVType.T_MAP);
+                if (fieldData.getString("fieldPermission").contains("insert")){
+                    String column = fieldData.getString("column");
+                    if (!keySet.contains(column)){
+                        ctx.setWRespCode(WRespCode.FIELD_UNFAMILIAR);
+                        ctx.setError(true);
+                        return;
+                    }
+                }
             }
-            JSONArray fieldPermissions = fieldData.getJSONArray("fieldPermission");
-            if (!fieldPermissions.contains("insert")){
-                ctx.setWRespCode(WRespCode.PERMISSION_DENIED);
-                ctx.setError(true);
-                return;
-            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            ctx.setWRespCode(WRespCode.FIELD_UNFAMILIAR);
+            ctx.setError(true);
+            return;
         }
+
+
+//        for (String field : insertFields.keySet()){
+//            System.out.println(username + "." + WConstants.PREFIX_FIELD + table + "." + field);
+//            JSONObject fieldData = (JSONObject) kvDBUtils.getValue(username + "." + WConstants.PREFIX_FIELD + table + "." + field, WKVType.T_MAP);
+//            if (fieldData == null){
+//                ctx.setWRespCode(WRespCode.FIELD_UNFAMILIAR);
+//                ctx.setError(true);
+//                return;
+//            }
+//            System.out.println(fieldData);
+//            JSONArray fieldPermissions = fieldData.getJSONArray("fieldPermission");
+//            if (!fieldPermissions.contains("insert")){
+//                ctx.setWRespCode(WRespCode.PERMISSION_DENIED);
+//                ctx.setError(true);
+//                return;
+//            }
+//        }
     }
 }
