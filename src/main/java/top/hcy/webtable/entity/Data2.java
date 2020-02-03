@@ -41,14 +41,17 @@ public class Data2 {
  private int numNumber;
  @WInsertField
  @WUpdateField
- @WField(aliasName = "密码",fieldType = WebFieldType.Number)
+ @WField(aliasName = "密码",fieldType = WebFieldType.NUMBER)
  private String tip;
  @WField(aliasName = "BASE64照片",fieldType = WebFieldType.IMAGEBASE64)
  private String data1;
  @WField(aliasName = "数据二")
  @WFindField
  private String data2;
- @WSelectField(select = {"wqwq","dsadsa"} )
+ @WField(aliasName = "选择项",fieldType = WebFieldType.SELECT)
+ @WSelectField(select = {"选择一","AAA","选择二","BBB","选择三","CCC"} )
+ @WInsertField
+ @WUpdateField
  private String data3;
  private String data4;
 

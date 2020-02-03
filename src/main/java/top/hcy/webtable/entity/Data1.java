@@ -34,7 +34,7 @@ public class Data1 {
    private int age2;
    @WInsertField
    @WUpdateField
-   @WField(aliasName = "密码",fieldType = WebFieldType.Number)
+   @WField(aliasName = "密码",fieldType = WebFieldType.NUMBER)
    private String passwd;
    @WField(aliasName = "照片显示",fieldType = WebFieldType.IMAGEURL)
    private String data1;
