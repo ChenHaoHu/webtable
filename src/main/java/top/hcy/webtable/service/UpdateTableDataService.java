@@ -17,6 +17,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
@@ -41,11 +42,13 @@ public class UpdateTableDataService implements WService{
 
         JSONObject fields = params.getJSONObject("fields");
         if (fields == null || fields.size() == 0){
+            ctx.setWRespCode(WRespCode.FIELD_UNFAMILIAR);
             ctx.setError(true);
         }
 
         JSONObject pks = params.getJSONObject("pk");
         if (fields == null || pks.size() == 0){
+            ctx.setWRespCode(WRespCode.PK_UNFAMILIAR);
             ctx.setError(true);
         }
 
@@ -198,7 +201,7 @@ public class UpdateTableDataService implements WService{
     private JSONObject getFieldData(String table, String username, String field) {
         return (JSONObject) kvDBUtils.getValue(username + "." + WConstants.PREFIX_FIELD+table+"."+ field, WKVType.T_MAP);
     }
-    private void check(WebTableContext ctx, String username, String table, JSONObject fields, JSONObject pks, JSONObject tableData,ArrayList<String> primayKey) {
+    private void check(WebTableContext ctx, String username, String table, JSONObject updateFields, JSONObject pks, JSONObject tableData,ArrayList<String> primayKey) {
 
         //验证表权限
         JSONArray permission = tableData.getJSONArray("permission");
@@ -220,20 +223,49 @@ public class UpdateTableDataService implements WService{
             }
         }
         //验证字段正确 和 权限
-        for (String field : fields.keySet()){
-            JSONObject fieldData = (JSONObject) kvDBUtils.getValue(username + "." + WConstants.PREFIX_FIELD + table + "." + field, WKVType.T_MAP);
-//            System.out.println(username + "." + WConstants.PREFIX_FIELD + table + "." + field);
-            if (fieldData == null){
-                ctx.setWRespCode(WRespCode.FIELD_UNFAMILIAR);
-                ctx.setError(true);
-                return;
+
+        //验证字段正确 和 权限
+        String intactClass =  tableData.getString("intactClass");
+
+        try {
+            Class<?> c = Class.forName(intactClass);
+            Set<String> keySet = updateFields.keySet();
+            Field[] fields = c.getFields();
+            for (int i = 0; i < fields.length; i++) {
+                Field field = fields[i];
+                JSONObject fieldData = (JSONObject) kvDBUtils.getValue(username + "." + WConstants.PREFIX_FIELD + table + "." + field, WKVType.T_MAP);
+                if (fieldData.getString("fieldPermission").contains("update")){
+                    String column = fieldData.getString("column");
+                    if (!keySet.contains(column)){
+                        ctx.setWRespCode(WRespCode.FIELD_UNFAMILIAR);
+                        ctx.setError(true);
+                        return;
+                    }
+                }
             }
-            JSONArray fieldPermissions = fieldData.getJSONArray("fieldPermission");
-            if (!fieldPermissions.contains("update")){
-                ctx.setWRespCode(WRespCode.PERMISSION_DENIED);
-                ctx.setError(true);
-                return;
-            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            ctx.setWRespCode(WRespCode.FIELD_UNFAMILIAR);
+            ctx.setError(true);
+            return;
         }
+
+
+
+//        for (String field : fields.keySet()){
+//            JSONObject fieldData = (JSONObject) kvDBUtils.getValue(username + "." + WConstants.PREFIX_FIELD + table + "." + field, WKVType.T_MAP);
+//            if (fieldData == null){
+//                ctx.setWRespCode(WRespCode.FIELD_UNFAMILIAR);
+//                ctx.setError(true);
+//                return;
+//            }
+//            JSONArray fieldPermissions = fieldData.getJSONArray("fieldPermission");
+//            if (!fieldPermissions.contains("update")){
+//                ctx.setWRespCode(WRespCode.PERMISSION_DENIED);
+//                ctx.setError(true);
+//                return;
+//            }
+//        }
     }
 }

@@ -6,6 +6,30 @@ token: hcytoken
   "u": "gkvdata",
 }
 
+<> 2020-02-03T114905.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gkvdata",
+}
+
+<> 2020-02-03T112458.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gkvdata",
+}
+
 <> 2020-02-02T093412.200.json
 
 ###
@@ -781,36 +805,6 @@ token: hcytoken
 }
 
 <> 2020-01-31T093558.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Data2",
-  "pagenum":0,
-  "pagesize":2
-}
-
-<> 2020-01-31T093435.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Data1",
-  "pagenum":0,
-  "pagesize":2
-}
-
-<> 2020-01-31T093426.200.json
 
 ###
 

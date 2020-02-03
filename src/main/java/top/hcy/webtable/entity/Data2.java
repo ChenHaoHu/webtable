@@ -25,7 +25,7 @@ import top.hcy.webtable.common.enums.WebFieldType;
 @Data
 @WTable(aliasName = "工作信息",tableName = "data2")
 @WEnadbleDelete
-@WEnadbleInsert
+//@WEnadbleInsert
 @WEnadbleUpdate
 public class Data2 {
  @WField(aliasName = "编号")
