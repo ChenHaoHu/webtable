@@ -1,5 +1,6 @@
 package top.hcy.webtable.tools;
 
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ class CommonUtilsTest {
 
     @Test
     void generateShareAccount() {
-        HashMap<String, String> map = CommonUtils.generateShareAccount();
+        JSONObject map = CommonUtils.generateShareAccount();
         Assert.assertNotNull(map);
     }
 }

@@ -1,5 +1,7 @@
 package top.hcy.webtable.db.mysql;
 
+import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
 import top.hcy.webtable.common.constant.WConstants;
 
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.HashMap;
  * @Date: 20-1-26 22:11
  * @Version: 1.0
  **/
+@Slf4j
 public class WSelectSql {
 
     private String table = "";
@@ -128,7 +131,9 @@ public class WSelectSql {
         if (isLimit){
             sql.append(" LIMIT "+limit_x + "  OFFSET "+limit_y);
         }
-        System.out.println(sql);
+        log.info("sql: "+sql);
+        log.info("values: "+ JSON.toJSONString(values));
+
         ArrayList<HashMap<String, Object>> data = MySqlDbUtils.find(sql.toString(), values);
         return data;
     }

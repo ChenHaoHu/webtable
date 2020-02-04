@@ -1,8 +1,10 @@
 package top.hcy.webtable.db.mysql;
 
+import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 
 /**
  * @ProjectName: webtable
@@ -13,6 +15,7 @@ import java.util.HashMap;
  * @Date: 20-1-27 00:44
  * @Version: 1.0
  **/
+@Slf4j
 public class WInsertSql {
 
     private String table = "";
@@ -73,8 +76,9 @@ public class WInsertSql {
                 sql.append(",");
             }
         }
-        System.out.println(sql);
-        System.out.println(values);
+        log.info("sql: "+sql);
+        log.info("values: "+ JSON.toJSONString(values));
+
 
         int insert = MySqlDbUtils.insert(sql.toString(),values);
         return insert;

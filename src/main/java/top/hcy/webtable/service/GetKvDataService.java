@@ -2,8 +2,6 @@ package top.hcy.webtable.service;
 
 import com.alibaba.fastjson.JSONObject;
 import top.hcy.webtable.common.WebTableContext;
-import top.hcy.webtable.common.constant.WGlobal;
-import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.db.kv.WKVType;
 
 import java.util.ArrayList;
@@ -31,8 +29,9 @@ public class GetKvDataService implements WService{
         ArrayList<String> allKeys = kvDBUtils.getAllKeys();
         HashMap<String,Object> data = new HashMap<>();
         for (int i = 0; i < allKeys.size(); i++) {
-            data.put(allKeys.get(i),
-                    kvDBUtils.getValue(allKeys.get(i), WKVType.T_STRING));
+                data.put(allKeys.get(i),
+                        (JSONObject)kvDBUtils.getValue(allKeys.get(i), WKVType.T_MAP));
+
         }
         ctx.setRespsonseEntity(data);
     }

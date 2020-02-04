@@ -1,5 +1,6 @@
 package top.hcy.webtable;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
@@ -118,7 +119,7 @@ public class BootStrap {
     private void initKvData() {
         saveTableData();
         saveFieldData();
-        saveTriggerMethods();
+        saveMethodsConfig();
         UpdateToShowMethods();
         UpdateToPersistenceMethods();
 
@@ -158,19 +159,37 @@ public class BootStrap {
         }
     }
 
-    private void saveTriggerMethods() {
-        updateTriggerMethods(WInsertTrigger.class,"insertTrigger");
-        updateTriggerMethods(WUpdateTrigger.class,"updateTrigger");
-        updateTriggerMethods(WDeleteTrigger.class,"deleteTrigger");
-        updateTriggerMethods(WSelectTrigger.class,"selectTrigger");
+    private void saveMethodsConfig() {
+        updateMethodsConfig(WInsertTrigger.class,"insertTrigger");
+        updateMethodsConfig(WUpdateTrigger.class,"updateTrigger");
+        updateMethodsConfig(WDeleteTrigger.class,"deleteTrigger");
+        updateMethodsConfig(WSelectTrigger.class,"selectTrigger");
+        updateAbstractFields(WAbstractField.class,"abstractfields");
         //测试打印
 //        JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + "Data1", WKVType.T_MAP);
 //        System.out.println(value);
     }
 
-    private void updateTriggerMethods(Class triggerClass,String key) {
-        Set<Method> wInsertTriggerMethods = reflections.getMethodsAnnotatedWith(triggerClass);
-        Iterator<Method> iterator = wInsertTriggerMethods.iterator();
+    private void updateAbstractFields(Class<WAbstractField> wAbstractFieldClass, String key) {
+        Set<Method> wtriggerMethods = reflections.getMethodsAnnotatedWith(wAbstractFieldClass);
+        Iterator<Method> iterator = wtriggerMethods.iterator();
+        while (iterator.hasNext()){
+            Method method = iterator.next();
+            String className = method.getDeclaringClass().getSimpleName();
+            JSONObject table = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + className, WKVType.T_MAP);
+            JSONArray wAbstractFields =  (JSONArray)table.get(key);
+            if(wAbstractFields == null){
+                wAbstractFields = new JSONArray();
+            }
+            wAbstractFields.add(method.getName());
+            table.put(key,wAbstractFields);
+            kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, WKVType.T_MAP);
+        }
+    }
+
+    private void updateMethodsConfig(Class triggerClass,String key) {
+        Set<Method> wtriggerMethods = reflections.getMethodsAnnotatedWith(triggerClass);
+        Iterator<Method> iterator = wtriggerMethods.iterator();
         while (iterator.hasNext()){
             Method method = iterator.next();
             String className = method.getDeclaringClass().getSimpleName();
@@ -230,10 +249,7 @@ public class BootStrap {
                fieldData.put("selects",selects);
            }
 
-
             kvDBUtils.setValue(WConstants.PREFIX_FIELD+className+"."+fieldName,fieldData, WKVType.T_MAP);
-            JSONObject value = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD+className+"."+fieldName, WKVType.T_MAP);
-         //   System.out.println(value);
         }
     }
 
@@ -292,6 +308,7 @@ public class BootStrap {
             tableData.put("class",wTableClassName);
             tableData.put("intactClass",wTableClass.getName());
             tableData.put("fields",f);
+            tableData.put("abstractfields",null);
             tableData.put("permission",permission);
             tableData.put("insertTrigger",null);
             tableData.put("updateTrigger",null);

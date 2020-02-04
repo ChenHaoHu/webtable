@@ -19,6 +19,11 @@ public enum WHandlerType {
     ATABLE("atable","添加表中数据信息"),
     GKVDATA("gkvdata","获取kv数据库信息"),
     USERINFO("userinfo","获取用户信息"),
+    GSHAREPERMISSIONLIST("gsharepermissionlist","获取分享内容权限表"),
+    GSHAREDATA("gshare","获取分享列表"),
+    USHAREDATA("ushare","更新分享列表"),
+    ASHAREDATA("ashare","添加分享信息"),
+    DSHAREDATA("dshare","删除分享信息"),
     LoginRequest("login","登录请求");
 
     private String uri;

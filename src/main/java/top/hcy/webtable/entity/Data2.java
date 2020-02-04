@@ -38,7 +38,7 @@ public class Data2 {
  @WInsertField
  @WUpdateField
  @WFindField
- @WField(aliasName = "2数值",columnName = "num")
+ @WField(aliasName = "数值",columnName = "num")
  private int numNumber;
  @WInsertField
  @WUpdateField
@@ -56,6 +56,16 @@ public class Data2 {
  @WUpdateField
  private String data3;
  private String data4;
+
+ @WAbstractField(aliasName = "虚拟字段1")
+ public String aa(){
+  return "虚拟字段1";
+ }
+
+ @WAbstractField(aliasName = "虚拟字段2")
+ public String bb(){
+  return "虚拟字段2";
+ }
 
 
  @WFieldToPersistence("tip")
@@ -78,7 +88,6 @@ public class Data2 {
  public void deleteData1Trigger(WebTableContext ctx){
   System.out.println("------------- 删除触发器 --------------");
  }
-
 
  @WUpdateTrigger
  public void updateData1Trigger(WebTableContext ctx){

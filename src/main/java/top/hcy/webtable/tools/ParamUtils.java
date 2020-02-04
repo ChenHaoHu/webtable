@@ -9,7 +9,7 @@ import top.hcy.webtable.common.enums.WRespCode;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * @ProjectName: webtable
@@ -28,20 +28,28 @@ public class ParamUtils {
     public static void getParamsFromRequest(WebTableContext ctx, HttpServletRequest request){
         ServletInputStream inputStream = null;
         try {
-             inputStream = request.getInputStream();
-            int len  = 100;
-            int b;
-            byte[] bytes = new byte[len];
+            inputStream = request.getInputStream();
+            InputStreamReader isr = new InputStreamReader(inputStream);
+            BufferedReader br = new BufferedReader(isr);
+            String tmp = "";
             StringBuffer str = new StringBuffer();
-            while ((b = inputStream.read(bytes))!=-1){
-                str.append(new String(bytes), 0, b);
+//            int len  = 100;
+//            int b;
+//            byte[] bytes = new byte[len];
+//            StringBuffer str = new StringBuffer();
+//            while ((b = inputStream.read(bytes))!=-1){
+//                str.append(new String(bytes), 0, b);
+//            }
+//            System.out.println(str.toString());
+//            System.out.println("------------");
+
+            while ((tmp = br.readLine())!=null){
+                str.append(tmp);
             }
-            System.out.println(str.toString());
-            System.out.println("------------");
             JSONObject jsonObject = JSON.parseObject(str.toString());
             ctx.setParams(jsonObject);
         } catch (Exception e) {
-       //     e.printStackTrace();
+            e.printStackTrace();
             ctx.setError(true);
             ctx.setWRespCode(WRespCode.REQUEST_PARAM_ERROR);
             if(log.isErrorEnabled()){

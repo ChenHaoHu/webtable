@@ -1,6 +1,7 @@
 package top.hcy.webtable.service;
 
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.common.constant.WGlobal;
@@ -19,6 +20,7 @@ import java.util.HashMap;
  * @Date: 20-1-25 22:07
  * @Version: 1.0
  **/
+@Slf4j
 public class UserInfoService implements WService {
     @Override
     public void verifyParams(WebTableContext ctx) {
@@ -33,7 +35,7 @@ public class UserInfoService implements WService {
         map.put("avatar",ctx.getToken());
         map.put("routers",UserRouterManagemanet.generateRouters(ctx));
 
-        System.out.println(UserRouterManagemanet.generateRouters(ctx));
+        log.info(UserRouterManagemanet.generateRouters(ctx));
         ctx.setRespsonseEntity(map);
     }
 }

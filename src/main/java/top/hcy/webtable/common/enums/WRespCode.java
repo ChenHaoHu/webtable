@@ -26,6 +26,7 @@ public enum WRespCode {
     INSERT_FAIL(1020, "插入失败"),
     DELETE_SUCCESS(1021, "删除成功"),
     DELETE_FAIL(1022, "删除失败"),
+    DELETE_NODATA(1023, "没有数据删除"),
     REQUEST_PARAM_WARN(1100, "请求参数不合法");
 
 

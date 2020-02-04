@@ -1,5 +1,8 @@
 package top.hcy.webtable.tools;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
@@ -25,8 +28,8 @@ public class CommonUtils {
     }
 
     //生成锻炼分享的账户
-    public static HashMap<String,String> generateShareAccount(){
-        HashMap<String, String> data = new HashMap<>();
+    public static JSONObject generateShareAccount(){
+        JSONObject data = new JSONObject();
         data.put("username",getShortStr());
         data.put("passwd",getShortStr());
         return data;

@@ -4,9 +4,11 @@ package top.hcy.webtable.service;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import top.hcy.webtable.annotation.field.WAbstractField;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.common.enums.WRespCode;
+import top.hcy.webtable.common.enums.WebFieldType;
 import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.db.mysql.WSelectSql;
 import top.hcy.webtable.db.mysql.WTableData;
@@ -68,6 +70,7 @@ public class GetTableDataService implements WService {
         String tableName = (String)tableOb.get("table");
         String className = (String)tableOb.get("intactClass");
         String selectTrigger = (String)tableOb.get("selectTrigger");
+        JSONArray abstractfields = (JSONArray)tableOb.get("abstractfields");
         String alias = (String)tableOb.get("alias");
         res.put("alias",alias);
         res.put("permission",permission);
@@ -165,11 +168,11 @@ public class GetTableDataService implements WService {
                     Field field = c.getDeclaredField(filedName);
                     if (field!=null){
                         field.setAccessible(true);
-                      try{
-                          field.set(o,map.get(fieldMap.get(filedName)[0]));
-                      }catch (Exception e){
+                        try{
+                            field.set(o,map.get(fieldMap.get(filedName)[0]));
+                        }catch (Exception e){
 
-                      }
+                        }
                     }
                 }
                 //执行展示方法
@@ -207,22 +210,59 @@ public class GetTableDataService implements WService {
                     }
                 }
 
-               if(k == i1-1){
+                //获取虚拟字段
+                if(abstractfields != null){
+                    int abstractfieldsSize = abstractfields.size();
+                    if ( abstractfieldsSize>0){
 
-                   //执行触发器
-                   if (selectTrigger!=null && selectTrigger.length()>0){
-                       Method trigger =  null;
-                       try {
-                           trigger = c.getDeclaredMethod(selectTrigger, WebTableContext.class);
-                       }catch (Exception e){
+                        for (int i = 0; i < abstractfieldsSize; i++) {
 
-                       }
-                       if (trigger!=null){
-                           trigger.invoke(o,ctx);
-                       }
-                   }
+                            Method trigger =  null;
+                            Object out = null;
 
-               }
+                            try {
+                                trigger = c.getDeclaredMethod(abstractfields.getString(i));
+                            }catch (Exception e){
+
+                            }
+                            if (trigger!=null){
+                                WAbstractField wAbstractFieldAnnotation = trigger.getAnnotation(WAbstractField.class);
+                                String aliasName = wAbstractFieldAnnotation.aliasName();
+                                WebFieldType webFieldType = wAbstractFieldAnnotation.fieldType();
+                                out = trigger.invoke(o);
+                                map.put(abstractfields.getString(i),out);
+                                HashMap<String,Object> s = new HashMap<>();
+                                s.put("alias",aliasName);
+                                s.put("field",abstractfields.getString(i));
+                                s.put("webFieldType",webFieldType.getStr());
+                                s.put("fieldPermission","");
+                                s.put("selects",null);
+                                fieldsMap.put(abstractfields.getString(i),s);
+
+                            }
+
+                        }
+                    }
+                }
+
+
+
+                if(k == i1-1){
+
+                    //执行触发器
+                    if (selectTrigger!=null && selectTrigger.length()>0){
+                        Method trigger =  null;
+                        try {
+                            trigger = c.getDeclaredMethod(selectTrigger, WebTableContext.class);
+                        }catch (Exception e){
+
+                        }
+                        if (trigger!=null){
+                            trigger.invoke(o,ctx);
+                        }
+                    }
+
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

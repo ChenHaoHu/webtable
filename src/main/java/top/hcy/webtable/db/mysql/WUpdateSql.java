@@ -1,5 +1,8 @@
 package top.hcy.webtable.db.mysql;
 
+import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -12,6 +15,7 @@ import java.util.Collections;
  * @Date: 20-1-28 13:34
  * @Version: 1.0
  **/
+@Slf4j
 public class WUpdateSql {
 
     private String table = "";
@@ -97,7 +101,11 @@ public class WUpdateSql {
         if (condition.length()!=0){
             sql.append(" WHERE "+condition+" ");
         }
-        System.out.println(sql);
+
+        log.info("sql: "+sql);
+        log.info("values: "+ JSON.toJSONString(values));
+        log.info("conditionValues: "+JSON.toJSONString(conditionValues));
+
         int insert = MySqlDbUtils.update(sql.toString(),values,conditionValues);
 
         return insert;
