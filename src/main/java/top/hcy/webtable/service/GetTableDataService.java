@@ -141,8 +141,6 @@ public class GetTableDataService implements WService {
             }
             if (size2 > 0){
                 for (String key : likeData.keySet()){
-
-
                     sql.like(key);
                     queryValue[i++] = "%"+likeData.getString(key)+"%";
                 }

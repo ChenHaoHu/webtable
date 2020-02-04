@@ -25,10 +25,12 @@ public class Data1 {
    @WField(aliasName = "编号")
    private long id;
    @WInsertField
+   @WFindField
    @WField(aliasName = "姓名")
    private String name;
    @WInsertField
    @WUpdateField
+   @WFindField
    @WField(aliasName = "年龄",columnName = "age")
    private int age2;
    @WInsertField

@@ -37,7 +37,8 @@ public class Data2 {
  private String job;
  @WInsertField
  @WUpdateField
- @WField(aliasName = "数值",columnName = "num")
+ @WFindField
+ @WField(aliasName = "2数值",columnName = "num")
  private int numNumber;
  @WInsertField
  @WUpdateField
