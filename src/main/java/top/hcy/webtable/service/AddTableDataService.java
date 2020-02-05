@@ -171,7 +171,7 @@ public class AddTableDataService implements WService{
     }
 
     private JSONObject getFieldData(String table, String username, String field) {
-        return (JSONObject) kvDBUtils.getValue(username + "." + WConstants.PREFIX_FIELD+table+"."+ field, WKVType.T_MAP);
+        return (JSONObject) kvDBUtils.getValue( WConstants.PREFIX_FIELD+table+"."+ field, WKVType.T_MAP);
     }
 
     private void check(WebTableContext ctx, String username, String table, JSONObject insertFields, JSONObject tableData) {
@@ -195,7 +195,7 @@ public class AddTableDataService implements WService{
             Field[] fields = c.getFields();
             for (int i = 0; i < fields.length; i++) {
                 Field field = fields[i];
-                JSONObject fieldData = (JSONObject) kvDBUtils.getValue(username + "." + WConstants.PREFIX_FIELD + table + "." + field, WKVType.T_MAP);
+                JSONObject fieldData = (JSONObject) kvDBUtils.getValue( WConstants.PREFIX_FIELD + table + "." + field, WKVType.T_MAP);
                 if (fieldData.getString("fieldPermission").contains("insert")){
                     String column = fieldData.getString("column");
                     if (!keySet.contains(column)){
@@ -214,21 +214,6 @@ public class AddTableDataService implements WService{
         }
 
 
-//        for (String field : insertFields.keySet()){
-//            System.out.println(username + "." + WConstants.PREFIX_FIELD + table + "." + field);
-//            JSONObject fieldData = (JSONObject) kvDBUtils.getValue(username + "." + WConstants.PREFIX_FIELD + table + "." + field, WKVType.T_MAP);
-//            if (fieldData == null){
-//                ctx.setWRespCode(WRespCode.FIELD_UNFAMILIAR);
-//                ctx.setError(true);
-//                return;
-//            }
-//            System.out.println(fieldData);
-//            JSONArray fieldPermissions = fieldData.getJSONArray("fieldPermission");
-//            if (!fieldPermissions.contains("insert")){
-//                ctx.setWRespCode(WRespCode.PERMISSION_DENIED);
-//                ctx.setError(true);
-//                return;
-//            }
-//        }
+
     }
 }

@@ -272,7 +272,7 @@ public class GetTableDataService implements WService {
     }
 
     private JSONObject getFieldData(String table, String username, String field) {
-        return (JSONObject) kvDBUtils.getValue(username + "." + WConstants.PREFIX_FIELD+table+"."+ field, WKVType.T_MAP);
+        return (JSONObject) kvDBUtils.getValue( WConstants.PREFIX_FIELD+table+"."+ field, WKVType.T_MAP);
     }
 
     private JSONObject getTable(String table, String username) {

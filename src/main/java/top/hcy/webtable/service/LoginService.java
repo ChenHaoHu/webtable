@@ -1,5 +1,6 @@
 package top.hcy.webtable.service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
@@ -7,6 +8,8 @@ import top.hcy.webtable.common.constant.WGlobal;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.tools.JwtTokenUtils;
+
+import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
 /**
  * @ProjectName: webtable
@@ -37,13 +40,30 @@ public class LoginService implements WService {
         JSONObject params = ctx.getParams();
         String username = (String)params.get("username");
         String passwd = (String)params.get("passwd");
-        String password = (String)WGlobal.kvDBUtils.getValue(WConstants.PREFIX_ACCOUNTS + username, WKVType.T_STRING);
+        String password = (String) kvDBUtils.getValue(WConstants.PREFIX_ACCOUNTS + username, WKVType.T_STRING);
         if (passwd.equals(password)){
             ctx.setWRespCode(WRespCode.LOGIN_SUCCESS);
-            String s = JwtTokenUtils.generateToken(username);
+            String s = JwtTokenUtils.generateToken(username+WConstants.TOKEN_SPLIT+"admin");
             ctx.setNewToken(s);
             ctx.setRefreshToken(true);
+            ctx.setRole("admin");
         }else{
+            //验证share账号
+
+            JSONArray shareslist = (JSONArray) kvDBUtils.getValue("shareslist", WKVType.T_LIST);
+
+            int size = shareslist.size();
+            for (int i = 0; i < size; i++) {
+                JSONObject share = (JSONObject) shareslist.get(i);
+                String u = share.getString("username");
+                if (u.equals(username) && share.getString("passwd").equals(passwd)){
+                    ctx.setWRespCode(WRespCode.LOGIN_SUCCESS);
+                    String s = JwtTokenUtils.generateToken(username+WConstants.TOKEN_SPLIT+"share");
+                    ctx.setNewToken(s);
+                    ctx.setRefreshToken(true);
+                    ctx.setRole("share");
+                }
+            }
             ctx.setWRespCode(WRespCode.LOGIN_FAILE);
         }
 

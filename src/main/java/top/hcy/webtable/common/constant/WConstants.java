@@ -18,7 +18,7 @@ public class WConstants {
 
     public static final int  PAGE_SIZE = 6;
     public static final int  PAGE_NUM = 0;
-
+    public static final String TOKEN_SPLIT = ".wetable.";
     public static final String URI_NAME = "u";
     public static final String PREFIX_PK = "pk_";
     public static final String PREFIX_ACCOUNTS = "account.";

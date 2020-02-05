@@ -30,7 +30,7 @@ public class GetKvDataService implements WService{
         HashMap<String,Object> data = new HashMap<>();
         for (int i = 0; i < allKeys.size(); i++) {
                 data.put(allKeys.get(i),
-                        (JSONObject)kvDBUtils.getValue(allKeys.get(i), WKVType.T_MAP));
+                       kvDBUtils.getValue(allKeys.get(i), WKVType.T_STRING));
 
         }
         ctx.setRespsonseEntity(data);

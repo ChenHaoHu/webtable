@@ -100,7 +100,8 @@ public class BootStrap {
         int size = allKeys.size();
         for (int i = 0; i < size; i++) {
             String s = allKeys.get(i);
-            if (s.startsWith(WConstants.PREFIX_TABLE) || s.startsWith(WConstants.PREFIX_FIELD)){
+//            if (s.startsWith(WConstants.PREFIX_TABLE) || s.startsWith(WConstants.PREFIX_FIELD)){
+            if (s.startsWith(WConstants.PREFIX_TABLE)){
                 baseKeys.add(s);
             }
         }
@@ -244,10 +245,10 @@ public class BootStrap {
 
             //添加多选
             WSelectField wSelectField = field.getAnnotation(WSelectField.class);
-           if(wSelectField !=null){
-               String[] selects = wSelectField.select();
-               fieldData.put("selects",selects);
-           }
+            if(wSelectField !=null){
+                String[] selects = wSelectField.select();
+                fieldData.put("selects",selects);
+            }
 
             kvDBUtils.setValue(WConstants.PREFIX_FIELD+className+"."+fieldName,fieldData, WKVType.T_MAP);
         }
@@ -315,7 +316,7 @@ public class BootStrap {
             tableData.put("selectTrigger",null);
             tableData.put("deleteTrigger",null);
             kvDBUtils.setValue(WConstants.PREFIX_TABLE+wTableClassName,tableData, WKVType.T_MAP);
-          //  JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + wTableClassName, WKVType.T_MAP);
+            //  JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + wTableClassName, WKVType.T_MAP);
             WGlobal.tables.add(wTableClassName);
         }
     }
@@ -334,7 +335,20 @@ public class BootStrap {
         }
 
         //处理 token key
-        ctx.setUsername(ctx.getTokenKey());
+        String tokenKey = ctx.getTokenKey();
+        if (tokenKey!=null){
+            String[] split = tokenKey.split(WConstants.TOKEN_SPLIT);
+            if (split.length == 2){
+                ctx.setUsername(split[0]);
+                ctx.setRole(split[1]);
+            }else{
+                ctx.setWRespCode(WRespCode.REQUEST_TOKEN_ERROR);
+                return defulteWResponseEntity(ctx);
+            }
+        }
+
+
+
 
         //获取对应service
         WService wService = ctx.getWService();
@@ -386,6 +400,5 @@ public class BootStrap {
         hPreRequest.addFiterOnLast(requestUrlFilter);
         hPreRequest.addFiterOnLast(tokenJwtFilter);
     }
-
 
 }

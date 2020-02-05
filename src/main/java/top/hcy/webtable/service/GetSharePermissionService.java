@@ -45,7 +45,7 @@ public class GetSharePermissionService implements WService {
             JSONObject fieldsAlias = new JSONObject();
             int fieldsSize = fields.size();
             for (int j = 0; j < fieldsSize; j++) {
-                JSONObject field = (JSONObject)kvDBUtils.getValue(username + "." + WConstants.PREFIX_FIELD + tables.get(i)+"."+fields.get(j), WKVType.T_MAP);
+                JSONObject field = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD + tables.get(i)+"."+fields.get(j), WKVType.T_MAP);
                 fieldsAlias.put(fields.getString(j),field.getString("alias"));
             }
             JSONArray wAbstractFields  = (JSONArray)table.get("abstractfields");

@@ -40,19 +40,18 @@ public class UserRouterManagemanet {
             routers.add(s);
         }
 
-        //wadmin 路由
-
-        ArrayList<UserRouter> wadminUserRouters = new ArrayList<>();
-        UserRouter permissionRouter = new UserRouter("permission","permission","/wadmin/permission/index","权限管理","form");
-        UserRouter memberRouter = new UserRouter("member","member","/wadmin/member/index","账号管理","tree");
-        UserRouter shareRouter = new UserRouter("share","share","/wadmin/share/index","分享管理","nested");
-        wadminUserRouters.add(permissionRouter);
-        wadminUserRouters.add(memberRouter);
-        wadminUserRouters.add(shareRouter);
-
-        JSONObject wadminRouters = pathItemWithChildren("/wadmin", "wadmin", "example", wadminUserRouters);
-
-        routers.add(wadminRouters);
+        if ("admin".equals(ctx.getRole())){
+            //wadmin 路由
+            ArrayList<UserRouter> wadminUserRouters = new ArrayList<>();
+            UserRouter permissionRouter = new UserRouter("permission","permission","/wadmin/permission/index","权限管理","form");
+            UserRouter memberRouter = new UserRouter("member","member","/wadmin/member/index","账号管理","tree");
+            UserRouter shareRouter = new UserRouter("share","share","/wadmin/share/index","分享管理","nested");
+            wadminUserRouters.add(permissionRouter);
+            wadminUserRouters.add(memberRouter);
+            wadminUserRouters.add(shareRouter);
+            JSONObject wadminRouters = pathItemWithChildren("/wadmin", "wadmin", "example", wadminUserRouters);
+            routers.add(wadminRouters);
+        }
 
 
         //默认添加 404

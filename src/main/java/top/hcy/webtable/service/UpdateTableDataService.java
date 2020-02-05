@@ -122,8 +122,17 @@ public class UpdateTableDataService implements WService{
            for(String key:updateFields.keySet()){
                Field updateField = c.getDeclaredField(fieldMap.get(key));
                if(updateField != null){
+
                    updateField.setAccessible(true);
-                   updateField.set(o,updateFields.get(key));
+
+                   String type = updateField.getType().getName();
+                   if ("int".equals(type)){
+                       updateField.set(o,Integer.valueOf(updateFields.get(key).toString()));
+                   }else if ("long".equals(type)){
+                       updateField.set(o,Long.valueOf(updateFields.get(key).toString()));
+                   }else{
+                       updateField.set(o,updateFields.get(key));
+                   }
                }
                JSONObject fieldData = getFieldData(table,username,updateField.getName());
                String toPersistenceMethod = fieldData.getString("toPersistenceMethod");
@@ -199,7 +208,7 @@ public class UpdateTableDataService implements WService{
     }
 
     private JSONObject getFieldData(String table, String username, String field) {
-        return (JSONObject) kvDBUtils.getValue(username + "." + WConstants.PREFIX_FIELD+table+"."+ field, WKVType.T_MAP);
+        return (JSONObject) kvDBUtils.getValue( WConstants.PREFIX_FIELD+table+"."+ field, WKVType.T_MAP);
     }
     private void check(WebTableContext ctx, String username, String table, JSONObject updateFields, JSONObject pks, JSONObject tableData,ArrayList<String> primayKey) {
 
@@ -232,7 +241,7 @@ public class UpdateTableDataService implements WService{
             Field[] fields = c.getFields();
             for (int i = 0; i < fields.length; i++) {
                 Field field = fields[i];
-                JSONObject fieldData = (JSONObject) kvDBUtils.getValue(username + "." + WConstants.PREFIX_FIELD + table + "." + field, WKVType.T_MAP);
+                JSONObject fieldData = (JSONObject) kvDBUtils.getValue( WConstants.PREFIX_FIELD + table + "." + field, WKVType.T_MAP);
                 if (fieldData.getString("fieldPermission").contains("update")){
                     String column = fieldData.getString("column");
                     if (!keySet.contains(column)){
@@ -252,19 +261,6 @@ public class UpdateTableDataService implements WService{
 
 
 
-//        for (String field : fields.keySet()){
-//            JSONObject fieldData = (JSONObject) kvDBUtils.getValue(username + "." + WConstants.PREFIX_FIELD + table + "." + field, WKVType.T_MAP);
-//            if (fieldData == null){
-//                ctx.setWRespCode(WRespCode.FIELD_UNFAMILIAR);
-//                ctx.setError(true);
-//                return;
-//            }
-//            JSONArray fieldPermissions = fieldData.getJSONArray("fieldPermission");
-//            if (!fieldPermissions.contains("update")){
-//                ctx.setWRespCode(WRespCode.PERMISSION_DENIED);
-//                ctx.setError(true);
-//                return;
-//            }
-//        }
+
     }
 }

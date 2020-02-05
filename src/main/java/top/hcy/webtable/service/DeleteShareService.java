@@ -6,6 +6,8 @@ import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.db.kv.WKVType;
 
+import java.util.ArrayList;
+
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
 /**
@@ -56,6 +58,16 @@ public class DeleteShareService implements WService {
         if(b == false){
             ctx.setWRespCode(WRespCode.DELETE_FAIL);
             return;
+        }
+
+
+        ArrayList<String> allKeys = kvDBUtils.getAllKeys();
+
+        for (int i = 0; i < allKeys.size(); i++) {
+            String s = allKeys.get(i);
+            if (s.startsWith(username)){
+                kvDBUtils.deleKey(s);
+            }
         }
 
         ctx.setWRespCode(WRespCode.DELETE_SUCCESS);

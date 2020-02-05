@@ -33,6 +33,7 @@ public class WebTableContext {
     private boolean error;
     private JSONObject params;
     private String username;
+    private String role;
     private String token;
     private String tokenKey;
     private String realUri;
