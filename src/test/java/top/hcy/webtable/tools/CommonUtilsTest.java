@@ -12,13 +12,14 @@ class CommonUtilsTest {
 
     @Test//k5qxvry9
     void getShortString() {
-        String shortURI = CommonUtils.getShortStr();
+        String shortURI = CommonUtils.getShortStr(25);
         Assert.assertNotNull(shortURI);
     }
 
     @Test
     void generateShareAccount() {
         JSONObject map = CommonUtils.generateShareAccount();
+        System.out.println(map);
         Assert.assertNotNull(map);
     }
 }

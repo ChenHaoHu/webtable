@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * @ProjectName: webtable
@@ -21,17 +22,20 @@ public class CommonUtils {
 
     //返回短链 因为不是分布式项目 并发数小
     //根据时间戳获得36进制字符串
-    public static String  getShortStr(){
+    public static String  getShortStr(int radix){
         long l = System.currentTimeMillis();
-        String s = Long.toString(l, 36);
+        String s = Long.toString(l, radix);
         return s;
     }
+
+
 
     //生成锻炼分享的账户
     public static JSONObject generateShareAccount(){
         JSONObject data = new JSONObject();
-        data.put("username",getShortStr());
-        data.put("passwd",getShortStr());
+        Random random = new Random();
+        data.put("username",getShortStr(random.nextInt(5)+20));
+        data.put("passwd",getShortStr(random.nextInt(4)+21));
         return data;
     }
 
