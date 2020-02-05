@@ -48,7 +48,7 @@ public class TokenJwtFilter implements WHandleFilter {
          len = WGlobal.TOKEN_POWER.length;
         for (int i = 0; i < len; i++) {
             if(WGlobal.TOKEN_POWER[i].equals(token)){
-                ctx.setTokenKey("admin");
+                ctx.setTokenKey("admin"+WConstants.TOKEN_SPLIT+"admin");
                 ctx.setRole("admin");
                 return;
             }
