@@ -233,22 +233,17 @@ public class GetTableDataService implements WService {
                                 map.put(abstractfields.getString(i),out);
                                 HashMap<String,Object> s = new HashMap<>();
                                 s.put("alias",aliasName);
-                                s.put("field",abstractfields.getString(i));
+                                s.put("fie2ld",abstractfields.getString(i));
                                 s.put("webFieldType",webFieldType.getStr());
                                 s.put("fieldPermission","");
                                 s.put("selects",null);
                                 fieldsMap.put(abstractfields.getString(i),s);
-
                             }
-
                         }
                     }
                 }
 
-
-
                 if(k == i1-1){
-
                     //执行触发器
                     if (selectTrigger!=null && selectTrigger.length()>0){
                         Method trigger =  null;

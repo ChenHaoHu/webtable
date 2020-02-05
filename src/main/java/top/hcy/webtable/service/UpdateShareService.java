@@ -36,7 +36,7 @@ public class UpdateShareService implements WService {
         String marks = params.getString("marks");
         String username = params.getString("username");
         String status = params.getString("status");
-        Object permission = params.get("permission");
+        JSONArray permissions = params.getJSONArray("permission");
         boolean flag = false;
 
         int size = shareslist.size();
@@ -46,7 +46,7 @@ public class UpdateShareService implements WService {
             if (o.getString("username").equals(username)){
                 o.put("marks",marks);
                 o.put("status",status);
-                o.put("permission",permission);
+                o.put("permission",permissions);
                 shareslist.remove(i);
                 shareslist.add(o);
                 flag = true;

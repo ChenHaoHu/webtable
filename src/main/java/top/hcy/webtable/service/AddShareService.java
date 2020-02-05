@@ -28,7 +28,6 @@ public class AddShareService implements  WService{
     @Override
     public void doService(WebTableContext ctx) {
 
-
         JSONArray shareslist = (JSONArray) kvDBUtils.getValue("shareslist", WKVType.T_LIST);
 
         if (shareslist == null){

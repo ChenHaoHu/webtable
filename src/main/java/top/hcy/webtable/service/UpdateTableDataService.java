@@ -222,7 +222,6 @@ public class UpdateTableDataService implements WService{
                 return;
             }
         }
-        //验证字段正确 和 权限
 
         //验证字段正确 和 权限
         String intactClass =  tableData.getString("intactClass");

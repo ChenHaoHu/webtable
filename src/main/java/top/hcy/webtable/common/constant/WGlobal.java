@@ -25,6 +25,7 @@ public class WGlobal {
             {"admin","admin"}
     };
 
+
     public static  final String[] TOKEN_POWER = new String[]{
             "hcytoken"
     };
@@ -33,5 +34,12 @@ public class WGlobal {
 
     public static final String PACKAGE_SCAN = "top.hcy.webtable.entity";
     public static final String JWT_SECRET = "eyJhbGciOiJIUzUxMiJ9";
+
+
+
+    public static  final String[] WRoles  = {
+            "admin","share"
+    };
+
 
 }
