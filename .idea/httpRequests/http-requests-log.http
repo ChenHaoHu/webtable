@@ -1,3 +1,53 @@
+POST http://localhost:8080/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gkvdata",
+}
+
+<> 2020-02-06T013013.200.json
+
+###
+
+POST http://localhost:8080/webtable
+Content-Type: application/jsonn
+token:
+
+{
+  "u": "login",
+  "username": "admin",
+  "passwd":"admin"
+}
+
+<> 2020-02-06T012936.200.json
+
+###
+
+POST http://localhost:8080/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gkvdata",
+}
+
+<> 2020-02-06T012912.200.json
+
+###
+
+POST http://localhost:8080/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gkvdata",
+}
+
+<> 2020-02-06T012854.200.json
+
+###
+
 POST http://localhost:9299/webtable
 Content-Type: application/jsonn
 token: hcytoken
@@ -621,78 +671,6 @@ token: hcytoken
 }
 
 <> 2020-02-01T122541.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Data1",
-  "pagenum":0,
-  "pagesize":2
-}
-
-<> 2020-02-01T122533.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Data1",
-  "pagenum":0,
-  "pagesize":2
-}
-
-<> 2020-02-01T122346.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Data1",
-  "pagenum":0,
-  "pagesize":2,
-  "find":{
-     "dasd":"dsada"
-  },
-  "like":{
-     "dasd"："Dada"
-  }
-}
-
-<> 2020-02-01T122328.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Data1",
-  "pagenum":0,
-  "pagesize":2,
-  "find":{
-     "dasd":"dsada"
-  },
-  "like":{
-     "dasd"："Dada
-  }
-}
-
-<> 2020-02-01T122311.200.json
 
 ###
 

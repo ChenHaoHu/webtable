@@ -148,6 +148,9 @@ public class GetTableDataService implements WService {
                     queryValue[i++] = "%"+likeData.getString(key)+"%";
                 }
             }
+        }else{
+
+            return null;
         }
 
 

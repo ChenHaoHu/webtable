@@ -85,9 +85,13 @@ public class AddTableDataService implements WService{
 
                     String type = cFields[i].getType().getName();
                     if ("int".equals(type)){
-                        cFields[i].set(o,Integer.valueOf(varColumn.toString()));
+                        cFields[i].set(o,Integer.valueOf(varColumn));
                     }else if ("long".equals(type)){
-                        cFields[i].set(o,Long.valueOf(varColumn.toString()));
+                        cFields[i].set(o,Long.valueOf(varColumn));
+                    }else if ("double".equals(type)){
+                        cFields[i].set(o,Double.valueOf(varColumn));
+                    }else if ("float".equals(type)){
+                        cFields[i].set(o,Float.valueOf(varColumn));
                     }else{
                         cFields[i].set(o,varColumn);
                     }

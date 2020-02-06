@@ -116,6 +116,9 @@ public class LevelDBUtils implements WKvDbUtils {
     @Override
     public boolean copyKey(String target, String key) {
         byte[] bytes = db.get(key.getBytes(CHARSET));
+        if (bytes == null){
+            return false;
+        }
         db.put(target.getBytes(CHARSET),bytes);
         return true;
     }

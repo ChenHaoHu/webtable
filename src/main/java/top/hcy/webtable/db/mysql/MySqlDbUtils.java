@@ -67,7 +67,7 @@ public class MySqlDbUtils implements DBUtils {
             list = CommonUtils.convertResultSetToList(rs);
             connection.close();
         }catch (Exception e){
-            // e.printStackTrace();
+             e.printStackTrace();
             log.error(sql+"  "+ values+ "  "+ e.getMessage());
         }finally {
             if(connection!=null){

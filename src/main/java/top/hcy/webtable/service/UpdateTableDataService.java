@@ -126,13 +126,19 @@ public class UpdateTableDataService implements WService{
                    updateField.setAccessible(true);
 
                    String type = updateField.getType().getName();
+
                    if ("int".equals(type)){
                        updateField.set(o,Integer.valueOf(updateFields.get(key).toString()));
                    }else if ("long".equals(type)){
                        updateField.set(o,Long.valueOf(updateFields.get(key).toString()));
+                   }else if ("double".equals(type)){
+                       updateField.set(o,Double.valueOf(updateFields.get(key).toString()));
+                   }else if ("float".equals(type)){
+                       updateField.set(o,Float.valueOf(updateFields.get(key).toString()));
                    }else{
-                       updateField.set(o,updateFields.get(key));
+                       updateField.set(o,updateFields.get(key).toString());
                    }
+
                }
                JSONObject fieldData = getFieldData(table,username,updateField.getName());
                String toPersistenceMethod = fieldData.getString("toPersistenceMethod");
