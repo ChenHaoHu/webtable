@@ -41,7 +41,7 @@ public class Data1 {
    private String data1;
    @WField(aliasName = "数据二")
    private String data2;
-   @WSelectField(select = {"1","aaa","2","bbbb"})
+   @WSelectsField(selects = {"1","aaa","2","bbbb"})
    private String data3;
    private String data4;
 

@@ -13,6 +13,7 @@ public @interface WTable {
     boolean insert() default false;
     boolean update() default false;
     boolean delete() default false;
+    String selectTrigger() default "";
     String insertTrigger() default "";
     String updateTrigger() default "";
     String deleteTrigger() default "";

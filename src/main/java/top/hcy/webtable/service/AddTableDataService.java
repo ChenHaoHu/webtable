@@ -141,6 +141,7 @@ public class AddTableDataService implements WService{
                 wInsertSql.fields(key);
                 fs[i++] = insertFields.getString(key);
             }
+
             wInsertSql.values(fs);
             int i1 = wInsertSql.executeInsert();
 

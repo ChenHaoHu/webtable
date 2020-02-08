@@ -5,6 +5,5 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD})
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-public @interface WSelectField {
-    String[] select();
+public @interface WReadField {
 }

@@ -24,4 +24,21 @@ class WSelectSqlTest {
         String sql = selectSql.getSql();
         Assert.assertEquals(sql,"SELECT task_id,author,task_name FROM task WHERE author = ?  LIMIT 2  OFFSET 0");
     }
+
+
+    @Test
+    void executeQuery2() {
+        WSelectSql selectSql = new WSelectSql();
+        ArrayList<HashMap<String, Object>> d;
+        selectSql = selectSql
+                .table("task")
+                .fields("task_id","author", "task_name")
+                .where()
+                .and("author")
+                .limit(2,0);
+//                .executeQuery("胡晨阳");
+        String sql = selectSql.getSql();
+        System.out.println(sql);
+        Assert.assertEquals(sql,"SELECT task_id,author,task_name FROM task WHERE author = ?  LIMIT 2  OFFSET 0");
+    }
 }

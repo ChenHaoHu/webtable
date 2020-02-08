@@ -1,6 +1,5 @@
 package top.hcy.webtable;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +25,6 @@ import top.hcy.webtable.common.response.WResponseEntity;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.filter.*;
-import top.hcy.webtable.router.Router;
 import top.hcy.webtable.router.RoutersManagement;
 import top.hcy.webtable.service.*;
 
@@ -45,21 +43,21 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 /**
  * @ProjectName: webtable
  * @Package: top.hcy.webtable
- * @ClassName: BootStrap
+ * @ClassName: WebTableBootStrap
  * @Author: hcy
  * @Description: web table 处理入口
  * @Date: 2020/1/14 19:52
  * @Version: 1.0
  */
 @Slf4j
-public class BootStrap {
+public class WebTableBootStrap {
 
     //普通请求前置处理
     private WFiterChainImpl hPreRequest = null;
 
     private Reflections reflections = null;
 
-    public BootStrap() {
+    public WebTableBootStrap() {
         init();
     }
 
@@ -218,6 +216,10 @@ public class BootStrap {
 
             //表权限表
             ArrayList<String> fieldPermission = new ArrayList<>();
+            if(field.getAnnotation(WReadField.class)!=null ||
+                    wField.read() ){
+                fieldPermission.add("read");
+            }
             if(field.getAnnotation(WInsertField.class)!=null ||
                     wField.insert() ){
                 fieldPermission.add("insert");
@@ -244,9 +246,9 @@ public class BootStrap {
 
 
             //添加多选
-            WSelectField wSelectField = field.getAnnotation(WSelectField.class);
+            WSelectsField wSelectField = field.getAnnotation(WSelectsField.class);
             if(wSelectField !=null){
-                String[] selects = wSelectField.select();
+                String[] selects = wSelectField.selects();
                 fieldData.put("selects",selects);
             }
 
@@ -311,10 +313,10 @@ public class BootStrap {
             tableData.put("fields",f);
             tableData.put("abstractfields",null);
             tableData.put("permission",permission);
-            tableData.put("insertTrigger",null);
-            tableData.put("updateTrigger",null);
-            tableData.put("selectTrigger",null);
-            tableData.put("deleteTrigger",null);
+            tableData.put("insertTrigger",wTable.insertTrigger());
+            tableData.put("updateTrigger",wTable.updateTrigger());
+            tableData.put("selectTrigger",wTable.selectTrigger());
+            tableData.put("deleteTrigger",wTable.deleteTrigger());
             kvDBUtils.setValue(WConstants.PREFIX_TABLE+wTableClassName,tableData, WKVType.T_MAP);
             //  JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + wTableClassName, WKVType.T_MAP);
             WGlobal.tables.add(wTableClassName);

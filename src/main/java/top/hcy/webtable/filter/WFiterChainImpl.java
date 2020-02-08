@@ -45,7 +45,6 @@ public class WFiterChainImpl extends AbstractFilterChain implements WHandleFilte
     }
 
 
-
     @Override
     public boolean deleteFiter(WHandleFilter f){
         filters.remove(f);
