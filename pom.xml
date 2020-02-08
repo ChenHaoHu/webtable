@@ -7,26 +7,6 @@
     <groupId>top.hcy</groupId>
     <artifactId>webtable-spring-boot-starter</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
-
-    <distributionManagement>
-        <repository>
-            <id>webtable-spring-boot-starter-repo</id>
-            <url>file:${basedir}/repo</url>
-        </repository>
-    </distributionManagement>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
@@ -105,5 +85,73 @@
             <version>2.1.3.RELEASE</version>
         </dependency>
     </dependencies>
+
+
+
+<!--    <properties>-->
+<!--        &lt;!&ndash; 设置 github 服务器使用的配置，在 ~/.m2/settings.xml 中定义 &ndash;&gt;-->
+<!--        <github.global.server>github</github.global.server>-->
+<!--    </properties>-->
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+<!--            <plugin>-->
+<!--                <artifactId>maven-deploy-plugin</artifactId>-->
+<!--                <version>2.8.1</version>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash;设置部署目录&ndash;&gt;-->
+<!--                    <altDeploymentRepository>-->
+<!--                        internal.repo::default::file://${project.build.directory}/mvn-repo-->
+<!--                    </altDeploymentRepository>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--            <plugin>-->
+<!--                <groupId>com.github.github</groupId>-->
+<!--                <artifactId>site-maven-plugin</artifactId>-->
+<!--                &lt;!&ndash;-->
+<!--                  这里需要使用 0.12, 0.9 部署时会出错，具体查看-->
+<!--                  https://github.com/github/maven-plugins/issues/105-->
+<!--                &ndash;&gt;-->
+<!--                <version>0.12</version>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash;git 提交的消息&ndash;&gt;-->
+<!--                    <message>Maven artifacts for ${project.version}</message>-->
+<!--                    &lt;!&ndash;禁用网页处理&ndash;&gt;-->
+<!--                    <noJekyll>true</noJekyll>-->
+<!--                    &lt;!&ndash;部署的目录，这里是和上面的 maven-deploy-plugin 的 configuration.altDeploymentRepository 对应&ndash;&gt;-->
+<!--                    <outputDirectory>${project.build.directory}/mvn-repo-->
+<!--                    </outputDirectory> &lt;!&ndash; matches distribution management repository url above &ndash;&gt;-->
+<!--                    &lt;!&ndash;远程分支名&ndash;&gt;-->
+<!--                    <branch>refs/heads/mvn-repo</branch>-->
+<!--                    <includes>-->
+<!--                        <include>**/*</include>-->
+<!--                    </includes>-->
+<!--                    &lt;!&ndash;github 仓库的名字&ndash;&gt;-->
+<!--                    <repositoryName>webtable</repositoryName>-->
+<!--                    &lt;!&ndash;github 用户名&ndash;&gt;-->
+<!--                    <repositoryOwner>ChenHaoHu</repositoryOwner>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            &lt;!&ndash;suppress MybatisMapperXmlInspection &ndash;&gt;-->
+<!--                            <goal>site</goal>-->
+<!--                        </goals>-->
+<!--                        <phase>deploy</phase>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+        </plugins>
+    </build>
+
+
 
 </project>
