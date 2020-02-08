@@ -18,11 +18,11 @@ public class StarterAutoConfigure {
     private StarterServiceProperties properties;
 
 
-    @Bean
+    @Bean()
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = "webtable", value = "enabled", havingValue = "true")
     WebTableBootStrap starterService (){
-        System.out.println(" ----- 6666 -----");
+        System.out.println(" ----- 7777 -----");
         System.out.println(properties);
 
         String entityPack = properties.getEntitypack();
