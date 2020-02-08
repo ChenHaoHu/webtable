@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>top.hcy</groupId>
+  <artifactId>webtable-spring-boot-starter</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20200208.094214</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20200208094214</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>1.0-20200208.094214-1</value>
+        <updated>20200208094214</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>1.0-20200208.094214-1</value>
+        <updated>20200208094214</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>

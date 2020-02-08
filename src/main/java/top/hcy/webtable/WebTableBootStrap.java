@@ -61,6 +61,13 @@ public class WebTableBootStrap {
         init();
     }
 
+    public WebTableBootStrap(String pack) {
+        WGlobal.PACKAGE_SCAN = pack;
+
+        init();
+    }
+
+
     private void init() {
         initReflections();
         initFilters();
