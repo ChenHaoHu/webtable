@@ -100,13 +100,20 @@ public class GetTableDataService implements WService {
 
             fieldMap.put(fields.getString(j),fieldData);
 
-            HashMap<String,Object> map = new HashMap<>();
-            map.put("alias",value.getString("alias"));
-            map.put("field",value.getString("field"));
-            map.put("webFieldType",value.getString("webFieldType"));
-            map.put("fieldPermission",value.get("fieldPermission"));
-            map.put("selects",value.get("selects"));
-            fieldsMap.put(columnName,map);
+
+            JSONArray fieldPermissions = value.getJSONArray("fieldPermission");
+
+            boolean read = fieldPermissions.contains("read");
+
+            if (read){
+                HashMap<String,Object> map = new HashMap<>();
+                map.put("alias",value.getString("alias"));
+                map.put("field",value.getString("field"));
+                map.put("webFieldType",value.getString("webFieldType"));
+                map.put("fieldPermission",value.get("fieldPermission"));
+                map.put("selects",value.get("selects"));
+                fieldsMap.put(columnName,map);
+            }
         }
 
         sql.limit(pagesize, (pagenum-1)*pagesize);
@@ -220,20 +227,21 @@ public class GetTableDataService implements WService {
 
                         for (int i = 0; i < abstractfieldsSize; i++) {
 
-                            Method trigger =  null;
+                            Method method =  null;
                             Object out = null;
 
                             try {
-                                trigger = c.getDeclaredMethod(abstractfields.getString(i));
+                                method = c.getDeclaredMethod(abstractfields.getString(i));
                             }catch (Exception e){
 
                             }
-                            if (trigger!=null){
-                                WAbstractField wAbstractFieldAnnotation = trigger.getAnnotation(WAbstractField.class);
+                            if (method!=null){
+                                WAbstractField wAbstractFieldAnnotation = method.getAnnotation(WAbstractField.class);
                                 String aliasName = wAbstractFieldAnnotation.aliasName();
                                 WebFieldType webFieldType = wAbstractFieldAnnotation.fieldType();
-                                out = trigger.invoke(o);
+                                out = method.invoke(o);
                                 map.put(abstractfields.getString(i),out);
+
                                 HashMap<String,Object> s = new HashMap<>();
                                 s.put("alias",aliasName);
                                 s.put("fie2ld",abstractfields.getString(i));

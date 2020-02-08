@@ -1,6 +1,5 @@
 package top.hcy.webtable;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +25,6 @@ import top.hcy.webtable.common.response.WResponseEntity;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.filter.*;
-import top.hcy.webtable.router.Router;
 import top.hcy.webtable.router.RoutersManagement;
 import top.hcy.webtable.service.*;
 
@@ -218,6 +216,10 @@ public class BootStrap {
 
             //表权限表
             ArrayList<String> fieldPermission = new ArrayList<>();
+            if(field.getAnnotation(WReadField.class)!=null ||
+                    wField.read() ){
+                fieldPermission.add("read");
+            }
             if(field.getAnnotation(WInsertField.class)!=null ||
                     wField.insert() ){
                 fieldPermission.add("insert");
@@ -244,9 +246,9 @@ public class BootStrap {
 
 
             //添加多选
-            WSelectField wSelectField = field.getAnnotation(WSelectField.class);
-            if(wSelectField !=null){
-                String[] selects = wSelectField.select();
+            WSelectsField wSelectsField = field.getAnnotation(WSelectsField.class);
+            if(wSelectsField !=null){
+                String[] selects = wSelectsField.selects();
                 fieldData.put("selects",selects);
             }
 
@@ -311,10 +313,10 @@ public class BootStrap {
             tableData.put("fields",f);
             tableData.put("abstractfields",null);
             tableData.put("permission",permission);
-            tableData.put("insertTrigger",null);
-            tableData.put("updateTrigger",null);
-            tableData.put("selectTrigger",null);
-            tableData.put("deleteTrigger",null);
+            tableData.put("insertTrigger",wTable.insertTrigger());
+            tableData.put("updateTrigger",wTable.updateTrigger());
+            tableData.put("selectTrigger",wTable.selectTrigger());
+            tableData.put("deleteTrigger",wTable.deleteTrigger());
             kvDBUtils.setValue(WConstants.PREFIX_TABLE+wTableClassName,tableData, WKVType.T_MAP);
             //  JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + wTableClassName, WKVType.T_MAP);
             WGlobal.tables.add(wTableClassName);

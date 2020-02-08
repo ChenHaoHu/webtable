@@ -11,6 +11,7 @@ public @interface WField {
     String aliasName() default "";
     String columnName() default "";
     WebFieldType fieldType() default WebFieldType.STRING;
+    boolean read() default true;
     boolean insert() default false;
     boolean update() default false;
     boolean find() default false;

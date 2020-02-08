@@ -7,7 +7,6 @@ import top.hcy.webtable.annotation.method.WInsertTrigger;
 import top.hcy.webtable.annotation.method.WSelectTrigger;
 import top.hcy.webtable.annotation.method.WUpdateTrigger;
 import top.hcy.webtable.annotation.table.WEnadbleDelete;
-import top.hcy.webtable.annotation.table.WEnadbleInsert;
 import top.hcy.webtable.annotation.table.WEnadbleUpdate;
 import top.hcy.webtable.annotation.table.WTable;
 import top.hcy.webtable.common.WebTableContext;
@@ -51,7 +50,7 @@ public class Data2 {
  @WFindField
  private String data2;
  @WField(aliasName = "选择项",fieldType = WebFieldType.SELECT)
- @WSelectField(select = {"选择一","AAA","选择二","BBB","选择三","CCC"} )
+ @WSelectsField(selects = {"选择一","AAA","选择二","BBB","选择三","CCC"} )
  @WInsertField
  @WUpdateField
  private String data3;
