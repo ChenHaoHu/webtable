@@ -23,7 +23,7 @@ import top.hcy.webtable.common.enums.WebFieldType;
 @WEnadbleUpdate
 @WEnadbleSort
 public class Book {
-    @WField(aliasName = "书籍ID",columnName = "book_id")
+    @WField(aliasName = "书籍ID",columnName = "book_id",fieldType = WebFieldType.NUMBER)
     @WFindField
     private String bookId;
 
