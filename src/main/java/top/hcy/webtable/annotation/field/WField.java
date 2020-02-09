@@ -15,6 +15,7 @@ public @interface WField {
     boolean insert() default false;
     boolean update() default false;
     boolean find() default false;
+    boolean sort() default false;
 //    String convertToShow() default "";
 //    String convertToPersistence() default "";
 }

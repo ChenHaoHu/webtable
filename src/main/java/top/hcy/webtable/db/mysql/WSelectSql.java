@@ -32,6 +32,10 @@ public class WSelectSql {
 
     private StringBuffer condition  = new StringBuffer();
 
+    private String orderByField = null;
+
+    private boolean orderByDesc = false;
+
     public WSelectSql() {
     }
 
@@ -98,6 +102,38 @@ public class WSelectSql {
         return this;
     }
 
+    public WSelectSql greater(String andStr){
+
+        if (condition.length() != 0){
+            this.condition.append("and "+andStr+"> ? ");
+        }
+        return this;
+    }
+
+    public WSelectSql less(String andStr){
+
+        if (condition.length() != 0){
+            this.condition.append("and "+andStr+"<? ");
+        }
+        return this;
+    }
+
+    public WSelectSql greaterAndequals(String andStr){
+
+        if (condition.length() != 0){
+            this.condition.append("and "+andStr+">=? ");
+        }
+        return this;
+    }
+
+    public WSelectSql lessAndequals(String andStr){
+
+        if (condition.length() != 0){
+            this.condition.append("and "+andStr+"<=? ");
+        }
+        return this;
+    }
+
     public WSelectSql or(String orStr){
         if (condition.length() != 0){
             this.condition.append("or "+orStr+"=? ");
@@ -111,6 +147,24 @@ public class WSelectSql {
         }
         return this;
     }
+
+
+    public WSelectSql orderBy(String field,Boolean desc){
+
+        this.orderByField = field;
+        this.orderByDesc = desc;
+
+        return this;
+    }
+
+    public WSelectSql orderBy(String field){
+
+        this.orderByField = field;
+        this.orderByDesc = true;
+
+        return this;
+    }
+
 
     public ArrayList<HashMap<String,Object>> executeQuery(String... values){
 
@@ -128,9 +182,19 @@ public class WSelectSql {
         if (condition.length() != 0){
             sql.append(" WHERE "+condition+" ");
         }
+
+        if (orderByField!=null){
+            sql.append(" ORDER BY "+ orderByField);
+            if (orderByDesc == true){
+                sql.append(" DESC");
+            }
+        }
+
         if (isLimit){
             sql.append(" LIMIT "+limit_x + "  OFFSET "+limit_y);
         }
+
+
         log.info("sql: "+sql);
         log.info("values: "+ JSON.toJSONString(values));
 
@@ -153,9 +217,18 @@ public class WSelectSql {
         if (condition.length() != 0){
             sql.append(" WHERE "+condition+" ");
         }
+
+        if (orderByField!=null){
+            sql.append(" ORDER BY "+ orderByField);
+            if (orderByDesc == true){
+                sql.append(" DESC");
+            }
+        }
+
         if (isLimit){
             sql.append(" LIMIT "+limit_x + "  OFFSET "+limit_y);
         }
+
         return sql.toString();
     }
 }

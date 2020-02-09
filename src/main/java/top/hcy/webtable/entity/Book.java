@@ -1,11 +1,9 @@
 package top.hcy.webtable.entity;
 
 import lombok.Data;
-import top.hcy.webtable.annotation.field.WField;
-import top.hcy.webtable.annotation.field.WFindField;
-import top.hcy.webtable.annotation.field.WInsertField;
-import top.hcy.webtable.annotation.field.WUpdateField;
+import top.hcy.webtable.annotation.field.*;
 import top.hcy.webtable.annotation.table.WEnadbleInsert;
+import top.hcy.webtable.annotation.table.WEnadbleSort;
 import top.hcy.webtable.annotation.table.WEnadbleUpdate;
 import top.hcy.webtable.annotation.table.WTable;
 import top.hcy.webtable.common.enums.WebFieldType;
@@ -23,8 +21,10 @@ import top.hcy.webtable.common.enums.WebFieldType;
 @WTable(aliasName = "图书管理模块",tableName = "Books")
 @WEnadbleInsert
 @WEnadbleUpdate
+@WEnadbleSort
 public class Book {
     @WField(aliasName = "书籍ID",columnName = "book_id")
+    @WFindField
     private String bookId;
 
     @WField(aliasName = "书名",columnName = "book_name",fieldType = WebFieldType.STRING)
@@ -46,9 +46,8 @@ public class Book {
     @WField(aliasName = "价格",columnName = "book_price",fieldType = WebFieldType.NUMBER)
     @WInsertField
     @WUpdateField
+    @WSortField
     private String bookPrice;
-
-
 
     private int bookNum;
 }

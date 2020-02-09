@@ -5,12 +5,19 @@ token:hcytoken
 
 {
   "u": "gtable",
-  "table":"Data1",
-  "pagenum":0,
-  "pagesize":2,
-  "like":{
-     "id":"452760"
-  }
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+  "sort":{
+     "field":"book_price"
+  },
+  "find":[
+
+  {key: "book_id", value: "1002", compare: "less"}
+
+  ],
+
+
 }
 
 ###

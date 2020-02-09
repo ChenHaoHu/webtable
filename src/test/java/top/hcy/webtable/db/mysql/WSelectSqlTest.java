@@ -19,9 +19,11 @@ class WSelectSqlTest {
                 .table("task")
                 .fields("task_id","author", "task_name")
                 .where("author = ?")
+                .orderBy("task_id",true)
                 .limit(2,0);
 //                .executeQuery("胡晨阳");
         String sql = selectSql.getSql();
-        Assert.assertEquals(sql,"SELECT task_id,author,task_name FROM task WHERE author = ?  LIMIT 2  OFFSET 0");
+        System.out.println(sql);
+        Assert.assertEquals(sql,"SELECT task_id,author,task_name FROM task WHERE author = ?  OREDER BY task_id DESC LIMIT 2  OFFSET 0");
     }
 }

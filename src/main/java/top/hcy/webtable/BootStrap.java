@@ -13,10 +13,7 @@ import top.hcy.webtable.annotation.method.WDeleteTrigger;
 import top.hcy.webtable.annotation.method.WInsertTrigger;
 import top.hcy.webtable.annotation.method.WSelectTrigger;
 import top.hcy.webtable.annotation.method.WUpdateTrigger;
-import top.hcy.webtable.annotation.table.WEnadbleDelete;
-import top.hcy.webtable.annotation.table.WEnadbleInsert;
-import top.hcy.webtable.annotation.table.WEnadbleUpdate;
-import top.hcy.webtable.annotation.table.WTable;
+import top.hcy.webtable.annotation.table.*;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.common.constant.WGlobal;
 import top.hcy.webtable.common.enums.WHandlerType;
@@ -232,6 +229,10 @@ public class BootStrap {
                     wField.find() ){
                 fieldPermission.add("find");
             }
+            if(field.getAnnotation(WSortField.class)!=null ||
+                    wField.sort() ){
+                fieldPermission.add("sort");
+            }
             HashMap<String, Object> fieldData = new HashMap<>();
             fieldData.put("field",fieldName);
             fieldData.put("type",field.getType());
@@ -292,9 +293,13 @@ public class BootStrap {
                     wTable.update() ){
                 permission.add("update");
             }
-            if(wTableClass.getAnnotation(WEnadbleUpdate.class)!=null ||
+            if(wTableClass.getAnnotation(WEnadbleFind.class)!=null ||
                     wTable.find() ){
                 permission.add("find");
+            }
+            if(wTableClass.getAnnotation(WEnadbleSort.class)!=null ||
+                    wTable.sort() ){
+                permission.add("sort");
             }
             ArrayList<String> f = new ArrayList<>();
             Field[] fields = wTableClass.getDeclaredFields();

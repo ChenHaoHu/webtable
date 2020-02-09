@@ -10,6 +10,7 @@ public @interface WTable {
     String tableName() default "";
     boolean read() default true;
     boolean find() default true;
+    boolean sort() default false;
     boolean insert() default false;
     boolean update() default false;
     boolean delete() default false;
