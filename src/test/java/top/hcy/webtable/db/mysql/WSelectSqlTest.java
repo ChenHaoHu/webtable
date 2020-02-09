@@ -24,6 +24,6 @@ class WSelectSqlTest {
 //                .executeQuery("胡晨阳");
         String sql = selectSql.getSql();
         System.out.println(sql);
-        Assert.assertEquals(sql,"SELECT task_id,author,task_name FROM task WHERE author = ?  OREDER BY task_id DESC LIMIT 2  OFFSET 0");
+        Assert.assertEquals(sql,"SELECT task_id,author,task_name FROM task WHERE author = ?  ORDER BY task_id DESC LIMIT 2  OFFSET 0");
     }
 }
