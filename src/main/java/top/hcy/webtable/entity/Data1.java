@@ -1,12 +1,16 @@
 package top.hcy.webtable.entity;
 
 import lombok.Data;
+import top.hcy.webtable.annotation.charts.WChart;
 import top.hcy.webtable.annotation.field.*;
 import top.hcy.webtable.annotation.method.WDeleteTrigger;
 import top.hcy.webtable.annotation.method.WInsertTrigger;
 import top.hcy.webtable.annotation.method.WUpdateTrigger;
 import top.hcy.webtable.annotation.table.*;
+import top.hcy.webtable.charts.WCharts;
 import top.hcy.webtable.common.enums.WebFieldType;
+
+import java.util.ArrayList;
 
 /**
  * @ProjectName: webtable
@@ -78,5 +82,53 @@ public class Data1 {
    @WDeleteTrigger
    public void deleteData1Trigger(){
       System.out.println("------------- 删除触发器 --------------");
+   }
+
+
+
+   @WChart("高层会议统计图")
+   public Object chart1(){
+
+      ArrayList<String> x = new ArrayList<>();
+      ArrayList<Integer> y = new ArrayList<>();
+
+      x.add("aaa");
+      x.add("bbb");
+      x.add("ccc");
+      x.add("ddd");
+
+      y.add(100);
+      y.add(200);
+      y.add(300);
+      y.add(400);
+
+      WCharts chart = new WCharts(x, y, WCharts.LineChart1);
+      chart.setXname("测试横坐标2");
+      chart.setYname("测试竖坐标2  ");
+      return chart;
+   }
+
+   @WChart("年终总结会议图")
+   public Object chart2(){
+
+      ArrayList<String> x = new ArrayList<>();
+      ArrayList<Integer> y = new ArrayList<>();
+
+      x.add("aaa");
+      x.add("bbb");
+      x.add("ccc");
+      x.add("ddd");
+
+      y.add(100);
+      y.add(200);
+      y.add(300);
+      y.add(400);
+
+      WCharts wBarChart = new WCharts(x, y, WCharts.BarChart);
+      wBarChart.setXname("测试横坐标");
+      wBarChart.setYname("测试竖坐标");
+
+      return wBarChart;
+
    }
 }

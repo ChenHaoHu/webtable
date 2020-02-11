@@ -300,7 +300,7 @@ public class GetTableDataService implements WService {
 
                                 HashMap<String,Object> s = new HashMap<>();
                                 s.put("alias",aliasName);
-                                s.put("fie2ld",abstractfields.getString(i));
+                                s.put("field",abstractfields.getString(i));
                                 s.put("webFieldType",webFieldType.getStr());
                                 s.put("fieldPermission","");
                                 s.put("selects",null);
@@ -317,7 +317,7 @@ public class GetTableDataService implements WService {
                         try {
                             trigger = c.getDeclaredMethod(selectTrigger, WebTableContext.class);
                         }catch (Exception e){
-
+                            e.printStackTrace();
                         }
                         if (trigger!=null){
                             trigger.invoke(o,ctx);
@@ -334,6 +334,13 @@ public class GetTableDataService implements WService {
         res.put("data",data);
         res.put("pagenum",pagenum);
         res.put("pagesize",data.size());
+
+        if (permission.contains("chart")){
+            //添加可视化数据
+            JSONObject wchart = tableOb.getJSONObject("wchart");
+            res.put("wchart",wchart);
+        }
+
 
         return res;
     }

@@ -11,6 +11,7 @@ public @interface WTable {
     boolean read() default true;
     boolean find() default true;
     boolean sort() default false;
+    boolean chart() default true;
     boolean insert() default false;
     boolean update() default false;
     boolean delete() default false;

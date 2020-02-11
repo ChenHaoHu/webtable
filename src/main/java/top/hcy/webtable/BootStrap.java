@@ -8,6 +8,7 @@ import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.MethodParameterScanner;
 import org.reflections.util.ConfigurationBuilder;
+import top.hcy.webtable.annotation.charts.WChart;
 import top.hcy.webtable.annotation.field.*;
 import top.hcy.webtable.annotation.method.WDeleteTrigger;
 import top.hcy.webtable.annotation.method.WInsertTrigger;
@@ -27,6 +28,7 @@ import top.hcy.webtable.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -160,13 +162,36 @@ public class BootStrap {
         updateMethodsConfig(WUpdateTrigger.class,"updateTrigger");
         updateMethodsConfig(WDeleteTrigger.class,"deleteTrigger");
         updateMethodsConfig(WSelectTrigger.class,"selectTrigger");
+
+        updateWChartConfig("wchart");
         updateAbstractFields(WAbstractField.class,"abstractfields");
         //测试打印
 //        JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + "Data1", WKVType.T_MAP);
 //        System.out.println(value);
     }
 
-    private void updateAbstractFields(Class<WAbstractField> wAbstractFieldClass, String key) {
+    private void updateWChartConfig( String key) {
+        Set<Method> wtriggerMethods = reflections.getMethodsAnnotatedWith(WChart.class);
+        Iterator<Method> iterator = wtriggerMethods.iterator();
+        while (iterator.hasNext()){
+            Method method = iterator.next();
+            String className = method.getDeclaringClass().getSimpleName();
+            JSONObject table = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + className, WKVType.T_MAP);
+
+            JSONObject wcharts = table.getJSONObject(key);
+            if (wcharts == null){
+                wcharts = new JSONObject();
+            }
+            WChart annotation = method.getAnnotation(WChart.class);
+            String value = annotation.value();
+            wcharts.put(value,method.getName());
+            table.put(key,wcharts);
+            kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, WKVType.T_MAP);
+        }
+
+    }
+
+    private void updateAbstractFields(Class wAbstractFieldClass, String key) {
         Set<Method> wtriggerMethods = reflections.getMethodsAnnotatedWith(wAbstractFieldClass);
         Iterator<Method> iterator = wtriggerMethods.iterator();
         while (iterator.hasNext()){
@@ -233,6 +258,7 @@ public class BootStrap {
                     wField.sort() ){
                 fieldPermission.add("sort");
             }
+
             HashMap<String, Object> fieldData = new HashMap<>();
             fieldData.put("field",fieldName);
             fieldData.put("type",field.getType());
@@ -301,6 +327,10 @@ public class BootStrap {
                     wTable.sort() ){
                 permission.add("sort");
             }
+            if(wTableClass.getAnnotation(WEnadbleChart.class)!=null ||
+                    wTable.chart() ){
+                permission.add("chart");
+            }
             ArrayList<String> f = new ArrayList<>();
             Field[] fields = wTableClass.getDeclaredFields();
             int length = fields.length;
@@ -322,6 +352,8 @@ public class BootStrap {
             tableData.put("updateTrigger",wTable.updateTrigger());
             tableData.put("selectTrigger",wTable.selectTrigger());
             tableData.put("deleteTrigger",wTable.deleteTrigger());
+            //可视化图表
+            tableData.put("wchart",null);
             kvDBUtils.setValue(WConstants.PREFIX_TABLE+wTableClassName,tableData, WKVType.T_MAP);
             //  JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + wTableClassName, WKVType.T_MAP);
             WGlobal.tables.add(wTableClassName);

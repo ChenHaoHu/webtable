@@ -17,5 +17,6 @@ public class RoutersManagement {
             Router.addRouter(WHandlerType.GSHAREDATA,new GetShareService());
             Router.addRouter(WHandlerType.USHAREDATA,new UpdateShareService());
             Router.addRouter(WHandlerType.DSHAREDATA,new DeleteShareService());
+            Router.addRouter(WHandlerType.GCHART,new GetChartData());
         }
     }
