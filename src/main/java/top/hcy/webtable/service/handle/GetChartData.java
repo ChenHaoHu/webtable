@@ -2,6 +2,7 @@ package top.hcy.webtable.service.handle;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import top.hcy.webtable.annotation.charts.WChart;
 import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
@@ -57,8 +58,10 @@ public class GetChartData implements WService {
         try {
             Class<?> c = Class.forName(intactClass);
             Method method = null;
+            WChart annotation = null;
             try {
                 method = c.getMethod(chart);
+                 annotation = method.getAnnotation(WChart.class);
             }catch (Exception e){
 
             }
@@ -71,7 +74,13 @@ public class GetChartData implements WService {
                 }else {
                     out = method.invoke(c.newInstance());
                 }
-                ctx.setRespsonseEntity(out);
+
+               JSONObject data = new JSONObject();
+                data.put("chart",out);
+                if (annotation!=null){
+                    data.put("title",annotation.value());
+                }
+                ctx.setRespsonseEntity(data);
             }
 
         } catch (Exception e) {

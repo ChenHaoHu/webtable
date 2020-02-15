@@ -23,11 +23,11 @@ public class WCharts {
     public static int PieChart2 = 5;
     public static int PieChart3 = 6;
 
+    private String title = "";
     private ArrayList<String> xValues = null;
     private ArrayList<Integer> yValues = null;
     public String xname = null;
     public String yname = null;
-    public String title = null;
     private int type;
 
     public WCharts(ArrayList<String> xValues, ArrayList<Integer> yValues, int type) {

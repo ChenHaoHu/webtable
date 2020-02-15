@@ -3,6 +3,20 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
+  "u": "gchart",
+  "table":"Data1",
+  "chart":"chart1"
+}
+
+<> 2020-02-16T011616.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
   "u": "gkvdata",
 }
 
@@ -762,18 +776,6 @@ token: hcytoken
 }
 
 <> 2020-02-04T104647.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gkvdata",
-}
-
-<> 2020-02-04T104436.200.json
 
 ###
 

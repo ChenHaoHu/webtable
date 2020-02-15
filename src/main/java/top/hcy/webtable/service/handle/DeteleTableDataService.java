@@ -29,7 +29,7 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
  * @Date: 20-1-30 23:42
  * @Version: 1.0
  **/
-@WHandleService(WHandlerType.DSHAREDATA)
+@WHandleService(WHandlerType.DTABLE)
 public class DeteleTableDataService implements WService {
     @Override
     public void verifyParams(WebTableContext ctx) {

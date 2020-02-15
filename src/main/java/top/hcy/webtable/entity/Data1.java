@@ -104,7 +104,9 @@ public class Data1 {
 
       WCharts chart = new WCharts(x, y, WCharts.LineChart1);
       chart.setXname("测试横坐标2");
-      chart.setYname("测试竖坐标2  ");
+      chart.setYname("测试竖坐标2");
+      chart.setTitle("??????????");
+
       return chart;
    }
 
