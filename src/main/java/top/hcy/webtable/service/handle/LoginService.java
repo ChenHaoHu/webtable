@@ -51,9 +51,10 @@ public class LoginService implements WService {
             ctx.setNewToken(s);
             ctx.setRefreshToken(true);
             ctx.setRole("admin");
-        }else{
+            return;
+        }
+        else{
             //验证share账号
-
             JSONArray shareslist = (JSONArray) kvDBUtils.getValue("shareslist", WKVType.T_LIST);
 
             int size = shareslist.size();
@@ -61,15 +62,24 @@ public class LoginService implements WService {
                 JSONObject share = (JSONObject) shareslist.get(i);
                 String u = share.getString("username");
                 if (u.equals(username) && share.getString("passwd").equals(passwd)){
-                    ctx.setWRespCode(WRespCode.LOGIN_SUCCESS);
-                    String s = JwtTokenUtils.generateToken(username+WConstants.TOKEN_SPLIT+"share");
-                    ctx.setNewToken(s);
-                    ctx.setRefreshToken(true);
-                    ctx.setRole("share");
+
+                    Integer status = share.getInteger("status");
+                    if(status == 1){
+                        ctx.setWRespCode(WRespCode.LOGIN_SUCCESS);
+                        String s = JwtTokenUtils.generateToken(username+WConstants.TOKEN_SPLIT+"share");
+                        ctx.setNewToken(s);
+                        ctx.setRefreshToken(true);
+                        ctx.setRole("share");
+                        return;
+                    }else{
+                        ctx.setWRespCode(WRespCode.LOGIN_SHAREFORBID);
+                        return;
+                    }
+
+
                 }
             }
-            ctx.setWRespCode(WRespCode.LOGIN_FAILE);
         }
-
+        ctx.setWRespCode(WRespCode.LOGIN_FAILE);
     }
 }

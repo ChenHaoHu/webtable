@@ -70,9 +70,7 @@ public class BootStrap {
     }
 
     private void initHandleRouters() {
-        Reflections re = new Reflections(new ConfigurationBuilder()
-                .forPackages(WGlobal.PACKAGE_HandleSerice));
-
+        Reflections re = new Reflections();
         Set<Class<?>> cs = re.getTypesAnnotatedWith(WHandleService.class);
         Iterator<Class<?>> iterator = cs.iterator();
         try {
