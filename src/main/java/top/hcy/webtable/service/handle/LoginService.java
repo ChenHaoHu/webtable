@@ -1,12 +1,15 @@
-package top.hcy.webtable.service;
+package top.hcy.webtable.service.handle;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.common.constant.WGlobal;
+import top.hcy.webtable.common.enums.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.db.kv.WKVType;
+import top.hcy.webtable.service.WService;
 import top.hcy.webtable.tools.JwtTokenUtils;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
@@ -20,6 +23,7 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
  * @Date: 20-1-25 22:07
  * @Version: 1.0
  **/
+@WHandleService(WHandlerType.LoginRequest)
 public class LoginService implements WService {
     @Override
     public void verifyParams(WebTableContext ctx) {

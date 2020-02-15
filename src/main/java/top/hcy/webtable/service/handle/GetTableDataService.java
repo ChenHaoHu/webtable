@@ -1,17 +1,20 @@
-package top.hcy.webtable.service;
+package top.hcy.webtable.service.handle;
 
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.annotation.field.WAbstractField;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
+import top.hcy.webtable.common.enums.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.common.enums.WebFieldType;
 import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.db.mysql.WSelectSql;
 import top.hcy.webtable.db.mysql.WTableData;
+import top.hcy.webtable.service.WService;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -31,6 +34,7 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
  * @Version: 1.0
  **/
 @Slf4j
+@WHandleService(WHandlerType.GTABLE)
 public class GetTableDataService implements WService {
     @Override
     public void verifyParams(WebTableContext ctx) {

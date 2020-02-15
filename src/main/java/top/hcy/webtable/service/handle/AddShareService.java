@@ -1,11 +1,14 @@
-package top.hcy.webtable.service;
+package top.hcy.webtable.service.handle;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
+import top.hcy.webtable.common.enums.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.db.kv.WKVType;
+import top.hcy.webtable.service.WService;
 import top.hcy.webtable.tools.CommonUtils;
 
 import java.util.ArrayList;
@@ -22,7 +25,8 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
  * @Date: 20-2-5 0:49
  * @Version: 1.0
  **/
-public class AddShareService implements  WService{
+@WHandleService(WHandlerType.ASHAREDATA)
+public class AddShareService implements WService {
     @Override
     public void verifyParams(WebTableContext ctx) {
         //验证管理员身份

@@ -9,6 +9,7 @@ import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.MethodParameterScanner;
 import org.reflections.util.ConfigurationBuilder;
 import top.hcy.webtable.annotation.charts.WChart;
+import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.annotation.field.*;
 import top.hcy.webtable.annotation.method.WDeleteTrigger;
 import top.hcy.webtable.annotation.method.WInsertTrigger;
@@ -23,18 +24,16 @@ import top.hcy.webtable.common.response.WResponseEntity;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.filter.*;
-import top.hcy.webtable.router.RoutersManagement;
+import top.hcy.webtable.service.Router;
+import top.hcy.webtable.service.HandleRoutersManagement;
 import top.hcy.webtable.service.*;
+import top.hcy.webtable.service.handle.LoginService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
@@ -64,10 +63,42 @@ public class BootStrap {
         initReflections();
         initFilters();
         initDefaultAccount();
-        initRouters();
+        initHandleRouters();
         initKvData();
         saveInitializationKeys();
         initDefaultAccountPermission();
+    }
+
+    private void initHandleRouters() {
+        Reflections re = new Reflections(new ConfigurationBuilder()
+                .forPackages(WGlobal.PACKAGE_HandleSerice));
+
+        Set<Class<?>> cs = re.getTypesAnnotatedWith(WHandleService.class);
+        Iterator<Class<?>> iterator = cs.iterator();
+        try {
+            while (iterator.hasNext()){
+                Class<?> next = iterator.next();
+                Class<?>[] interfaces = next.getInterfaces();
+                int length = interfaces.length;
+                boolean flag = false;
+                for (int i = 0; i < length; i++) {
+                    if (WService.class.equals(interfaces[i])){
+                        flag = true;
+                        break;
+                    }
+                }
+                if(flag){
+                    WHandleService annotation = next.getAnnotation(WHandleService.class);
+                    WHandlerType value = annotation.value();
+                    Router.addRouter(value,(WService) next.newInstance());
+                }else{
+                    log.warn("initHandleRouters: class "+next.getName() +"is not implements WService");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //  new HandleRoutersManagement().invoke();
     }
 
 
@@ -106,7 +137,7 @@ public class BootStrap {
 
     private void initReflections() {
         reflections = new Reflections(new ConfigurationBuilder()
-                .forPackages(WGlobal.PACKAGE_SCAN) // 指定路径URL
+                .forPackages(WGlobal.PACKAGE_ENTITY) // 指定路径URL
 //                .addScanners(new SubTypesScanner()) // 添加子类扫描工具
                 .addScanners(new FieldAnnotationsScanner()) // 添加 属性注解扫描工具
                 .addScanners(new MethodAnnotationsScanner() ) // 添加 方法注解扫描工具
@@ -360,9 +391,7 @@ public class BootStrap {
         }
     }
 
-    private void initRouters() {
-        new RoutersManagement().invoke();
-    }
+
 
     //处理入口
     public WResponseEntity handler(HttpServletRequest request, HttpServletResponse response){

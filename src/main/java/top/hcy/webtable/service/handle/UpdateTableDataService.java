@@ -1,17 +1,20 @@
-package top.hcy.webtable.service;
+package top.hcy.webtable.service.handle;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.annotation.field.WUpdateField;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
+import top.hcy.webtable.common.enums.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.db.mysql.WDBData;
 import top.hcy.webtable.db.mysql.WSelectSql;
 import top.hcy.webtable.db.mysql.WTableData;
 import top.hcy.webtable.db.mysql.WUpdateSql;
+import top.hcy.webtable.service.WService;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -30,7 +33,8 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
  * @Date: 20-1-30 23:42
  * @Version: 1.0
  **/
-public class UpdateTableDataService implements WService{
+@WHandleService(WHandlerType.UTABLE)
+public class UpdateTableDataService implements WService {
     @Override
     public void verifyParams(WebTableContext ctx) {
         JSONObject params = ctx.getParams();

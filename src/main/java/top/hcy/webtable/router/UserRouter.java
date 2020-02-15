@@ -1,4 +1,4 @@
-package top.hcy.webtable.service;
+package top.hcy.webtable.router;
 
 import lombok.Data;
 

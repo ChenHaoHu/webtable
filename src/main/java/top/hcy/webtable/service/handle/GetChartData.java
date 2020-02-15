@@ -1,11 +1,14 @@
-package top.hcy.webtable.service;
+package top.hcy.webtable.service.handle;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
+import top.hcy.webtable.common.enums.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.db.kv.WKVType;
+import top.hcy.webtable.service.WService;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -21,6 +24,7 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
  * @Date: 20-2-11 19:30
  * @Version: 1.0
  **/
+@WHandleService(WHandlerType.GCHART)
 public class GetChartData implements WService {
     @Override
     public void verifyParams(WebTableContext ctx) {
