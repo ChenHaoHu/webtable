@@ -1,8 +1,5 @@
 package top.hcy.webtable.service;
 
-import top.hcy.webtable.common.enums.WHandlerType;
-import top.hcy.webtable.service.handle.*;
-
 public class HandleRoutersManagement {
         public void invoke() {
 //            Router.addRouter(WHandlerType.LoginRequest,new LoginService());

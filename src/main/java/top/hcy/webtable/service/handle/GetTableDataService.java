@@ -8,7 +8,7 @@ import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.annotation.field.WAbstractField;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
-import top.hcy.webtable.common.enums.WHandlerType;
+import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.common.enums.WebFieldType;
 import top.hcy.webtable.db.kv.WKVType;
@@ -342,6 +342,14 @@ public class GetTableDataService implements WService {
         if (permission.contains("chart")){
             //添加可视化数据
             JSONObject wchart = tableOb.getJSONObject("wchart");
+
+           if (wchart!=null){
+               for (String key : wchart.keySet()){
+                   String method = wchart.getJSONObject(key).getString("method");
+                   wchart.put(key,method);
+               }
+           }
+
             res.put("wchart",wchart);
         }
 

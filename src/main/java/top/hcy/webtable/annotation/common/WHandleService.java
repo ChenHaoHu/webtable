@@ -1,6 +1,6 @@
 package top.hcy.webtable.annotation.common;
 
-import top.hcy.webtable.common.enums.WHandlerType;
+import top.hcy.webtable.router.WHandlerType;
 
 import java.lang.annotation.*;
 

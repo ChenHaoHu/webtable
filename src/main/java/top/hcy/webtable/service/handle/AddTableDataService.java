@@ -5,18 +5,14 @@ import com.alibaba.fastjson.JSONObject;
 import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
-import top.hcy.webtable.common.enums.WHandlerType;
+import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.db.mysql.WInsertSql;
-import top.hcy.webtable.db.mysql.WSelectSql;
-import top.hcy.webtable.db.mysql.WTableData;
-import top.hcy.webtable.db.mysql.WUpdateSql;
 import top.hcy.webtable.service.WService;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 

@@ -86,7 +86,7 @@ public class Data1 {
 
 
 
-   @WChart("高层会议统计图")
+   @WChart(value = "高层会议统计图",showDashboard = true)
    public Object chart1(){
 
       ArrayList<String> x = new ArrayList<>();
@@ -105,12 +105,12 @@ public class Data1 {
       WCharts chart = new WCharts(x, y, WCharts.LineChart1);
       chart.setXname("测试横坐标2");
       chart.setYname("测试竖坐标2");
-      chart.setTitle("??????????");
+      chart.setTitle("高层会议统计图");
 
       return chart;
    }
 
-   @WChart("年终总结会议图")
+   @WChart(value = "年终总结会议图",showDashboard = true)
    public Object chart2(){
 
       ArrayList<String> x = new ArrayList<>();
@@ -130,6 +130,30 @@ public class Data1 {
       wBarChart.setXname("测试横坐标");
       wBarChart.setYname("测试竖坐标");
 
+      return wBarChart;
+
+   }
+
+   @WChart(value = "交易总结",showDashboard = true)
+   public Object chart3(){
+
+      ArrayList<String> x = new ArrayList<>();
+      ArrayList<Integer> y = new ArrayList<>();
+
+      x.add("aaa");
+      x.add("bbb");
+      x.add("ccc");
+      x.add("ddd");
+
+      y.add(100);
+      y.add(200);
+      y.add(300);
+      y.add(400);
+
+      WCharts wBarChart = new WCharts(x, y, WCharts.PieChart1);
+      wBarChart.setXname("测试横坐标");
+      wBarChart.setYname("测试竖坐标");
+      wBarChart.setTitle("交易总结图");
       return wBarChart;
 
    }

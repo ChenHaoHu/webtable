@@ -7,4 +7,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface WChart {
     String value() default "";
+    boolean showDashboard() default false;
 }

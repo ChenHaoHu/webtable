@@ -1,18 +1,17 @@
 package top.hcy.webtable.service.handle;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.annotation.field.WAbstractField;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
-import top.hcy.webtable.common.constant.WGlobal;
-import top.hcy.webtable.common.enums.WHandlerType;
+import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.service.WService;
 
 import java.lang.reflect.Method;
+import java.util.LinkedHashMap;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
@@ -44,9 +43,18 @@ public class GetSharePermissionService implements WService {
             JSONObject table = (JSONObject)kvDBUtils.getValue(username + "." + WConstants.PREFIX_TABLE + tables.get(i), WKVType.T_MAP);
             JSONObject item =new JSONObject();
             item.put("permission",table.get("permission"));
+
+            JSONObject wchart = table.getJSONObject("wchart");
+           if (wchart!=null){
+               for (String key : wchart.keySet()){
+                   String method = wchart.getJSONObject(key).getString("method");
+                   wchart.put(key,method);
+               }
+           }
+            item.put("wchart",wchart);
             item.put("alias",table.get("alias"));
             JSONArray fields  = (JSONArray)table.get("fields");
-            JSONObject fieldsAlias = new JSONObject();
+            LinkedHashMap<String,String> fieldsAlias = new LinkedHashMap();
             int fieldsSize = fields.size();
             for (int j = 0; j < fieldsSize; j++) {
                 JSONObject field = (JSONObject)kvDBUtils.getValue( WConstants.PREFIX_FIELD + tables.get(i)+"."+fields.get(j), WKVType.T_MAP);

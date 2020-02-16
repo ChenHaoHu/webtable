@@ -18,16 +18,14 @@ import top.hcy.webtable.annotation.method.WUpdateTrigger;
 import top.hcy.webtable.annotation.table.*;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.common.constant.WGlobal;
-import top.hcy.webtable.common.enums.WHandlerType;
+import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.common.response.WResponseEntity;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.filter.*;
 import top.hcy.webtable.service.Router;
-import top.hcy.webtable.service.HandleRoutersManagement;
 import top.hcy.webtable.service.*;
-import top.hcy.webtable.service.handle.LoginService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -213,7 +211,10 @@ public class BootStrap {
             }
             WChart annotation = method.getAnnotation(WChart.class);
             String value = annotation.value();
-            wcharts.put(value,method.getName());
+            JSONObject item = new JSONObject();
+            item.put("method",method.getName());
+            item.put("showDashboard",annotation.showDashboard());
+            wcharts.put(value,item);
             table.put(key,wcharts);
             kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, WKVType.T_MAP);
         }

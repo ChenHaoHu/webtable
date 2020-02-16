@@ -31,14 +31,16 @@ public class UserRouterManagemanet {
 
         JSONArray tables = (JSONArray) kvDBUtils.getValue(username + ".tables", WKVType.T_LIST);
 
-        int size = tables.size();
-        for (int i = 0; i < size; i++) {
-            String table = tables.getString(i);
-            JSONObject tableData = (JSONObject)kvDBUtils.getValue(username + "." + WConstants.PREFIX_TABLE + table, WKVType.T_MAP);
-            UserRouter userRouter = new UserRouter("table   ", table, "/table/index",tableData.getString("alias"),"table");
-            JSONObject s = pathItemOneChildren("/"+table, userRouter);
-            routers.add(s);
-        }
+       if (tables!=null){
+           int size = tables.size();
+           for (int i = 0; i < size; i++) {
+               String table = tables.getString(i);
+               JSONObject tableData = (JSONObject)kvDBUtils.getValue(username + "." + WConstants.PREFIX_TABLE + table, WKVType.T_MAP);
+               UserRouter userRouter = new UserRouter("table   ", table, "/table/index",tableData.getString("alias"),"table");
+               JSONObject s = pathItemOneChildren("/"+table, userRouter);
+               routers.add(s);
+           }
+       }
 
         if ("admin".equals(ctx.getRole())){
             //wadmin 路由

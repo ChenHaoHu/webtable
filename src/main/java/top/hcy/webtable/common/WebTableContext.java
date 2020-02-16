@@ -3,7 +3,6 @@ package top.hcy.webtable.common;
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 import lombok.ToString;
-import top.hcy.webtable.common.enums.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.service.WService;
 

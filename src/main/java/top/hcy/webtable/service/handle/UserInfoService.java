@@ -3,7 +3,7 @@ package top.hcy.webtable.service.handle;
 import lombok.extern.slf4j.Slf4j;
 import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.common.WebTableContext;
-import top.hcy.webtable.common.enums.WHandlerType;
+import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.router.UserRouterManagemanet;
 import top.hcy.webtable.service.WService;
 

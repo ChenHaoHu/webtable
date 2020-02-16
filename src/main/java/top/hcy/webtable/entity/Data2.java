@@ -1,6 +1,7 @@
 package top.hcy.webtable.entity;
 
 import lombok.Data;
+import top.hcy.webtable.annotation.charts.WChart;
 import top.hcy.webtable.annotation.field.*;
 import top.hcy.webtable.annotation.method.WDeleteTrigger;
 import top.hcy.webtable.annotation.method.WInsertTrigger;
@@ -9,8 +10,11 @@ import top.hcy.webtable.annotation.method.WUpdateTrigger;
 import top.hcy.webtable.annotation.table.WEnadbleDelete;
 import top.hcy.webtable.annotation.table.WEnadbleUpdate;
 import top.hcy.webtable.annotation.table.WTable;
+import top.hcy.webtable.charts.WCharts;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.enums.WebFieldType;
+
+import java.util.ArrayList;
 
 /**
  * @ProjectName: webtable
@@ -92,4 +96,50 @@ public class Data2 {
  public void updateData1Trigger(WebTableContext ctx){
   System.out.println("------------- 更新触发器 --------------");
  }
+
+ @WChart(value = "部门业绩表",showDashboard = true)
+ public Object chart2(){
+
+  ArrayList<String> x = new ArrayList<>();
+  ArrayList<Integer> y = new ArrayList<>();
+
+  x.add("aaa");
+  x.add("bbb");
+  x.add("ccc");
+  x.add("ddd");
+
+  y.add(100);
+  y.add(200);
+  y.add(300);
+  y.add(400);
+
+  WCharts wBarChart = new WCharts(x, y, WCharts.BarChart);
+  wBarChart.setXname("测试横坐标");
+  wBarChart.setYname("测试竖坐标");
+  return wBarChart;
+ }
+
+
+ @WChart(value = "部门绩效汇总",showDashboard = true)
+ public Object chart3(){
+
+  ArrayList<String> x = new ArrayList<>();
+  ArrayList<Integer> y = new ArrayList<>();
+
+  x.add("aaa");
+  x.add("bbb");
+  x.add("ccc");
+  x.add("ddd");
+
+  y.add(100);
+  y.add(200);
+  y.add(300);
+  y.add(400);
+
+  WCharts wBarChart = new WCharts(x, y, WCharts.PieChart3);
+  wBarChart.setXname("测试横坐标");
+  wBarChart.setYname("测试竖坐标");
+  return wBarChart;
+ }
 }
+
