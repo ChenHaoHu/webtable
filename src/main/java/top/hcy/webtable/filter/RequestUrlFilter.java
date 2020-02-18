@@ -10,13 +10,7 @@ import top.hcy.webtable.tools.ParamUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * @ClassName: RequestUrlFilter
- * @Author: hcy
- * @Description:
- * @Date: 2020-01-19 23:35
- * @Version: 1.0
- **/
+
 public class RequestUrlFilter implements WHandleFilter {
     @Override
     public void doFilter(WebTableContext ctx) {

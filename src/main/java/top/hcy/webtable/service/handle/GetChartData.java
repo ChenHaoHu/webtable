@@ -16,15 +16,7 @@ import java.lang.reflect.Modifier;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.service
- * @ClassName: GetChartData
- * @Author: hcy
- * @Description:
- * @Date: 20-2-11 19:30
- * @Version: 1.0
- **/
+
 @WHandleService(WHandlerType.GCHART)
 public class GetChartData implements WService {
     @Override

@@ -10,15 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.common
- * @ClassName: WebTableContext
- * @Author: hcy
- * @Description: webtable http context
- * @Date: 2020/1/14 19:41
- * @Version: 1.0
- */
+
 @Data
 @ToString
 public class WebTableContext {

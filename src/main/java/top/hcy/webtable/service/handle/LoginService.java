@@ -13,15 +13,7 @@ import top.hcy.webtable.tools.JwtTokenUtils;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.service
- * @ClassName: LoginService
- * @Author: hcy
- * @Description: 登录处理
- * @Date: 20-1-25 22:07
- * @Version: 1.0
- **/
+
 @WHandleService(WHandlerType.LoginRequest)
 public class LoginService implements WService {
     @Override

@@ -5,13 +5,7 @@ import top.hcy.webtable.db.kv.LevelDBUtils;
 
 import java.util.ArrayList;
 
-/**
- * @ClassName: WGlobal
- * @Author: hcy
- * @Description:
- * @Date: 2020-01-20 22:46
- * @Version: 1.0
- **/
+
 public class WGlobal {
 
     public static  ArrayList<String> tables = new ArrayList<>();

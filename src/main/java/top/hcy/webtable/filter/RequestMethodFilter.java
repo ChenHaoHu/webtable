@@ -5,13 +5,7 @@ import top.hcy.webtable.common.enums.WRespCode;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * @ClassName: RequestMethodFilter
- * @Author: hcy
- * @Description:
- * @Date: 2020-01-19 23:33
- * @Version: 1.0
- **/
+
 public class RequestMethodFilter implements WHandleFilter {
     @Override
     public void doFilter(WebTableContext ctx) {

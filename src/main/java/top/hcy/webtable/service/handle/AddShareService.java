@@ -17,15 +17,6 @@ import java.util.Set;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.service
- * @ClassName: AddShareService
- * @Author: hcy
- * @Description:
- * @Date: 20-2-5 0:49
- * @Version: 1.0
- **/
 @WHandleService(WHandlerType.ASHAREDATA)
 public class AddShareService implements WService {
     @Override

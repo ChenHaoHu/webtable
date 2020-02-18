@@ -9,15 +9,7 @@ import top.hcy.webtable.service.WService;
 
 import java.util.HashMap;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.service
- * @ClassName: LoginService
- * @Author: hcy
- * @Description: 登录处理
- * @Date: 20-1-25 22:07
- * @Version: 1.0
- **/
+
 @Slf4j
 @WHandleService(WHandlerType.USERINFO)
 public class UserInfoService implements WService {

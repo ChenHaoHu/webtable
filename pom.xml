@@ -4,9 +4,57 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>top.hcy</groupId>
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+
+    <name>webtable-spring-boot-starter</name>
+    <description>webtable-spring-boot-starter</description>
+    <url>https://github.com/ChenHaoHu/webtable</url>
+
+    <groupId>com.github.ChenHaoHu</groupId>
     <artifactId>webtable-spring-boot-starter</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
+
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/ChenHaoHu/webtable</url>
+        <connection>https://github.com/ChenHaoHu/webtable.git</connection>
+        <developerConnection>https://github.com/ChenHaoHu/webtable</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Chenhao hu</name>
+            <email>775656764@qq.com</email>
+            <url>https://github.com/ChenHaoHu/webtable</url>
+        </developer>
+    </developers>
+
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>Nexus Release Repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
@@ -86,11 +134,6 @@
     </dependencies>
 
 
-<!--    <properties>-->
-<!--        &lt;!&ndash; 设置 github 服务器使用的配置，在 ~/.m2/settings.xml 中定义 &ndash;&gt;-->
-<!--        <github.global.server>github</github.global.server>-->
-<!--    </properties>-->
-
     <build>
         <plugins>
             <plugin>
@@ -101,49 +144,32 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 <!--            <plugin>-->
-<!--                <artifactId>maven-deploy-plugin</artifactId>-->
-<!--                <version>2.8.1</version>-->
-<!--                <configuration>-->
-<!--                    &lt;!&ndash;设置部署目录&ndash;&gt;-->
-<!--                    <altDeploymentRepository>-->
-<!--                        internal.repo::default::file://${project.build.directory}/mvn-repo-->
-<!--                    </altDeploymentRepository>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>com.github.github</groupId>-->
-<!--                <artifactId>site-maven-plugin</artifactId>-->
-<!--                &lt;!&ndash;-->
-<!--                  这里需要使用 0.12, 0.9 部署时会出错，具体查看-->
-<!--                  https://github.com/github/maven-plugins/issues/105-->
-<!--                &ndash;&gt;-->
-<!--                <version>0.12</version>-->
-<!--                <configuration>-->
-<!--                    &lt;!&ndash;git 提交的消息&ndash;&gt;-->
-<!--                    <message>Maven artifacts for ${project.version}</message>-->
-<!--                    &lt;!&ndash;禁用网页处理&ndash;&gt;-->
-<!--                    <noJekyll>true</noJekyll>-->
-<!--                    &lt;!&ndash;部署的目录，这里是和上面的 maven-deploy-plugin 的 configuration.altDeploymentRepository 对应&ndash;&gt;-->
-<!--                    <outputDirectory>${project.build.directory}/mvn-repo-->
-<!--                    </outputDirectory> &lt;!&ndash; matches distribution management repository url above &ndash;&gt;-->
-<!--                    &lt;!&ndash;远程分支名&ndash;&gt;-->
-<!--                    <branch>refs/heads/mvn-repo</branch>-->
-<!--                    <includes>-->
-<!--                        <include>**/*</include>-->
-<!--                    </includes>-->
-<!--                    &lt;!&ndash;github 仓库的名字&ndash;&gt;-->
-<!--                    <repositoryName>webtable</repositoryName>-->
-<!--                    &lt;!&ndash;github 用户名&ndash;&gt;-->
-<!--                    <repositoryOwner>ChenHaoHu</repositoryOwner>-->
-<!--                </configuration>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-javadoc-plugin</artifactId>-->
+<!--                <version>2.7</version>-->
 <!--                <executions>-->
 <!--                    <execution>-->
+<!--                        <id>attach-javadocs</id>-->
 <!--                        <goals>-->
-<!--                            &lt;!&ndash;suppress MybatisMapperXmlInspection &ndash;&gt;-->
-<!--                            <goal>site</goal>-->
+<!--                            <goal>jar</goal>-->
 <!--                        </goals>-->
-<!--                        <phase>deploy</phase>-->
+<!--                        <configuration>-->
+<!--                            <additionalparam>-Xdoclint:none</additionalparam>-->
+<!--                        </configuration>-->
 <!--                    </execution>-->
 <!--                </executions>-->
 <!--            </plugin>-->

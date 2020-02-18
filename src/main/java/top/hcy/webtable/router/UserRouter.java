@@ -4,15 +4,7 @@ import lombok.Data;
 
 import java.util.HashMap;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.service
- * @ClassName: UserRouter
- * @Author: hcy
- * @Description:
- * @Date: 20-2-2 21:09
- * @Version: 1.0
- **/
+
 @Data
 public class UserRouter {
     private String path;

@@ -36,24 +36,16 @@ import java.util.*;
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable
- * @ClassName: BootStrap
- * @Author: hcy
- * @Description: web table 处理入口
- * @Date: 2020/1/14 19:52
- * @Version: 1.0
- */
+
 @Slf4j
-public class BootStrap {
+public class WebTableBootStrap {
 
     //普通请求前置处理
     private WFiterChainImpl hPreRequest = null;
 
     private Reflections reflections = null;
 
-    public BootStrap() {
+    public WebTableBootStrap() {
         init();
     }
 

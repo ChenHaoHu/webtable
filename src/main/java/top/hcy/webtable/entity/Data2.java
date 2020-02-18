@@ -16,15 +16,7 @@ import top.hcy.webtable.common.enums.WebFieldType;
 
 import java.util.ArrayList;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.entity
- * @ClassName: Data1
- * @Author: hcy
- * @Description: 测试实例 1
- * @Date: 20-1-27 17:35
- * @Version: 1.0
- **/
+
 @Data
 @WTable(aliasName = "工作信息",tableName = "data2")
 @WEnadbleDelete

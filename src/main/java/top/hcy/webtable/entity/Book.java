@@ -8,15 +8,7 @@ import top.hcy.webtable.annotation.table.WEnadbleUpdate;
 import top.hcy.webtable.annotation.table.WTable;
 import top.hcy.webtable.common.enums.WebFieldType;
 
-/**
- * @ProjectName: webtabletest
- * @Package: top.hcy.webtabletest.entity
- * @ClassName: Book
- * @Author: hcy
- * @Description:
- * @Date: 20-2-6 23:16
- * @Version: 1.0
- **/
+
 @Data
 @WTable(aliasName = "图书管理模块",tableName = "Books")
 @WEnadbleInsert

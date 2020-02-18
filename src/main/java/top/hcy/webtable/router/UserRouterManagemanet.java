@@ -11,15 +11,7 @@ import java.util.ArrayList;
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.service
- * @ClassName: UserRouterManagemanet
- * @Author: hcy
- * @Description:
- * @Date: 20-2-2 15:28
- * @Version: 1.0
- **/
+
 public class UserRouterManagemanet {
 
     //生成前端路由

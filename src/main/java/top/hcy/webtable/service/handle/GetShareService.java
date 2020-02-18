@@ -8,15 +8,7 @@ import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.service.WService;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.service
- * @ClassName: GetShareService
- * @Author: hcy
- * @Description:
- * @Date: 20-2-5 1:08
- * @Version: 1.0
- **/
+
 @WHandleService(WHandlerType.GSHAREDATA)
 public class GetShareService implements WService {
     @Override

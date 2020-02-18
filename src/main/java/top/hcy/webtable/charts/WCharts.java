@@ -4,15 +4,7 @@ import lombok.Data;
 
 import java.util.ArrayList;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable
- * @ClassName: WCharts
- * @Author: hcy
- * @Description:
- * @Date: 20-2-10 23:54
- * @Version: 1.0
- **/
+
 @Data
 public class WCharts {
 

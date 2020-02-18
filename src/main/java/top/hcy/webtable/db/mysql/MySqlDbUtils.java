@@ -15,15 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.db.mysql
- * @ClassName: MySqlDbUtils
- * @Author: hcy
- * @Description:
- * @Date: 20-1-26 15:49
- * @Version: 1.0
- **/
+
 @Slf4j
 public class MySqlDbUtils implements DBUtils {
 

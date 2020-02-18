@@ -15,15 +15,7 @@ import java.util.LinkedHashMap;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.service
- * @ClassName: GetSharePermissionService
- * @Author: hcy
- * @Description:
- * @Date: 20-2-4 22:43
- * @Version: 1.0
- **/
+
 @WHandleService(WHandlerType.GSHAREPERMISSIONLIST)
 public class GetSharePermissionService implements WService {
     @Override

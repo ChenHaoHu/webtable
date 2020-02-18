@@ -5,15 +5,7 @@ import top.hcy.webtable.router.WHandlerType;
 
 import java.util.ArrayList;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.filter
- * @ClassName: WFiterChain
- * @Author: hcy
- * @Description: webtable filter chain
- * @Date: 2020/1/15 11:05
- * @Version: 1.0
- */
+
 
 public class WFiterChainImpl extends AbstractFilterChain implements WHandleFilter {
 

@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import top.hcy.webtable.common.constant.WGlobal;
 
 
 @Configuration
@@ -27,7 +28,7 @@ public class StarterAutoConfigure {
 
         String entityPack = properties.getEntitypack();
         System.out.println(entityPack);
-
-        return new WebTableBootStrap(entityPack);
+        WGlobal.PACKAGE_ENTITY = entityPack;
+        return new WebTableBootStrap();
     }
 }
