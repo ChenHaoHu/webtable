@@ -1,12 +1,14 @@
-package top.hcy.webtable.service;
+package top.hcy.webtable.service.handle;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
-import top.hcy.webtable.common.constant.WGlobal;
+import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.db.kv.WKVType;
+import top.hcy.webtable.service.WService;
 import top.hcy.webtable.tools.JwtTokenUtils;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
@@ -20,6 +22,7 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
  * @Date: 20-1-25 22:07
  * @Version: 1.0
  **/
+@WHandleService(WHandlerType.LoginRequest)
 public class LoginService implements WService {
     @Override
     public void verifyParams(WebTableContext ctx) {
@@ -47,9 +50,10 @@ public class LoginService implements WService {
             ctx.setNewToken(s);
             ctx.setRefreshToken(true);
             ctx.setRole("admin");
-        }else{
+            return;
+        }
+        else{
             //验证share账号
-
             JSONArray shareslist = (JSONArray) kvDBUtils.getValue("shareslist", WKVType.T_LIST);
 
             int size = shareslist.size();
@@ -57,15 +61,24 @@ public class LoginService implements WService {
                 JSONObject share = (JSONObject) shareslist.get(i);
                 String u = share.getString("username");
                 if (u.equals(username) && share.getString("passwd").equals(passwd)){
-                    ctx.setWRespCode(WRespCode.LOGIN_SUCCESS);
-                    String s = JwtTokenUtils.generateToken(username+WConstants.TOKEN_SPLIT+"share");
-                    ctx.setNewToken(s);
-                    ctx.setRefreshToken(true);
-                    ctx.setRole("share");
+
+                    Integer status = share.getInteger("status");
+                    if(status == 1){
+                        ctx.setWRespCode(WRespCode.LOGIN_SUCCESS);
+                        String s = JwtTokenUtils.generateToken(username+WConstants.TOKEN_SPLIT+"share");
+                        ctx.setNewToken(s);
+                        ctx.setRefreshToken(true);
+                        ctx.setRole("share");
+                        return;
+                    }else{
+                        ctx.setWRespCode(WRespCode.LOGIN_SHAREFORBID);
+                        return;
+                    }
+
+
                 }
             }
-            ctx.setWRespCode(WRespCode.LOGIN_FAILE);
         }
-
+        ctx.setWRespCode(WRespCode.LOGIN_FAILE);
     }
 }

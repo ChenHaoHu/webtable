@@ -1,17 +1,20 @@
-package top.hcy.webtable.service;
+package top.hcy.webtable.service.handle;
 
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.annotation.field.WAbstractField;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
+import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.common.enums.WebFieldType;
 import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.db.mysql.WSelectSql;
 import top.hcy.webtable.db.mysql.WTableData;
+import top.hcy.webtable.service.WService;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -31,6 +34,7 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
  * @Version: 1.0
  **/
 @Slf4j
+@WHandleService(WHandlerType.GTABLE)
 public class GetTableDataService implements WService {
     @Override
     public void verifyParams(WebTableContext ctx) {
@@ -56,7 +60,7 @@ public class GetTableDataService implements WService {
     }
 
     private HashMap<String,Object> getTableData( String table,int pagenum, int pagesize,WebTableContext ctx) {
-
+        JSONObject params = ctx.getParams();
         String username = ctx.getUsername();
         JSONObject tableOb = getTable(table, username);
         if (tableOb == null){
@@ -76,6 +80,7 @@ public class GetTableDataService implements WService {
         res.put("permission",permission);
 
         ArrayList<HashMap<String, Object>> totalSql = new WSelectSql(tableName).count().executeQuery();
+
         Object total = totalSql.size() > 0?totalSql.get(0).get("count"):0;
         res.put("total",Integer.valueOf(total.toString()));
 
@@ -116,6 +121,10 @@ public class GetTableDataService implements WService {
             }
         }
 
+        if (pagenum < 1){
+            pagenum  = 1;
+        }
+
         sql.limit(pagesize, (pagenum-1)*pagesize);
 
         //添加主键 保证唯一性
@@ -129,36 +138,87 @@ public class GetTableDataService implements WService {
 
         res.put("pk",primayKey);
 
-        String[] queryValue = null;
+        String[] queryValue = new String[0];
 
         sql.where();
+
         //处理 查找条件
-        boolean find = permission.contains("find");
-        if (find == true){
+        JSONArray findData = params.getJSONArray("find");
 
-            JSONObject params = ctx.getParams();
-            JSONObject findData = params.getJSONObject("find");
-            JSONObject likeData = params.getJSONObject("like");
-            int size1 = findData == null?0:findData.size();
-            int size2 = likeData == null?0:likeData.size();
-            int i = 0;
-            queryValue = new String[size1+size2];
-            if (size1 > 0){
-                for (String key : findData.keySet()){
-                    sql.and(key);
-                    queryValue[i++] = findData.getString(key);
-                }
-            }
-            if (size2 > 0){
-                for (String key : likeData.keySet()){
-                    sql.like(key);
-                    queryValue[i++] = "%"+likeData.getString(key)+"%";
-                }
-            }
-        }else{
+        if (findData !=null && findData.size()>0){
+            boolean find = permission.contains("find");
+            if (find){
 
-            return null;
+                int size = findData.size();
+                queryValue = new String[size];
+
+                for (int i = 0; i < size; i++) {
+                    JSONObject item = findData.getJSONObject(i);
+                    String compare = item.getString("compare");
+                    String key = item.getString("key");
+                    String value = item.getString("value");
+
+                    switch (compare){
+                        case  "equals":{
+                            queryValue[i] =value;
+                            sql.and(key);
+                            break;
+                        }
+                        case  "like":{
+                            sql.like(key);
+                            queryValue[i] = "%"+value+"%";
+                            break;
+                        }
+                        case  "greater":{
+                            queryValue[i] =value;
+                            sql.greater(key);
+                            break;
+                        }
+                        case  "less":{
+                            queryValue[i] =value;
+                            sql.less(key);
+                            break;
+                        }
+                        case  "greaterAndequals":{
+                            queryValue[i] =value;
+                            sql.greaterAndequals(key);
+                            break;
+                        }
+                        case  "lessAndequals":{
+                            queryValue[i] =value;
+                            sql.lessAndequals(key);
+                            break;
+                        }
+                    }
+                }
+            }else{
+                ctx.setWRespCode(WRespCode.PERMISSION_DENIED);
+                return null;
+            }
         }
+
+        //处理 排序条件
+        JSONObject sortData = params.getJSONObject("sort");
+
+        if(sortData!=null) {
+            boolean sort = permission.contains("sort");
+            if (sort){
+
+                String field = sortData.getString("field");
+                Boolean desc = sortData.getBoolean("desc");
+
+                if (desc !=null && field!=null){
+                    sql.orderBy(field,desc);
+                }else if(field!=null){
+                    sql.orderBy(field);
+                }
+
+            }else{
+                ctx.setWRespCode(WRespCode.PERMISSION_DENIED);
+                return null;
+            }
+        }
+
 
 
         data = sql.executeQuery(queryValue);
@@ -244,7 +304,7 @@ public class GetTableDataService implements WService {
 
                                 HashMap<String,Object> s = new HashMap<>();
                                 s.put("alias",aliasName);
-                                s.put("fie2ld",abstractfields.getString(i));
+                                s.put("field",abstractfields.getString(i));
                                 s.put("webFieldType",webFieldType.getStr());
                                 s.put("fieldPermission","");
                                 s.put("selects",null);
@@ -261,7 +321,7 @@ public class GetTableDataService implements WService {
                         try {
                             trigger = c.getDeclaredMethod(selectTrigger, WebTableContext.class);
                         }catch (Exception e){
-
+                            e.printStackTrace();
                         }
                         if (trigger!=null){
                             trigger.invoke(o,ctx);
@@ -278,6 +338,21 @@ public class GetTableDataService implements WService {
         res.put("data",data);
         res.put("pagenum",pagenum);
         res.put("pagesize",data.size());
+
+        if (permission.contains("chart")){
+            //添加可视化数据
+            JSONObject wchart = tableOb.getJSONObject("wchart");
+
+           if (wchart!=null){
+               for (String key : wchart.keySet()){
+                   String method = wchart.getJSONObject(key).getString("method");
+                   wchart.put(key,method);
+               }
+           }
+
+            res.put("wchart",wchart);
+        }
+
 
         return res;
     }

@@ -1,4 +1,4 @@
-package top.hcy.webtable.service;
+package top.hcy.webtable.router;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -31,19 +31,21 @@ public class UserRouterManagemanet {
 
         JSONArray tables = (JSONArray) kvDBUtils.getValue(username + ".tables", WKVType.T_LIST);
 
-        int size = tables.size();
-        for (int i = 0; i < size; i++) {
-            String table = tables.getString(i);
-            JSONObject tableData = (JSONObject)kvDBUtils.getValue(username + "." + WConstants.PREFIX_TABLE + table, WKVType.T_MAP);
-            UserRouter userRouter = new UserRouter("table   ", table, "/table/index",tableData.getString("alias"),"table");
-            JSONObject s = pathItemOneChildren("/"+table, userRouter);
-            routers.add(s);
-        }
+       if (tables!=null){
+           int size = tables.size();
+           for (int i = 0; i < size; i++) {
+               String table = tables.getString(i);
+               JSONObject tableData = (JSONObject)kvDBUtils.getValue(username + "." + WConstants.PREFIX_TABLE + table, WKVType.T_MAP);
+               UserRouter userRouter = new UserRouter("table   ", table, "/table/index",tableData.getString("alias"),"table");
+               JSONObject s = pathItemOneChildren("/"+table, userRouter);
+               routers.add(s);
+           }
+       }
 
         if ("admin".equals(ctx.getRole())){
             //wadmin 路由
             ArrayList<UserRouter> wadminUserRouters = new ArrayList<>();
-            UserRouter permissionRouter = new UserRouter("permission","permission","/wadmin/permission/index","权限管理","form");
+            UserRouter permissionRouter = new UserRouter("permission","permission","/wadmin/permission/index","角色管理","form");
             UserRouter memberRouter = new UserRouter("member","member","/wadmin/member/index","账号管理","tree");
             UserRouter shareRouter = new UserRouter("share","share","/wadmin/share/index","分享管理","nested");
             wadminUserRouters.add(permissionRouter);

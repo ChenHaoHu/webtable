@@ -1,15 +1,19 @@
-package top.hcy.webtable.service;
+package top.hcy.webtable.service.handle;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
+import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.db.kv.WKVType;
+import top.hcy.webtable.service.WService;
 import top.hcy.webtable.tools.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
@@ -22,7 +26,8 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
  * @Date: 20-2-5 0:49
  * @Version: 1.0
  **/
-public class AddShareService implements  WService{
+@WHandleService(WHandlerType.ASHAREDATA)
+public class AddShareService implements WService {
     @Override
     public void verifyParams(WebTableContext ctx) {
         //验证管理员身份
@@ -59,6 +64,7 @@ public class AddShareService implements  WService{
         HashMap<String, ArrayList<String>> permissionsMap = new HashMap<>();
         HashMap<String, ArrayList<String>> fieldsMap = new HashMap<>();
         HashMap<String, ArrayList<String>> abstractfieldsMap = new HashMap<>();
+        HashMap<String, ArrayList<String>> chartsMap = new HashMap<>();
         for (int i = 0; i < size; i++) {
             String permission = permissions.getString(i);
             if(permission.startsWith("permission.")){
@@ -70,6 +76,16 @@ public class AddShareService implements  WService{
                     }
                     list.add(split[2]);
                     permissionsMap.put(split[1],list);
+                }
+
+                //charts
+                if (split.length == 4 && "chart".equals(split[2])){
+                    ArrayList<String> list = chartsMap.get(split[1]);
+                    if (list == null){
+                        list = new ArrayList<>();
+                    }
+                    list.add(split[3]);
+                    chartsMap.put(split[1],list);
                 }
             }
             if(permission.startsWith("fields.")){
@@ -99,6 +115,33 @@ public class AddShareService implements  WService{
             value.put("permission",permissionsMap.get(table));
             value.put("fields",fieldsMap.get(table));
             value.put("abstractfields",abstractfieldsMap.get(table));
+
+            //处理charts
+            ArrayList<String> wchartList = chartsMap.get(table);
+            JSONObject wcharts = value.getJSONObject("wchart");
+            if (wcharts!=null && wchartList!=null){
+                //添加权限
+                JSONArray permission = value.getJSONArray("permission");
+                if (permission!=null){
+                    permission.add("chart");
+                }
+
+                Set<String> keySet = wcharts.keySet();
+                String[] removes = new String[wcharts.size()];
+                int i = 0;
+                for(String key: keySet){
+                    boolean contains = wchartList.contains(wcharts.getJSONObject(key).getString("method"));
+                    if (!contains){
+                        removes[i++] = key;
+                    }
+                }
+                for (int j = 0; j < i; j++) {
+                    wcharts.remove(removes[j]);
+                }
+            }
+
+            value.put("wchart",wcharts);
+
             b = kvDBUtils.setValue(data.getString("username") + "." + WConstants.PREFIX_TABLE + table, value, WKVType.T_MAP);
             if(b == false){
                 ctx.setWRespCode(WRespCode.INSERT_FAIL);

@@ -32,7 +32,8 @@ public class WGlobal {
 
     public static final long TOKEN_REFRESH_TIME = 20 * 1000;
 
-    public static  String PACKAGE_SCAN = "top.hcy.webtable.entity";
+    public static  String PACKAGE_ENTITY = "top.hcy.webtable.entity";
+
     public static final String JWT_SECRET = "eyJhbGciOiJIUzUxMiJ9";
 
     public static  final String[] WRoles  = {

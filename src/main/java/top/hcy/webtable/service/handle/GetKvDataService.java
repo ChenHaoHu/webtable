@@ -1,8 +1,10 @@
-package top.hcy.webtable.service;
+package top.hcy.webtable.service.handle;
 
-import com.alibaba.fastjson.JSONObject;
+import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.common.WebTableContext;
+import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.db.kv.WKVType;
+import top.hcy.webtable.service.WService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +20,8 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
  * @Date: 20-1-30 23:42
  * @Version: 1.0
  **/
-public class GetKvDataService implements WService{
+@WHandleService(WHandlerType.GKVDATA)
+public class GetKvDataService implements WService {
     @Override
     public void verifyParams(WebTableContext ctx) {
 

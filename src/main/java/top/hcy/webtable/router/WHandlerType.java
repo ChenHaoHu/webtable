@@ -1,4 +1,4 @@
-package top.hcy.webtable.common.enums;
+package top.hcy.webtable.router;
 
 /**
  * @ProjectName: webtable
@@ -24,6 +24,8 @@ public enum WHandlerType {
     USHAREDATA("ushare","更新分享列表"),
     ASHAREDATA("ashare","添加分享信息"),
     DSHAREDATA("dshare","删除分享信息"),
+    GCHART("gchart","获取设定的图表分析数据"),
+    GHOMEPAGE("ghomepage","获取首页信息"),
     LoginRequest("login","登录请求");
 
     private String uri;

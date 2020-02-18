@@ -27,6 +27,7 @@ public enum WRespCode {
     DELETE_SUCCESS(1021, "删除成功"),
     DELETE_FAIL(1022, "删除失败"),
     DELETE_NODATA(1023, "没有数据删除"),
+    LOGIN_SHAREFORBID(1024, "此分享账号临时封停"),
     REQUEST_PARAM_WARN(1100, "请求参数不合法");
 
 

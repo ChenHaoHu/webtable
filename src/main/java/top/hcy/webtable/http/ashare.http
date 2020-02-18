@@ -5,7 +5,7 @@ token:hcytoken
 
 {
   "u": "ashare",
-  "marks":"Data2",
+  "marks":"Data1",
   "permission":["permission.Data2.delete", "permission.Data2.update", "permission.Data2.find", "Data2permission"]
 }
 

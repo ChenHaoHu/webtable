@@ -1,7 +1,7 @@
 package top.hcy.webtable.filter;
 
 import top.hcy.webtable.common.WebTableContext;
-import top.hcy.webtable.common.enums.WHandlerType;
+import top.hcy.webtable.router.WHandlerType;
 
 import java.util.ArrayList;
 

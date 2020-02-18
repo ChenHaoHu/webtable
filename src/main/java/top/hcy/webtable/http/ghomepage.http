@@ -1,0 +1,20 @@
+
+
+###
+
+//login
+POST http://{{host}}:{{port}}/webtable
+Content-Type: application/jsonn
+token:hcytoken
+
+{
+  "u": "ghomepage",
+}
+
+###
+
+###
+
+
+
+###

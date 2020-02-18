@@ -8,34 +8,30 @@ import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.MethodParameterScanner;
 import org.reflections.util.ConfigurationBuilder;
+import top.hcy.webtable.annotation.charts.WChart;
+import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.annotation.field.*;
 import top.hcy.webtable.annotation.method.WDeleteTrigger;
 import top.hcy.webtable.annotation.method.WInsertTrigger;
 import top.hcy.webtable.annotation.method.WSelectTrigger;
 import top.hcy.webtable.annotation.method.WUpdateTrigger;
-import top.hcy.webtable.annotation.table.WEnadbleDelete;
-import top.hcy.webtable.annotation.table.WEnadbleInsert;
-import top.hcy.webtable.annotation.table.WEnadbleUpdate;
-import top.hcy.webtable.annotation.table.WTable;
+import top.hcy.webtable.annotation.table.*;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.common.constant.WGlobal;
-import top.hcy.webtable.common.enums.WHandlerType;
+import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.common.response.WResponseEntity;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.filter.*;
-import top.hcy.webtable.router.RoutersManagement;
+import top.hcy.webtable.service.Router;
 import top.hcy.webtable.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
@@ -43,39 +39,62 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 /**
  * @ProjectName: webtable
  * @Package: top.hcy.webtable
- * @ClassName: WebTableBootStrap
+ * @ClassName: BootStrap
  * @Author: hcy
  * @Description: web table 处理入口
  * @Date: 2020/1/14 19:52
  * @Version: 1.0
  */
 @Slf4j
-public class WebTableBootStrap {
+public class BootStrap {
 
     //普通请求前置处理
     private WFiterChainImpl hPreRequest = null;
 
     private Reflections reflections = null;
 
-    public WebTableBootStrap() {
+    public BootStrap() {
         init();
     }
-
-    public WebTableBootStrap(String pack) {
-        WGlobal.PACKAGE_SCAN = pack;
-
-        init();
-    }
-
 
     private void init() {
         initReflections();
         initFilters();
         initDefaultAccount();
-        initRouters();
+        initHandleRouters();
         initKvData();
         saveInitializationKeys();
         initDefaultAccountPermission();
+    }
+
+    private void initHandleRouters() {
+        Reflections re = new Reflections();
+        Set<Class<?>> cs = re.getTypesAnnotatedWith(WHandleService.class);
+        Iterator<Class<?>> iterator = cs.iterator();
+        try {
+            while (iterator.hasNext()){
+                Class<?> next = iterator.next();
+                Class<?>[] interfaces = next.getInterfaces();
+                int length = interfaces.length;
+                boolean flag = false;
+                for (int i = 0; i < length; i++) {
+                    if (WService.class.equals(interfaces[i])){
+                        flag = true;
+                        break;
+                    }
+                }
+                if(flag){
+                    WHandleService annotation = next.getAnnotation(WHandleService.class);
+                    WHandlerType value = annotation.value();
+                    Router.addRouter(value,(WService) next.newInstance());
+                }else{
+                    log.warn("initHandleRouters: class "+next.getName() +"is not implements WService");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //  new HandleRoutersManagement().invoke();
     }
 
 
@@ -114,7 +133,7 @@ public class WebTableBootStrap {
 
     private void initReflections() {
         reflections = new Reflections(new ConfigurationBuilder()
-                .forPackages(WGlobal.PACKAGE_SCAN) // 指定路径URL
+                .forPackages(WGlobal.PACKAGE_ENTITY) // 指定路径URL
 //                .addScanners(new SubTypesScanner()) // 添加子类扫描工具
                 .addScanners(new FieldAnnotationsScanner()) // 添加 属性注解扫描工具
                 .addScanners(new MethodAnnotationsScanner() ) // 添加 方法注解扫描工具
@@ -170,26 +189,55 @@ public class WebTableBootStrap {
         updateMethodsConfig(WUpdateTrigger.class,"updateTrigger");
         updateMethodsConfig(WDeleteTrigger.class,"deleteTrigger");
         updateMethodsConfig(WSelectTrigger.class,"selectTrigger");
+
+        updateWChartConfig("wchart");
         updateAbstractFields(WAbstractField.class,"abstractfields");
         //测试打印
 //        JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + "Data1", WKVType.T_MAP);
 //        System.out.println(value);
     }
 
-    private void updateAbstractFields(Class<WAbstractField> wAbstractFieldClass, String key) {
+    private void updateWChartConfig( String key) {
+        Set<Method> wtriggerMethods = reflections.getMethodsAnnotatedWith(WChart.class);
+        Iterator<Method> iterator = wtriggerMethods.iterator();
+        while (iterator.hasNext()){
+            Method method = iterator.next();
+            String className = method.getDeclaringClass().getSimpleName();
+            JSONObject table = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + className, WKVType.T_MAP);
+            if(table != null){
+                JSONObject wcharts = table.getJSONObject(key);
+                if (wcharts == null){
+                    wcharts = new JSONObject();
+                }
+                WChart annotation = method.getAnnotation(WChart.class);
+                String value = annotation.value();
+                JSONObject item = new JSONObject();
+                item.put("method",method.getName());
+                item.put("showDashboard",annotation.showDashboard());
+                wcharts.put(value,item);
+                table.put(key,wcharts);
+                kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, WKVType.T_MAP);
+            }
+        }
+
+    }
+
+    private void updateAbstractFields(Class wAbstractFieldClass, String key) {
         Set<Method> wtriggerMethods = reflections.getMethodsAnnotatedWith(wAbstractFieldClass);
         Iterator<Method> iterator = wtriggerMethods.iterator();
         while (iterator.hasNext()){
             Method method = iterator.next();
             String className = method.getDeclaringClass().getSimpleName();
             JSONObject table = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + className, WKVType.T_MAP);
-            JSONArray wAbstractFields =  (JSONArray)table.get(key);
-            if(wAbstractFields == null){
-                wAbstractFields = new JSONArray();
+            if (table!=null){
+                JSONArray wAbstractFields =  (JSONArray)table.get(key);
+                if(wAbstractFields == null){
+                    wAbstractFields = new JSONArray();
+                }
+                wAbstractFields.add(method.getName());
+                table.put(key,wAbstractFields);
+                kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, WKVType.T_MAP);
             }
-            wAbstractFields.add(method.getName());
-            table.put(key,wAbstractFields);
-            kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, WKVType.T_MAP);
         }
     }
 
@@ -200,8 +248,10 @@ public class WebTableBootStrap {
             Method method = iterator.next();
             String className = method.getDeclaringClass().getSimpleName();
             JSONObject table = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + className, WKVType.T_MAP);
-            table.put(key,method.getName());
-            kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, WKVType.T_MAP);
+            if (table!=null){
+                table.put(key,method.getName());
+                kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, WKVType.T_MAP);
+            }
         }
     }
 
@@ -239,6 +289,11 @@ public class WebTableBootStrap {
                     wField.find() ){
                 fieldPermission.add("find");
             }
+            if(field.getAnnotation(WSortField.class)!=null ||
+                    wField.sort() ){
+                fieldPermission.add("sort");
+            }
+
             HashMap<String, Object> fieldData = new HashMap<>();
             fieldData.put("field",fieldName);
             fieldData.put("type",field.getType());
@@ -253,9 +308,9 @@ public class WebTableBootStrap {
 
 
             //添加多选
-            WSelectsField wSelectField = field.getAnnotation(WSelectsField.class);
-            if(wSelectField !=null){
-                String[] selects = wSelectField.selects();
+            WSelectsField wSelectsField = field.getAnnotation(WSelectsField.class);
+            if(wSelectsField !=null){
+                String[] selects = wSelectsField.selects();
                 fieldData.put("selects",selects);
             }
 
@@ -299,9 +354,17 @@ public class WebTableBootStrap {
                     wTable.update() ){
                 permission.add("update");
             }
-            if(wTableClass.getAnnotation(WEnadbleUpdate.class)!=null ||
+            if(wTableClass.getAnnotation(WEnadbleFind.class)!=null ||
                     wTable.find() ){
                 permission.add("find");
+            }
+            if(wTableClass.getAnnotation(WEnadbleSort.class)!=null ||
+                    wTable.sort() ){
+                permission.add("sort");
+            }
+            if(wTableClass.getAnnotation(WEnadbleChart.class)!=null ||
+                    wTable.chart() ){
+                permission.add("chart");
             }
             ArrayList<String> f = new ArrayList<>();
             Field[] fields = wTableClass.getDeclaredFields();
@@ -324,15 +387,15 @@ public class WebTableBootStrap {
             tableData.put("updateTrigger",wTable.updateTrigger());
             tableData.put("selectTrigger",wTable.selectTrigger());
             tableData.put("deleteTrigger",wTable.deleteTrigger());
+            //可视化图表
+            tableData.put("wchart",null);
             kvDBUtils.setValue(WConstants.PREFIX_TABLE+wTableClassName,tableData, WKVType.T_MAP);
             //  JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + wTableClassName, WKVType.T_MAP);
             WGlobal.tables.add(wTableClassName);
         }
     }
 
-    private void initRouters() {
-        new RoutersManagement().invoke();
-    }
+
 
     //处理入口
     public WResponseEntity handler(HttpServletRequest request, HttpServletResponse response){
