@@ -204,19 +204,20 @@ public class BootStrap {
             Method method = iterator.next();
             String className = method.getDeclaringClass().getSimpleName();
             JSONObject table = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + className, WKVType.T_MAP);
-
-            JSONObject wcharts = table.getJSONObject(key);
-            if (wcharts == null){
-                wcharts = new JSONObject();
+            if(table != null){
+                JSONObject wcharts = table.getJSONObject(key);
+                if (wcharts == null){
+                    wcharts = new JSONObject();
+                }
+                WChart annotation = method.getAnnotation(WChart.class);
+                String value = annotation.value();
+                JSONObject item = new JSONObject();
+                item.put("method",method.getName());
+                item.put("showDashboard",annotation.showDashboard());
+                wcharts.put(value,item);
+                table.put(key,wcharts);
+                kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, WKVType.T_MAP);
             }
-            WChart annotation = method.getAnnotation(WChart.class);
-            String value = annotation.value();
-            JSONObject item = new JSONObject();
-            item.put("method",method.getName());
-            item.put("showDashboard",annotation.showDashboard());
-            wcharts.put(value,item);
-            table.put(key,wcharts);
-            kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, WKVType.T_MAP);
         }
 
     }
@@ -228,13 +229,15 @@ public class BootStrap {
             Method method = iterator.next();
             String className = method.getDeclaringClass().getSimpleName();
             JSONObject table = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + className, WKVType.T_MAP);
-            JSONArray wAbstractFields =  (JSONArray)table.get(key);
-            if(wAbstractFields == null){
-                wAbstractFields = new JSONArray();
+            if (table!=null){
+                JSONArray wAbstractFields =  (JSONArray)table.get(key);
+                if(wAbstractFields == null){
+                    wAbstractFields = new JSONArray();
+                }
+                wAbstractFields.add(method.getName());
+                table.put(key,wAbstractFields);
+                kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, WKVType.T_MAP);
             }
-            wAbstractFields.add(method.getName());
-            table.put(key,wAbstractFields);
-            kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, WKVType.T_MAP);
         }
     }
 
@@ -245,8 +248,10 @@ public class BootStrap {
             Method method = iterator.next();
             String className = method.getDeclaringClass().getSimpleName();
             JSONObject table = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + className, WKVType.T_MAP);
-            table.put(key,method.getName());
-            kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, WKVType.T_MAP);
+            if (table!=null){
+                table.put(key,method.getName());
+                kvDBUtils.setValue(WConstants.PREFIX_TABLE+className,table, WKVType.T_MAP);
+            }
         }
     }
 
