@@ -9,12 +9,8 @@ token:hcytoken
   "pagenum":1,
   "pagesize":6,
   "sort":{
-     "field":"book_price"
   },
   "find":[
-
-  {key: "book_id", value: "1002", compare: "less"}
-
   ],
 
 

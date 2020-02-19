@@ -1,10 +1,9 @@
 package top.hcy.webtable.db.mysql;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
-import jdk.nashorn.internal.runtime.logging.Logger;
 import lombok.extern.slf4j.Slf4j;
+import top.hcy.webtable.common.constant.WGlobal;
 import top.hcy.webtable.db.DBUtils;
-import top.hcy.webtable.entity.Data1;
 import top.hcy.webtable.tools.CommonUtils;
 
 import javax.sql.DataSource;
@@ -12,7 +11,6 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 
@@ -20,26 +18,30 @@ import java.util.Properties;
 public class MySqlDbUtils implements DBUtils {
 
     private static Properties p;
-    private static DataSource dataSource;
+    private static DataSource dataSource = WGlobal.dataSource;
 
-    static {
-        try {
-            ClassLoader loader = Thread.currentThread().getContextClassLoader();
-            InputStream inputStream = loader.getResourceAsStream("db.properties");
-            p = new Properties();
-            p.load(inputStream);
-            // 通过工厂类获取DataSource对象
-            dataSource = DruidDataSourceFactory.createDataSource(p);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    static {
+//        try {
+//            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+//            InputStream inputStream = loader.getResourceAsStream("db.properties");
+//            p = new Properties();
+//            p.load(inputStream);
+//            // 通过工厂类获取DataSource对象
+//            dataSource = DruidDataSourceFactory.createDataSource(p);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public static Connection getConnection() {
-        try {
-            return dataSource.getConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (dataSource == null){
+            log.error("datasource can not be null. please execute setDataSource");
+        }else{
+            try {
+                return dataSource.getConnection();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }

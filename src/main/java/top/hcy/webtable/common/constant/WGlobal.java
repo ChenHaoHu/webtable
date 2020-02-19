@@ -3,10 +3,13 @@ package top.hcy.webtable.common.constant;
 import top.hcy.webtable.db.kv.WKvDbUtils;
 import top.hcy.webtable.db.kv.LevelDBUtils;
 
+import javax.sql.DataSource;
 import java.util.ArrayList;
 
 
 public class WGlobal {
+
+    public static DataSource dataSource = null;
 
     public static  ArrayList<String> tables = new ArrayList<>();
 

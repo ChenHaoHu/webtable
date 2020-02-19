@@ -8,6 +8,9 @@ import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.MethodParameterScanner;
 import org.reflections.util.ConfigurationBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import top.hcy.webtable.annotation.charts.WChart;
 import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.annotation.field.*;
@@ -29,13 +32,12 @@ import top.hcy.webtable.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
-
-
 
 @Slf4j
 public class WebTableBootStrap {
@@ -45,11 +47,13 @@ public class WebTableBootStrap {
 
     private Reflections reflections = null;
 
+
     public WebTableBootStrap() {
         init();
     }
 
     private void init() {
+
         initReflections();
         initFilters();
         initDefaultAccount();
@@ -58,6 +62,12 @@ public class WebTableBootStrap {
         saveInitializationKeys();
         initDefaultAccountPermission();
     }
+
+    public void setDataSource(DataSource dataSource){
+        WGlobal.dataSource = dataSource;
+    }
+
+
 
     private void initHandleRouters() {
         Reflections re = new Reflections();
@@ -184,9 +194,7 @@ public class WebTableBootStrap {
 
         updateWChartConfig("wchart");
         updateAbstractFields(WAbstractField.class,"abstractfields");
-        //测试打印
-//        JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + "Data1", WKVType.T_MAP);
-//        System.out.println(value);
+
     }
 
     private void updateWChartConfig( String key) {
