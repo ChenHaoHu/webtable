@@ -31,6 +31,8 @@ public class WGlobal {
 
     public static  String PACKAGE_ENTITY = "top.hcy.webtable.entity";
 
+    public static  String HandleRoutersScanPackage = "top.hcy.webtable.service.handle";
+
     public static final String JWT_SECRET = "eyJhbGciOiJIUzUxMiJ9";
 
     public static  final String[] WRoles  = {

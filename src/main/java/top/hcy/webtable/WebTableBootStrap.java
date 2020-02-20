@@ -8,9 +8,9 @@ import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.MethodParameterScanner;
 import org.reflections.util.ConfigurationBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.slf4j.ILoggerFactory;
+import org.slf4j.LoggerFactory;
+import org.slf4j.spi.SLF4JServiceProvider;
 import top.hcy.webtable.annotation.charts.WChart;
 import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.annotation.field.*;
@@ -35,12 +35,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
 @Slf4j
 public class WebTableBootStrap {
+
 
     //普通请求前置处理
     private WFiterChainImpl hPreRequest = null;
@@ -53,6 +57,7 @@ public class WebTableBootStrap {
     }
 
     private void init() {
+
 
         initReflections();
         initFilters();
@@ -70,7 +75,7 @@ public class WebTableBootStrap {
 
 
     private void initHandleRouters() {
-        Reflections re = new Reflections();
+        Reflections re = new Reflections(WGlobal.HandleRoutersScanPackage);
         Set<Class<?>> cs = re.getTypesAnnotatedWith(WHandleService.class);
         Iterator<Class<?>> iterator = cs.iterator();
         try {
@@ -135,7 +140,7 @@ public class WebTableBootStrap {
 
     private void initReflections() {
         reflections = new Reflections(new ConfigurationBuilder()
-                .forPackages(WGlobal.PACKAGE_ENTITY) // 指定路径URL
+                .forPackages(WGlobal.PACKAGE_ENTITY+".tmp") // 指定路径URL
 //                .addScanners(new SubTypesScanner()) // 添加子类扫描工具
                 .addScanners(new FieldAnnotationsScanner()) // 添加 属性注解扫描工具
                 .addScanners(new MethodAnnotationsScanner() ) // 添加 方法注解扫描工具

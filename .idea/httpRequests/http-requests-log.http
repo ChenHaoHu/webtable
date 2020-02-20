@@ -1,4 +1,347 @@
 POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gshare",
+}
+
+<> 2020-02-21T124752.200.txt
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+
+
+
+}
+
+<> 2020-02-21T124730.200.txt
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+
+
+
+}
+
+<> 2020-02-21T124249.200.txt
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+
+
+
+}
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+
+
+
+}
+
+<> 2020-02-20T115549.200.txt
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+
+
+
+}
+
+<> 2020-02-20T115548-1.200.txt
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+
+
+
+}
+
+<> 2020-02-20T115548.200.txt
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+
+
+
+}
+
+<> 2020-02-20T115547.200.txt
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+
+
+
+}
+
+<> 2020-02-20T115546.200.txt
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+
+
+
+}
+
+<> 2020-02-20T115545.200.txt
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+
+
+
+}
+
+<> 2020-02-20T115542.200.txt
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+
+
+
+}
+
+<> 2020-02-20T115539.200.txt
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+
+
+
+}
+
+<> 2020-02-20T115527.200.txt
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+
+
+
+}
+
+<> 2020-02-20T115259.500.json
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+
+
+
+}
+
+<> 2020-02-20T114737.500.json
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+
+
+
+}
+
+<> 2020-02-20T014639.200.json
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+  "sort":{
+  },
+  "find":[
+  ],
+
+
+}
+
+<> 2020-02-20T014630.200.json
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+  "sort":{
+  },
+  "find":[
+  ],
+
+
+}
+
+<> 2020-02-20T015327.200.json
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+  "sort":{
+  },
+  "find":[
+  ],
+
+
+}
+
+<> 2020-02-20T013405.200.json
+
+###
+
+POST http://localhost:8089/webtable
 Content-Type: application/json
 token:
 
@@ -423,332 +766,6 @@ token: hcytoken
 }
 
 <> 2020-02-16T021827.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gchart",
-  "table":"Data1",
-  "chart":"chart1"
-}
-
-<> 2020-02-16T011616.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gkvdata",
-}
-
-<> 2020-02-16T121649.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gchart",
-  "table":"Data1",
-   "chart":"chart1"
-
-}
-
-<> 2020-02-11T075308.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gchart",
-  "table":"Data1",
-   "chart":"chart2"
-
-}
-
-<> 2020-02-11T075303.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gchart",
-  "table":"Data1",
-   "chart":""
-
-}
-
-<> 2020-02-11T075238.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gchart",
-  "table":"Data1",
-   "chart":""
-
-}
-
-<> 2020-02-11T075140.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gchart",
-  "table":"",
-   "chart":""
-
-}
-
-<> 2020-02-11T075109.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gchart",
-  "table":"",
-   "chart":""
-
-}
-
-<> 2020-02-11T074941.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gchart",
-  "table":"",
-}
-
-<> 2020-02-11T074928.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gkvdata",
-}
-
-<> 2020-02-11T010810.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":1,
-  "pagesize":6,
-  "sort":{
-     "field":"book_price"
-  },
-  "find":[
-
-  {key: "book_id", value: "1002", compare: "less"}
-
-  ],
-
-
-}
-
-<> 2020-02-10T020948.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":1,
-  "pagesize":6,
-  "like":{
-  },
-  "sort":{
-     "field":"book_price"
-  }
-}
-
-<> 2020-02-09T113208.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":6,
-  "pagesize":2,
-  "like":{
-  },
-  "sort":{
-     "field":"book_price"
-  }
-}
-
-<> 2020-02-09T113150.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":1,
-  "pagesize":2,
-  "like":{
-  },
-  "sort":{
-     "field":"book_price"
-  }
-}
-
-<> 2020-02-09T113141.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":0,
-  "pagesize":2,
-  "like":{
-  },
-  "sort":{
-     "field":"book_price"
-  }
-}
-
-<> 2020-02-09T112748.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":0,
-  "pagesize":2,
-  "like":{
-  },
-  "sort":{
-     "field":"book_price"
-  }
-}
-
-<> 2020-02-09T112439.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":0,
-  "pagesize":2,
-  "like":{
-  },
-  "sort":{
-     "field":"bookprice"
-  }
-}
-
-<> 2020-02-09T112209.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":0,
-  "pagesize":2,
-  "like":{
-  },
-  "sort":{
-     "field":"book_price"
-  }
-}
-
-<> 2020-02-09T111957.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":0,
-  "pagesize":2,
-  "like":{
-  },
-  "sort":{
-     "field":"book_price"
-  }
-}
-
-<> 2020-02-09T111739.200.json
 
 ###
 

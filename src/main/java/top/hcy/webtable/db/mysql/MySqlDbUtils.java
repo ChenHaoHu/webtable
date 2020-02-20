@@ -20,19 +20,6 @@ public class MySqlDbUtils implements DBUtils {
     private static Properties p;
     private static DataSource dataSource = WGlobal.dataSource;
 
-//    static {
-//        try {
-//            ClassLoader loader = Thread.currentThread().getContextClassLoader();
-//            InputStream inputStream = loader.getResourceAsStream("db.properties");
-//            p = new Properties();
-//            p.load(inputStream);
-//            // 通过工厂类获取DataSource对象
-//            dataSource = DruidDataSourceFactory.createDataSource(p);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     public static Connection getConnection() {
         if (dataSource == null){
             log.error("datasource can not be null. please execute setDataSource");

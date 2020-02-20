@@ -26,7 +26,7 @@ public class UserInfoService implements WService {
         map.put("avatar",ctx.getToken());
         map.put("routers", UserRouterManagemanet.generateRouters(ctx));
 
-        log.info(UserRouterManagemanet.generateRouters(ctx));
+        //log.info(UserRouterManagemanet.generateRouters(ctx));
         ctx.setRespsonseEntity(map);
     }
 }
