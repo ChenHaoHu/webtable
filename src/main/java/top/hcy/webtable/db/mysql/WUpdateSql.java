@@ -6,15 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.db.mysql
- * @ClassName: WUpdateSql
- * @Author: hcy
- * @Description:
- * @Date: 20-1-28 13:34
- * @Version: 1.0
- **/
+
 @Slf4j
 public class WUpdateSql {
 

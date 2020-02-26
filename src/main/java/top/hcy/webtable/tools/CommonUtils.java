@@ -9,15 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.tools
- * @ClassName: CommonUtils
- * @Author: hcy
- * @Description:
- * @Date: 20-1-23 23:49
- * @Version: 1.0
- **/
+
 public class CommonUtils {
 
     //返回短链 因为不是分布式项目 并发数小

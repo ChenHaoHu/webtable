@@ -24,15 +24,7 @@ import java.util.LinkedHashMap;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.service
- * @ClassName: GetTableDataService
- * @Author: hcy
- * @Description:
- * @Date: 20-1-28 22:16
- * @Version: 1.0
- **/
+
 @Slf4j
 @WHandleService(WHandlerType.GTABLE)
 public class GetTableDataService implements WService {

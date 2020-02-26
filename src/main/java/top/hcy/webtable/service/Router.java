@@ -4,15 +4,7 @@ import top.hcy.webtable.router.WHandlerType;
 
 import java.util.HashMap;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.router
- * @ClassName: Router
- * @Author: hcy
- * @Description: 请求转发表
- * @Date: 20-1-25 19:31
- * @Version: 1.0
- **/
+
 public class Router {
 
     private static HashMap<String, WService> routers = new HashMap<>();

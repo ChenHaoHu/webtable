@@ -1,14 +1,6 @@
 package top.hcy.webtable.router;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.common
- * @ClassName: HandlerTypeCode
- * @Author: hcy
- * @Description: web table handler type
- * @Date: 2020/1/14 19:42
- * @Version: 1.0
- */
+
 public enum WHandlerType {
 
     GFiled("","获取表详情"),

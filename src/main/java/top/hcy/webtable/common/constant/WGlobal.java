@@ -3,16 +3,13 @@ package top.hcy.webtable.common.constant;
 import top.hcy.webtable.db.kv.WKvDbUtils;
 import top.hcy.webtable.db.kv.LevelDBUtils;
 
+import javax.sql.DataSource;
 import java.util.ArrayList;
 
-/**
- * @ClassName: WGlobal
- * @Author: hcy
- * @Description:
- * @Date: 2020-01-20 22:46
- * @Version: 1.0
- **/
+
 public class WGlobal {
+
+    public static DataSource dataSource = null;
 
     public static  ArrayList<String> tables = new ArrayList<>();
 
@@ -33,6 +30,8 @@ public class WGlobal {
     public static final long TOKEN_REFRESH_TIME = 20 * 1000;
 
     public static  String PACKAGE_ENTITY = "top.hcy.webtable.entity";
+
+    public static  String HandleRoutersScanPackage = "top.hcy.webtable.service.handle";
 
     public static final String JWT_SECRET = "eyJhbGciOiJIUzUxMiJ9";
 

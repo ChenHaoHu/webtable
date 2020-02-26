@@ -7,15 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.db.mysql
- * @ClassName: WDeleteSql
- * @Author: hcy
- * @Description:
- * @Date: 20-1-27 14:14
- * @Version: 1.0
- **/
+
 @Slf4j
 public class WDeleteSql {
 

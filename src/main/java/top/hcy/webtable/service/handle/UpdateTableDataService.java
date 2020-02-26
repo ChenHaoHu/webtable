@@ -21,15 +21,6 @@ import java.util.Set;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.service
- * @ClassName: UpdateTableDataService
- * @Author: hcy
- * @Description: 更新数据
- * @Date: 20-1-30 23:42
- * @Version: 1.0
- **/
 @WHandleService(WHandlerType.UTABLE)
 public class UpdateTableDataService implements WService {
     @Override

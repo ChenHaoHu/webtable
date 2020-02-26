@@ -29,31 +29,25 @@ import top.hcy.webtable.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
-
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable
- * @ClassName: BootStrap
- * @Author: hcy
- * @Description: web table 处理入口
- * @Date: 2020/1/14 19:52
- * @Version: 1.0
- */
 @Slf4j
-public class BootStrap {
+public class WebTableBootStrap {
 
     //普通请求前置处理
     private WFiterChainImpl hPreRequest = null;
 
     private Reflections reflections = null;
 
-    public BootStrap() {
+    public WebTableBootStrap() {
         init();
     }
 
@@ -67,8 +61,14 @@ public class BootStrap {
         initDefaultAccountPermission();
     }
 
+    public void setDataSource(DataSource dataSource){
+        WGlobal.dataSource = dataSource;
+    }
+
+
+
     private void initHandleRouters() {
-        Reflections re = new Reflections();
+        Reflections re = new Reflections(WGlobal.HandleRoutersScanPackage);
         Set<Class<?>> cs = re.getTypesAnnotatedWith(WHandleService.class);
         Iterator<Class<?>> iterator = cs.iterator();
         try {
@@ -133,7 +133,7 @@ public class BootStrap {
 
     private void initReflections() {
         reflections = new Reflections(new ConfigurationBuilder()
-                .forPackages(WGlobal.PACKAGE_ENTITY) // 指定路径URL
+                .forPackages(WGlobal.PACKAGE_ENTITY+".tmp") // 指定路径URL
 //                .addScanners(new SubTypesScanner()) // 添加子类扫描工具
                 .addScanners(new FieldAnnotationsScanner()) // 添加 属性注解扫描工具
                 .addScanners(new MethodAnnotationsScanner() ) // 添加 方法注解扫描工具
@@ -192,9 +192,7 @@ public class BootStrap {
 
         updateWChartConfig("wchart");
         updateAbstractFields(WAbstractField.class,"abstractfields");
-        //测试打印
-//        JSONObject value = (JSONObject)kvDBUtils.getValue(WConstants.PREFIX_TABLE + "Data1", WKVType.T_MAP);
-//        System.out.println(value);
+
     }
 
     private void updateWChartConfig( String key) {

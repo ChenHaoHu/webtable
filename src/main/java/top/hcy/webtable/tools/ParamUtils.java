@@ -11,15 +11,7 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.tools
- * @ClassName: ParamUtil
- * @Author: hcy
- * @Description: 参数处理工具
- * @Date: 2020/1/15 10:30
- * @Version: 1.0
- */
+
 @Slf4j
 public class ParamUtils {
 

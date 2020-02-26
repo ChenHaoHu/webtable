@@ -1,9 +1,8 @@
 package top.hcy.webtable.controller;
 
-import com.alibaba.fastjson.JSON;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import top.hcy.webtable.BootStrap;
+import top.hcy.webtable.WebTableBootStrap;
 import top.hcy.webtable.common.response.WResponseEntity;
 import top.hcy.webtable.db.kv.WKVType;
 
@@ -18,10 +17,10 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 @RestController
 public class WebTableController {
 
-    BootStrap webTabelHandler;
+    WebTableBootStrap webTabelHandler;
     public WebTableController() {
       //初始化处理链
-         webTabelHandler = new BootStrap();
+         webTabelHandler = new WebTableBootStrap();
     }
 
     @RequestMapping("/webtable")

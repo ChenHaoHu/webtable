@@ -8,15 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-/**
- * @ProjectName: webtable
- * @Package: top.hcy.webtable.db.mysql
- * @ClassName: WSelectSql
- * @Author: hcy
- * @Description:
- * @Date: 20-1-26 22:11
- * @Version: 1.0
- **/
+
 @Slf4j
 public class WSelectSql {
 
