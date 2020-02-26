@@ -1,15 +1,12 @@
 package top.hcy.webtable.webfilter;
 
 
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.Utils;
-import top.hcy.webtable.WebTableBootStrap;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.net.URL;
 
 public class WebAdminFilter implements Filter {
     @Override

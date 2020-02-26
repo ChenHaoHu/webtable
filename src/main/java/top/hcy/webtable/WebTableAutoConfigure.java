@@ -35,6 +35,7 @@ public class WebTableAutoConfigure {
     WebTableBootStrap webTableBootStrap (){
         String entityPack = properties.getEntitypack();
         WGlobal.PACKAGE_ENTITY = entityPack;
+        log.info("webtable will scan package: "+ entityPack);
         DataSource bean = appContext.getBean(DataSource.class);
         if (bean==null){
             log.error("datasource can not be null. you should init DataSource");
