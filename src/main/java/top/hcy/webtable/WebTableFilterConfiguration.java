@@ -9,7 +9,6 @@ import top.hcy.webtable.webfilter.WebTableFilter;
 @ConditionalOnWebApplication
 public class WebTableFilterConfiguration {
 
-
     @Bean
     public FilterRegistrationBean webAdminFilterRegistrationBean( ) {
 
