@@ -17,7 +17,7 @@ import java.util.Map;
 @Slf4j
 public class LevelDBUtils implements WKvDbUtils {
 
-    private static final String PATH = "leveldb";
+    private static final String PATH = "webtableDB";
     private static final Charset CHARSET = Charset.forName("utf-8");
     private static final File FILE = new File(PATH);
     DB db = null;

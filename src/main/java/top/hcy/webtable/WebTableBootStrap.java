@@ -32,10 +32,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.net.URL;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
@@ -133,7 +131,7 @@ public class WebTableBootStrap {
 
     private void initReflections() {
         reflections = new Reflections(new ConfigurationBuilder()
-                .forPackages(WGlobal.PACKAGE_ENTITY+".tmp") // 指定路径URL
+                .forPackages(WGlobal.PACKAGE_ENTITY) // 指定路径URL
 //                .addScanners(new SubTypesScanner()) // 添加子类扫描工具
                 .addScanners(new FieldAnnotationsScanner()) // 添加 属性注解扫描工具
                 .addScanners(new MethodAnnotationsScanner() ) // 添加 方法注解扫描工具
