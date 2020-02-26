@@ -24,7 +24,7 @@ jobs:
         username: ${{ secrets.USER }}
         password: ${{ secrets.PASSWD }}
         port: ${{ secrets.PORT }}
-        source: "target/webtable-1.0.0.jar"
+        source: "target/webtable-1.0.1.jar"
         target: "/githubci"
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
@@ -36,6 +36,6 @@ jobs:
         script: |
           cd /githubci
           kill -9 `lsof -i :9299 | awk {'print $2'}  | head -n 2 | tail -n 1`
-          nohup java -jar /githubci/target/webtable-1.0.0.jar > Log.log 2>&1 &
+          nohup java -jar /githubci/target/webtable-1.0.1.jar > Log.log 2>&1 &
           echo "deploy ok"
           
