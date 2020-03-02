@@ -231,6 +231,9 @@ public class MySqlDbUtils implements DBUtils {
 
     private static void recordSQLData(String sql, ArrayList<String> values, String[] conditionValues, boolean executedSuccess, String error,long executedTime) {
         WebTableContext ctx = WGlobal.ctxThreadLocal.get();
+        if(ctx==null){
+            return;
+        }
         JSONArray executedSQLs = ctx.getExecutedSQLs();
         if (executedSQLs == null){
             executedSQLs = new JSONArray();
