@@ -17,6 +17,7 @@ public class WLogEventEntity {
     private String username;
     private String role;
     private String uri;
+    private String ip;
     private String requestdesc;
     private String params;
     private String response;

@@ -104,7 +104,7 @@ public class WLogger implements WLogs {
         ctx.setResponseTime(System.currentTimeMillis());
 
         WLogEventEntity wLogEventEntity = new WLogEventEntity(level, ctx.getUsername(), ctx.getRole(),
-                ctx.getRealUri(),requstDesc, ctx.getParams().toJSONString(), ctx.getWRespCode().getMsg(),ctx.getRequestTime(),
+                ctx.getRealUri(),ctx.getIp(),requstDesc, ctx.getParams().toJSONString(), ctx.getWRespCode().getMsg(),ctx.getRequestTime(),
         ctx.getResponseTime(),ctx.getExecutedSQLs());
         logs.add(wLogEventEntity);
         kvDBUtils.setValue(key, logs, WKVType.T_LIST);

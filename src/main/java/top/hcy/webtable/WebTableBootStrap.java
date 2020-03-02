@@ -26,12 +26,15 @@ import top.hcy.webtable.db.kv.WKVType;
 import top.hcy.webtable.filter.*;
 import top.hcy.webtable.service.Router;
 import top.hcy.webtable.service.*;
+import top.hcy.webtable.tools.CommonUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.*;
 
 
@@ -405,7 +408,13 @@ public class WebTableBootStrap {
         //设置threadlocal
         WGlobal.ctxThreadLocal.set(ctx);
 
+        //设置请求时间
         ctx.setRequestTime(System.currentTimeMillis());
+
+        //获取请求IP
+        String ipAddr = CommonUtils.getIRealIPAddr(request);
+        ctx.setIp(ipAddr);
+
 
         //检查url 和 请求方法
         hPreRequest.doFilter(ctx);

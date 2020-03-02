@@ -31,6 +31,7 @@ public class WebTableContext {
     private String tokenKey;
     private String realUri;
     private String newToken;
+    private String ip;
     // 管理员权限表 非分享权限
     private JSONArray permissions;
     //记录执行的sql
