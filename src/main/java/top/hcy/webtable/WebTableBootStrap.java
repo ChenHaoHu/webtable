@@ -36,6 +36,7 @@ import java.util.*;
 
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
+import static top.hcy.webtable.common.constant.WGlobal.wLogger;
 
 @Slf4j
 public class WebTableBootStrap {
@@ -218,6 +219,10 @@ public class WebTableBootStrap {
 
     }
 
+    public void closeResources(){
+        WGlobal.ctxThreadLocal.remove();
+    }
+
     private void updateAbstractFields(Class wAbstractFieldClass, String key) {
         Set<Method> wtriggerMethods = reflections.getMethodsAnnotatedWith(wAbstractFieldClass);
         Iterator<Method> iterator = wtriggerMethods.iterator();
@@ -396,10 +401,16 @@ public class WebTableBootStrap {
     //处理入口
     public WResponseEntity handler(HttpServletRequest request, HttpServletResponse response){
         WebTableContext ctx = new WebTableContext(request,response);
+
+        //设置threadlocal
+        WGlobal.ctxThreadLocal.set(ctx);
+
+        ctx.setRequestTime(System.currentTimeMillis());
+
         //检查url 和 请求方法
         hPreRequest.doFilter(ctx);
         if (ctx.isError()){
-            return defulteWResponseEntity(ctx);
+            return responseWResponseEntity(ctx);
         }
 
         //处理 token key
@@ -411,19 +422,17 @@ public class WebTableBootStrap {
                 ctx.setRole(split[1]);
             }else{
                 ctx.setWRespCode(WRespCode.REQUEST_TOKEN_ERROR);
-                return defulteWResponseEntity(ctx);
+                return responseWResponseEntity(ctx);
             }
         }
-
-
-
 
         //获取对应service
         WService wService = ctx.getWService();
         //校验参数
         wService.verifyParams(ctx);
         if (ctx.isError()){
-            return defulteWResponseEntity(ctx);
+            wLogger.warn(ctx,"");
+            return responseWResponseEntity(ctx);
         }
         //执行service
         try {
@@ -432,7 +441,10 @@ public class WebTableBootStrap {
             e.printStackTrace();
             log.error("service error"+e.getClass().getName() +"  ctx:"+ ctx.toString());
             ctx.setWRespCode(WRespCode.REQUEST_SERVICE_ERROR);
+            wLogger.error(ctx,"");
+        }finally {
         }
+
         HashMap res = new HashMap();
         if (ctx.isRefreshToken()){
             res.put("token",ctx.getNewToken());
@@ -442,9 +454,10 @@ public class WebTableBootStrap {
 
         res.put("data",ctx.getRespsonseEntity());
 
-        return new WResponseEntity(ctx.getWRespCode(),res);
+        wLogger.info(ctx,"");
+        ctx.setRespsonseEntity(res);
+        return responseWResponseEntity(ctx);
     }
-
 
     private void initDefaultAccount() {
         ArrayList<HashMap> list = new ArrayList<>();
@@ -455,7 +468,10 @@ public class WebTableBootStrap {
         }
     }
 
-    public WResponseEntity defulteWResponseEntity(WebTableContext ctx){
+    public WResponseEntity responseWResponseEntity(WebTableContext ctx){
+        closeResources();
+        //记录返回时间戳
+        ctx.setResponseTime(System.currentTimeMillis());
         return new WResponseEntity(ctx.getWRespCode(),ctx.getRespsonseEntity());
     }
 

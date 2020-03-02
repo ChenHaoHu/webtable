@@ -56,6 +56,7 @@ public class UpdateShareService implements WService {
 
         if (flag == false){
             ctx.setWRespCode(WRespCode.UPDATE_NODATA);
+            ctx.setError(true);
             return;
         }
 
@@ -63,6 +64,7 @@ public class UpdateShareService implements WService {
 
         if(b == false){
             ctx.setWRespCode(WRespCode.UPDATE_FAIL);
+            ctx.setError(true);
             return;
         }
 
@@ -152,6 +154,7 @@ public class UpdateShareService implements WService {
             b = kvDBUtils.setValue(username + "." + WConstants.PREFIX_TABLE + table, value, WKVType.T_MAP);
             if(b == false){
                 ctx.setWRespCode(WRespCode.INSERT_FAIL);
+                ctx.setError(true);
                 return;
             }
             b = kvDBUtils.setValue(username + ".tables" , tableList, WKVType.T_LIST);
@@ -159,6 +162,7 @@ public class UpdateShareService implements WService {
 
         if(b == false){
             ctx.setWRespCode(WRespCode.INSERT_FAIL);
+            ctx.setError(true);
             return;
         }
 

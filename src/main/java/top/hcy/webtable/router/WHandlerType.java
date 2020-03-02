@@ -18,6 +18,7 @@ public enum WHandlerType {
     DSHAREDATA("dshare","删除分享信息"),
     GCHART("gchart","获取设定的图表分析数据"),
     GHOMEPAGE("ghomepage","获取首页信息"),
+    GLOGS("glogs","获取系统日志"),
     LoginRequest("login","登录请求");
 
     private String uri;
@@ -31,8 +32,6 @@ public enum WHandlerType {
     public String getUri() {
         return uri;
     }
-
-
 
     public String getDesc() {
         return desc;

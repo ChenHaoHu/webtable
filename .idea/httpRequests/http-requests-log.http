@@ -3,6 +3,240 @@ Content-Type: application/jsonn
 token: hcytoken
 
 {
+  "u": "glogs",
+  "user":null,
+  "role":"",
+  "level":0,
+
+}
+
+<> 2020-03-02T124145.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":null,
+  "role":"",
+  "level":0,
+  "start":0,
+  "end":0
+}
+
+<> 2020-03-02T124134.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":null,
+  "role":"",
+  "level":-1,
+
+}
+
+<> 2020-03-01T114430.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":null,
+  "role":"",
+  "level":0,
+
+}
+
+<> 2020-03-01T114418.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":null,
+  "role":"",
+  "level":0,
+  "start":0,
+  "end":0
+}
+
+<> 2020-03-01T114411.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":"",
+  "role":"",
+  "level":0,
+  "start":0,
+  "end":0
+}
+
+<> 2020-03-01T114307.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":"Data1",
+  "role":"Data1",
+  "level":0,
+  "start":0,
+  "end":0
+}
+
+<> 2020-03-01T114256.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":"Data1",
+  "role":"Data1",
+  "start":0,
+  "end":0
+}
+
+<> 2020-03-01T113520.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":"Data1",
+  "role":"Data1",
+  "level":0,
+  "start":0,
+  "end":0
+}
+
+<> 2020-03-01T113321.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":"Data1",
+  "role":"Data1",
+  "levle":0,
+  "start":0,
+  "end":0
+}
+
+<> 2020-03-01T113245.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":"Data1",
+  "role":"Data1",
+  "levle":0,
+  "start":0,
+  "end":0
+}
+
+<> 2020-03-01T113119.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":"Data1",
+  "role":"Data1",
+  "levle":0,
+  "start":0,
+  "end":0
+}
+
+<> 2020-03-01T112851.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":"Data1",
+  "role":"Data1",
+  "levle":0,
+  "start":0,
+  "end":0
+}
+
+<> 2020-03-01T112726.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":"Data1",
+  "role":"Data1",
+  "levle":0,
+  "start":0,
+  "end":0
+}
+
+<> 2020-03-01T112539.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
   "u": "gkvdata",
 }
 
@@ -464,261 +698,6 @@ token: hcytoken
 }
 
 <> 2020-02-11T075238.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gchart",
-  "table":"Data1",
-   "chart":""
-
-}
-
-<> 2020-02-11T075140.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gchart",
-  "table":"",
-   "chart":""
-
-}
-
-<> 2020-02-11T075109.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gchart",
-  "table":"",
-   "chart":""
-
-}
-
-<> 2020-02-11T074941.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gchart",
-  "table":"",
-}
-
-<> 2020-02-11T074928.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gkvdata",
-}
-
-<> 2020-02-11T010810.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":1,
-  "pagesize":6,
-  "sort":{
-     "field":"book_price"
-  },
-  "find":[
-
-  {key: "book_id", value: "1002", compare: "less"}
-
-  ],
-
-
-}
-
-<> 2020-02-10T020948.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":1,
-  "pagesize":6,
-  "like":{
-  },
-  "sort":{
-     "field":"book_price"
-  }
-}
-
-<> 2020-02-09T113208.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":6,
-  "pagesize":2,
-  "like":{
-  },
-  "sort":{
-     "field":"book_price"
-  }
-}
-
-<> 2020-02-09T113150.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":1,
-  "pagesize":2,
-  "like":{
-  },
-  "sort":{
-     "field":"book_price"
-  }
-}
-
-<> 2020-02-09T113141.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":0,
-  "pagesize":2,
-  "like":{
-  },
-  "sort":{
-     "field":"book_price"
-  }
-}
-
-<> 2020-02-09T112748.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":0,
-  "pagesize":2,
-  "like":{
-  },
-  "sort":{
-     "field":"book_price"
-  }
-}
-
-<> 2020-02-09T112439.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":0,
-  "pagesize":2,
-  "like":{
-  },
-  "sort":{
-     "field":"bookprice"
-  }
-}
-
-<> 2020-02-09T112209.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":0,
-  "pagesize":2,
-  "like":{
-  },
-  "sort":{
-     "field":"book_price"
-  }
-}
-
-<> 2020-02-09T111957.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gtable",
-  "table":"Book",
-  "pagenum":0,
-  "pagesize":2,
-  "like":{
-  },
-  "sort":{
-     "field":"book_price"
-  }
-}
-
-<> 2020-02-09T111739.200.json
 
 ###
 

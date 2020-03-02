@@ -1,13 +1,17 @@
 package top.hcy.webtable.common.constant;
 
+import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.db.kv.WKvDbUtils;
 import top.hcy.webtable.db.kv.LevelDBUtils;
+import top.hcy.webtable.logs.WLogger;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
 
 
 public class WGlobal {
+
+    public static WLogger wLogger = new WLogger();
 
     public static DataSource dataSource = null;
 
@@ -35,9 +39,14 @@ public class WGlobal {
 
     public static final String JWT_SECRET = "eyJhbGciOiJIUzUxMiJ9";
 
-    public static  final String[] WRoles  = {
+    public static  String[] WRoles  = {
             "admin","share"
     };
 
+    public static String[] logWhiteList = {
+      "userinfo","glogs","login","gsharepermissionlist"
+    };
+
+    public static ThreadLocal<WebTableContext> ctxThreadLocal = new ThreadLocal<>();
 
 }

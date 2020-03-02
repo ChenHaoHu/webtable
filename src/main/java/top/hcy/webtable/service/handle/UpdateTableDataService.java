@@ -57,6 +57,7 @@ public class UpdateTableDataService implements WService {
         JSONObject tableData = (JSONObject) kvDBUtils.getValue(username+"."+WConstants.PREFIX_TABLE+table,WKVType.T_MAP);
         if (tableData == null){
             ctx.setWRespCode(WRespCode.TABLE_NULL);
+            ctx.setError(true);
             return;
         }
         String tableName = tableData.getString("table");
@@ -84,6 +85,7 @@ public class UpdateTableDataService implements WService {
 
         if (selectData.size() == 0){
             ctx.setWRespCode(WRespCode.UPDATE_NODATA);
+            ctx.setError(true);
             return;
         }
 
@@ -195,6 +197,7 @@ public class UpdateTableDataService implements WService {
 
             }else{
                 ctx.setWRespCode(WRespCode.UPDATE_FAIL);
+                ctx.setError(true);
             }
 
 

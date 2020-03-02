@@ -5,9 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 
 public class CommonUtils {
@@ -49,5 +47,19 @@ public class CommonUtils {
             list  = null;
         }
         return list;
+    }
+
+    /**
+     * 获取当天的零点时间戳
+     *精度到秒
+     * @return 当天的零点时间戳
+     */
+    public static long getTodayStartTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        return calendar.getTime().getTime()/1000;
     }
 }

@@ -50,6 +50,7 @@ public class AddTableDataService implements WService {
 
         if (tableData == null){
             ctx.setWRespCode(WRespCode.TABLE_NULL);
+            ctx.setError(true);
             return;
         }
         String tableName = tableData.getString("table");
@@ -156,6 +157,7 @@ public class AddTableDataService implements WService {
                 }
             }else{
                 ctx.setWRespCode(WRespCode.INSERT_FAIL);
+                ctx.setError(true);
             }
 
 

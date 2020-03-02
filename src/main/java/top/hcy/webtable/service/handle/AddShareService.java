@@ -47,6 +47,7 @@ public class AddShareService implements WService {
 
         if(b == false){
             ctx.setWRespCode(WRespCode.INSERT_FAIL);
+            ctx.setError(true);
             return;
         }
 
@@ -136,6 +137,7 @@ public class AddShareService implements WService {
             b = kvDBUtils.setValue(data.getString("username") + "." + WConstants.PREFIX_TABLE + table, value, WKVType.T_MAP);
             if(b == false){
                 ctx.setWRespCode(WRespCode.INSERT_FAIL);
+                ctx.setError(true);
                 return;
             }
             b = kvDBUtils.setValue(data.getString("username") + ".tables" , tableList, WKVType.T_LIST);
@@ -143,6 +145,7 @@ public class AddShareService implements WService {
 
         if(b == false){
             ctx.setWRespCode(WRespCode.INSERT_FAIL);
+            ctx.setError(true);
             return;
         }
 

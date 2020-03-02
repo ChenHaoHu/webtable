@@ -1,7 +1,9 @@
 package top.hcy.webtable.db.mysql;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
+import com.alibaba.fastjson.JSONArray;
 import lombok.extern.slf4j.Slf4j;
+import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WGlobal;
 import top.hcy.webtable.db.DBUtils;
 import top.hcy.webtable.tools.CommonUtils;
@@ -107,6 +109,7 @@ public class MySqlDbUtils implements DBUtils {
                 preparedStatement.setString(size+i+1,conditionValues[i]);
             }
             execute = preparedStatement.executeUpdate();
+
         }catch (Exception e){
             //e.printStackTrace();
             log.error(sql+"  "+ values+ "  "+ e.getMessage());
@@ -174,5 +177,14 @@ public class MySqlDbUtils implements DBUtils {
             }
         }
         return list;
+    }
+
+    public void recordSQLData(){
+        WebTableContext ctx = WGlobal.ctxThreadLocal.get();
+        JSONArray executedSQL = ctx.getExecutedSQL();
+        if (executedSQL == null){
+            executedSQL = new JSONArray();
+        }
+
     }
 }

@@ -185,6 +185,7 @@ public class GetTableDataService implements WService {
                 }
             }else{
                 ctx.setWRespCode(WRespCode.PERMISSION_DENIED);
+                ctx.setError(true);
                 return null;
             }
         }
@@ -207,6 +208,7 @@ public class GetTableDataService implements WService {
 
             }else{
                 ctx.setWRespCode(WRespCode.PERMISSION_DENIED);
+                ctx.setError(true);
                 return null;
             }
         }

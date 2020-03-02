@@ -46,6 +46,7 @@ public class DeleteShareService implements WService {
 
         if (flag == false){
             ctx.setWRespCode(WRespCode.DELETE_NODATA);
+            ctx.setError(true);
             return;
         }
 
@@ -53,6 +54,7 @@ public class DeleteShareService implements WService {
 
         if(b == false){
             ctx.setWRespCode(WRespCode.DELETE_FAIL);
+            ctx.setError(true);
             return;
         }
 

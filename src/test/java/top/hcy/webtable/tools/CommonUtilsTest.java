@@ -22,4 +22,9 @@ class CommonUtilsTest {
         System.out.println(map);
         Assert.assertNotNull(map);
     }
+
+    @Test
+    void getTodayStartTime() {
+        System.out.println(CommonUtils.getTodayStartTime());
+    }
 }

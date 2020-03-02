@@ -40,9 +40,11 @@ public class UserRouterManagemanet {
             UserRouter permissionRouter = new UserRouter("permission","permission","/wadmin/permission/index","角色管理","form");
             UserRouter memberRouter = new UserRouter("member","member","/wadmin/member/index","账号管理","tree");
             UserRouter shareRouter = new UserRouter("share","share","/wadmin/share/index","分享管理","nested");
+            UserRouter logRouter = new UserRouter("log","log","/wadmin/log/index","日志管理","skill");
             wadminUserRouters.add(permissionRouter);
             wadminUserRouters.add(memberRouter);
             wadminUserRouters.add(shareRouter);
+            wadminUserRouters.add(logRouter);
             JSONObject wadminRouters = pathItemWithChildren("/wadmin", "wadmin", "example", wadminUserRouters);
             routers.add(wadminRouters);
         }

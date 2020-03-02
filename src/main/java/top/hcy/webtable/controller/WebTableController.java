@@ -29,7 +29,6 @@ public class WebTableController {
         //处理一些配置操作
         WGlobal.PACKAGE_ENTITY = "top.hcy.webtable.entity";
 
-
         try {
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
             InputStream inputStream = loader.getResourceAsStream("db.properties");

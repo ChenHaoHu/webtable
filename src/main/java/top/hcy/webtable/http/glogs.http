@@ -1,0 +1,22 @@
+//login
+POST http://{{host}}:{{port}}/webtable
+Content-Type: application/jsonn
+token:hcytoken
+
+{
+  "u": "glogs",
+  "user":null,
+  "role":"",
+  "level":0,
+  "start":0,
+  "end":0
+}
+
+###
+
+###
+
+
+
+
+###

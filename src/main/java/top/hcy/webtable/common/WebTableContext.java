@@ -1,5 +1,6 @@
 package top.hcy.webtable.common;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 import lombok.ToString;
@@ -9,6 +10,7 @@ import top.hcy.webtable.service.WService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
+import java.util.List;
 
 
 @Data
@@ -29,6 +31,12 @@ public class WebTableContext {
     private String tokenKey;
     private String realUri;
     private String newToken;
+    // 管理员权限表 非分享权限
+    private JSONArray permissions;
+    //记录执行的sql
+    private JSONArray executedSQL;
+    private long requestTime;
+    private long responseTime;
     private boolean refreshToken = false;
     private WService wService;
 

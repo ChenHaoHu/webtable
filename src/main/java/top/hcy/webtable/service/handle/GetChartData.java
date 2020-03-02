@@ -38,11 +38,13 @@ public class GetChartData implements WService {
         JSONObject tableData = getTable(table, username);
         if (tableData == null){
             ctx.setWRespCode(WRespCode.TABLE_NULL);
+            ctx.setError(true);
             return;
         }
         JSONArray permission = tableData.getJSONArray("permission");
         if (!permission.contains("chart")){
             ctx.setWRespCode(WRespCode.PERMISSION_DENIED);
+            ctx.setError(true);
             return;
         }
 

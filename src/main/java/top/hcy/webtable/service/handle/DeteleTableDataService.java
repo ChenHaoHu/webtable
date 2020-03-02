@@ -46,6 +46,7 @@ public class DeteleTableDataService implements WService {
         JSONObject tableData = (JSONObject) kvDBUtils.getValue(username+"."+WConstants.PREFIX_TABLE+table,WKVType.T_MAP);
         if (tableData == null){
             ctx.setWRespCode(WRespCode.TABLE_NULL);
+            ctx.setError(true);
             return;
         }
         String tableName = tableData.getString("table");
@@ -99,6 +100,7 @@ public class DeteleTableDataService implements WService {
 
         }else{
             ctx.setWRespCode(WRespCode.DELETE_FAIL);
+            ctx.setError(true);
         }
 
     }

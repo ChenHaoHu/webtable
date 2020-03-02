@@ -64,6 +64,7 @@ public class LoginService implements WService {
                         return;
                     }else{
                         ctx.setWRespCode(WRespCode.LOGIN_SHAREFORBID);
+                        ctx.setError(true);
                         return;
                     }
 
@@ -72,5 +73,6 @@ public class LoginService implements WService {
             }
         }
         ctx.setWRespCode(WRespCode.LOGIN_FAILE);
+        ctx.setError(true);
     }
 }
