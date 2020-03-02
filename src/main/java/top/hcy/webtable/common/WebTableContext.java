@@ -34,7 +34,7 @@ public class WebTableContext {
     // 管理员权限表 非分享权限
     private JSONArray permissions;
     //记录执行的sql
-    private JSONArray executedSQL;
+    private JSONArray executedSQLs;
     private long requestTime;
     private long responseTime;
     private boolean refreshToken = false;

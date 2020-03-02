@@ -28,7 +28,8 @@ public class WLogger implements WLogs {
 
     @Override
     public  void error(WebTableContext ctx, String str)  {
-        saveLogs(ctx, 2);
+        int level = 2;
+        saveLogs(ctx, level);
     }
 
 
@@ -99,8 +100,12 @@ public class WLogger implements WLogs {
             }
         }
 
+        //打日志时，记录返回时间  有待改进
+        ctx.setResponseTime(System.currentTimeMillis());
+
         WLogEventEntity wLogEventEntity = new WLogEventEntity(level, ctx.getUsername(), ctx.getRole(),
-                ctx.getRealUri(),requstDesc, ctx.getParams().toJSONString(), ctx.getWRespCode().getMsg(),ctx.getRequestTime());
+                ctx.getRealUri(),requstDesc, ctx.getParams().toJSONString(), ctx.getWRespCode().getMsg(),ctx.getRequestTime(),
+        ctx.getResponseTime(),ctx.getExecutedSQLs());
         logs.add(wLogEventEntity);
         kvDBUtils.setValue(key, logs, WKVType.T_LIST);
     }

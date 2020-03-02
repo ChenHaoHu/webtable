@@ -10,6 +10,87 @@ token: hcytoken
 
 }
 
+<> 2020-03-02T075647.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":null,
+  "role":"",
+  "level":0,
+
+}
+
+<> 2020-03-02T051340.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":null,
+  "role":"",
+  "level":0,
+
+}
+
+<> 2020-03-02T051023.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":null,
+  "role":"",
+  "level":0,
+
+}
+
+<> 2020-03-02T050846.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":null,
+  "role":"",
+  "level":0,
+  "start":0,
+  "end":0
+}
+
+<> 2020-03-02T050801.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "glogs",
+  "user":null,
+  "role":"",
+  "level":0,
+
+}
+
 <> 2020-03-02T124145.200.json
 
 ###
@@ -627,77 +708,6 @@ token: hcytoken
 }
 
 <> 2020-02-16T021827.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gchart",
-  "table":"Data1",
-  "chart":"chart1"
-}
-
-<> 2020-02-16T011616.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gkvdata",
-}
-
-<> 2020-02-16T121649.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gchart",
-  "table":"Data1",
-   "chart":"chart1"
-
-}
-
-<> 2020-02-11T075308.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gchart",
-  "table":"Data1",
-   "chart":"chart2"
-
-}
-
-<> 2020-02-11T075303.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gchart",
-  "table":"Data1",
-   "chart":""
-
-}
-
-<> 2020-02-11T075238.200.json
 
 ###
 

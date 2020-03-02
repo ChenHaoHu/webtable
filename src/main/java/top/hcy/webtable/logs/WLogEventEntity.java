@@ -1,6 +1,7 @@
 package top.hcy.webtable.logs;
 
 
+import com.alibaba.fastjson.JSONArray;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,8 @@ public class WLogEventEntity {
     private String requestdesc;
     private String params;
     private String response;
-    private Long time;
+    private Long requestTime;
+    private Long responseTime;
+    private JSONArray sqlRecords;
 
 }

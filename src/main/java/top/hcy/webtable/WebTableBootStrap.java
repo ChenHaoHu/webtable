@@ -454,7 +454,11 @@ public class WebTableBootStrap {
 
         res.put("data",ctx.getRespsonseEntity());
 
-        wLogger.info(ctx,"");
+        if (ctx.isError()){
+            wLogger.warn(ctx,"");
+        }else{
+            wLogger.info(ctx,"");
+        }
         ctx.setRespsonseEntity(res);
         return responseWResponseEntity(ctx);
     }
@@ -470,8 +474,6 @@ public class WebTableBootStrap {
 
     public WResponseEntity responseWResponseEntity(WebTableContext ctx){
         closeResources();
-        //记录返回时间戳
-        ctx.setResponseTime(System.currentTimeMillis());
         return new WResponseEntity(ctx.getWRespCode(),ctx.getRespsonseEntity());
     }
 
