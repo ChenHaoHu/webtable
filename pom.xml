@@ -15,13 +15,13 @@
     <description>webtable-spring-boot-starter</description>
     <url>https://github.com/ChenHaoHu/webtable</url>
 
-<!--    <groupId>com.github.ChenHaoHu</groupId>-->
-<!--    <artifactId>webtable</artifactId>-->
-<!--    <version>1.0.1</version>-->
+    <groupId>com.github.ChenHaoHu</groupId>
+    <artifactId>webtable</artifactId>
+    <version>1.0.1</version>
 
-        <groupId>top.hcy.webtable</groupId>
-        <artifactId>webtable</artifactId>
-        <version>1.0.1</version>
+<!--        <groupId>top.hcy.webtable</groupId>-->
+<!--        <artifactId>webtable</artifactId>-->
+<!--        <version>1.0.1</version>-->
 
 
     <licenses>
