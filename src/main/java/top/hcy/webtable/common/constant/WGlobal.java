@@ -17,27 +17,30 @@ public class WGlobal {
 
     public static  ArrayList<String> tables = new ArrayList<>();
 
+
+    public static String DB_FILE = "WebTabelDB";
+
     public static WKvDbUtils kvDBUtils = new LevelDBUtils();
 
     public static ArrayList<String> baseKeys =  new ArrayList<>();
 
-    public static  final String[][] DefaultAccounts  = {
+    public static   String[][] DefaultAccounts  = {
             {"secadmin","admin"},
             {"admin","admin"}
     };
 
 
-    public static  final String[] TOKEN_POWER = new String[]{
+    public static   String[] TOKEN_POWER = new String[]{
             "hcytoken"
     };
 
-    public static final long TOKEN_REFRESH_TIME = 20 * 1000;
+    public static  long TOKEN_REFRESH_TIME = 20 * 1000;
 
     public static  String PACKAGE_ENTITY = "top.hcy.webtable.entity";
 
     public static  String HandleRoutersScanPackage = "top.hcy.webtable.service.handle";
 
-    public static final String JWT_SECRET = "eyJhbGciOiJIUzUxMiJ9";
+    public static  String JWT_SECRET = "eyJhbGciOiJIUzUxMiJ9";
 
     public static  String[] WRoles  = {
             "admin","share"
@@ -48,5 +51,6 @@ public class WGlobal {
     };
 
     public static ThreadLocal<WebTableContext> ctxThreadLocal = new ThreadLocal<>();
+
 
 }

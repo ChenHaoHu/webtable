@@ -1,3 +1,81 @@
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gchart",
+  "table":"Data1",
+  "chart":"chart1"
+}
+
+<> 2020-03-21T011348.200.json
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gchart",
+  "table":"Data1",
+  "chart":"chart1"
+}
+
+<> 2020-03-21T011256.200.json
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gchart"
+}
+
+<> 2020-03-21T011247.200.json
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gchart",
+}
+
+<> 2020-03-21T011243.200.json
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gchart",
+  "table":"Data1",
+  "chart":"chart1"
+}
+
+<> 2020-03-21T011225.200.json
+
+###
+
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gchart",
+  "table":"Data1",
+  "chart":"chart1"
+}
+
+###
+
 POST http://localhost:9299/webtable
 Content-Type: application/jsonn
 token: hcytoken
@@ -636,78 +714,6 @@ token: hcytoken
 }
 
 <> 2020-02-16T025957.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gkvdata",
-}
-
-<> 2020-02-16T025501.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gkvdata",
-}
-
-<> 2020-02-16T025131.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gkvdata",
-}
-
-<> 2020-02-16T024149.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gsharepermissionlist",
-}
-
-<> 2020-02-16T022222.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gkvdata",
-}
-
-<> 2020-02-16T022120.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gsharepermissionlist",
-}
-
-<> 2020-02-16T021827.200.json
 
 ###
 

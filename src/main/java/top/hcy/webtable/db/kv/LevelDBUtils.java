@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.iq80.leveldb.*;
 import org.iq80.leveldb.impl.Iq80DBFactory;
+import top.hcy.webtable.common.constant.WGlobal;
 
 import java.io.File;
 import java.nio.charset.Charset;
@@ -17,18 +18,17 @@ import java.util.Map;
 @Slf4j
 public class LevelDBUtils implements WKvDbUtils {
 
-    private static final String PATH = "webtableDB";
-    private static final Charset CHARSET = Charset.forName("utf-8");
-    private static final File FILE = new File(PATH);
+    private static String PATH = WGlobal.DB_FILE;
+    private static Charset CHARSET = Charset.forName("utf-8");
     DB db = null;
     DBFactory factory = null;
 
     public LevelDBUtils(){
         //初始化对象
-         factory = new Iq80DBFactory();
+        factory = new Iq80DBFactory();
         // 默认如果没有则创建
         Options options = new Options();
-        File file = new File(PATH);
+        File file = new File(WGlobal.DB_FILE);
         try {
             db = factory.open(file, options);
         }catch (Exception e){
@@ -116,6 +116,7 @@ public class LevelDBUtils implements WKvDbUtils {
         db.put(target.getBytes(CHARSET),bytes);
         return true;
     }
+
     public ArrayList<String> getAllKeys(){
         ArrayList<String> keys = new ArrayList<>();
         DBIterator iterator = db.iterator();

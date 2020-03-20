@@ -33,8 +33,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.*;
 
 
@@ -63,10 +61,76 @@ public class WebTableBootStrap {
         initDefaultAccountPermission();
     }
 
-    public void setDataSource(DataSource dataSource){
-        WGlobal.dataSource = dataSource;
-    }
+    //处理入口
+    public WResponseEntity handler(HttpServletRequest request, HttpServletResponse response){
+        WebTableContext ctx = new WebTableContext(request,response);
 
+        //设置threadlocal
+        WGlobal.ctxThreadLocal.set(ctx);
+
+        //设置请求时间
+        ctx.setRequestTime(System.currentTimeMillis());
+
+        //获取请求IP
+        String ipAddr = CommonUtils.getIRealIPAddr(request);
+        ctx.setIp(ipAddr);
+
+
+        //检查url 和 请求方法
+        hPreRequest.doFilter(ctx);
+        if (ctx.isError()){
+            return responseWResponseEntity(ctx);
+        }
+
+        //处理 token key
+        String tokenKey = ctx.getTokenKey();
+        if (tokenKey!=null){
+            String[] split = tokenKey.split(WConstants.TOKEN_SPLIT);
+            if (split.length == 2){
+                ctx.setUsername(split[0]);
+                ctx.setRole(split[1]);
+            }else{
+                ctx.setWRespCode(WRespCode.REQUEST_TOKEN_ERROR);
+                return responseWResponseEntity(ctx);
+            }
+        }
+
+        //获取对应service
+        WService wService = ctx.getWService();
+        //校验参数
+        wService.verifyParams(ctx);
+        if (ctx.isError()){
+            wLogger.warn(ctx,"");
+            return responseWResponseEntity(ctx);
+        }
+        //执行service
+        try {
+            wService.doService(ctx);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("service error"+e.getClass().getName() +"  ctx:"+ ctx.toString());
+            ctx.setWRespCode(WRespCode.REQUEST_SERVICE_ERROR);
+            wLogger.error(ctx,"");
+        }finally {
+        }
+
+        HashMap res = new HashMap();
+        if (ctx.isRefreshToken()){
+            res.put("token",ctx.getNewToken());
+        }else{
+            res.put("token","");
+        }
+
+        res.put("data",ctx.getRespsonseEntity());
+
+        if (ctx.isError()){
+            wLogger.warn(ctx,"");
+        }else{
+            wLogger.info(ctx,"");
+        }
+        ctx.setRespsonseEntity(res);
+        return responseWResponseEntity(ctx);
+    }
 
 
     private void initHandleRouters() {
@@ -99,6 +163,10 @@ public class WebTableBootStrap {
         //  new HandleRoutersManagement().invoke();
     }
 
+
+    public void setDataSource(DataSource dataSource){
+        WGlobal.dataSource = dataSource;
+    }
 
     private void initDefaultAccountPermission() {
         ArrayList<String> baseKeys = WGlobal.baseKeys;
@@ -401,76 +469,6 @@ public class WebTableBootStrap {
 
 
 
-    //处理入口
-    public WResponseEntity handler(HttpServletRequest request, HttpServletResponse response){
-        WebTableContext ctx = new WebTableContext(request,response);
-
-        //设置threadlocal
-        WGlobal.ctxThreadLocal.set(ctx);
-
-        //设置请求时间
-        ctx.setRequestTime(System.currentTimeMillis());
-
-        //获取请求IP
-        String ipAddr = CommonUtils.getIRealIPAddr(request);
-        ctx.setIp(ipAddr);
-
-
-        //检查url 和 请求方法
-        hPreRequest.doFilter(ctx);
-        if (ctx.isError()){
-            return responseWResponseEntity(ctx);
-        }
-
-        //处理 token key
-        String tokenKey = ctx.getTokenKey();
-        if (tokenKey!=null){
-            String[] split = tokenKey.split(WConstants.TOKEN_SPLIT);
-            if (split.length == 2){
-                ctx.setUsername(split[0]);
-                ctx.setRole(split[1]);
-            }else{
-                ctx.setWRespCode(WRespCode.REQUEST_TOKEN_ERROR);
-                return responseWResponseEntity(ctx);
-            }
-        }
-
-        //获取对应service
-        WService wService = ctx.getWService();
-        //校验参数
-        wService.verifyParams(ctx);
-        if (ctx.isError()){
-            wLogger.warn(ctx,"");
-            return responseWResponseEntity(ctx);
-        }
-        //执行service
-        try {
-            wService.doService(ctx);
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error("service error"+e.getClass().getName() +"  ctx:"+ ctx.toString());
-            ctx.setWRespCode(WRespCode.REQUEST_SERVICE_ERROR);
-            wLogger.error(ctx,"");
-        }finally {
-        }
-
-        HashMap res = new HashMap();
-        if (ctx.isRefreshToken()){
-            res.put("token",ctx.getNewToken());
-        }else{
-            res.put("token","");
-        }
-
-        res.put("data",ctx.getRespsonseEntity());
-
-        if (ctx.isError()){
-            wLogger.warn(ctx,"");
-        }else{
-            wLogger.info(ctx,"");
-        }
-        ctx.setRespsonseEntity(res);
-        return responseWResponseEntity(ctx);
-    }
 
     private void initDefaultAccount() {
         ArrayList<HashMap> list = new ArrayList<>();

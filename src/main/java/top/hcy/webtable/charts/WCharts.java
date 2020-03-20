@@ -16,21 +16,21 @@ public class WCharts {
     public static int PieChart3 = 6;
 
     private String title = "";
-    private ArrayList<String> xValues = null;
-    private ArrayList<Integer> yValues = null;
+    private ArrayList<String> xvalues = null;
+    private ArrayList<Integer> yvalues = null;
     public String xname = null;
     public String yname = null;
     private int type;
 
     public WCharts(ArrayList<String> xValues, ArrayList<Integer> yValues, int type) {
-        this.xValues = xValues;
-        this.yValues = yValues;
+        this.xvalues = xValues;
+        this.yvalues = yValues;
         this.type = type;
     }
 
     public WCharts(ArrayList<String> xValues, ArrayList<Integer> yValues, String xname, String yname, String title, int type) {
-        this.xValues = xValues;
-        this.yValues = yValues;
+        this.xvalues = xValues;
+        this.yvalues = yValues;
         this.xname = xname;
         this.yname = yname;
         this.title = title;

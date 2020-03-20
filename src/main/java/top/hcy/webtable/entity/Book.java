@@ -1,12 +1,14 @@
 package top.hcy.webtable.entity;
 
 import lombok.Data;
+
 import top.hcy.webtable.annotation.field.*;
 import top.hcy.webtable.annotation.table.WEnadbleInsert;
 import top.hcy.webtable.annotation.table.WEnadbleSort;
 import top.hcy.webtable.annotation.table.WEnadbleUpdate;
 import top.hcy.webtable.annotation.table.WTable;
 import top.hcy.webtable.common.enums.WebFieldType;
+
 
 /**
  * @ProjectName: webtabletest

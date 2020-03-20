@@ -120,6 +120,8 @@ public class Data2 {
  }
 
 
+
+
  @WChart(value = "部门绩效汇总",showDashboard = true)
  public Object chart3(){
 
