@@ -3,10 +3,11 @@ package top.hcy.webtable.service.handle;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import top.hcy.webtable.annotation.common.WHandleService;
+import top.hcy.webtable.annotation.webtable.WEnableLog;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
-import top.hcy.webtable.db.kv.WKVType;
+import top.hcy.webtable.wsql.kv.WKVType;
 import top.hcy.webtable.service.WService;
 
 import java.util.ArrayList;
@@ -15,14 +16,15 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
 
 @WHandleService(WHandlerType.DSHAREDATA)
-public class DeleteShareService implements WService {
-    @Override
+@WEnableLog
+public class DeleteShareService extends WService {
+
     public void verifyParams(WebTableContext ctx) {
 
     }
 
 
-    @Override
+
     public void doService(WebTableContext ctx) {
         JSONObject params = ctx.getParams();
 

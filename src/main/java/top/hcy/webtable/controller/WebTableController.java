@@ -6,13 +6,12 @@ import org.springframework.web.bind.annotation.RestController;
 import top.hcy.webtable.WebTableBootStrap;
 import top.hcy.webtable.common.constant.WGlobal;
 import top.hcy.webtable.common.response.WResponseEntity;
-import top.hcy.webtable.db.kv.WKVType;
+import top.hcy.webtable.wsql.kv.WKVType;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;

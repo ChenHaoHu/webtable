@@ -7,7 +7,7 @@ import top.hcy.webtable.annotation.field.WAbstractField;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.router.WHandlerType;
-import top.hcy.webtable.db.kv.WKVType;
+import top.hcy.webtable.wsql.kv.WKVType;
 import top.hcy.webtable.service.WService;
 
 import java.lang.reflect.Method;
@@ -17,13 +17,13 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
 
 @WHandleService(WHandlerType.GSHAREPERMISSIONLIST)
-public class GetSharePermissionService implements WService {
-    @Override
+public class GetSharePermissionService extends WService {
+
     public void verifyParams(WebTableContext ctx) {
 
     }
 
-    @Override
+
     public void doService(WebTableContext ctx) {
         String username = ctx.getUsername();
         JSONArray tables = (JSONArray) kvDBUtils.getValue(username + ".tables", WKVType.T_LIST);

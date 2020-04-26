@@ -5,8 +5,8 @@ import top.hcy.webtable.common.WebTableContext;
 
 
 public interface WLogs {
-    void info( WebTableContext ctx, String str);
-    void warn( WebTableContext ctx, String str);
-    void error(WebTableContext ctx, String str);
+    void info( WebTableContext ctx);
+    void warn( WebTableContext ctx);
+    void error(WebTableContext ctx);
     JSONArray getLogs(String user, String role, Long start, Long end, Integer level);
 }

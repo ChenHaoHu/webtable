@@ -2,6 +2,7 @@ package top.hcy.webtable.service.handle;
 
 import lombok.extern.slf4j.Slf4j;
 import top.hcy.webtable.annotation.common.WHandleService;
+import top.hcy.webtable.annotation.webtable.WEnableLog;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.router.UserRouterManagemanet;
@@ -12,13 +13,13 @@ import java.util.HashMap;
 
 @Slf4j
 @WHandleService(WHandlerType.USERINFO)
-public class UserInfoService implements WService {
-    @Override
+public class UserInfoService extends WService {
+
     public void verifyParams(WebTableContext ctx) {
 
     }
 
-    @Override
+
     public void doService(WebTableContext ctx) {
         HashMap<String,String> map = new HashMap<>();
 

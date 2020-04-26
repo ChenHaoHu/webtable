@@ -3,6 +3,7 @@ package top.hcy.webtable.service.handle;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import top.hcy.webtable.annotation.common.WHandleService;
+import top.hcy.webtable.annotation.webtable.WEnableLog;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.router.WHandlerType;
@@ -12,12 +13,13 @@ import top.hcy.webtable.service.WService;
 import static top.hcy.webtable.common.constant.WGlobal.wLogger;
 
 @WHandleService(WHandlerType.GLOGS)
-public class GetLogsService implements WService {
+@WEnableLog
+public class GetLogsService extends WService {
 
     String permissions[] = {};
 
 
-    @Override
+
     public void verifyParams(WebTableContext ctx) {
         JSONArray userPermissions = ctx.getPermissions();
         for (int i = 0; i < permissions.length; i++) {
@@ -30,7 +32,7 @@ public class GetLogsService implements WService {
         }
     }
 
-    @Override
+
     public void doService(WebTableContext ctx) {
 
         JSONObject params = ctx.getParams();

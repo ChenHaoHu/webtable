@@ -8,7 +8,7 @@ import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
-import top.hcy.webtable.db.kv.WKVType;
+import top.hcy.webtable.wsql.kv.WKVType;
 import top.hcy.webtable.service.WService;
 
 import java.lang.reflect.Method;
@@ -18,8 +18,8 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
 
 @WHandleService(WHandlerType.GCHART)
-public class GetChartData implements WService {
-    @Override
+public class GetChartData extends WService {
+
     public void verifyParams(WebTableContext ctx) {
 
         JSONObject params = ctx.getParams();
@@ -29,13 +29,13 @@ public class GetChartData implements WService {
         }
     }
 
-    @Override
+
     public void doService(WebTableContext ctx) {
         JSONObject params = ctx.getParams();
         String table = params.getString("table");
         String chart = params.getString("chart");
         String username = ctx.getUsername();
-        JSONObject tableData = getTable(table, username);
+        JSONObject tableData = getTableConfig(table, username);
         if (tableData == null){
             ctx.setWRespCode(WRespCode.TABLE_NULL);
             ctx.setError(true);
@@ -83,7 +83,5 @@ public class GetChartData implements WService {
         }
     }
 
-    private JSONObject getTable(String table, String username) {
-        return (JSONObject) kvDBUtils.getValue(username+"."+ WConstants.PREFIX_TABLE + table, WKVType.T_MAP);
-    }
+
 }

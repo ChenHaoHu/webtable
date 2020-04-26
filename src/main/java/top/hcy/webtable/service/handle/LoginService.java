@@ -3,20 +3,23 @@ package top.hcy.webtable.service.handle;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import top.hcy.webtable.annotation.common.WHandleService;
+import top.hcy.webtable.annotation.webtable.WEnableLog;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
-import top.hcy.webtable.db.kv.WKVType;
+import top.hcy.webtable.wsql.kv.WKVType;
 import top.hcy.webtable.service.WService;
 import top.hcy.webtable.tools.JwtTokenUtils;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
 
-@WHandleService(WHandlerType.LoginRequest)
-public class LoginService implements WService {
-    @Override
+@WHandleService(WHandlerType.Login)
+@WEnableLog
+
+public class LoginService extends WService {
+
     public void verifyParams(WebTableContext ctx) {
         JSONObject params = ctx.getParams();
         String username = (String)params.get("username");
@@ -30,7 +33,7 @@ public class LoginService implements WService {
         }
     }
 
-    @Override
+
     public void doService(WebTableContext ctx) {
         JSONObject params = ctx.getParams();
         String username = (String)params.get("username");

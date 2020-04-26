@@ -1,6 +1,7 @@
 package top.hcy.webtable.common.constant;
 
 import org.springframework.beans.factory.annotation.Value;
+import top.hcy.webtable.router.WHandlerType;
 
 import java.util.HashMap;
 
@@ -18,7 +19,7 @@ public class WConstants {
     public static final String PREFIX_TABLE = "table.";
     public static final String PREFIX_FIELD = "field.";
     public static final String[] NO_TOKEN_URI = new String[]{
-            "/login","login",
+            WHandlerType.Login.getUri(),
     };
 
 }

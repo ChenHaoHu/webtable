@@ -1,8 +1,9 @@
 package top.hcy.webtable.common.constant;
 
 import top.hcy.webtable.common.WebTableContext;
-import top.hcy.webtable.db.kv.WKvDbUtils;
-import top.hcy.webtable.db.kv.LevelDBUtils;
+import top.hcy.webtable.router.WHandlerType;
+import top.hcy.webtable.wsql.kv.WKvDbUtils;
+import top.hcy.webtable.wsql.kv.LevelDBUtils;
 import top.hcy.webtable.logs.WLogger;
 
 import javax.sql.DataSource;
@@ -17,8 +18,7 @@ public class WGlobal {
 
     public static  ArrayList<String> tables = new ArrayList<>();
 
-
-    public static String DB_FILE = "WebTabelDB";
+    public static String DB_FILE = "DB_WebTable";
 
     public static WKvDbUtils kvDBUtils = new LevelDBUtils();
 
@@ -46,11 +46,8 @@ public class WGlobal {
             "admin","share"
     };
 
-    public static String[] logWhiteList = {
-      "userinfo","glogs","login","gsharepermissionlist"
-    };
+    public static ArrayList<String> logWhiteList ;
 
     public static ThreadLocal<WebTableContext> ctxThreadLocal = new ThreadLocal<>();
-
 
 }

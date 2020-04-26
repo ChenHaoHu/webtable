@@ -19,7 +19,7 @@ public enum WHandlerType {
     GCHART("gchart","获取设定的图表分析数据"),
     GHOMEPAGE("ghomepage","获取首页信息"),
     GLOGS("glogs","获取系统日志"),
-    LoginRequest("login","登录请求");
+    Login("login","登录请求");
 
     private String uri;
     private String desc;

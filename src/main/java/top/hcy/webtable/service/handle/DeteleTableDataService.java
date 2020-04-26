@@ -3,13 +3,14 @@ package top.hcy.webtable.service.handle;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import top.hcy.webtable.annotation.common.WHandleService;
+import top.hcy.webtable.annotation.webtable.WEnableLog;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
-import top.hcy.webtable.db.kv.WKVType;
-import top.hcy.webtable.db.mysql.WDeleteSql;
-import top.hcy.webtable.db.mysql.WTableData;
+import top.hcy.webtable.wsql.kv.WKVType;
+import top.hcy.webtable.wsql.structured.impl.mysql.WMysqlDeleteSql;
+import top.hcy.webtable.wsql.structured.impl.mysql.WMysqlTableData;
 import top.hcy.webtable.service.WService;
 
 import java.lang.reflect.Method;
@@ -19,8 +20,9 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
 
 @WHandleService(WHandlerType.DTABLE)
-public class DeteleTableDataService implements WService {
-    @Override
+@WEnableLog
+public class DeteleTableDataService extends WService {
+
     public void verifyParams(WebTableContext ctx) {
         JSONObject params = ctx.getParams();
         String table = params.getString("table");
@@ -36,7 +38,7 @@ public class DeteleTableDataService implements WService {
         }
     }
 
-    @Override
+
     public void doService(WebTableContext ctx) {
         String username = ctx.getUsername();
         JSONObject params = ctx.getParams();
@@ -50,8 +52,8 @@ public class DeteleTableDataService implements WService {
             return;
         }
         String tableName = tableData.getString("table");
-        WTableData wTableData = new WTableData();
-        ArrayList<String> primayKey = wTableData.table(tableName).getPrimayKey();
+        WMysqlTableData wMysqlTableData = new WMysqlTableData();
+        ArrayList<String> primayKey = wMysqlTableData.table(tableName).getPrimayKey();
 
         check(ctx, pkFields,tableData,primayKey);
         if (ctx.isError()){
@@ -59,19 +61,19 @@ public class DeteleTableDataService implements WService {
         }
 
         //删除操作
-        WDeleteSql wDeleteSql = new WDeleteSql();
-        wDeleteSql.table(tableName);
-        wDeleteSql.where();
+        WMysqlDeleteSql wMysqlDeleteSql = new WMysqlDeleteSql();
+        wMysqlDeleteSql.table(tableName);
+        wMysqlDeleteSql.where();
         int size = pkFields.size();
         String[] values = new String[size];
         int i = 0;
-        wDeleteSql.where();
+        wMysqlDeleteSql.where();
         for (String key : pkFields.keySet()){
-            wDeleteSql.and(key);
+            wMysqlDeleteSql.and(key);
             values[i++] = pkFields.getString(key);
         }
 
-        int i1 = wDeleteSql.executeDelete(values);
+        int i1 = wMysqlDeleteSql.executeDelete(values);
 
         if (i1 >= 1){
             ctx.setWRespCode(WRespCode.DELETE_SUCCESS);
@@ -105,9 +107,7 @@ public class DeteleTableDataService implements WService {
 
     }
 
-    private JSONObject getFieldData(String table, String username, String field) {
-        return (JSONObject) kvDBUtils.getValue( WConstants.PREFIX_FIELD+table+"."+ field, WKVType.T_MAP);
-    }
+
 
     private void check(WebTableContext ctx, JSONObject pks, JSONObject tableData, ArrayList<String> primayKey) {
 

@@ -2,32 +2,35 @@ package top.hcy.webtable.logs;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import top.hcy.webtable.annotation.webtable.WEnableLog;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.common.constant.WGlobal;
-import top.hcy.webtable.db.kv.WKVType;
+import top.hcy.webtable.service.WService;
+import top.hcy.webtable.wsql.kv.WKVType;
 import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.tools.CommonUtils;
+
+import java.util.ArrayList;
 
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
 public class WLogger implements WLogs {
 
     @Override
-    public  void info( WebTableContext ctx, String str) {
+    public  void info( WebTableContext ctx) {
         saveLogs(ctx, 0);
     }
 
     @Override
-    public  void warn(WebTableContext ctx, String str)  {
+    public  void warn(WebTableContext ctx)  {
         int level = 1;
         saveLogs(ctx, level);
     }
 
 
     @Override
-    public  void error(WebTableContext ctx, String str)  {
+    public  void error(WebTableContext ctx)  {
         int level = 2;
         saveLogs(ctx, level);
     }
@@ -73,13 +76,18 @@ public class WLogger implements WLogs {
 
     private synchronized void saveLogs(WebTableContext ctx, int level) {
 
-        String[] logWhiteList = WGlobal.logWhiteList;
-        int logWhiteListLength = logWhiteList.length;
-        for (int i = 0; i < logWhiteListLength; i++) {
-              if (logWhiteList[i].equals(ctx.getRealUri())){
-                  return;
-              }
+        boolean b = checkWLog(ctx);
+
+        if(!b){
+            return;
         }
+//        WService wService = ctx.getWService();
+//        if(wService!=null){
+//            WEnableLog annotation = wService.getClass().getAnnotation(WEnableLog.class);
+//            if (annotation == null){
+//                return;
+//            }
+//        }
 
         Long s = CommonUtils.getTodayStartTime();
         String key = WConstants.PREFIX_LOG+s;
@@ -105,9 +113,20 @@ public class WLogger implements WLogs {
 
         WLogEventEntity wLogEventEntity = new WLogEventEntity(level, ctx.getUsername(), ctx.getRole(),
                 ctx.getRealUri(),ctx.getIp(),requstDesc, ctx.getParams().toJSONString(), ctx.getWRespCode().getMsg(),ctx.getRequestTime(),
-        ctx.getResponseTime(),ctx.getExecutedSQLs());
+                ctx.getResponseTime(),ctx.getExecutedSQLs());
         logs.add(wLogEventEntity);
         kvDBUtils.setValue(key, logs, WKVType.T_LIST);
+    }
+
+    private boolean checkWLog(WebTableContext ctx) {
+        ArrayList<String> logWhiteList = WGlobal.logWhiteList;
+        int logWhiteListLength = logWhiteList.size();
+        for (int i = 0; i < logWhiteListLength; i++) {
+            if (logWhiteList.get(i).equals(ctx.getRealUri())){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

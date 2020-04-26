@@ -3,12 +3,13 @@ package top.hcy.webtable.service.handle;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import top.hcy.webtable.annotation.common.WHandleService;
+import top.hcy.webtable.annotation.webtable.WEnableLog;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
-import top.hcy.webtable.db.kv.WKVType;
-import top.hcy.webtable.db.mysql.WInsertSql;
+import top.hcy.webtable.wsql.kv.WKVType;
+import top.hcy.webtable.wsql.structured.impl.mysql.WMysqlInsertSql;
 import top.hcy.webtable.service.WService;
 
 import java.lang.reflect.Field;
@@ -20,8 +21,9 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
 
 @WHandleService(WHandlerType.ATABLE)
-public class AddTableDataService implements WService {
-    @Override
+@WEnableLog
+public class AddTableDataService extends WService {
+
     public void verifyParams(WebTableContext ctx) {
         JSONObject params = ctx.getParams();
         String table = params.getString("table");
@@ -39,7 +41,7 @@ public class AddTableDataService implements WService {
 
     }
 
-    @Override
+
     public void doService(WebTableContext ctx) {
 
         String username = ctx.getUsername();
@@ -66,7 +68,7 @@ public class AddTableDataService implements WService {
             Field[] cFields = c.getDeclaredFields();
             HashMap<String,String> fieldMap = new HashMap<>();
             for (int i = 0; i < cFields.length; i++) {
-                JSONObject fieldData = getFieldData(table,username,cFields[i].getName());
+                JSONObject fieldData = getFieldConfig(table,username,cFields[i].getName());
                 String column = cFields[i].getName();
                 if (fieldData!=null){
                     column = fieldData.getString("column");
@@ -95,7 +97,7 @@ public class AddTableDataService implements WService {
 
             for (String key : insertFields.keySet()){
                 Field insertField = c.getDeclaredField(fieldMap.get(key));
-                JSONObject fieldData = getFieldData(table,username,insertField.getName());
+                JSONObject fieldData = getFieldConfig(table,username,insertField.getName());
                 String toPersistenceMethod = fieldData.getString("toPersistenceMethod");
                 if (toPersistenceMethod  == null || toPersistenceMethod.length() == 0){
                     continue;
@@ -125,17 +127,17 @@ public class AddTableDataService implements WService {
                 }
             }
 
-            WInsertSql wInsertSql = new WInsertSql();
-            wInsertSql.table(tableName);
+            WMysqlInsertSql wMysqlInsertSql = new WMysqlInsertSql();
+            wMysqlInsertSql.table(tableName);
             int size = insertFields.size();
             String[] fs = new String[size];
             int i = 0;
             for (String key : insertFields.keySet()){
-                wInsertSql.fields(key);
+                wMysqlInsertSql.fields(key);
                 fs[i++] = insertFields.getString(key);
             }
-            wInsertSql.values(fs);
-            int i1 = wInsertSql.executeInsert();
+            wMysqlInsertSql.values(fs);
+            int i1 = wMysqlInsertSql.executeInsert();
 
 
             if (i1 >= 1){
@@ -168,9 +170,6 @@ public class AddTableDataService implements WService {
 
     }
 
-    private JSONObject getFieldData(String table, String username, String field) {
-        return (JSONObject) kvDBUtils.getValue( WConstants.PREFIX_FIELD+table+"."+ field, WKVType.T_MAP);
-    }
 
     private void check(WebTableContext ctx, String username, String table, JSONObject insertFields, JSONObject tableData) {
 

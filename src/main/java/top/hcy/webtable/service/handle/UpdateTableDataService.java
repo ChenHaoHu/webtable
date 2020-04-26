@@ -3,14 +3,15 @@ package top.hcy.webtable.service.handle;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import top.hcy.webtable.annotation.common.WHandleService;
+import top.hcy.webtable.annotation.webtable.WEnableLog;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
-import top.hcy.webtable.db.kv.WKVType;
-import top.hcy.webtable.db.mysql.WSelectSql;
-import top.hcy.webtable.db.mysql.WTableData;
-import top.hcy.webtable.db.mysql.WUpdateSql;
+import top.hcy.webtable.wsql.kv.WKVType;
+import top.hcy.webtable.wsql.structured.impl.mysql.WMysqlSelectSql;
+import top.hcy.webtable.wsql.structured.impl.mysql.WMysqlTableData;
+import top.hcy.webtable.wsql.structured.impl.mysql.WMysqlUpdateSql;
 import top.hcy.webtable.service.WService;
 
 import java.lang.reflect.Field;
@@ -22,8 +23,9 @@ import java.util.Set;
 import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
 @WHandleService(WHandlerType.UTABLE)
-public class UpdateTableDataService implements WService {
-    @Override
+@WEnableLog
+public class UpdateTableDataService extends WService {
+
     public void verifyParams(WebTableContext ctx) {
         JSONObject params = ctx.getParams();
         String table = params.getString("table");
@@ -46,7 +48,7 @@ public class UpdateTableDataService implements WService {
 
     }
 
-    @Override
+
     public void doService(WebTableContext ctx) {
         String username = ctx.getUsername();
         JSONObject params = ctx.getParams();
@@ -61,8 +63,8 @@ public class UpdateTableDataService implements WService {
             return;
         }
         String tableName = tableData.getString("table");
-        WTableData wTableData = new WTableData();
-        ArrayList<String> primayKey = wTableData.table(tableName).getPrimayKey();
+        WMysqlTableData wMysqlTableData = new WMysqlTableData();
+        ArrayList<String> primayKey = wMysqlTableData.table(tableName).getPrimayKey();
 
         check(ctx, username, table, updateFields,pks,tableData,primayKey);
         if (ctx.isError()){
@@ -70,7 +72,7 @@ public class UpdateTableDataService implements WService {
         }
 
         //先根据主键查到 然后 在触发触发器 然后插入
-        WSelectSql selectSql = new WSelectSql();
+        WMysqlSelectSql selectSql = new WMysqlSelectSql();
         selectSql.table(tableName);
 
         int pkSize = primayKey.size();
@@ -99,7 +101,7 @@ public class UpdateTableDataService implements WService {
             Field[] cFields = c.getDeclaredFields();
             HashMap<String,String> fieldMap = new HashMap<>();
             for (int i = 0; i < cFields.length; i++) {
-                JSONObject fieldData = getFieldData(table,username,cFields[i].getName());
+                JSONObject fieldData = getFieldConfig(table,username,cFields[i].getName());
                 String column = cFields[i].getName();
                 if (fieldData!=null){
                      column = fieldData.getString("column");
@@ -134,7 +136,7 @@ public class UpdateTableDataService implements WService {
                    }
 
                }
-               JSONObject fieldData = getFieldData(table,username,updateField.getName());
+               JSONObject fieldData = getFieldConfig(table,username,updateField.getName());
                String toPersistenceMethod = fieldData.getString("toPersistenceMethod");
                if (toPersistenceMethod  == null || toPersistenceMethod.length() == 0){
                    continue;
@@ -166,7 +168,7 @@ public class UpdateTableDataService implements WService {
 
           //进行更新操作
 
-            WUpdateSql updateSql  = new WUpdateSql();
+            WMysqlUpdateSql updateSql  = new WMysqlUpdateSql();
             updateSql.table(tableName).where();
 
             for (int i = 0; i < pkSize; i++) {
@@ -208,9 +210,7 @@ public class UpdateTableDataService implements WService {
 
     }
 
-    private JSONObject getFieldData(String table, String username, String field) {
-        return (JSONObject) kvDBUtils.getValue( WConstants.PREFIX_FIELD+table+"."+ field, WKVType.T_MAP);
-    }
+
     private void check(WebTableContext ctx, String username, String table, JSONObject updateFields, JSONObject pks, JSONObject tableData,ArrayList<String> primayKey) {
 
         //验证表权限
@@ -259,9 +259,6 @@ public class UpdateTableDataService implements WService {
             ctx.setError(true);
             return;
         }
-
-
-
 
     }
 }

@@ -6,14 +6,15 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.annotation.field.WAbstractField;
+import top.hcy.webtable.annotation.webtable.WEnableLog;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.common.enums.WebFieldType;
-import top.hcy.webtable.db.kv.WKVType;
-import top.hcy.webtable.db.mysql.WSelectSql;
-import top.hcy.webtable.db.mysql.WTableData;
+import top.hcy.webtable.wsql.kv.WKVType;
+import top.hcy.webtable.wsql.structured.impl.mysql.WMysqlSelectSql;
+import top.hcy.webtable.wsql.structured.impl.mysql.WMysqlTableData;
 import top.hcy.webtable.service.WService;
 
 import java.lang.reflect.Field;
@@ -27,8 +28,9 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
 @Slf4j
 @WHandleService(WHandlerType.GTABLE)
-public class GetTableDataService implements WService {
-    @Override
+@WEnableLog
+public class GetTableDataService extends WService {
+
     public void verifyParams(WebTableContext ctx) {
         JSONObject params = ctx.getParams();
         Integer pagesize = params.getInteger("pagesize");
@@ -44,7 +46,7 @@ public class GetTableDataService implements WService {
         }
     }
 
-    @Override
+
     public void doService(WebTableContext ctx) {
         JSONObject params = ctx.getParams();
         HashMap<String, Object> table = getTableData(params.getString("table"),params.getInteger("pagenum"),params.getInteger("pagesize"), ctx);
@@ -54,7 +56,7 @@ public class GetTableDataService implements WService {
     private HashMap<String,Object> getTableData( String table,int pagenum, int pagesize,WebTableContext ctx) {
         JSONObject params = ctx.getParams();
         String username = ctx.getUsername();
-        JSONObject tableOb = getTable(table, username);
+        JSONObject tableOb = getTableConfig(table, username);
         if (tableOb == null){
             return null;
         }
@@ -71,12 +73,12 @@ public class GetTableDataService implements WService {
         res.put("alias",alias);
         res.put("permission",permission);
 
-        ArrayList<HashMap<String, Object>> totalSql = new WSelectSql(tableName).count().executeQuery();
+        ArrayList<HashMap<String, Object>> totalSql = new WMysqlSelectSql(tableName).count().executeQuery();
 
         Object total = totalSql.size() > 0?totalSql.get(0).get("count"):0;
         res.put("total",Integer.valueOf(total.toString()));
 
-        WSelectSql sql = new WSelectSql();
+        WMysqlSelectSql sql = new WMysqlSelectSql();
         sql.table(tableName);
         HashMap<String,String[]> fieldMap = new HashMap<>();
         //HashMap< String,HashMap<String,Object>> fieldsMap = new HashMap<>();
@@ -85,7 +87,7 @@ public class GetTableDataService implements WService {
         res.put("fields",fieldsMap);
 
         for (int j = 0; j < fields.size(); j++) {
-            JSONObject value = getFieldData(table, username, fields.getString(j));
+            JSONObject value = getFieldConfig(table, username, fields.getString(j));
             if (value == null){
                 continue;
             }
@@ -120,8 +122,8 @@ public class GetTableDataService implements WService {
         sql.limit(pagesize, (pagenum-1)*pagesize);
 
         //添加主键 保证唯一性
-        WTableData wTableData = new WTableData();
-        ArrayList<String> primayKey = wTableData.table(tableName).getPrimayKey();
+        WMysqlTableData wMysqlTableData = new WMysqlTableData();
+        ArrayList<String> primayKey = wMysqlTableData.table(tableName).getPrimayKey();
 
         int pkSize = primayKey.size();
         for (int i = 0; i < pkSize; i++) {
@@ -351,11 +353,7 @@ public class GetTableDataService implements WService {
         return res;
     }
 
-    private JSONObject getFieldData(String table, String username, String field) {
-        return (JSONObject) kvDBUtils.getValue( WConstants.PREFIX_FIELD+table+"."+ field, WKVType.T_MAP);
-    }
 
-    private JSONObject getTable(String table, String username) {
-        return (JSONObject) kvDBUtils.getValue(username+"."+ WConstants.PREFIX_TABLE + table, WKVType.T_MAP);
-    }
+
+
 }

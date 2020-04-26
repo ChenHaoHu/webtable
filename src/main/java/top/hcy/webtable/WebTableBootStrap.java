@@ -22,7 +22,7 @@ import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.common.response.WResponseEntity;
 import top.hcy.webtable.common.WebTableContext;
-import top.hcy.webtable.db.kv.WKVType;
+import top.hcy.webtable.wsql.kv.WKVType;
 import top.hcy.webtable.filter.*;
 import top.hcy.webtable.service.Router;
 import top.hcy.webtable.service.*;
@@ -60,6 +60,8 @@ public class WebTableBootStrap {
         saveInitializationKeys();
         initDefaultAccountPermission();
     }
+
+
 
     //处理入口
     public WResponseEntity handler(HttpServletRequest request, HttpServletResponse response){
@@ -100,7 +102,7 @@ public class WebTableBootStrap {
         //校验参数
         wService.verifyParams(ctx);
         if (ctx.isError()){
-            wLogger.warn(ctx,"");
+            wLogger.warn(ctx);
             return responseWResponseEntity(ctx);
         }
         //执行service
@@ -110,7 +112,7 @@ public class WebTableBootStrap {
             e.printStackTrace();
             log.error("service error"+e.getClass().getName() +"  ctx:"+ ctx.toString());
             ctx.setWRespCode(WRespCode.REQUEST_SERVICE_ERROR);
-            wLogger.error(ctx,"");
+            wLogger.error(ctx);
         }finally {
         }
 
@@ -124,41 +126,55 @@ public class WebTableBootStrap {
         res.put("data",ctx.getRespsonseEntity());
 
         if (ctx.isError()){
-            wLogger.warn(ctx,"");
+            wLogger.warn(ctx);
         }else{
-            wLogger.info(ctx,"");
+            wLogger.info(ctx);
         }
         ctx.setRespsonseEntity(res);
         return responseWResponseEntity(ctx);
     }
 
 
+
     private void initHandleRouters() {
         Reflections re = new Reflections(WGlobal.HandleRoutersScanPackage);
         Set<Class<?>> cs = re.getTypesAnnotatedWith(WHandleService.class);
         Iterator<Class<?>> iterator = cs.iterator();
+        ArrayList<String> logWhiteList = new ArrayList<>();
+
         try {
             while (iterator.hasNext()){
                 Class<?> next = iterator.next();
-                Class<?>[] interfaces = next.getInterfaces();
-                int length = interfaces.length;
+                //   Class<?>[] interfaces = next.getInterfaces();
+                Class<?> superclass = next.getSuperclass();
                 boolean flag = false;
-                for (int i = 0; i < length; i++) {
-                    if (WService.class.equals(interfaces[i])){
-                        flag = true;
-                        break;
-                    }
+//                int length = interfaces.length;
+//                for (int i = 0; i < length; i++) {
+//                    if (WService.class.equals(interfaces[i])){
+//                        flag = true;
+//                        break;
+//                    }
+//                }
+                if (WService.class.equals(superclass)){
+                    flag = true;
                 }
                 if(flag){
                     WHandleService annotation = next.getAnnotation(WHandleService.class);
                     WHandlerType value = annotation.value();
+                    logWhiteList.add(value.getUri());
+
                     Router.addRouter(value,(WService) next.newInstance());
+
+
+
                 }else{
                     log.warn("initHandleRouters: class "+next.getName() +"is not implements WService");
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            WGlobal.logWhiteList = logWhiteList;
         }
         //  new HandleRoutersManagement().invoke();
     }

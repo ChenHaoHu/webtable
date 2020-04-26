@@ -1,3 +1,51 @@
+POST http://localhost:9299/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+  "sort":{
+     "field":"book_price"
+  },
+  "find":[
+
+  {key: "book_id", value: "1002", compare: "less"}
+
+  ],
+
+
+}
+
+<> 2020-04-26T045141.200.json
+
+###
+
+POST http://localhost:8089/webtable
+Content-Type: application/jsonn
+token: hcytoken
+
+{
+  "u": "gtable",
+  "table":"Book",
+  "pagenum":1,
+  "pagesize":6,
+  "sort":{
+     "field":"book_price"
+  },
+  "find":[
+
+  {key: "book_id", value: "1002", compare: "less"}
+
+  ],
+
+
+}
+
+###
+
 POST http://localhost:8089/webtable
 Content-Type: application/jsonn
 token: hcytoken
@@ -690,30 +738,6 @@ token: hcytoken
 }
 
 <> 2020-02-16T040629.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gkvdata",
-}
-
-<> 2020-02-16T035526.200.json
-
-###
-
-POST http://localhost:9299/webtable
-Content-Type: application/jsonn
-token: hcytoken
-
-{
-  "u": "gkvdata",
-}
-
-<> 2020-02-16T025957.200.json
 
 ###
 

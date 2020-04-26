@@ -3,7 +3,7 @@ package top.hcy.webtable.service.handle;
 import top.hcy.webtable.annotation.common.WHandleService;
 import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.router.WHandlerType;
-import top.hcy.webtable.db.kv.WKVType;
+import top.hcy.webtable.wsql.kv.WKVType;
 import top.hcy.webtable.service.WService;
 
 import java.util.ArrayList;
@@ -13,13 +13,13 @@ import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
 
 @WHandleService(WHandlerType.GKVDATA)
-public class GetKvDataService implements WService {
-    @Override
+public class GetKvDataService extends WService {
+
     public void verifyParams(WebTableContext ctx) {
 
     }
 
-    @Override
+
     public void doService(WebTableContext ctx) {
         ArrayList<String> allKeys = kvDBUtils.getAllKeys();
         HashMap<String,Object> data = new HashMap<>();
