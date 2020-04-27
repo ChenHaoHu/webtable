@@ -7,7 +7,7 @@ class WMysqlUpdateSqlTest {
 
     @Test
     void executeUpdate() {
-        WMysqlUpdateSql updateSql = new WMysqlUpdateSql();
+        WMySQLUpdateSql updateSql = new WMySQLUpdateSql();
         updateSql.table("ttt")
                 .update("email", "100000")
                 .where("id < ?")

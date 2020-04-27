@@ -3,11 +3,11 @@ package top.hcy.webtable.wsql.structured.impl.mysql;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
-class WMysqlDeleteSqlTest {
+class WMySQLDeleteSqlTest {
 
     @Test
     void executeDelete() {
-        WMysqlDeleteSql deleteSql = new WMysqlDeleteSql();
+        WMySQLDeleteSql deleteSql = new WMySQLDeleteSql();
        deleteSql.table("ttt")
                 .where("id<?");
 //                .executeDelete("100");

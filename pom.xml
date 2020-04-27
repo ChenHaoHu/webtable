@@ -19,9 +19,9 @@
     <artifactId>webtable</artifactId>
     <version>1.0.1</version>
 
-<!--        <groupId>top.hcy.webtable</groupId>-->
-<!--        <artifactId>webtable</artifactId>-->
-<!--        <version>1.0.1</version>-->
+    <!--        <groupId>top.hcy.webtable</groupId>-->
+    <!--        <artifactId>webtable</artifactId>-->
+    <!--        <version>1.0.1</version>-->
 
 
     <licenses>
@@ -90,12 +90,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.junit.vintage</groupId>-->
-<!--                    <artifactId>junit-vintage-engine</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
+            <!--            <exclusions>-->
+            <!--                <exclusion>-->
+            <!--                    <groupId>org.junit.vintage</groupId>-->
+            <!--                    <artifactId>junit-vintage-engine</artifactId>-->
+            <!--                </exclusion>-->
+            <!--            </exclusions>-->
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.iq80.leveldb/leveldb -->
         <dependency>
@@ -122,6 +122,17 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.18</version>
         </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.mongodb/mongodb-driver -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.0.4</version>
+        </dependency>
+
+
+
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>

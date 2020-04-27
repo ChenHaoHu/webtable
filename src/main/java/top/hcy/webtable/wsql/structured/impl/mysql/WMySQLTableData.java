@@ -5,26 +5,26 @@ import top.hcy.webtable.wsql.structured.WTableData;
 import java.util.ArrayList;
 
 
-public class WMysqlTableData implements WTableData {
+public class WMySQLTableData implements WTableData {
 
     private  String table = "";
 
-    public WMysqlTableData() {
+    public WMySQLTableData() {
     }
 
-    public WMysqlTableData(String table) {
+    public WMySQLTableData(String table) {
         this.table = table;
     }
 
     @Override
-    public WMysqlTableData table(String table){
+    public WMySQLTableData table(String table){
         this.table = table;
         return this;
     }
 
     @Override
     public ArrayList<String> getPrimayKey(){
-       ArrayList<String> primayKeys = MySqlDBUtils.getPrimayKey(table);
+       ArrayList<String> primayKeys = MySQLDBUtils.getPrimayKey(table);
        return primayKeys;
    }
 }

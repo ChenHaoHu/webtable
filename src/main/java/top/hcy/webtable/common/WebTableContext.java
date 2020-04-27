@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.ToString;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.service.WService;
+import top.hcy.webtable.wsql.structured.factory.WSQLDBType;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,6 +41,9 @@ public class WebTableContext {
     private long responseTime;
     private boolean refreshToken = false;
     private WService wService;
+    private Object DataSource;
+    private WSQLDBType wsqldbType = WSQLDBType.MYSQL;
+    private String dbname = "default";
 
     public WebTableContext(HttpServletRequest reuqest, HttpServletResponse response) {
         this.request = reuqest;

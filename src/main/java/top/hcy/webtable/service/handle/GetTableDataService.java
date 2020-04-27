@@ -12,9 +12,9 @@ import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.common.enums.WebFieldType;
-import top.hcy.webtable.wsql.kv.WKVType;
-import top.hcy.webtable.wsql.structured.impl.mysql.WMysqlSelectSql;
-import top.hcy.webtable.wsql.structured.impl.mysql.WMysqlTableData;
+import top.hcy.webtable.wsql.structured.WSelectSql;
+import top.hcy.webtable.wsql.structured.factory.WSQLFactory;
+import top.hcy.webtable.wsql.structured.impl.mysql.WMySQLTableData;
 import top.hcy.webtable.service.WService;
 
 import java.lang.reflect.Field;
@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-import static top.hcy.webtable.common.constant.WGlobal.kvDBUtils;
 
 
 @Slf4j
@@ -73,12 +72,16 @@ public class GetTableDataService extends WService {
         res.put("alias",alias);
         res.put("permission",permission);
 
-        ArrayList<HashMap<String, Object>> totalSql = new WMysqlSelectSql(tableName).count().executeQuery();
+      //  ArrayList<HashMap<String, Object>> totalSql = new WMysqlSelectSql(tableName).count().executeQuery();
+
+        WSelectSql wSelectSql = WSQLFactory.getWSelectSql(ctx.getWsqldbType());
+        ArrayList<HashMap<String, Object>> totalSql = wSelectSql.table(tableName).count().executeQuery();
 
         Object total = totalSql.size() > 0?totalSql.get(0).get("count"):0;
         res.put("total",Integer.valueOf(total.toString()));
 
-        WMysqlSelectSql sql = new WMysqlSelectSql();
+     //   WMysqlSelectSql sql = new WMysqlSelectSql();
+        WSelectSql sql = WSQLFactory.getWSelectSql(ctx.getWsqldbType());
         sql.table(tableName);
         HashMap<String,String[]> fieldMap = new HashMap<>();
         //HashMap< String,HashMap<String,Object>> fieldsMap = new HashMap<>();
@@ -122,7 +125,7 @@ public class GetTableDataService extends WService {
         sql.limit(pagesize, (pagenum-1)*pagesize);
 
         //添加主键 保证唯一性
-        WMysqlTableData wMysqlTableData = new WMysqlTableData();
+        WMySQLTableData wMysqlTableData = new WMySQLTableData();
         ArrayList<String> primayKey = wMysqlTableData.table(tableName).getPrimayKey();
 
         int pkSize = primayKey.size();

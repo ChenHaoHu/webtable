@@ -7,6 +7,8 @@ import top.hcy.webtable.common.WebTableContext;
 import top.hcy.webtable.common.constant.WGlobal;
 import top.hcy.webtable.wsql.structured.DBUtils;
 import top.hcy.webtable.tools.CommonUtils;
+import top.hcy.webtable.wsql.structured.factory.WDataSource;
+import top.hcy.webtable.wsql.structured.factory.WSQLDBType;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -15,21 +17,30 @@ import java.util.HashMap;
 
 
 @Slf4j
-public class MySqlDBUtils implements DBUtils {
+public class MySQLDBUtils implements DBUtils {
 
-    private static DataSource dataSource = WGlobal.dataSource;
 
     public static Connection getConnection() {
-        if (dataSource == null){
-            log.error("datasource can not be null. please execute setDataSource");
-        }else{
-            try {
-                return dataSource.getConnection();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        WebTableContext ctx = WGlobal.ctxThreadLocal.get();
+        WSQLDBType wsqldbType = ctx.getWsqldbType();
+        String dbname = ctx.getDbname();
+        Connection connection = null;
+
+        DataSource dataSource = (DataSource)WDataSource.getDataSource(wsqldbType, dbname);
+
+      if (dataSource == null){
+
+          log.error("datasource can not be null " +" WsqldbType:"+wsqldbType+" dbname: "+dbname);
+          throw new NullPointerException();
+      }
+
+        try {
+            connection = dataSource.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return null;
+
+        return connection;
     }
 
     public static ArrayList<HashMap<String,Object>> find(String sql,String... values) {
@@ -102,7 +113,6 @@ public class MySqlDBUtils implements DBUtils {
             executedSuccess = false;
             log.error(sql+"  "+ values+ "  "+ e.getMessage());
         }finally {
-
             if(connection!=null){
                 try {
                     connection.close();

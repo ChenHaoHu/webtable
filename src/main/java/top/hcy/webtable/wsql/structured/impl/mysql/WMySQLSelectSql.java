@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 
 @Slf4j
-public class WMysqlSelectSql implements WSelectSql {
+public class WMySQLSelectSql implements WSelectSql {
 
     private String table = "";
 
@@ -29,40 +29,40 @@ public class WMysqlSelectSql implements WSelectSql {
 
     private boolean orderByDesc = false;
 
-    public WMysqlSelectSql() {
+    public WMySQLSelectSql() {
     }
 
-    public WMysqlSelectSql(String table) {
+    public WMySQLSelectSql(String table) {
         this.table = table;
     }
 
     @Override
-    public WMysqlSelectSql table(String tableName){
+    public WMySQLSelectSql table(String tableName){
         this.table = tableName;
         return this;
     }
 
     @Override
-    public WMysqlSelectSql fields(String... fields){
+    public WMySQLSelectSql fields(String... fields){
         Collections.addAll(this.fields,fields);
         return this;
     }
 
     @Override
-    public WMysqlSelectSql fieldsPk(String pk){
+    public WMySQLSelectSql fieldsPk(String pk){
         this.fields(pk+" as "+ WConstants.PREFIX_PK+pk);
         return this;
     }
 
     @Override
-    public WMysqlSelectSql count(){
+    public WMySQLSelectSql count(){
         fields.clear();
         fields.add("count(1) as count");
         return this;
     }
 
     @Override
-    public WMysqlSelectSql limit(int limit, int offset){
+    public WMySQLSelectSql limit(int limit, int offset){
         isLimit = true;
         this.limit_x = limit;
         this.limit_y = offset;
@@ -70,7 +70,7 @@ public class WMysqlSelectSql implements WSelectSql {
     }
 
     @Override
-    public WMysqlSelectSql page(int pageNum, int pageSize){
+    public WMySQLSelectSql page(int pageNum, int pageSize){
         isLimit = true;
         this.limit_x = pageSize;
         this.limit_y = pageNum*pageSize;
@@ -78,7 +78,7 @@ public class WMysqlSelectSql implements WSelectSql {
     }
 
     @Override
-    public WMysqlSelectSql where(){
+    public WMySQLSelectSql where(){
         if (this.condition.length() == 0){
             this.condition.append(" 1=1 ");
         }
@@ -87,7 +87,7 @@ public class WMysqlSelectSql implements WSelectSql {
 
 
     @Override
-    public WMysqlSelectSql where(String condition){
+    public WMySQLSelectSql where(String condition){
 
         if (this.condition.length() == 0){
             this.condition.append(condition);
@@ -96,7 +96,7 @@ public class WMysqlSelectSql implements WSelectSql {
     }
 
     @Override
-    public WMysqlSelectSql and(String andStr){
+    public WMySQLSelectSql and(String andStr){
 
         if (condition.length() != 0){
             this.condition.append("and "+andStr+"=? ");
@@ -105,7 +105,7 @@ public class WMysqlSelectSql implements WSelectSql {
     }
 
     @Override
-    public WMysqlSelectSql greater(String andStr){
+    public WMySQLSelectSql greater(String andStr){
 
         if (condition.length() != 0){
             this.condition.append("and "+andStr+"> ? ");
@@ -114,7 +114,7 @@ public class WMysqlSelectSql implements WSelectSql {
     }
 
     @Override
-    public WMysqlSelectSql less(String andStr){
+    public WMySQLSelectSql less(String andStr){
 
         if (condition.length() != 0){
             this.condition.append("and "+andStr+"<? ");
@@ -123,7 +123,7 @@ public class WMysqlSelectSql implements WSelectSql {
     }
 
     @Override
-    public WMysqlSelectSql greaterAndequals(String andStr){
+    public WMySQLSelectSql greaterAndequals(String andStr){
 
         if (condition.length() != 0){
             this.condition.append("and "+andStr+">=? ");
@@ -132,7 +132,7 @@ public class WMysqlSelectSql implements WSelectSql {
     }
 
     @Override
-    public WMysqlSelectSql lessAndequals(String andStr){
+    public WMySQLSelectSql lessAndequals(String andStr){
 
         if (condition.length() != 0){
             this.condition.append("and "+andStr+"<=? ");
@@ -141,7 +141,7 @@ public class WMysqlSelectSql implements WSelectSql {
     }
 
     @Override
-    public WMysqlSelectSql or(String orStr){
+    public WMySQLSelectSql or(String orStr){
         if (condition.length() != 0){
             this.condition.append("or "+orStr+"=? ");
         }
@@ -149,7 +149,7 @@ public class WMysqlSelectSql implements WSelectSql {
     }
 
     @Override
-    public WMysqlSelectSql like(String likeStr){
+    public WMySQLSelectSql like(String likeStr){
         if (condition.length() != 0){
             this.condition.append("and "+likeStr+"  like ?");
         }
@@ -158,7 +158,7 @@ public class WMysqlSelectSql implements WSelectSql {
 
 
     @Override
-    public WMysqlSelectSql orderBy(String field, Boolean desc){
+    public WMySQLSelectSql orderBy(String field, Boolean desc){
 
         this.orderByField = field;
         this.orderByDesc = desc;
@@ -167,7 +167,7 @@ public class WMysqlSelectSql implements WSelectSql {
     }
 
     @Override
-    public WMysqlSelectSql orderBy(String field){
+    public WMySQLSelectSql orderBy(String field){
 
         this.orderByField = field;
         this.orderByDesc = true;
@@ -209,7 +209,7 @@ public class WMysqlSelectSql implements WSelectSql {
         log.info("sql: "+sql);
         log.info("values: "+ JSON.toJSONString(values));
 
-        ArrayList<HashMap<String, Object>> data = MySqlDBUtils.find(sql.toString(), values);
+        ArrayList<HashMap<String, Object>> data = MySQLDBUtils.find(sql.toString(), values);
         return data;
     }
 

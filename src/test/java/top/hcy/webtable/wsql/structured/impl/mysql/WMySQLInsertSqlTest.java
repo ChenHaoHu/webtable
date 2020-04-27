@@ -3,11 +3,11 @@ package top.hcy.webtable.wsql.structured.impl.mysql;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
-class WMysqlInsertSqlTest {
+class WMySQLInsertSqlTest {
 
     @Test
     void execute() {
-        WMysqlInsertSql insertSql = new WMysqlInsertSql();
+        WMySQLInsertSql insertSql = new WMySQLInsertSql();
          insertSql = insertSql.table("ttt")
                 .fields("id", "email", "date")
                 .values("110", "775656764@qq.com", "2018-01-02 12:22")

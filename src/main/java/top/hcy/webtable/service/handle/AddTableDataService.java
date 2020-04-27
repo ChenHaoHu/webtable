@@ -9,7 +9,8 @@ import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.wsql.kv.WKVType;
-import top.hcy.webtable.wsql.structured.impl.mysql.WMysqlInsertSql;
+import top.hcy.webtable.wsql.structured.WInsertSql;
+import top.hcy.webtable.wsql.structured.factory.WSQLFactory;
 import top.hcy.webtable.service.WService;
 
 import java.lang.reflect.Field;
@@ -127,17 +128,18 @@ public class AddTableDataService extends WService {
                 }
             }
 
-            WMysqlInsertSql wMysqlInsertSql = new WMysqlInsertSql();
-            wMysqlInsertSql.table(tableName);
+            //WMysqlInsertSql wMysqlInsertSql = new WMysqlInsertSql();
+            WInsertSql wInsertSql = WSQLFactory.getWInsertSql(ctx.getWsqldbType());
+            wInsertSql.table(tableName);
             int size = insertFields.size();
             String[] fs = new String[size];
             int i = 0;
             for (String key : insertFields.keySet()){
-                wMysqlInsertSql.fields(key);
+                wInsertSql.fields(key);
                 fs[i++] = insertFields.getString(key);
             }
-            wMysqlInsertSql.values(fs);
-            int i1 = wMysqlInsertSql.executeInsert();
+            wInsertSql.values(fs);
+            int i1 = wInsertSql.executeInsert();
 
 
             if (i1 >= 1){

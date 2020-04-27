@@ -9,8 +9,9 @@ import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.wsql.kv.WKVType;
-import top.hcy.webtable.wsql.structured.impl.mysql.WMysqlDeleteSql;
-import top.hcy.webtable.wsql.structured.impl.mysql.WMysqlTableData;
+import top.hcy.webtable.wsql.structured.WDeleteSql;
+import top.hcy.webtable.wsql.structured.factory.WSQLFactory;
+import top.hcy.webtable.wsql.structured.impl.mysql.WMySQLTableData;
 import top.hcy.webtable.service.WService;
 
 import java.lang.reflect.Method;
@@ -52,7 +53,7 @@ public class DeteleTableDataService extends WService {
             return;
         }
         String tableName = tableData.getString("table");
-        WMysqlTableData wMysqlTableData = new WMysqlTableData();
+        WMySQLTableData wMysqlTableData = new WMySQLTableData();
         ArrayList<String> primayKey = wMysqlTableData.table(tableName).getPrimayKey();
 
         check(ctx, pkFields,tableData,primayKey);
@@ -61,19 +62,20 @@ public class DeteleTableDataService extends WService {
         }
 
         //删除操作
-        WMysqlDeleteSql wMysqlDeleteSql = new WMysqlDeleteSql();
-        wMysqlDeleteSql.table(tableName);
-        wMysqlDeleteSql.where();
+       // WMysqlDeleteSql wMysqlDeleteSql = new WMysqlDeleteSql();
+        WDeleteSql wDeleteSql = WSQLFactory.getWDeleteSql(ctx.getWsqldbType());
+        wDeleteSql.table(tableName);
+        wDeleteSql.where();
         int size = pkFields.size();
         String[] values = new String[size];
         int i = 0;
-        wMysqlDeleteSql.where();
+        wDeleteSql.where();
         for (String key : pkFields.keySet()){
-            wMysqlDeleteSql.and(key);
+            wDeleteSql.and(key);
             values[i++] = pkFields.getString(key);
         }
 
-        int i1 = wMysqlDeleteSql.executeDelete(values);
+        int i1 = wDeleteSql.executeDelete(values);
 
         if (i1 >= 1){
             ctx.setWRespCode(WRespCode.DELETE_SUCCESS);

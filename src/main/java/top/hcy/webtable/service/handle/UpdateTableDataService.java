@@ -9,9 +9,11 @@ import top.hcy.webtable.common.constant.WConstants;
 import top.hcy.webtable.router.WHandlerType;
 import top.hcy.webtable.common.enums.WRespCode;
 import top.hcy.webtable.wsql.kv.WKVType;
-import top.hcy.webtable.wsql.structured.impl.mysql.WMysqlSelectSql;
-import top.hcy.webtable.wsql.structured.impl.mysql.WMysqlTableData;
-import top.hcy.webtable.wsql.structured.impl.mysql.WMysqlUpdateSql;
+import top.hcy.webtable.wsql.structured.WSelectSql;
+import top.hcy.webtable.wsql.structured.WTableData;
+import top.hcy.webtable.wsql.structured.WUpdateSql;
+import top.hcy.webtable.wsql.structured.factory.WSQLFactory;
+
 import top.hcy.webtable.service.WService;
 
 import java.lang.reflect.Field;
@@ -63,8 +65,9 @@ public class UpdateTableDataService extends WService {
             return;
         }
         String tableName = tableData.getString("table");
-        WMysqlTableData wMysqlTableData = new WMysqlTableData();
-        ArrayList<String> primayKey = wMysqlTableData.table(tableName).getPrimayKey();
+        //WMysqlTableData wMysqlTableData = new WMysqlTableData();
+        WTableData wTableData = WSQLFactory.getWTableData(ctx.getWsqldbType());
+        ArrayList<String> primayKey = wTableData.table(tableName).getPrimayKey();
 
         check(ctx, username, table, updateFields,pks,tableData,primayKey);
         if (ctx.isError()){
@@ -72,18 +75,19 @@ public class UpdateTableDataService extends WService {
         }
 
         //先根据主键查到 然后 在触发触发器 然后插入
-        WMysqlSelectSql selectSql = new WMysqlSelectSql();
-        selectSql.table(tableName);
+       // WMysqlSelectSql selectSql = new WMysqlSelectSql();
+        WSelectSql wSelectSql = WSQLFactory.getWSelectSql(ctx.getWsqldbType());
+        wSelectSql.table(tableName);
 
         int pkSize = primayKey.size();
         String[] pkValue = new String[pkSize];
-        selectSql.fields("*");
-        selectSql.where();
+        wSelectSql.fields("*");
+        wSelectSql.where();
         for (int i = 0; i < pkSize; i++) {
-            selectSql.and(primayKey.get(i));
+            wSelectSql.and(primayKey.get(i));
             pkValue[i] = pks.getString(primayKey.get(i));
         }
-        ArrayList<HashMap<String, Object>> selectData = selectSql.executeQuery(pkValue);
+        ArrayList<HashMap<String, Object>> selectData = wSelectSql.executeQuery(pkValue);
 
         if (selectData.size() == 0){
             ctx.setWRespCode(WRespCode.UPDATE_NODATA);
@@ -168,17 +172,18 @@ public class UpdateTableDataService extends WService {
 
           //进行更新操作
 
-            WMysqlUpdateSql updateSql  = new WMysqlUpdateSql();
-            updateSql.table(tableName).where();
+           // WMysqlUpdateSql updateSql  = new WMysqlUpdateSql();
+            WUpdateSql wUpdateSql = WSQLFactory.getWUpdateSql(ctx.getWsqldbType());
+            wUpdateSql.table(tableName).where();
 
             for (int i = 0; i < pkSize; i++) {
-                updateSql.and(primayKey.get(i));
+                wUpdateSql.and(primayKey.get(i));
             }
 
             for (String key : updateFields.keySet()){
-                updateSql.update(key,updateFields.getString(key));
+                wUpdateSql.update(key,updateFields.getString(key));
             }
-            int i = updateSql.executeUpdate(pkValue);
+            int i = wUpdateSql.executeUpdate(pkValue);
 
             if (i == 1){
                 ctx.setWRespCode(WRespCode.UPDATE_SUCCESS);

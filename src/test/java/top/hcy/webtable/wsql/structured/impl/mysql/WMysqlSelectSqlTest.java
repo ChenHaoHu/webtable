@@ -10,7 +10,7 @@ class WMysqlSelectSqlTest {
 
     @Test
     void executeQuery() {
-        WMysqlSelectSql selectSql = new WMysqlSelectSql();
+        WMySQLSelectSql selectSql = new WMySQLSelectSql();
         ArrayList<HashMap<String, Object>> d;
         selectSql = selectSql
                 .table("task")

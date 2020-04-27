@@ -26,5 +26,11 @@ public class WService {
     public JSONObject getTableConfig(String table, String username) {
         return (JSONObject) kvDBUtils.getValue(username+"."+ WConstants.PREFIX_TABLE + table, WKVType.T_MAP);
     }
+    public boolean initDataSource(WebTableContext ctx){
+
+
+
+        return true;
+    }
 
 }

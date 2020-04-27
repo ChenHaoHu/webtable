@@ -6,27 +6,27 @@ import top.hcy.webtable.wsql.structured.WDeleteSql;
 
 
 @Slf4j
-public class WMysqlDeleteSql implements WDeleteSql {
+public class WMySQLDeleteSql implements WDeleteSql {
 
     private String table = "";
 
     private StringBuffer condition  = new StringBuffer();
 
-    public WMysqlDeleteSql() {
+    public WMySQLDeleteSql() {
     }
 
-    public WMysqlDeleteSql(String table) {
+    public WMySQLDeleteSql(String table) {
         this.table = table;
     }
 
     @Override
-    public WMysqlDeleteSql table(String tableName){
+    public WMySQLDeleteSql table(String tableName){
         this.table = tableName;
         return this;
     }
 
     @Override
-    public WMysqlDeleteSql where(){
+    public WMySQLDeleteSql where(){
         if (this.condition.length() == 0){
             this.condition.append(" 1=1 ");
         }
@@ -35,7 +35,7 @@ public class WMysqlDeleteSql implements WDeleteSql {
 
 
     @Override
-    public WMysqlDeleteSql where(String condition){
+    public WMySQLDeleteSql where(String condition){
 
         if (this.condition.length() == 0){
             this.condition.append(condition);
@@ -44,7 +44,7 @@ public class WMysqlDeleteSql implements WDeleteSql {
     }
 
     @Override
-    public WMysqlDeleteSql and(String andStr){
+    public WMySQLDeleteSql and(String andStr){
 
         if (condition.length() != 0){
             this.condition.append("and "+andStr+"=? ");
@@ -53,7 +53,7 @@ public class WMysqlDeleteSql implements WDeleteSql {
     }
 
     @Override
-    public WMysqlDeleteSql or(String orStr){
+    public WMySQLDeleteSql or(String orStr){
         if (condition.length() != 0){
             this.condition.append("or "+orStr+"=? ");
         }
@@ -75,7 +75,7 @@ public class WMysqlDeleteSql implements WDeleteSql {
         log.info("values: "+ JSON.toJSONString(values));
 
 
-        int i = MySqlDBUtils.delete(sql.toString(), values);
+        int i = MySQLDBUtils.delete(sql.toString(), values);
         return i;
     }
 

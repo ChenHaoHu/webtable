@@ -62,7 +62,6 @@ public class WebTableBootStrap {
     }
 
 
-
     //处理入口
     public WResponseEntity handler(HttpServletRequest request, HttpServletResponse response){
         WebTableContext ctx = new WebTableContext(request,response);

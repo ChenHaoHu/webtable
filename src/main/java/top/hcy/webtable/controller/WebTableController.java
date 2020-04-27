@@ -1,12 +1,17 @@
 package top.hcy.webtable.controller;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
+
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.hcy.webtable.WebTableBootStrap;
 import top.hcy.webtable.common.constant.WGlobal;
 import top.hcy.webtable.common.response.WResponseEntity;
 import top.hcy.webtable.wsql.kv.WKVType;
+import top.hcy.webtable.wsql.structured.factory.WDataSource;
+import top.hcy.webtable.wsql.structured.factory.WSQLDBType;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,12 +34,24 @@ public class WebTableController {
         WGlobal.PACKAGE_ENTITY = "top.hcy.webtable.entity";
 
         try {
+
+            //mysql
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
             InputStream inputStream = loader.getResourceAsStream("db.properties");
             Properties  p = new Properties();
             p.load(inputStream);
             DataSource dataSource = DruidDataSourceFactory.createDataSource(p);
-            WGlobal.dataSource = dataSource;
+
+            WDataSource.addDefaulteDataSource(WSQLDBType.MYSQL,dataSource);
+
+
+            //mongo
+            MongoClient   mongoClient = new MongoClient("139.155.9.88", 8080);
+            MongoDatabase database = mongoClient.getDatabase("mydb");
+
+            WDataSource.addDefaulteDataSource(WSQLDBType.MongoDB,database);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 
 @Slf4j
-public class WMysqlUpdateSql implements WUpdateSql {
+public class WMySQLUpdateSql implements WUpdateSql {
 
     private String table = "";
 
@@ -18,21 +18,21 @@ public class WMysqlUpdateSql implements WUpdateSql {
 
     private StringBuffer condition  = new StringBuffer();
 
-    public WMysqlUpdateSql() {
+    public WMySQLUpdateSql() {
     }
 
-    public WMysqlUpdateSql(String table) {
+    public WMySQLUpdateSql(String table) {
         this.table = table;
     }
 
     @Override
-    public WMysqlUpdateSql table(String tableName){
+    public WMySQLUpdateSql table(String tableName){
         this.table = tableName;
         return this;
     }
 
     @Override
-    public WMysqlUpdateSql update(String field, String value){
+    public WMySQLUpdateSql update(String field, String value){
         fields.add(field);
         values.add(value);
         return this;
@@ -51,7 +51,7 @@ public class WMysqlUpdateSql implements WUpdateSql {
 //    }
 
     @Override
-    public WMysqlUpdateSql where(){
+    public WMySQLUpdateSql where(){
         if (condition.length() == 0){
             this.condition.append(" 1=1 ");
         }
@@ -59,7 +59,7 @@ public class WMysqlUpdateSql implements WUpdateSql {
     }
 
     @Override
-    public WMysqlUpdateSql where(String condition){
+    public WMySQLUpdateSql where(String condition){
 
         if (this.condition.length() == 0){
             this.condition.append(condition);
@@ -68,7 +68,7 @@ public class WMysqlUpdateSql implements WUpdateSql {
     }
 
     @Override
-    public WMysqlUpdateSql and(String andStr){
+    public WMySQLUpdateSql and(String andStr){
 
         if (condition.length() != 0){
             this.condition.append("and "+andStr+"=? ");
@@ -77,7 +77,7 @@ public class WMysqlUpdateSql implements WUpdateSql {
     }
 
     @Override
-    public WMysqlUpdateSql or(String orStr){
+    public WMySQLUpdateSql or(String orStr){
         if (condition.length() != 0){
             this.condition.append("or "+orStr+"=? ");
         }
@@ -105,7 +105,7 @@ public class WMysqlUpdateSql implements WUpdateSql {
         log.info("values: "+ JSON.toJSONString(values));
         log.info("conditionValues: "+JSON.toJSONString(conditionValues));
 
-        int insert = MySqlDBUtils.update(sql.toString(),values,conditionValues);
+        int insert = MySQLDBUtils.update(sql.toString(),values,conditionValues);
 
         return insert;
     }

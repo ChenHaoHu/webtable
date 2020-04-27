@@ -8,7 +8,7 @@ class WMysqlTableDataTest {
 
     @Test
     void getPrimayKey() {
-        WMysqlTableData wMysqlTableData = new WMysqlTableData();
+        WMySQLTableData wMysqlTableData = new WMySQLTableData();
         ArrayList<String> ttt = wMysqlTableData.table("ttt").getPrimayKey();
         System.out.println(ttt);
     }

@@ -9,7 +9,7 @@ import java.util.Collections;
 
 
 @Slf4j
-public class WMysqlInsertSql implements WInsertSql {
+public class WMySQLInsertSql implements WInsertSql {
 
     private String table = "";
 
@@ -17,27 +17,27 @@ public class WMysqlInsertSql implements WInsertSql {
 
     private ArrayList<ArrayList<String>> values = new ArrayList<>();
 
-    public WMysqlInsertSql() {
+    public WMySQLInsertSql() {
     }
 
-    public WMysqlInsertSql(String table) {
+    public WMySQLInsertSql(String table) {
         this.table = table;
     }
 
     @Override
-    public WMysqlInsertSql table(String tableName){
+    public WMySQLInsertSql table(String tableName){
         this.table = tableName;
         return this;
     }
 
     @Override
-    public WMysqlInsertSql fields(String... fields){
+    public WMySQLInsertSql fields(String... fields){
         Collections.addAll(this.fields,fields);
         return this;
     }
 
     @Override
-    public WMysqlInsertSql values(String... values){
+    public WMySQLInsertSql values(String... values){
         ArrayList<String> list = new ArrayList<>();
         Collections.addAll(list,values);
         this.values.add(list);
@@ -77,7 +77,7 @@ public class WMysqlInsertSql implements WInsertSql {
         log.info("values: "+ JSON.toJSONString(values));
 
 
-        int insert = MySqlDBUtils.insert(sql.toString(),values);
+        int insert = MySQLDBUtils.insert(sql.toString(),values);
         return insert;
     }
 
