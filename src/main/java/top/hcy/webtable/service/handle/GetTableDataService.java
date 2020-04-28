@@ -135,8 +135,6 @@ public class GetTableDataService extends WService {
 
         res.put("pk",primayKey);
 
-        String[] queryValue = new String[0];
-
         sql.where();
 
         //处理 查找条件
@@ -147,7 +145,6 @@ public class GetTableDataService extends WService {
             if (find){
 
                 int size = findData.size();
-                queryValue = new String[size];
 
                 for (int i = 0; i < size; i++) {
                     JSONObject item = findData.getJSONObject(i);
@@ -157,33 +154,27 @@ public class GetTableDataService extends WService {
 
                     switch (compare){
                         case  "equals":{
-                            queryValue[i] =value;
-                            sql.and(key);
+                            sql.and(key,value);
                             break;
                         }
                         case  "like":{
-                            sql.like(key);
-                            queryValue[i] = "%"+value+"%";
+                            sql.like(key,"%"+value+"%");
                             break;
                         }
                         case  "greater":{
-                            queryValue[i] =value;
-                            sql.greater(key);
+                            sql.greater(key,value);
                             break;
                         }
                         case  "less":{
-                            queryValue[i] =value;
-                            sql.less(key);
+                            sql.less(key,value);
                             break;
                         }
                         case  "greaterAndequals":{
-                            queryValue[i] =value;
-                            sql.greaterAndequals(key);
+                            sql.greaterAndequals(key,value);
                             break;
                         }
                         case  "lessAndequals":{
-                            queryValue[i] =value;
-                            sql.lessAndequals(key);
+                            sql.lessAndequals(key,value);
                             break;
                         }
                     }
@@ -220,7 +211,7 @@ public class GetTableDataService extends WService {
 
 
 
-        data = sql.executeQuery(queryValue);
+        data = sql.executeQuery();
 
         int length = fields.size();
         Class<?> c = null;

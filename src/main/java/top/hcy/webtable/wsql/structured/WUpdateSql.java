@@ -7,13 +7,13 @@ public interface WUpdateSql {
 
     WUpdateSql where();
 
-    WUpdateSql where(String condition);
+//    WUpdateSql where(String condition);
 
-    WUpdateSql and(String andStr);
+    WUpdateSql and(String andField,String andValue);
 
-    WUpdateSql or(String orStr);
+    WUpdateSql or(String orField,String orValue);
 
-    int executeUpdate(String... conditionValues);
+    int executeUpdate();
 
     String getSql();
 }

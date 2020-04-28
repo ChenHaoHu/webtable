@@ -26,7 +26,13 @@ public class MongoDBUtils {
         MongoDatabase mongoDatabase = getMongoDatabase();
         MongoCollection<Document> c = mongoDatabase.getCollection(collection);
         c.insertMany(documents);
+        return documents.size();
+    }
 
+    public static int select(String collection, List<Document> documents){
+        MongoDatabase mongoDatabase = getMongoDatabase();
+        MongoCollection<Document> c = mongoDatabase.getCollection(collection);
+        c.insertMany(documents);
         return 0;
     }
 

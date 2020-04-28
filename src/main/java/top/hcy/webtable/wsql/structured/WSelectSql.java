@@ -18,27 +18,27 @@ public interface WSelectSql {
 
     WSelectSql where();
 
-    WSelectSql where(String condition);
+//    WSelectSql where(String condition);
 
-    WSelectSql and(String andStr);
+    WSelectSql and(String andField,String andValue);
 
-    WSelectSql greater(String andStr);
+    WSelectSql greater(String gteField,String gteValue);
 
-    WSelectSql less(String andStr);
+    WSelectSql less(String lessField,String lessValue);
 
-    WSelectSql greaterAndequals(String andStr);
+    WSelectSql greaterAndequals(String gteAndEqualsField,String gteAndEqualsValue);
 
-    WSelectSql lessAndequals(String andStr);
+    WSelectSql lessAndequals(String lessAndEqualsField,String lessAndEqualsValue);
 
-    WSelectSql or(String orStr);
+    WSelectSql or(String orField,String orValue);
 
-    WSelectSql like(String likeStr);
+    WSelectSql like(String likeField,String likeValue);
 
-    WSelectSql orderBy(String field, Boolean desc);
+    WSelectSql orderBy(String orderByField, Boolean desc);
 
-    WSelectSql orderBy(String field);
+    WSelectSql orderBy(String orderByField);
 
-    ArrayList<HashMap<String,Object>> executeQuery(String... values);
+    ArrayList<HashMap<String,Object>> executeQuery();
 
     String getSql();
 }

@@ -1,5 +1,6 @@
 package top.hcy.webtable.wsql.structured.impl.mysql;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +44,7 @@ public class MySQLDBUtils implements DBUtils {
         return connection;
     }
 
-    public static ArrayList<HashMap<String,Object>> find(String sql,String... values) {
+    public static ArrayList<HashMap<String,Object>> find(String sql,ArrayList<String> conditionValues) {
         ArrayList<HashMap<String,Object>> list = new ArrayList<>();
         Connection connection = null;
 
@@ -52,12 +53,12 @@ public class MySQLDBUtils implements DBUtils {
         long startTime = 0;
         long executedTime = 0;
         try{
-            int size = values.length;
+            int size = conditionValues.size();
             connection  = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             for (int i = 0; i < size; i++) {
-                preparedStatement.setString(i+1,values[i]);
+                preparedStatement.setString(i+1,conditionValues.get(i));
             }
             startTime =  System.currentTimeMillis();
             ResultSet rs = preparedStatement.executeQuery();
@@ -69,7 +70,7 @@ public class MySQLDBUtils implements DBUtils {
             executedTime = System.currentTimeMillis() - startTime;
             error = e.getMessage();
             executedSuccess = false;
-            log.error(sql+"  "+ values+ "  "+ e.getMessage());
+            log.error(sql+"  "+ conditionValues+ "  "+ e.getMessage());
         }finally {
             if(connection!=null){
                 try {
@@ -80,7 +81,7 @@ public class MySQLDBUtils implements DBUtils {
             }
         }
 
-        recordSQLData(sql,values,executedSuccess,error,executedTime);
+        recordSQLData(sql,conditionValues,executedSuccess,error,executedTime);
         return list;
     }
 
@@ -125,7 +126,7 @@ public class MySQLDBUtils implements DBUtils {
         return execute;
     }
 
-    public static int update(String sql,ArrayList<String> values,String... conditionValues) {
+    public static int update(String sql,ArrayList<String> values,ArrayList<String> conditionValues) {
         int execute = 0;
         Connection connection = null;
         long startTime = 0;
@@ -139,9 +140,9 @@ public class MySQLDBUtils implements DBUtils {
             for (int i = 0; i < size; i++) {
                 preparedStatement.setString(i+1,values.get(i));
             }
-            int len = conditionValues.length;
+            int len = conditionValues.size();
             for (int i = 0; i < len; i++) {
-                preparedStatement.setString(size+i+1,conditionValues[i]);
+                preparedStatement.setString(size+i+1,conditionValues.get(i));
             }
             startTime = System.currentTimeMillis();
             execute = preparedStatement.executeUpdate();
@@ -168,7 +169,7 @@ public class MySQLDBUtils implements DBUtils {
 
 
 
-    public static int delete(String sql,String... values) {
+    public static int delete(String sql,ArrayList<String> conditionValues) {
         int execute = 0;
         Connection connection = null;
         boolean executedSuccess = true;
@@ -179,9 +180,9 @@ public class MySQLDBUtils implements DBUtils {
         try{
             connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            int size = values.length;
+            int size = conditionValues.size();
             for (int i = 0; i < size; i++) {
-                preparedStatement.setString(i+1,values[i]);
+                preparedStatement.setString(i+1,conditionValues.get(i));
             }
             startTime = System.currentTimeMillis();
             execute = preparedStatement.executeUpdate();
@@ -192,7 +193,7 @@ public class MySQLDBUtils implements DBUtils {
             error = e.getMessage();
             executedSuccess = false;
             executedTime = System.currentTimeMillis() - startTime;
-            log.error(sql+"  "+ values+ "  "+ e.getMessage());
+            log.error(sql+"  "+ JSON.toJSONString(conditionValues)+ "  "+ e.getMessage());
         }finally {
             if(connection!=null){
                 try {
@@ -203,7 +204,7 @@ public class MySQLDBUtils implements DBUtils {
             }
         }
 
-        recordSQLData(sql,values,executedSuccess,error,executedTime);
+        recordSQLData(sql,conditionValues,executedSuccess,error,executedTime);
         return execute;
     }
 
@@ -239,7 +240,7 @@ public class MySQLDBUtils implements DBUtils {
 
 
 
-    private static void recordSQLData(String sql, ArrayList<String> values, String[] conditionValues, boolean executedSuccess, String error,long executedTime) {
+    private static void recordSQLData(String sql, ArrayList<String> values, ArrayList<String> conditionValues, boolean executedSuccess, String error,long executedTime) {
         WebTableContext ctx = WGlobal.ctxThreadLocal.get();
         if(ctx==null){
             return;
@@ -261,7 +262,7 @@ public class MySQLDBUtils implements DBUtils {
         ctx.setExecutedSQLs(executedSQLs);
     }
 
-    private static void recordSQLData(String sql, String[] values, boolean executedSuccess, String error,long executedTime) {
+    private static void recordSQLData(String sql, ArrayList values, boolean executedSuccess, String error,long executedTime) {
         WebTableContext ctx = WGlobal.ctxThreadLocal.get();
         JSONArray executedSQLs = ctx.getExecutedSQLs();
         if (executedSQLs == null){
@@ -279,21 +280,21 @@ public class MySQLDBUtils implements DBUtils {
         ctx.setExecutedSQLs(executedSQLs);
     }
 
-    private static void recordSQLData(String sql, ArrayList<ArrayList<String>> values, boolean executedSuccess, String error,long executedTime) {
-        WebTableContext ctx = WGlobal.ctxThreadLocal.get();
-        JSONArray executedSQLs = ctx.getExecutedSQLs();
-        if (executedSQLs == null){
-            executedSQLs = new JSONArray();
-        }
-        JSONObject data = new JSONObject();
-        data.put("sql",sql);
-        data.put("state",executedSuccess);
-        data.put("error",error);
-        data.put("executedTime",executedTime);
-        JSONArray vs =  new JSONArray();
-        vs.add(values);
-        data.put("values",vs);
-        executedSQLs.add(data);
-        ctx.setExecutedSQLs(executedSQLs);
-    }
+//    private static void recordSQLData(String sql, ArrayList<ArrayList<String>> values, boolean executedSuccess, String error,long executedTime) {
+//        WebTableContext ctx = WGlobal.ctxThreadLocal.get();
+//        JSONArray executedSQLs = ctx.getExecutedSQLs();
+//        if (executedSQLs == null){
+//            executedSQLs = new JSONArray();
+//        }
+//        JSONObject data = new JSONObject();
+//        data.put("sql",sql);
+//        data.put("state",executedSuccess);
+//        data.put("error",error);
+//        data.put("executedTime",executedTime);
+//        JSONArray vs =  new JSONArray();
+//        vs.add(values);
+//        data.put("values",vs);
+//        executedSQLs.add(data);
+//        ctx.setExecutedSQLs(executedSQLs);
+//    }
 }

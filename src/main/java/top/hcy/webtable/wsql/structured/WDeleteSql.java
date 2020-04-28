@@ -5,13 +5,13 @@ public interface WDeleteSql {
 
     WDeleteSql where();
 
-    WDeleteSql where(String condition);
+//    WDeleteSql where(String condition);
 
-    WDeleteSql and(String andStr);
+    WDeleteSql and(String andField,String andValue);
 
-    WDeleteSql or(String orStr);
+    WDeleteSql or(String orField,String orValue);
 
-    int executeDelete(String... values);
+    int executeDelete();
 
     String getSql();
 }

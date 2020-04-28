@@ -18,6 +18,8 @@ public class WMySQLUpdateSql implements WUpdateSql {
 
     private StringBuffer condition  = new StringBuffer();
 
+    private ArrayList<String> conditionValues = new ArrayList<>();
+
     public WMySQLUpdateSql() {
     }
 
@@ -58,34 +60,37 @@ public class WMySQLUpdateSql implements WUpdateSql {
         return this;
     }
 
-    @Override
-    public WMySQLUpdateSql where(String condition){
+//    @Override
+//    public WMySQLUpdateSql where(String condition){
+//
+//        if (this.condition.length() == 0){
+//            this.condition.append(condition);
+//        }
+//        return this;
+//    }
 
-        if (this.condition.length() == 0){
-            this.condition.append(condition);
-        }
-        return this;
-    }
-
     @Override
-    public WMySQLUpdateSql and(String andStr){
+    public WMySQLUpdateSql and(String andField,String andValue){
 
         if (condition.length() != 0){
-            this.condition.append("and "+andStr+"=? ");
+            this.condition.append("and "+andField+"=? ");
+            conditionValues.add(andValue);
+
         }
         return this;
     }
 
     @Override
-    public WMySQLUpdateSql or(String orStr){
+    public WMySQLUpdateSql or(String orField,String orValue){
         if (condition.length() != 0){
-            this.condition.append("or "+orStr+"=? ");
+            this.condition.append("or "+orField+"=? ");
+            conditionValues.add(orField);
         }
         return this;
     }
 
     @Override
-    public int executeUpdate(String... conditionValues){
+    public int executeUpdate(){
 
         StringBuffer sql = new StringBuffer();
         sql.append("UPDATE  "+table +" SET  ");

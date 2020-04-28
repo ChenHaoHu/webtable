@@ -10,17 +10,17 @@ class WMysqlSelectSqlTest {
 
     @Test
     void executeQuery() {
-        WMySQLSelectSql selectSql = new WMySQLSelectSql();
-        ArrayList<HashMap<String, Object>> d;
-        selectSql = selectSql
-                .table("task")
-                .fields("task_id","author", "task_name")
-                .where("author = ?")
-                .orderBy("task_id",true)
-                .limit(2,0);
-//                .executeQuery("胡晨阳");
-        String sql = selectSql.getSql();
-        System.out.println(sql);
-        Assert.assertEquals(sql,"SELECT task_id,author,task_name FROM task WHERE author = ?  ORDER BY task_id DESC LIMIT 2  OFFSET 0");
+//        WMySQLSelectSql selectSql = new WMySQLSelectSql();
+//        ArrayList<HashMap<String, Object>> d;
+//        selectSql = selectSql
+//                .table("task")
+//                .fields("task_id","author", "task_name")
+//                .where("author = ?")
+//                .orderBy("task_id",true)
+//                .limit(2,0);
+////                .executeQuery("胡晨阳");
+//        String sql = selectSql.getSql();
+//        System.out.println(sql);
+//        Assert.assertEquals(sql,"SELECT task_id,author,task_name FROM task WHERE author = ?  ORDER BY task_id DESC LIMIT 2  OFFSET 0");
     }
 }

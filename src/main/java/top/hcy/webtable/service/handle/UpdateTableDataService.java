@@ -84,10 +84,9 @@ public class UpdateTableDataService extends WService {
         wSelectSql.fields("*");
         wSelectSql.where();
         for (int i = 0; i < pkSize; i++) {
-            wSelectSql.and(primayKey.get(i));
-            pkValue[i] = pks.getString(primayKey.get(i));
+            wSelectSql.and(primayKey.get(i),pks.getString(primayKey.get(i)));
         }
-        ArrayList<HashMap<String, Object>> selectData = wSelectSql.executeQuery(pkValue);
+        ArrayList<HashMap<String, Object>> selectData = wSelectSql.executeQuery();
 
         if (selectData.size() == 0){
             ctx.setWRespCode(WRespCode.UPDATE_NODATA);
@@ -177,13 +176,13 @@ public class UpdateTableDataService extends WService {
             wUpdateSql.table(tableName).where();
 
             for (int i = 0; i < pkSize; i++) {
-                wUpdateSql.and(primayKey.get(i));
+                wUpdateSql.and(primayKey.get(i),pks.getString(primayKey.get(i)));
             }
 
             for (String key : updateFields.keySet()){
                 wUpdateSql.update(key,updateFields.getString(key));
             }
-            int i = wUpdateSql.executeUpdate(pkValue);
+            int i = wUpdateSql.executeUpdate();
 
             if (i == 1){
                 ctx.setWRespCode(WRespCode.UPDATE_SUCCESS);

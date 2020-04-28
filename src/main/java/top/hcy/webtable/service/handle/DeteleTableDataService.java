@@ -67,15 +67,13 @@ public class DeteleTableDataService extends WService {
         wDeleteSql.table(tableName);
         wDeleteSql.where();
         int size = pkFields.size();
-        String[] values = new String[size];
         int i = 0;
         wDeleteSql.where();
         for (String key : pkFields.keySet()){
-            wDeleteSql.and(key);
-            values[i++] = pkFields.getString(key);
+            wDeleteSql.and(key,pkFields.getString(key));
         }
 
-        int i1 = wDeleteSql.executeDelete(values);
+        int i1 = wDeleteSql.executeDelete();
 
         if (i1 >= 1){
             ctx.setWRespCode(WRespCode.DELETE_SUCCESS);
